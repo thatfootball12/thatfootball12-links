@@ -1,363 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ThatFootball12 | All Links</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThatFootball12 — Link Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D0D0D;
+    --panel:#18140F;
+    --panel-line:#2A2620;
+    --gold:#D4A017;
+    --crimson:#C8102E;
+    --bone:#F3EFE6;
+    --bone-dim:#B8B2A4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(212,160,23,0.08), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
+  }
+  .wrap{width:100%;max-width:480px;}
 
-    :root {
-      --black:  #0D0D0D;
-      --gold:   #D4A017;
-      --red:    #C8102E;
-      --white:  #FFFFFF;
-      --gray:   #1A1A1A;
-      --muted:  #2C2C2C;
-    }
+  /* HEADER */
+  header{text-align:center;margin-bottom:28px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--panel-line);
+    padding:5px 14px;border-radius:999px;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--crimson);display:inline-block;}
+  h1{
+    font-family:'Anton',sans-serif;
+    font-size:44px;
+    letter-spacing:1px;
+    line-height:0.95;
+    color:var(--bone);
+    text-transform:uppercase;
+  }
+  h1 span{color:var(--gold);}
+  .tagline{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-top:8px;
+  }
 
-    body {
-      background-color: var(--black);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 48px 20px 64px;
-    }
+  /* SCOREBOARD STRIP */
+  .slate-strip{
+    display:flex;justify-content:space-between;align-items:center;
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:10px;
+    padding:12px 16px;
+    margin:24px 0 30px;
+    font-family:'Oswald',sans-serif;
+  }
+  .slate-strip .label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--bone-dim);}
+  .slate-strip .value{font-family:'Anton',sans-serif;font-size:20px;color:var(--gold);letter-spacing:1px;}
 
-    /* ── FIELD STRIPE BACKGROUND ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        180deg,
-        transparent 0px,
-        transparent 58px,
-        rgba(255,255,255,0.018) 58px,
-        rgba(255,255,255,0.018) 60px
-      );
-      pointer-events: none;
-      z-index: 0;
-    }
+  /* SECTION */
+  .section{margin-bottom:26px;}
+  .section-head{
+    display:flex;align-items:baseline;gap:10px;
+    border-bottom:1px solid var(--panel-line);
+    padding-bottom:8px;margin-bottom:12px;
+  }
+  .section-num{
+    font-family:'Anton',sans-serif;
+    font-size:15px;color:var(--crimson);
+    min-width:22px;
+  }
+  .section-title{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--bone);
+    flex:1;
+  }
+  .section-count{
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    color:var(--bone-dim);
+    letter-spacing:1px;
+  }
 
-    .container {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 480px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
+  /* LINK CARD */
+  a.link-card{
+    display:flex;align-items:center;gap:12px;
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:10px;
+    padding:14px 16px;
+    text-decoration:none;
+    color:var(--bone);
+    margin-bottom:10px;
+    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+  a.link-card:hover, a.link-card:focus-visible{
+    border-color:var(--gold);
+    background:#1F1A13;
+    transform:translateY(-1px);
+    outline:none;
+  }
+  a.link-card:active{transform:translateY(0);}
+  .tag{
+    font-family:'Oswald',sans-serif;
+    font-size:9px;font-weight:600;
+    letter-spacing:1px;text-transform:uppercase;
+    padding:3px 7px;border-radius:4px;
+    white-space:nowrap;
+  }
+  .tag.shein{background:rgba(212,160,23,0.15);color:var(--gold);}
+  .tag.amazon{background:rgba(200,16,46,0.15);color:#E8536A;}
+  .tag.pin{background:rgba(243,239,230,0.1);color:var(--bone-dim);}
+  .tag.redbubble{background:rgba(200,16,46,0.2);color:#E8536A;}
+  .tag.tiktok{background:rgba(212,160,23,0.15);color:var(--gold);}
+  .link-text{
+    font-size:14px;
+    font-weight:500;
+    line-height:1.3;
+    flex:1;
+  }
+  .arrow{color:var(--bone-dim);font-size:16px;}
 
-    /* ── HEADER ── */
-    .header {
-      text-align: center;
-      margin-bottom: 36px;
-    }
+  /* NO-LINK NOTE */
+  .no-link-note{
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    color:var(--bone-dim);
+    font-style:italic;
+    padding:10px 2px;
+  }
 
-    .logo-mark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-bottom: 16px;
-      position: relative;
-    }
+  /* SOCIALS / SHOP SECTION */
+  .shop-section, .follow-section{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:26px;
+  }
+  .shop-section h3, .follow-section h3{
+    font-family:'Oswald',sans-serif;
+    font-size:15px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:16px;
+    text-align:center;
+  }
 
-    .logo-mark svg {
-      width: 40px;
-      height: 40px;
-    }
-
-    /* red slash accent on logo */
-    .logo-mark::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      right: -4px;
-      width: 20px;
-      height: 20px;
-      background: var(--red);
-      border-radius: 50%;
-      border: 2px solid var(--black);
-    }
-
-    .brand-name {
-      font-family: 'Oswald', sans-serif;
-      font-size: 28px;
-      letter-spacing: 0.04em;
-      color: var(--white);
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .brand-name span {
-      color: var(--gold);
-    }
-
-    .tagline {
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), var(--red), transparent);
-      margin-bottom: 36px;
-      opacity: 0.6;
-    }
-
-    /* ── LINK BUTTONS ── */
-    .links {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 40px;
-    }
-
-    .link-btn {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      width: 100%;
-      padding: 16px 20px;
-      background: var(--gray);
-      border: 1px solid var(--muted);
-      border-radius: 6px;
-      text-decoration: none;
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: border-color 0.18s ease, background 0.18s ease, transform 0.12s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* gold left-edge accent — the signature element */
-    .link-btn::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: var(--gold);
-      transition: width 0.18s ease;
-    }
-
-    .link-btn:hover {
-      border-color: var(--gold);
-      background: #1f1f1f;
-      transform: translateY(-1px);
-    }
-
-    .link-btn:hover::before {
-      width: 5px;
-    }
-
-    .link-btn.primary {
-      background: var(--red);
-      border-color: var(--red);
-    }
-
-    .link-btn.primary::before {
-      background: var(--gold);
-    }
-
-    .link-btn.primary:hover {
-      background: #a50d25;
-      border-color: #a50d25;
-    }
-
-    .link-icon {
-      font-size: 20px;
-      flex-shrink: 0;
-      width: 28px;
-      text-align: center;
-    }
-
-    .link-text {
-      flex: 1;
-    }
-
-    .link-label {
-      display: block;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--white);
-    }
-
-    .link-sub {
-      display: block;
-      font-size: 12px;
-      color: rgba(255,255,255,0.45);
-      margin-top: 2px;
-    }
-
-    .link-arrow {
-      color: rgba(255,255,255,0.3);
-      font-size: 18px;
-      flex-shrink: 0;
-      transition: color 0.18s ease, transform 0.18s ease;
-    }
-
-    .link-btn:hover .link-arrow {
-      color: var(--gold);
-      transform: translateX(3px);
-    }
-
-    /* ── SECTION LABEL ── */
-    .section-label {
-      width: 100%;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.28);
-      margin-bottom: 10px;
-      margin-top: 10px;
-      padding-left: 4px;
-    }
-
-    .section-label:first-child {
-      margin-top: 0;
-    }
-
-    /* ── FOOTER ── */
-    .footer {
-      text-align: center;
-      font-size: 11px;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 0.06em;
-    }
-
-    .footer strong {
-      color: rgba(212, 160, 23, 0.5);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .link-btn, .link-btn::before, .link-arrow { transition: none; }
-    }
-  </style>
+  /* FOOTER SOCIALS */
+  footer{margin-top:34px;text-align:center;}
+  .footer-title{
+    font-family:'Oswald',sans-serif;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--bone-dim);margin-bottom:12px;
+  }
+  .social-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .social-row a{
+    font-family:'Oswald',sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:0.5px;
+    color:var(--ink);background:var(--bone);
+    padding:9px 16px;border-radius:999px;text-decoration:none;
+    transition:background .15s ease;
+  }
+  .social-row a:hover{background:var(--gold);}
+  .fine-print{
+    margin-top:22px;font-size:10.5px;color:var(--bone-dim);
+    font-family:'Poppins',sans-serif;line-height:1.6;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
+<div class="wrap">
 
-    <!-- HEADER -->
-    <header class="header">
-      <div class="logo-mark">
-        <!-- Football SVG icon -->
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="20" cy="20" rx="13" ry="8.5" transform="rotate(-35 20 20)" fill="#0D0D0D" stroke="#0D0D0D" stroke-width="1"/>
-          <ellipse cx="20" cy="20" rx="12" ry="7.5" transform="rotate(-35 20 20)" fill="#5C3A1E"/>
-          <!-- laces -->
-          <line x1="20" y1="15" x2="20" y2="25" stroke="white" stroke-width="1.2" transform="rotate(-35 20 20)"/>
-          <line x1="17.5" y1="18" x2="22.5" y2="18" stroke="white" stroke-width="1" transform="rotate(-35 20 20)"/>
-          <line x1="17.5" y1="20.5" x2="22.5" y2="20.5" stroke="white" stroke-width="1" transform="rotate(-35 20 20)"/>
-          <line x1="17.5" y1="23" x2="22.5" y2="23" stroke="white" stroke-width="1" transform="rotate(-35 20 20)"/>
-        </svg>
-      </div>
-      <h1 class="brand-name">That<span>Football</span>12</h1>
-      <p class="tagline">NFL Fan Gear · Tees · Stickers · Posters</p>
-    </header>
+  <header>
+    <div class="badge">ThatFootball12 Links</div>
+    <h1>THAT<span>FOOTBALL</span>12</h1>
+    <div class="tagline">NFL Fan Gear • Game Day Style • Shop &amp; Follow</div>
+  </header>
 
-    <div class="divider"></div>
-
-    <!-- LINKS -->
-    <nav class="links" aria-label="ThatFootball12 links">
-
-      <p class="section-label">Shop</p>
-
-      <a class="link-btn primary" href="https://tee.pub/lic/7L2oflyOEuQ" target="_blank" rel="noopener">
-        <span class="link-icon">🛒</span>
-        <span class="link-text">
-          <span class="link-label">Shop ThatFootball12 — TeePublic</span>
-          <span class="link-sub">Tees, stickers, posters & more</span>
-        </span>
-        <span class="link-arrow">›</span>
-      </a>
-
-      <a class="link-btn" href="https://www.redbubble.com/people/ThatFootball12/shop" target="_blank" rel="noopener">
-        <span class="link-icon">🎨</span>
-        <span class="link-text">
-          <span class="link-label">Shop ThatFootball12 — Redbubble</span>
-          <span class="link-sub">Full catalogue on Redbubble</span>
-        </span>
-        <span class="link-arrow">›</span>
-      </a>
-
-      <p class="section-label">Follow</p>
-
-      <a class="link-btn" href="https://www.tiktok.com/@thatfootballguy14?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
-        <span class="link-icon">🎵</span>
-        <span class="link-text">
-          <span class="link-label">TikTok</span>
-          <span class="link-sub">Game day content & new drop reveals</span>
-        </span>
-        <span class="link-arrow">›</span>
-      </a>
-
-      <a class="link-btn" href="https://pin.it/2mqzY9e0X" target="_blank" rel="noopener">
-        <span class="link-icon">📌</span>
-        <span class="link-text">
-          <span class="link-label">Pinterest</span>
-          <span class="link-sub">Football lifestyle, gear & fan style inspo</span>
-        </span>
-        <span class="link-arrow">›</span>
-      </a>
-
-      <a class="link-btn" href="https://www.instagram.com/that_football_guy_12?igsh=MW44MnN5anB5aTNwcg==" target="_blank" rel="noopener">
-        <span class="link-icon">📸</span>
-        <span class="link-text">
-          <span class="link-label">Instagram</span>
-          <span class="link-sub">Behind the scenes & game day vibes</span>
-        </span>
-        <span class="link-arrow">›</span>
-      </a>
-
-      <p class="section-label">Coming Soon</p>
-
-      <a class="link-btn" href="#" style="opacity:0.45; pointer-events:none; cursor:default;">
-        <span class="link-icon">🛍️</span>
-        <span class="link-text">
-          <span class="link-label">Etsy Store</span>
-          <span class="link-sub">Launching soon</span>
-        </span>
-        <span class="link-arrow">›</span>
-      </a>
-
-      <a class="link-btn" href="#" style="opacity:0.45; pointer-events:none; cursor:default;">
-        <span class="link-icon">📦</span>
-        <span class="link-text">
-          <span class="link-label">Amazon Merch</span>
-          <span class="link-sub">Launching soon</span>
-        </span>
-        <span class="link-arrow">›</span>
-      </a>
-
-    </nav>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <strong>ThatFootball12</strong> &nbsp;·&nbsp; Built for the fans
-    </footer>
-
+  <!-- SHOP SECTION -->
+  <div class="shop-section">
+    <h3>🛒 Official Shop</h3>
+    <a class="link-card" href="https://tee.pub/lic/7L2oflyOEuQ" target="_blank" rel="noopener">
+      <span class="tag">TEE PUBLIC</span>
+      <span class="link-text">Tees, Stickers, Posters &amp; More</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://www.redbubble.com/people/ThatFootball12/shop" target="_blank" rel="noopener">
+      <span class="tag redbubble">REDBUBBLE</span>
+      <span class="link-text">Full Catalogue – Apparel &amp; Merch</span>
+      <span class="arrow">↗</span>
+    </a>
   </div>
+
+  <!-- THIS WEEK'S DROPS (from template) -->
+  <div class="slate-strip">
+    <span class="label">Videos live this week</span>
+    <span class="value">7</span>
+  </div>
+
+  <!-- VIDEO 1 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-title">5 Trending Products</span>
+      <span class="section-count">5 links</span>
+    </div>
+    <a class="link-card" href="https://onelink.shein.com/42/5vllziw405lb" target="_blank" rel="noopener">
+      <span class="tag shein">SHEIN</span>
+      <span class="link-text">Shorts</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://onelink.shein.com/42/5venfb8j708z" target="_blank" rel="noopener">
+      <span class="tag shein">SHEIN</span>
+      <span class="link-text">Nike x Kobe Shirt</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://amzn.to/3SSM677" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">FIFA World Cup 2026 Baseball Cap</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://amzn.to/4bkWgna" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">NFL Patriots Triangle Navy T-Shirt</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://onelink.shein.com/42/5vlwyexs4qoa" target="_blank" rel="noopener">
+      <span class="tag shein">SHEIN</span>
+      <span class="link-text">NY Outfit Set</span>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- VIDEO 2 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-title">Everyday Casual Fit Check</span>
+      <span class="section-count">3 links</span>
+    </div>
+    <a class="link-card" href="https://onelink.shein.com/42/5vlwwrqur3gm" target="_blank" rel="noopener">
+      <span class="tag shein">SHEIN</span>
+      <span class="link-text">Crocs</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://onelink.shein.com/41/5usopocjl8a6" target="_blank" rel="noopener">
+      <span class="tag shein">SHEIN</span>
+      <span class="link-text">White Shirts</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://amzn.to/4wIzIVV" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">MAGCOMSEN Athletic Basketball Shorts</span>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- VIDEO 3 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <span class="section-title">Gameday Fit Check</span>
+      <span class="section-count">3 links</span>
+    </div>
+    <a class="link-card" href="https://onelink.shein.com/42/5vlxj0tezmwi" target="_blank" rel="noopener">
+      <span class="tag shein">SHEIN</span>
+      <span class="link-text">Jersey</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://onelink.shein.com/38/5slocxa8eq" target="_blank" rel="noopener">
+      <span class="tag shein">SHEIN</span>
+      <span class="link-text">Jeans</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://amzn.to/3SJgz7u" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">Under Armour Charged Edge Sneaker</span>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- VIDEO 4 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <span class="section-title">NFL Offseason Winners</span>
+      <span class="section-count">talk video</span>
+    </div>
+    <div class="no-link-note">No shoppable products for this one — pure NFL talk. Drive traffic to the video itself.</div>
+  </div>
+
+  <!-- VIDEO 5 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <span class="section-title">This or That: Eagles vs Broncos</span>
+      <span class="section-count">3 links</span>
+    </div>
+    <a class="link-card" href="https://amzn.to/3SYepB5" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">Broncos Junk Food Helmet Tee</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://amzn.to/4phK9x3" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">NFL Pro Line Tyreek Hill Dolphins Jersey</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://amzn.to/4waMQmH" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">Eagles Junk Food Bold Logo Tee</span>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- VIDEO 6 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <span class="section-title">Men's Summer Outfits Under $50</span>
+      <span class="section-count">5 links</span>
+    </div>
+    <a class="link-card" href="https://onelink.shein.com/42/5vlwyexs4qoa" target="_blank" rel="noopener">
+      <span class="tag shein">SHEIN</span>
+      <span class="link-text">NY Set</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://amzn.to/4vupo2H" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">Hawaiian Shirt &amp; Trunks Set</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://amzn.to/4agXYFH" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">2-Piece Linen Henley Set</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://onelink.shein.com/41/5uspdgnyzazw" target="_blank" rel="noopener">
+      <span class="tag shein">SHEIN</span>
+      <span class="link-text">Palm Tree Set</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://amzn.to/4y0YCS7" target="_blank" rel="noopener">
+      <span class="tag amazon">AMAZON</span>
+      <span class="link-text">2-Piece Button Down Beach Set</span>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- VIDEO 7 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">07</span>
+      <span class="section-title">Pinterest Board Promo</span>
+      <span class="section-count">4 boards</span>
+    </div>
+    <a class="link-card" href="https://pin.it/6WUr5SgnF" target="_blank" rel="noopener">
+      <span class="tag pin">PINTEREST</span>
+      <span class="link-text">Football &amp; Beer Collection</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://pin.it/5CATNPdYq" target="_blank" rel="noopener">
+      <span class="tag pin">PINTEREST</span>
+      <span class="link-text">Game Day Outfits for Men</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://pin.it/2q7i83EgH" target="_blank" rel="noopener">
+      <span class="tag pin">PINTEREST</span>
+      <span class="link-text">Men's Sports Casual Style</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://pin.it/3LdmXVvdI" target="_blank" rel="noopener">
+      <span class="tag pin">PINTEREST</span>
+      <span class="link-text">Buffalo Bills Mafia Essentials</span>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- FOLLOW SECTION -->
+  <div class="follow-section">
+    <h3>📲 Follow ThatFootball12</h3>
+    <a class="link-card" href="https://www.tiktok.com/@thatfootballguy14" target="_blank" rel="noopener">
+      <span class="tag tiktok">TIKTOK</span>
+      <span class="link-text">Game day content &amp; new drop reveals</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://www.instagram.com/that_football_guy_12" target="_blank" rel="noopener">
+      <span class="tag">INSTAGRAM</span>
+      <span class="link-text">Behind the scenes &amp; game day vibes</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://pin.it/2mqzY9e0X" target="_blank" rel="noopener">
+      <span class="tag pin">PINTEREST</span>
+      <span class="link-text">Football lifestyle, gear &amp; fan style inspo</span>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <footer>
+    <div class="footer-title">Stay Connected</div>
+    <div class="social-row">
+      <a href="https://www.tiktok.com/@thatfootballguy14" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.instagram.com/that_football_guy_12" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://pin.it/2mqzY9e0X" target="_blank" rel="noopener">Pinterest</a>
+      <a href="https://www.redbubble.com/people/ThatFootball12/shop" target="_blank" rel="noopener">Redbubble</a>
+    </div>
+    <div class="fine-print">
+      As an Amazon Associate and SHEIN affiliate, ThatFootball12 earns from qualifying purchases. Links refresh weekly — check back each Monday for the new drop.
+    </div>
+  </footer>
+
+</div>
 </body>
 </html>
