@@ -32,8 +32,29 @@
   }
   .wrap{width:100%;max-width:480px;}
 
+  /* HERO IMAGE */
+  .hero{
+    width:100%;
+    height:260px;
+    background-size:cover;
+    background-position:center;
+    border-radius:16px;
+    margin-bottom:28px;
+    position:relative;
+    border:3px solid var(--panel-line);
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  }
+  .hero::after{
+    content:'';
+    position:absolute;
+    bottom:0; left:0; right:0;
+    height:40%;
+    background:linear-gradient(transparent, var(--ink));
+    border-radius:0 0 13px 13px;
+  }
+
   /* HEADER */
-  header{text-align:center;margin-bottom:28px;}
+  header{text-align:center;margin-bottom:20px;}
   .badge{
     display:inline-flex;align-items:center;gap:8px;
     border:1px solid var(--panel-line);
@@ -103,25 +124,27 @@
     letter-spacing:1px;
   }
 
-  /* LINK CARD */
+  /* LINK CARD - Enhanced hover & spacing */
   a.link-card{
     display:flex;align-items:center;gap:12px;
     background:var(--panel);
     border:1px solid var(--panel-line);
-    border-radius:10px;
-    padding:14px 16px;
+    border-radius:12px;
+    padding:16px 18px;
     text-decoration:none;
     color:var(--bone);
-    margin-bottom:10px;
-    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+    margin-bottom:12px;
+    transition:all .2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
   }
   a.link-card:hover, a.link-card:focus-visible{
     border-color:var(--gold);
     background:#1F1A13;
-    transform:translateY(-1px);
+    transform:translateY(-4px) scale(1.02);
+    box-shadow:0 12px 25px rgba(212,160,23,0.15);
     outline:none;
   }
-  a.link-card:active{transform:translateY(0);}
+  a.link-card:active{transform:translateY(0) scale(0.98);}
   .tag{
     font-family:'Oswald',sans-serif;
     font-size:9px;font-weight:600;
@@ -137,10 +160,11 @@
   .link-text{
     font-size:14px;
     font-weight:500;
-    line-height:1.3;
+    line-height:1.35;
     flex:1;
   }
-  .arrow{color:var(--bone-dim);font-size:16px;}
+  .arrow{color:var(--bone-dim);font-size:18px;transition:transform .2s ease;}
+  a.link-card:hover .arrow{transform:translateX(4px);color:var(--gold);}
 
   /* NO-LINK NOTE */
   .no-link-note{
@@ -148,33 +172,38 @@
     font-size:12px;
     color:var(--bone-dim);
     font-style:italic;
-    padding:10px 2px;
-  }
-
-  /* SOCIALS / SHOP SECTION */
-  .shop-section, .follow-section{
+    padding:14px 16px;
     background:var(--panel);
     border:1px solid var(--panel-line);
     border-radius:10px;
-    padding:20px;
+  }
+
+  /* SHOP & FOLLOW SECTIONS */
+  .shop-section, .follow-section{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    padding:22px;
     margin-bottom:26px;
   }
   .shop-section h3, .follow-section h3{
     font-family:'Oswald',sans-serif;
-    font-size:15px;
-    letter-spacing:1px;
+    font-size:16px;
+    letter-spacing:1.5px;
     text-transform:uppercase;
     color:var(--gold);
-    margin-bottom:16px;
+    margin-bottom:18px;
     text-align:center;
+    border-bottom:1px solid var(--panel-line);
+    padding-bottom:12px;
   }
 
-  /* FOOTER SOCIALS */
-  footer{margin-top:34px;text-align:center;}
+  /* FOOTER */
+  footer{margin-top:40px;text-align:center;}
   .footer-title{
     font-family:'Oswald',sans-serif;
     font-size:11px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--bone-dim);margin-bottom:12px;
+    color:var(--bone-dim);margin-bottom:14px;
   }
   .social-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
   .social-row a{
@@ -186,18 +215,24 @@
   }
   .social-row a:hover{background:var(--gold);}
   .fine-print{
-    margin-top:22px;font-size:10.5px;color:var(--bone-dim);
+    margin-top:26px;font-size:10.5px;color:var(--bone-dim);
     font-family:'Poppins',sans-serif;line-height:1.6;
+    max-width:380px;
+    margin-left:auto;
+    margin-right:auto;
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
+  <!-- HERO COVER PHOTO -->
+  <div class="hero" style="background-image: url('https://thatfootball12.github.io/thatfootball12-links/assets/cover.jpg');"></div>
+
   <header>
-    <div class="badge">ThatFootball12 Links</div>
+    <div class="badge">Week of July 14</div>
     <h1>THAT<span>FOOTBALL</span>12</h1>
-    <div class="tagline">NFL Fan Gear • Game Day Style • Shop &amp; Follow</div>
+    <div class="tagline">Football Fan Gear • Game Day Style • Men's Fashion</div>
   </header>
 
   <!-- SHOP SECTION -->
@@ -215,12 +250,12 @@
     </a>
   </div>
 
-  <!-- THIS WEEK'S DROPS (from template) -->
   <div class="slate-strip">
     <span class="label">Videos live this week</span>
     <span class="value">7</span>
   </div>
 
+  <!-- VIDEO SECTIONS (unchanged content, enhanced styling) -->
   <!-- VIDEO 1 -->
   <div class="section">
     <div class="section-head">
@@ -429,7 +464,7 @@
       <a href="https://www.redbubble.com/people/ThatFootball12/shop" target="_blank" rel="noopener">Redbubble</a>
     </div>
     <div class="fine-print">
-      As an Amazon Associate and SHEIN affiliate, ThatFootball12 earns from qualifying purchases. Links refresh weekly — check back each Monday for the new drop.
+      As an Amazon Associate and SHEIN affiliate, ThatFootball12 earns from qualifying purchases made through the links above. Links refresh weekly — check back each Monday for the new drop.
     </div>
   </footer>
 
