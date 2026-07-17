@@ -7,38 +7,79 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{ --ink:#0D0D0D; --panel:#18140F; --gold:#D4A017; --crimson:#C8102E; --bone:#F3EFE6; }
+  :root{
+    --ink:#0D0D0D;
+    --panel:#18140F;
+    --panel-line:#2A2620;
+    --gold:#D4A017;
+    --crimson:#C8102E;
+    --bone:#F3EFE6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
   body{
-    background:var(--ink); color:var(--bone); font-family:'Poppins',sans-serif;
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Poppins',sans-serif;
     padding:32px 16px;
   }
-  .wrap{max-width:480px; margin:auto;}
-  .card{
-    background:var(--panel); border:1px solid #2A2620; border-radius:12px;
-    padding:16px; margin-bottom:12px;
+  .wrap{max-width:480px;margin:auto;}
+  .hero{
+    width:100%;
+    height:180px;
+    background-size:cover;
+    background-position:center;
+    border-radius:16px;
+    margin-bottom:24px;
+    border:3px solid var(--panel-line);
+  }
+  .section{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:24px;
+  }
+  .section h3{
+    color:var(--gold);
+    font-family:'Oswald',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:16px;
+  }
+  a.link-card{
+    display:block;
+    padding:14px 16px;
+    background:#1F1A13;
+    border-radius:8px;
+    margin-bottom:10px;
+    color:var(--bone);
+    text-decoration:none;
+    transition:all .2s;
+  }
+  a.link-card:hover{
+    background:var(--gold);
+    color:var(--ink);
   }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1 style="text-align:center; font-family:'Anton',sans-serif; color:var(--gold);">All Drops Archive</h1>
-  <p style="text-align:center; color:#B8B2A4;">July 2026</p>
 
-  <div class="card">
-    <a href="../trending-july14/" style="color:white; text-decoration:none;">Trending Products — July 14</a>
+  <div class="hero" style="background-image: url('../cover.jpg');"></div>
+
+  <h1 style="text-align:center; font-family:'Anton',sans-serif; color:var(--gold); margin-bottom:8px;">All Drops Archive</h1>
+  <p style="text-align:center; color:var(--bone-dim);">Every video &amp; shoppable look</p>
+
+  <!-- July 2026 -->
+  <div class="section">
+    <h3>July 2026</h3>
+    <a href="../trending-july14/" class="link-card">Trending Products — July 14</a>
+    <a href="../casual-fit-july-14/" class="link-card">Everyday Casual Fit Check — July 14</a>
+    <a href="../gameday-fit-july-14/" class="link-card">Gameday Fit Check — July 14</a>
+    <a href="../eagles-broncos/" class="link-card">This or That: Eagles vs Broncos — July 14</a>
+    <a href="../summer-outfits-july-14/" class="link-card">Men's Summer Outfits Under $65 — July 14</a>
   </div>
-  <div class="card">
-    <a href="../casual-fit-july-14/" style="color:white; text-decoration:none;">Everyday Casual Fit Check — July 14</a>
-  </div>
-  <div class="card">
-    <a href="../gameday-fit-july-14/" style="color:white; text-decoration:none;">Gameday Fit Check — July 14</a>
-  </div>
-  <div class="card">
-    <a href="../eagles-broncos/" style="color:white; text-decoration:none;">Eagles vs Broncos — July 14</a>
-  </div>
-  <div class="card">
-    <a href="../summer-outfits-july-14/" style="color:white; text-decoration:none;">Men's Summer Outfits — July 14</a>
-  </div>
+
 </div>
 </body>
 </html>
