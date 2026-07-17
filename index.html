@@ -105,6 +105,13 @@
     background:#1F1A13;
     transform:translateY(-3px);
   }
+  .tag{
+    font-family:'Oswald',sans-serif;
+    font-size:9px;font-weight:600;
+    letter-spacing:1px;text-transform:uppercase;
+    padding:3px 8px;border-radius:4px;
+    white-space:nowrap;
+  }
   .tag.redbubble{background:rgba(200,16,46,0.2);color:#E8536A;}
   .tag.tiktok{background:rgba(212,160,23,0.15);color:var(--gold);}
   .link-text{
@@ -121,13 +128,15 @@
     font-size:11px;letter-spacing:2px;text-transform:uppercase;
     color:var(--bone-dim);margin-bottom:14px;
   }
-  .social-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .social-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
   .social-row a{
-    font-size:22px;
-    color:var(--bone);
-    transition:color .2s;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:0.5px;
+    color:var(--ink);background:var(--bone);
+    padding:9px 16px;border-radius:999px;text-decoration:none;
+    transition:background .15s ease;
   }
-  .social-row a:hover{color:var(--gold);}
+  .social-row a:hover{background:var(--gold);}
   .fine-print{
     margin-top:26px;font-size:10.5px;color:var(--bone-dim);
     font-family:'Poppins',sans-serif;line-height:1.6;
@@ -172,16 +181,31 @@
   <!-- FOLLOW SECTION -->
   <div class="section">
     <h3>📲 Follow ThatFootball12</h3>
-    <div class="social-row">
-      <a href="https://www.tiktok.com/@thatfootballguy14" target="_blank" rel="noopener">🎵</a>
-      <a href="https://www.instagram.com/that_football_guy_12" target="_blank" rel="noopener">📸</a>
-      <a href="https://pin.it/2mqzY9e0X" target="_blank" rel="noopener">📌</a>
-      <a href="https://www.redbubble.com/people/ThatFootball12/shop" target="_blank" rel="noopener">🛍️</a>
-    </div>
+    <a class="link-card" href="https://www.tiktok.com/@thatfootballguy14" target="_blank" rel="noopener">
+      <span class="tag tiktok">TIKTOK</span>
+      <span class="link-text">Game day content &amp; new drop reveals</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://www.instagram.com/that_football_guy_12" target="_blank" rel="noopener">
+      <span class="tag">INSTAGRAM</span>
+      <span class="link-text">Behind the scenes &amp; game day vibes</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a class="link-card" href="https://pin.it/2mqzY9e0X" target="_blank" rel="noopener">
+      <span class="tag">PINTEREST</span>
+      <span class="link-text">Football lifestyle &amp; gear inspo</span>
+      <span class="arrow">↗</span>
+    </a>
   </div>
 
   <footer>
     <div class="footer-title">Stay Connected</div>
+    <div class="social-row">
+      <a href="https://www.tiktok.com/@thatfootballguy14" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.instagram.com/that_football_guy_12" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://pin.it/2mqzY9e0X" target="_blank" rel="noopener">Pinterest</a>
+      <a href="https://www.redbubble.com/people/ThatFootball12/shop" target="_blank" rel="noopener">Redbubble</a>
+    </div>
     <div class="fine-print">
       As an Amazon Associate and SHEIN affiliate, ThatFootball12 earns from qualifying purchases made through the links above.<br>
       Permanent links to every video drop and outfit. Shop anytime.
