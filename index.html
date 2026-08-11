@@ -31,7 +31,6 @@
       radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
   }
   .wrap{width:100%;max-width:480px;}
-
   .hero{
     width:100%;
     height:220px;
@@ -42,7 +41,6 @@
     border:3px solid var(--panel-line);
     box-shadow:0 10px 30px rgba(0,0,0,0.6);
   }
-
   header{text-align:center;margin-bottom:20px;}
   .badge{
     display:inline-flex;align-items:center;gap:8px;
@@ -71,7 +69,6 @@
     color:var(--bone-dim);
     margin-top:8px;
   }
-
   .section{
     background:var(--panel);
     border:1px solid var(--panel-line);
@@ -88,7 +85,6 @@
     margin-bottom:18px;
     text-align:center;
   }
-
   a.link-card{
     display:flex;align-items:center;gap:12px;
     background:var(--panel);
@@ -114,6 +110,8 @@
   }
   .tag.redbubble{background:rgba(200,16,46,0.2);color:#E8536A;}
   .tag.tiktok{background:rgba(212,160,23,0.15);color:var(--gold);}
+  .tag.shein{background:rgba(212,160,23,0.15);color:var(--gold);}
+  .tag.moosehill{background:rgba(212,160,23,0.15);color:var(--gold);}
   .link-text{
     font-size:14px;
     font-weight:500;
@@ -121,7 +119,6 @@
     flex:1;
   }
   .arrow{color:var(--bone-dim);font-size:18px;}
-
   footer{margin-top:40px;text-align:center;}
   .footer-title{
     font-family:'Oswald',sans-serif;
@@ -140,6 +137,11 @@
   .fine-print{
     margin-top:26px;font-size:10.5px;color:var(--bone-dim);
     font-family:'Poppins',sans-serif;line-height:1.6;
+  }
+  .affiliate-banner img{
+    width:100%;
+    border-radius:12px;
+    display:block;
   }
 </style>
 </head>
@@ -166,6 +168,23 @@
     <p style="font-size:12px; color:var(--bone-dim); margin-top:12px;">
       Search code <strong>SJFA6M9</strong> in the SHEIN App or use the link above.
     </p>
+  </div>
+
+  <!-- MOOSEHILL AFFILIATE -->
+  <div class="section" style="background:#1F1A13; border-color:var(--gold); text-align:center;">
+    <h3 style="color:var(--gold); margin-bottom:16px;">Moosehill Outdoor Gear</h3>
+    
+    <!-- START ADVERTISER: Moosehill from awin.com -->
+    <a class="affiliate-banner" rel="sponsored" href="https://www.awin1.com/cread.php?s=4773121&v=96701&q=556664&r=2968527" target="_blank" rel="noopener">
+      <img src="https://www.awin1.com/cshow.php?s=4773121&v=96701&q=556664&r=2968527" alt="Moosehill Outdoor Gear" border="0">
+    </a>
+    <!-- END ADVERTISER: Moosehill from awin.com -->
+
+    <a class="link-card" href="https://www.awin1.com/cread.php?s=4773121&v=96701&q=556664&r=2968527" target="_blank" rel="noopener" style="border-color:var(--gold); margin-top:16px;">
+      <span class="tag moosehill">MOOSEHILL</span>
+      <span class="link-text">Shop Outdoor &amp; Everyday Gear</span>
+      <span class="arrow">↗</span>
+    </a>
   </div>
 
   <!-- SHOP SECTION -->
@@ -221,7 +240,7 @@
       <a href="https://www.redbubble.com/people/ThatFootball12/shop" target="_blank" rel="noopener">Redbubble</a>
     </div>
     <div class="fine-print">
-      As an Amazon Associate and SHEIN affiliate, ThatFootball12 earns from qualifying purchases made through the links above.<br>
+      As an Amazon Associate, SHEIN affiliate, and Moosehill (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through the links above.<br>
       Permanent links to every video drop and outfit. Shop anytime.
     </div>
   </footer>
