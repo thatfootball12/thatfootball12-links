@@ -1,0 +1,26 @@
+name: Weekly Broken Link Check
+
+on:
+  schedule:
+    # Runs every Monday at 9:00 AM UTC — adjust the cron time if you'd prefer a different day/time
+    - cron: '0 9 * * 1'
+  workflow_dispatch: {}  # lets you also trigger it manually from the Actions tab anytime
+
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --exclude-mail
+            './**/*.html'
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
