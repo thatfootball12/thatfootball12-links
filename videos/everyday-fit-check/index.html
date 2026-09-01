@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everyday Fit Check • ThatFootball12</title>
+<meta property="og:title" content="Everyday Fit Check - ThatFootball12" />
+<meta property="og:description" content="Every shoppable Everyday Fit Check video drop from ThatFootball12." />
+<meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
+<meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/videos/everyday-fit-check/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ThatFootball12" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Everyday Fit Check - ThatFootball12" />
+<meta name="twitter:description" content="Every shoppable Everyday Fit Check video drop from ThatFootball12." />
+<meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D0D0D;
+    --panel:#18140F;
+    --panel-line:#2A2620;
+    --gold:#D4A017;
+    --crimson:#C8102E;
+    --bone:#F3EFE6;
+    --bone-dim:#B8B2A4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(212,160,23,0.08), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
+  }
+  .wrap{width:100%;max-width:480px;}
+  .hero{
+    width:100%;
+    height:220px;
+    background-size:cover;
+    background-position:center;
+    border-radius:16px;
+    margin-bottom:28px;
+    border:3px solid var(--panel-line);
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  }
+  header{text-align:center;margin-bottom:20px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--panel-line);
+    padding:5px 14px;border-radius:999px;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--crimson);display:inline-block;}
+  h1{
+    font-family:'Anton',sans-serif;
+    font-size:44px;
+    letter-spacing:1px;
+    line-height:0.95;
+    color:var(--bone);
+    text-transform:uppercase;
+  }
+  h1 span{color:var(--gold);}
+  .tagline{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-top:8px;
+  }
+  .back{
+    display:block;
+    text-align:center;
+    margin-bottom:20px;
+    color:var(--gold);
+    font-size:13px;
+    text-decoration:none;
+  }
+  .section{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    padding:22px;
+    margin-bottom:26px;
+  }
+  .section h3{
+    font-family:'Oswald',sans-serif;
+    font-size:16px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+    text-align:center;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+  }
+  a.card-tile{
+    display:flex;
+    flex-direction:column;
+    background:var(--ink);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    overflow:hidden;
+    text-decoration:none;
+    color:var(--bone);
+    transition:all .2s ease;
+  }
+  a.card-tile:hover{
+    border-color:var(--gold);
+    transform:translateY(-3px);
+  }
+  .card-thumb{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    background:var(--panel);
+  }
+  .card-thumb-placeholder{
+    width:100%;
+    aspect-ratio:1/1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    background:repeating-linear-gradient(45deg, var(--panel), var(--panel) 10px, #15110c 10px, #15110c 20px);
+    border-bottom:1px solid var(--panel-line);
+    color:var(--bone-dim);
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    text-align:center;
+    padding:8px;
+  }
+  .card-thumb-placeholder .icon{font-size:22px;}
+  .card-body{padding:10px 12px 14px;}
+  .card-date{
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+  .card-caption{
+    font-size:12px;
+    line-height:1.4;
+    color:var(--bone-dim);
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  footer{margin-top:40px;text-align:center;}
+  .fine-print{
+    margin-top:26px;font-size:10.5px;color:var(--bone-dim);
+    font-family:'Poppins',sans-serif;line-height:1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero" style="background-image: url('../../cover.jpg');"></div>
+
+  <a class="back" href="../">← Back to Video Categories</a>
+
+  <header>
+    <div class="badge">Everyday Fit Check</div>
+    <h1>EVERYDAY <span>FIT CHECK</span></h1>
+    <div class="tagline">3 Shoppable Drops</div>
+  </header>
+
+  <div class="section">
+    <h3>📅 All Everyday Fit Check Drops</h3>
+    <div class="grid">
+      <a class="card-tile" href="everyday-fit-check-aug-11/">
+        <img class="card-thumb" src="everyday-fit-check-aug-11/plaid-shirt/plaid-shirt.jpg" alt="Everyday Fit Check - August 11th, 2026">
+        <div class="card-body">
+          <div class="card-date">Aug 11th, 2026</div>
+          <div class="card-caption">Brown plaid short-sleeve shirt, plain round-neck tee, and Y2K straight-leg washed jeans — simple everyday look.</div>
+        </div>
+      </a>
+      <a class="card-tile" href="everyday-fit-july29/">
+        <div class="card-thumb-placeholder"><span class="icon">📷</span>Photo Coming Soon</div>
+        <div class="card-body">
+          <div class="card-date">Jul 29th, 2026</div>
+          <div class="card-caption">Everyday Fit Check.</div>
+        </div>
+      </a>
+      <a class="card-tile" href="everyday-fit-july22/">
+        <div class="card-thumb-placeholder"><span class="icon">📷</span>Photo Coming Soon</div>
+        <div class="card-body">
+          <div class="card-date">Jul 22nd, 2026</div>
+          <div class="card-caption">Everyday Fit Check.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fine-print">
+      As an Amazon Associate, SHEIN affiliate, and Moosehill (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through the links above.<br>
+      Prices and availability may have changed since this was published — check the retailer page for current details.
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

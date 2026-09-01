@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop All Products • ThatFootball12</title>
+<meta property="og:title" content="Shop All Products - ThatFootball12" />
+<meta property="og:description" content="Every shoppable product from ThatFootball12 in one catalog — filter by type and price." />
+<meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
+<meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/products/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ThatFootball12" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Shop All Products - ThatFootball12" />
+<meta name="twitter:description" content="Every shoppable product from ThatFootball12 in one catalog — filter by type and price." />
+<meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D0D0D;
+    --panel:#18140F;
+    --panel-line:#2A2620;
+    --gold:#D4A017;
+    --crimson:#C8102E;
+    --bone:#F3EFE6;
+    --bone-dim:#B8B2A4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(212,160,23,0.08), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
+  }
+  .wrap{width:100%;max-width:480px;}
+  .hero{
+    width:100%;
+    height:220px;
+    background-size:cover;
+    background-position:center;
+    border-radius:16px;
+    margin-bottom:28px;
+    border:3px solid var(--panel-line);
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  }
+  header{text-align:center;margin-bottom:20px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--panel-line);
+    padding:5px 14px;border-radius:999px;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--crimson);display:inline-block;}
+  h1{
+    font-family:'Anton',sans-serif;
+    font-size:44px;
+    letter-spacing:1px;
+    line-height:0.95;
+    color:var(--bone);
+    text-transform:uppercase;
+  }
+  h1 span{color:var(--gold);}
+  .tagline{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-top:8px;
+  }
+  .back{
+    display:block;
+    text-align:center;
+    margin-bottom:20px;
+    color:var(--gold);
+    font-size:13px;
+    text-decoration:none;
+  }
+  .section{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    padding:22px;
+    margin-bottom:26px;
+  }
+  .section h3{
+    font-family:'Oswald',sans-serif;
+    font-size:16px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+    text-align:center;
+  }
+  .filters{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    padding:18px 18px 20px;
+    margin-bottom:18px;
+    position:sticky;
+    top:12px;
+    z-index:10;
+  }
+  .filter-group{margin-bottom:14px;}
+  .filter-group:last-child{margin-bottom:0;}
+  .filter-label{
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-bottom:8px;
+  }
+  .filter-chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.3px;
+    text-transform:uppercase;
+    padding:7px 12px;
+    border-radius:999px;
+    border:1px solid var(--panel-line);
+    background:var(--ink);
+    color:var(--bone-dim);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip:hover{border-color:var(--gold);color:var(--bone);}
+  .chip.active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
+  .result-count{
+    text-align:center;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-bottom:14px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+  }
+  a.card-tile{
+    display:flex;
+    flex-direction:column;
+    background:var(--ink);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    overflow:hidden;
+    text-decoration:none;
+    color:var(--bone);
+    transition:all .2s ease;
+  }
+  a.card-tile:hover{
+    border-color:var(--gold);
+    transform:translateY(-3px);
+  }
+  a.card-tile.hidden{display:none;}
+  .thumb-wrap{position:relative;}
+  .card-thumb{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    background:var(--panel);
+    border-bottom:1px solid var(--panel-line);
+  }
+  .card-thumb-placeholder{
+    width:100%;
+    aspect-ratio:1/1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    background:repeating-linear-gradient(45deg, var(--panel), var(--panel) 10px, #15110c 10px, #15110c 20px);
+    border-bottom:1px solid var(--panel-line);
+    color:var(--bone-dim);
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    text-align:center;
+    padding:8px;
+  }
+  .card-thumb-placeholder .icon{font-size:22px;}
+  .new-badge{
+    position:absolute;
+    top:6px;
+    left:6px;
+    background:var(--crimson);
+    color:#fff;
+    font-family:'Oswald',sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    padding:3px 7px;
+    border-radius:6px;
+    z-index:2;
+  }
+  .card-body{padding:10px 12px 14px;}
+  .item-tag{
+    font-family:'Oswald',sans-serif;
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:4px;
+  }
+  .prod-name{
+    font-size:12px;
+    font-weight:500;
+    line-height:1.35;
+    margin-bottom:6px;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .prod-price{
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    color:var(--gold);
+  }
+  #no-results{
+    text-align:center;
+    font-size:13px;
+    color:var(--bone-dim);
+    padding:30px 10px;
+  }
+  #no-results.hidden{display:none;}
+  footer{margin-top:40px;text-align:center;}
+  .fine-print{
+    margin-top:26px;font-size:10.5px;color:var(--bone-dim);
+    font-family:'Poppins',sans-serif;line-height:1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero" style="background-image: url('../cover.jpg');"></div>
+
+  <a class="back" href="../">← Back to Home</a>
+
+  <header>
+    <div class="badge">ThatFootball12 Shop</div>
+    <h1>ALL <span>PRODUCTS</span></h1>
+    <div class="tagline">155 Shoppable Items</div>
+  </header>
+
+  <div class="filters">
+    <div class="filter-group" data-filter-group="type">
+      <div class="filter-label">Item Type</div>
+      <div class="filter-chips">
+        <button class="chip active" data-value="all">All Types</button>
+        <button class="chip" data-value="Jackets">Jackets</button>
+        <button class="chip" data-value="Hoodies/Flannels">Hoodies/Flannels</button>
+        <button class="chip" data-value="Tees &amp; Graphics">Tees &amp; Graphics</button>
+        <button class="chip" data-value="Dress &amp; Polo">Dress &amp; Polo</button>
+        <button class="chip" data-value="Jeans/Chinos">Jeans/Chinos</button>
+        <button class="chip" data-value="Bottoms">Bottoms</button>
+        <button class="chip" data-value="Accessories">Accessories</button>
+        <button class="chip" data-value="Footwear">Footwear</button>
+        <button class="chip" data-value="Gifts &amp; Extras">Gifts &amp; Extras</button>
+      </div>
+    </div>
+    <div class="filter-group" data-filter-group="price">
+      <div class="filter-label">Price</div>
+      <div class="filter-chips">
+        <button class="chip active" data-value="all">All Prices</button>
+        <button class="chip" data-value="under25">Under $25</button>
+        <button class="chip" data-value="25to50">$25–50</button>
+        <button class="chip" data-value="over50">$50+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-count" id="result-count">155 of 155 products</div>
+
+  <div class="section">
+    <div class="grid" id="product-grid">
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-10/pants/" data-type="Bottoms" data-price="27.78" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-10/pants/pants.jpg" alt="Manfinity Mode Men's Solid Color Pleated Pocket Straight Leg Casual Formal Pants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Mode Men's Solid Color Pleated Pocket Straight Leg Casual Formal Pants</div>
+          <div class="prod-price">CA$27.78</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-10/shirt/" data-type="Dress &amp; Polo" data-price="17.93" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-10/shirt/shirt.jpg" alt="Men's Ribbed Airplane Collar Polo Knit Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">Men's Ribbed Airplane Collar Polo Knit Shirt</div>
+          <div class="prod-price">CA$17.93</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-10/shoes/" data-type="Footwear" data-price="32.93" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-10/shoes/shoes.jpg" alt="4 Season Retro German Style Casual Shoes For Men">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">4 Season Retro German Style Casual Shoes For Men</div>
+          <div class="prod-price">CA$32.93</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-10/watch/" data-type="Accessories" data-price="13.92" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-10/watch/watch.jpg" alt="Pablo Raez Men's Vintage Stainless Steel Watch">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">Pablo Raez Men's Vintage Stainless Steel Watch</div>
+          <div class="prod-price">CA$13.92</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-17/chinos/" data-type="Jeans/Chinos" data-price="30.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-17/chinos/chinos.jpg" alt="Manfinity Homme Men's Casual Solid Color Tapered Pants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Manfinity Homme Men's Casual Solid Color Tapered Pants</div>
+          <div class="prod-price">CA$30.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-17/loafers/" data-type="Footwear" data-price="36.86" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-17/loafers/loafers.jpg" alt="Salkin Luxury Designer Penny Loafers">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Salkin Luxury Designer Penny Loafers</div>
+          <div class="prod-price">CA$36.86</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-17/watch/" data-type="Accessories" data-price="99.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-17/watch/watch.jpg" alt="BENYAR Mens Watches Analog Quartz Chronograph">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">BENYAR Mens Watches Analog Quartz Chronograph</div>
+          <div class="prod-price">$99.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-17/zip-up/" data-type="Hoodies/Flannels" data-price="28.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-17/zip-up/zip-up.jpg" alt="Manfinity CasualCool Men's Autumn Smart Casual Quarter Zip Sweatshirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Manfinity CasualCool Men's Autumn Smart Casual Quarter Zip Sweatshirt</div>
+          <div class="prod-price">CA$28.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-24/cardigan/" data-type="Hoodies/Flannels" data-price="30.73" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-24/cardigan/cardigan.jpg" alt="Men's Vintage Coin Pattern Long Sleeve Cardigan">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Men's Vintage Coin Pattern Long Sleeve Cardigan</div>
+          <div class="prod-price">CA$30.73</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-24/chinos/" data-type="Jeans/Chinos" data-price="27.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-24/chinos/chinos.jpg" alt="Manfinity Mode Men's Straight Leg Casual Trousers">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Manfinity Mode Men's Straight Leg Casual Trousers</div>
+          <div class="prod-price">CA$27.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/business-casual/business-casual-aug-24/dress-shirt/" data-type="Dress &amp; Polo" data-price="35.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/business-casual/business-casual-aug-24/dress-shirt/dress-shirt.jpg" alt="Alimens &amp; Gentle Mens Dress Shirt Long Sleeve Button Down">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">Alimens &amp; Gentle Mens Dress Shirt Long Sleeve Button Down</div>
+          <div class="prod-price">$35.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-12/denim-shorts/" data-type="Jeans/Chinos" data-price="14.74" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-12/denim-shorts/denim-shorts.jpg" alt="Manfinity LEGND Light Wash Distressed Denim Shorts">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Manfinity LEGND Light Wash Distressed Denim Shorts</div>
+          <div class="prod-price">CA$14.74</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-12/flannel/" data-type="Hoodies/Flannels" data-price="15.48" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-12/flannel/flannel.jpg" alt="Resyla Men Men's Summer Casual Plaid Cropped Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Resyla Men Men's Summer Casual Plaid Cropped Shirt</div>
+          <div class="prod-price">CA$15.48</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-12/tee/" data-type="Tees &amp; Graphics" data-price="5.98" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-12/tee/tee.jpg" alt="DAZY Men's Solid Color Short Sleeve T-Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">DAZY Men's Solid Color Short Sleeve T-Shirt</div>
+          <div class="prod-price">CA$5.98</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-12/watch/" data-type="Accessories" data-price="3.92" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-12/watch/watch.jpg" alt="GAIETY Classic Roman Numeral Men's Wrist Watch">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">GAIETY Classic Roman Numeral Men's Wrist Watch</div>
+          <div class="prod-price">CA$3.92</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-15/jeans/" data-type="Jeans/Chinos" data-price="38.38" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-15/jeans/jeans.jpg" alt="Men's Y2K Straight Leg Washed Casual Jeans">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Men's Y2K Straight Leg Washed Casual Jeans</div>
+          <div class="prod-price">CA$38.38</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-15/plaid-shirt/" data-type="Hoodies/Flannels" data-price="21.88" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-15/plaid-shirt/plaid-shirt.jpg" alt="STEELVANCE Men's Brown Plaid Short Sleeve Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">STEELVANCE Men's Brown Plaid Short Sleeve Shirt</div>
+          <div class="prod-price">CA$21.88</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-15/tee/" data-type="Tees &amp; Graphics" data-price="12.88" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-15/tee/tee.jpg" alt="Manfinity Homme Men's Plain Round Neck Short Sleeve Casual Top">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Manfinity Homme Men's Plain Round Neck Short Sleeve Casual Top</div>
+          <div class="prod-price">CA$12.88</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-22/flannel/" data-type="Hoodies/Flannels" data-price="21.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-22/flannel/flannel.jpg" alt="Manfinity Homme Men's Plaid Short Sleeve Single-Breasted Casual Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Manfinity Homme Men's Plaid Short Sleeve Single-Breasted Casual Shirt</div>
+          <div class="prod-price">CA$21.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-22/jeans/" data-type="Jeans/Chinos" data-price="30.82" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-22/jeans/jeans.jpg" alt="QuarKem Men's Solid Color Pocket Casual Straight Leg Jeans">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">QuarKem Men's Solid Color Pocket Casual Straight Leg Jeans</div>
+          <div class="prod-price">CA$30.82</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-22/tee/" data-type="Tees &amp; Graphics" data-price="16.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-22/tee/tee.jpg" alt="Manfinity LEGND Men's F1 Racing Car Silhouette Print Loose Fit T-Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Manfinity LEGND Men's F1 Racing Car Silhouette Print Loose Fit T-Shirt</div>
+          <div class="prod-price">CA$16.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-29/cardigan/" data-type="Hoodies/Flannels" data-price="55.11" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-29/cardigan/cardigan.jpg" alt="Men's Cable Knit Long Cardigan Sweater Buttons Shawl Collar">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Men's Cable Knit Long Cardigan Sweater Buttons Shawl Collar</div>
+          <div class="prod-price">$55.11</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-29/pants/" data-type="Bottoms" data-price="23.03" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-29/pants/pants.jpg" alt="Manfinity Homme Men's Light Grey Autumn Casual Drawstring Sweatpants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Homme Men's Light Grey Autumn Casual Drawstring Sweatpants</div>
+          <div class="prod-price">CA$23.03</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-aug-29/tee/" data-type="Tees &amp; Graphics" data-price="15.98" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-aug-29/tee/tee.jpg" alt="Gildan Mens Heavy Cotton T-Shirt G5000 - White">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Gildan Mens Heavy Cotton T-Shirt G5000 - White</div>
+          <div class="prod-price">$15.98</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-sept-4/pants/" data-type="Bottoms" data-price="23.03" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-sept-4/pants/pants.jpg" alt="Manfinity Homme Men's Light Grey Autumn Casual Drawstring Sweatpants">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Homme Men's Light Grey Autumn Casual Drawstring Sweatpants</div>
+          <div class="prod-price">CA$23.03</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-sept-4/sweatshirt/" data-type="Hoodies/Flannels" data-price="16.87" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-sept-4/sweatshirt/sweatshirt.jpg" alt="Men's Solid Color Pullover Sweatshirt - Spring &amp; Autumn Long Sleeve">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Men's Solid Color Pullover Sweatshirt - Spring &amp; Autumn Long Sleeve</div>
+          <div class="prod-price">CA$16.87</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/casual/casual-outfit-sept-4/watch/" data-type="Accessories" data-price="30.99" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/casual/casual-outfit-sept-4/watch/watch.jpg" alt="CIVO Mens Watches Stainless Steel - Silver Classic Date Dial Waterproof">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">CIVO Mens Watches Stainless Steel - Silver Classic Date Dial Waterproof</div>
+          <div class="prod-price">$30.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-13/belt/" data-type="Accessories" data-price="3.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-13/belt/belt.jpg" alt="Square Buckle Versatile Fashion Men's Belt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">Square Buckle Versatile Fashion Men's Belt</div>
+          <div class="prod-price">CA$3.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-13/shirt/" data-type="Dress &amp; Polo" data-price="14.38" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-13/shirt/shirt.jpg" alt="JOLTRO Striped Rib-Knit Burgundy Polo Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">JOLTRO Striped Rib-Knit Burgundy Polo Shirt</div>
+          <div class="prod-price">CA$14.38</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-13/shoes/" data-type="Footwear" data-price="54.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-13/shoes/shoes.jpg" alt="Bruno Marc Men's Leather Sneakers Casual Shoes">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Bruno Marc Men's Leather Sneakers Casual Shoes</div>
+          <div class="prod-price">$54.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-13/shorts/" data-type="Bottoms" data-price="19.58" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-13/shorts/shorts.jpg" alt="Manfinity Homme Men's Solid Color Casual Shorts With Pockets">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Homme Men's Solid Color Casual Shorts With Pockets</div>
+          <div class="prod-price">CA$19.58</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-14/pants/" data-type="Bottoms" data-price="17.18" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-14/pants/pants.jpg" alt="Summer Lightweight Cargo Pants - Men's Solid Color Straight Leg">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Summer Lightweight Cargo Pants - Men's Solid Color Straight Leg</div>
+          <div class="prod-price">CA$17.18</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-14/shirt/" data-type="Dress &amp; Polo" data-price="20.16" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-14/shirt/shirt.jpg" alt="Manfinity Mode Men's Navy Blue Business Casual Long Sleeve Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">Manfinity Mode Men's Navy Blue Business Casual Long Sleeve Shirt</div>
+          <div class="prod-price">CA$20.16</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-20/blazer/" data-type="Jackets" data-price="87.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-20/blazer/blazer.jpg" alt="PAUL JONES Mens Casual Knit Blazer Two Button Unlined Stretch Sport Coat">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">PAUL JONES Mens Casual Knit Blazer Two Button Unlined Stretch Sport Coat</div>
+          <div class="prod-price">$87.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-20/jeans/" data-type="Jeans/Chinos" data-price="37.90" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-20/jeans/jeans.jpg" alt="Men Slant Pocket Jeans">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Men Slant Pocket Jeans</div>
+          <div class="prod-price">CA$37.90</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-20/shirt/" data-type="Tees &amp; Graphics" data-price="22.97" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-20/shirt/shirt.jpg" alt="Hanes Men's 4 Pack FreshIQ Crewneck Undershirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Hanes Men's 4 Pack FreshIQ Crewneck Undershirt</div>
+          <div class="prod-price">$22.97</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-20/watch/" data-type="Accessories" data-price="8.52" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-20/watch/watch.jpg" alt="RICECGO Men's Business Watch">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">RICECGO Men's Business Watch</div>
+          <div class="prod-price">CA$8.52</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-27/button-up/" data-type="Dress &amp; Polo" data-price="18.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-27/button-up/button-up.jpg" alt="WAIT HIM Men's Vintage Vertical Striped Short Sleeve Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">WAIT HIM Men's Vintage Vertical Striped Short Sleeve Shirt</div>
+          <div class="prod-price">CA$18.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-27/pants/" data-type="Bottoms" data-price="21.20" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-27/pants/pants.jpg" alt="Men's Spring/Summer Thin Breathable Hip-Hop Linen Casual Pants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Men's Spring/Summer Thin Breathable Hip-Hop Linen Casual Pants</div>
+          <div class="prod-price">CA$21.20</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-aug-27/tee/" data-type="Tees &amp; Graphics" data-price="15.98" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-aug-27/tee/tee.jpg" alt="Gildan Mens Heavy Cotton T-Shirt G5000">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Gildan Mens Heavy Cotton T-Shirt G5000</div>
+          <div class="prod-price">$15.98</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-sept-2/jeans/" data-type="Jeans/Chinos" data-price="33.76" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-sept-2/jeans/jeans.jpg" alt="Levi Strauss Signature Gold Men's Big and Tall Athletic Tech Jeans">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Levi Strauss Signature Gold Men's Big and Tall Athletic Tech Jeans</div>
+          <div class="prod-price">$33.76</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-sept-2/polo/" data-type="Dress &amp; Polo" data-price="16.07" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-sept-2/polo/polo.jpg" alt="Men's Solid Color Breathable Fashion Casual Business Elastic Polo Shirt">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">Men's Solid Color Breathable Fashion Casual Business Elastic Polo Shirt</div>
+          <div class="prod-price">CA$16.07</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/date-night-sept-2/quarter-zip/" data-type="Hoodies/Flannels" data-price="39.99" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/date-night-sept-2/quarter-zip/quarter-zip.jpg" alt="COOFANDY Men's Quarter Zip Up Pullover Lightweight Mock Neck Sweatshirt">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">COOFANDY Men's Quarter Zip Up Pullover Lightweight Mock Neck Sweatshirt</div>
+          <div class="prod-price">$39.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/night-out-aug-31/chinos/" data-type="Jeans/Chinos" data-price="24.18" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/night-out-aug-31/chinos/chinos.jpg" alt="Manfinity Homme Men's Solid Color Skinny Fit Suit Pants">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Manfinity Homme Men's Solid Color Skinny Fit Suit Pants</div>
+          <div class="prod-price">CA$24.18</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/night-out-aug-31/loafers/" data-type="Footwear" data-price="33.30" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/night-out-aug-31/loafers/loafers.jpg" alt="Salkin Classic Designer Men's Moccasin Shoes - Luxury Suede Loafers">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Salkin Classic Designer Men's Moccasin Shoes - Luxury Suede Loafers</div>
+          <div class="prod-price">CA$33.30</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/night-out-aug-31/quarter-zip/" data-type="Hoodies/Flannels" data-price="15.27" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/night-out-aug-31/quarter-zip/quarter-zip.jpg" alt="Men's Half-Zip Collar Lightweight Solid Color Long Sleeve Sweatshirt">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Men's Half-Zip Collar Lightweight Solid Color Long Sleeve Sweatshirt</div>
+          <div class="prod-price">CA$15.27</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/date-night/night-out-aug-31/tee/" data-type="Tees &amp; Graphics" data-price="16.98" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/date-night/night-out-aug-31/tee/tee.jpg" alt="Gildan Mens Heavy Cotton T-Shirt G5000">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Gildan Mens Heavy Cotton T-Shirt G5000</div>
+          <div class="prod-price">$16.98</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/casual-gameday-aug-13/jeans/" data-type="Jeans/Chinos" data-price="24.83" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/casual-gameday-aug-13/jeans/jeans.jpg" alt="Manfinity Homme Men's Casual Straight Loose Fit Pockets Jeans">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Manfinity Homme Men's Casual Straight Loose Fit Pockets Jeans</div>
+          <div class="prod-price">CA$24.83</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/casual-gameday-aug-13/shirt/" data-type="Tees &amp; Graphics" data-price="12.11" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/casual-gameday-aug-13/shirt/shirt.jpg" alt="Pickens X CeeDee WE DEM BOYZ Adult and Youth T-Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Pickens X CeeDee WE DEM BOYZ Adult and Youth T-Shirt</div>
+          <div class="prod-price">CA$12.11</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/casual-gameday-aug-21/beanie/" data-type="Accessories" data-price="4.76" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/casual-gameday-aug-21/beanie/beanie.jpg" alt="Men's Autumn/Winter Knitted Hat With Leather Label">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">Men's Autumn/Winter Knitted Hat With Leather Label</div>
+          <div class="prod-price">CA$4.76</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/casual-gameday-aug-21/bracelet/" data-type="Accessories" data-price="16.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/casual-gameday-aug-21/bracelet/bracelet.jpg" alt="Two-Row Braided Leather Bangle Bracelet">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">Two-Row Braided Leather Bangle Bracelet</div>
+          <div class="prod-price">$16.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/casual-gameday-aug-21/hoodie/" data-type="Hoodies/Flannels" data-price="40.17" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/casual-gameday-aug-21/hoodie/hoodie.jpg" alt="Hanes Mens EcoSmart Hoodie Midweight Fleece">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Hanes Mens EcoSmart Hoodie Midweight Fleece</div>
+          <div class="prod-price">$40.17</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/casual-gameday-aug-21/pants/" data-type="Bottoms" data-price="15.82" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/casual-gameday-aug-21/pants/pants.jpg" alt="Manfinity Homme Men's Solid Color Straight Leg Pants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Homme Men's Solid Color Straight Leg Pants</div>
+          <div class="prod-price">CA$15.82</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/casual-gameday-outfit-aug-14/shirt/" data-type="Tees &amp; Graphics" data-price="18.54" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/casual-gameday-outfit-aug-14/shirt/shirt.jpg" alt="Davante Adams Custom Vintage Bootleg Style Tee">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Davante Adams Custom Vintage Bootleg Style Tee</div>
+          <div class="prod-price">CA$18.54</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/casual-gameday-outfit-aug-14/shorts/" data-type="Bottoms" data-price="11.18" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/casual-gameday-outfit-aug-14/shorts/shorts.jpg" alt="Manfinity Homme Loose Fit Men's Shorts With Slant Pockets">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Homme Loose Fit Men's Shorts With Slant Pockets</div>
+          <div class="prod-price">CA$11.18</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/casual-gameday-outfit-aug-14/slides/" data-type="Footwear" data-price="15.47" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/casual-gameday-outfit-aug-14/slides/slides.jpg" alt="Men's Comfortable Slide Sandals - Thick Sole Slip-On">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Men's Comfortable Slide Sandals - Thick Sole Slip-On</div>
+          <div class="prod-price">CA$15.47</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/fantasy-football-sept-5/hat/" data-type="Accessories" data-price="32.49" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/fantasy-football-sept-5/hat/hat.jpg" alt="CafePress Fantasy Football Loser Trucker Hat">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">CafePress Fantasy Football Loser Trucker Hat</div>
+          <div class="prod-price">$32.49</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/fantasy-football-sept-5/pants/" data-type="Bottoms" data-price="17.32" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/fantasy-football-sept-5/pants/pants.jpg" alt="Men's Loose Fashionable Sports Long Pants - Minimalist Solid Color Wide Leg">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Men's Loose Fashionable Sports Long Pants - Minimalist Solid Color Wide Leg</div>
+          <div class="prod-price">CA$17.32</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/fantasy-football-sept-5/tee/" data-type="Tees &amp; Graphics" data-price="32.99" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/fantasy-football-sept-5/tee/tee.jpg" alt="I Suck at Fantasy Football - Fantasy Football Loser Shirt">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">I Suck at Fantasy Football - Fantasy Football Loser Shirt</div>
+          <div class="prod-price">$32.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/game-day-aug-28/hat/" data-type="Accessories" data-price="43.96" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/game-day-aug-28/hat/hat.jpg" alt="New Era Kansas City Chiefs NFL 2022 Sideline Chrome White 39Thirty Stretch Cap">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">New Era Kansas City Chiefs NFL 2022 Sideline Chrome White 39Thirty Stretch Cap</div>
+          <div class="prod-price">$43.96</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/game-day-aug-28/hoodie/" data-type="Hoodies/Flannels" data-price="81.70" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/game-day-aug-28/hoodie/hoodie.jpg" alt="Team Fan Apparel NFL Adult Gameday Hooded Sweatshirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Team Fan Apparel NFL Adult Gameday Hooded Sweatshirt</div>
+          <div class="prod-price">$81.70</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/game-day-aug-28/jeans/" data-type="Jeans/Chinos" data-price="30.07" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/game-day-aug-28/jeans/jeans.jpg" alt="Manfinity Homme Men's Straight Loose Fit Multi-Pocket Casual Denim Jeans">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Manfinity Homme Men's Straight Loose Fit Multi-Pocket Casual Denim Jeans</div>
+          <div class="prod-price">CA$30.07</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/gameday-outfit-aug-30/hoodie/" data-type="Hoodies/Flannels" data-price="15.07" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/gameday-outfit-aug-30/hoodie/hoodie.jpg" alt="Men's Casual Minimalist Solid Color Kangaroo Pocket Drawstring Hoodie">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Men's Casual Minimalist Solid Color Kangaroo Pocket Drawstring Hoodie</div>
+          <div class="prod-price">CA$15.07</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/gameday-outfit-aug-30/jeans/" data-type="Jeans/Chinos" data-price="30.82" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/gameday-outfit-aug-30/jeans/jeans.jpg" alt="QuarKem Men's Casual Distressed Tapered Leg Jeans">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">QuarKem Men's Casual Distressed Tapered Leg Jeans</div>
+          <div class="prod-price">CA$30.82</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/gameday-outfit-aug-30/jersey/" data-type="Tees &amp; Graphics" data-price="252.14" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/gameday-outfit-aug-30/jersey/jersey.jpg" alt="Men's Jayden Daniels Burgundy Washington Commanders Pro Line Jersey">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Men's Jayden Daniels Burgundy Washington Commanders Pro Line Jersey</div>
+          <div class="prod-price">$252.14</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/gameday/gameday-outfit-aug-30/sneakers/" data-type="Footwear" data-price="40.60" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/gameday/gameday-outfit-aug-30/sneakers/sneakers.jpg" alt="New Men's Versatile Flat Sole German Training Shoes">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">New Men's Versatile Flat Sole German Training Shoes</div>
+          <div class="prod-price">CA$40.60</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/motor-streetwear/motor-streetwear-aug-12/glasses/" data-type="Accessories" data-price="24.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/motor-streetwear/motor-streetwear-aug-12/glasses/glasses.jpg" alt="LUENX Aviator Polarized Sunglasses for Men">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">LUENX Aviator Polarized Sunglasses for Men</div>
+          <div class="prod-price">$24.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/motor-streetwear/motor-streetwear-aug-12/jacket/" data-type="Jackets" data-price="43.15" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/motor-streetwear/motor-streetwear-aug-12/jacket/jacket.jpg" alt="Men's Motorcycle Leather Jacket with Fleece Lining">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">Men's Motorcycle Leather Jacket with Fleece Lining</div>
+          <div class="prod-price">CA$43.15</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/motor-streetwear/motor-streetwear-aug-12/jeans/" data-type="Jeans/Chinos" data-price="38.49" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/motor-streetwear/motor-streetwear-aug-12/jeans/jeans.jpg" alt="Men's Cat Scratch Textured Elastic Slim Fit Tapered Jeans">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Men's Cat Scratch Textured Elastic Slim Fit Tapered Jeans</div>
+          <div class="prod-price">CA$38.49</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/motor-streetwear/motor-streetwear-aug-12/shirt/" data-type="Tees &amp; Graphics" data-price="14.98" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/motor-streetwear/motor-streetwear-aug-12/shirt/shirt.jpg" alt="IslaSuriya Racing Street Slogan Print Round Neck T-Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">IslaSuriya Racing Street Slogan Print Round Neck T-Shirt</div>
+          <div class="prod-price">CA$14.98</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/motor-streetwear/motor-streetwear-aug-19/cargo-pants/" data-type="Bottoms" data-price="25.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/motor-streetwear/motor-streetwear-aug-19/cargo-pants/cargo-pants.jpg" alt="Manfinity Homme Men's Solid Color Drawstring Waist Cargo Pants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Homme Men's Solid Color Drawstring Waist Cargo Pants</div>
+          <div class="prod-price">CA$25.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/motor-streetwear/motor-streetwear-aug-19/hoodie/" data-type="Hoodies/Flannels" data-price="40.29" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/motor-streetwear/motor-streetwear-aug-19/hoodie/hoodie.jpg" alt="Hanes Mens EcoSmart Hoodie Midweight Fleece">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Hanes Mens EcoSmart Hoodie Midweight Fleece</div>
+          <div class="prod-price">$40.29</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/motor-streetwear/motor-streetwear-aug-19/jacket/" data-type="Jackets" data-price="37.07" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/motor-streetwear/motor-streetwear-aug-19/jacket/jacket.jpg" alt="Men's Casual Vintage Motorcycle Riding Jacket">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">Men's Casual Vintage Motorcycle Riding Jacket</div>
+          <div class="prod-price">CA$37.07</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/motor-streetwear/motor-streetwear-aug-19/sneakers/" data-type="Footwear" data-price="90" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/motor-streetwear/motor-streetwear-aug-19/sneakers/sneakers.jpg" alt="Adidas Mens Grand Court 3.0 Sneaker">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Adidas Mens Grand Court 3.0 Sneaker</div>
+          <div class="prod-price">$90</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-11/duffel-bag/" data-type="Accessories" data-price="149.99" data-new="no">
+        <div class="thumb-wrap">
+          <div class="card-thumb-placeholder"><span class="icon">📷</span>Photo Coming Soon</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">KomalC Genuine Leather Duffel Bag</div>
+          <div class="prod-price">$149.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-11/loafers/" data-type="Footwear" data-price="38.80" data-new="no">
+        <div class="thumb-wrap">
+          <div class="card-thumb-placeholder"><span class="icon">📷</span>Photo Coming Soon</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Salkin Luxury Designer Penny Loafers</div>
+          <div class="prod-price">CA$38.80</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-11/pants/" data-type="Bottoms" data-price="24.28" data-new="no">
+        <div class="thumb-wrap">
+          <div class="card-thumb-placeholder"><span class="icon">📷</span>Photo Coming Soon</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Homme Minimalist Casual Suit Pants</div>
+          <div class="prod-price">CA$24.28</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-11/shirt/" data-type="Dress &amp; Polo" data-price="20.45" data-new="no">
+        <div class="thumb-wrap">
+          <div class="card-thumb-placeholder"><span class="icon">📷</span>Photo Coming Soon</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">Men's Casual Button-Down Long Sleeve Striped Shirt</div>
+          <div class="prod-price">CA$20.45</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-18/dress-shoes/" data-type="Footwear" data-price="63.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-aug-18/dress-shoes/dress-shoes.jpg" alt="Men's Lace-Up Dress Sneakers - Derby Style">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Men's Lace-Up Dress Sneakers - Derby Style</div>
+          <div class="prod-price">$63.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-18/overcoat/" data-type="Jackets" data-price="105" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-aug-18/overcoat/overcoat.jpg" alt="COOFANDY Men Trench Coat Long Casual Single Breasted Overcoat">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">COOFANDY Men Trench Coat Long Casual Single Breasted Overcoat</div>
+          <div class="prod-price">$105</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-18/sweater/" data-type="Hoodies/Flannels" data-price="16.87" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-aug-18/sweater/sweater.jpg" alt="Men's Solid Color Crew Neck Long Sleeve Knit Sweater">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Men's Solid Color Crew Neck Long Sleeve Knit Sweater</div>
+          <div class="prod-price">CA$16.87</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-18/trousers/" data-type="Bottoms" data-price="46.98" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-aug-18/trousers/trousers.jpg" alt="Libin Mens Golf Pants Quick Dry Lightweight Stretch Dress Pants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Libin Mens Golf Pants Quick Dry Lightweight Stretch Dress Pants</div>
+          <div class="prod-price">$46.98</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-25/belt/" data-type="Accessories" data-price="29.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-aug-25/belt/belt.jpg" alt="CHAOREN Mens Belts Leather - 35mm Casual Genuine Leather">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">CHAOREN Mens Belts Leather - 35mm Casual Genuine Leather</div>
+          <div class="prod-price">$29.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-25/chinos/" data-type="Jeans/Chinos" data-price="26.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-aug-25/chinos/chinos.jpg" alt="Men's Solid Color Casual Tapered Pants With Pockets">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Men's Solid Color Casual Tapered Pants With Pockets</div>
+          <div class="prod-price">CA$26.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-25/loafers/" data-type="Footwear" data-price="28.92" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-aug-25/loafers/loafers.jpg" alt="SHUZIA Men's Rich Tan PU Boat Shoes">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">SHUZIA Men's Rich Tan PU Boat Shoes</div>
+          <div class="prod-price">CA$28.92</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-aug-25/polo/" data-type="Dress &amp; Polo" data-price="11.32" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-aug-25/polo/polo.jpg" alt="WASSUP OTHER Men's Loose Lightweight Business POLO Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">WASSUP OTHER Men's Loose Lightweight Business POLO Shirt</div>
+          <div class="prod-price">CA$11.32</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-style-july-30/duffel-bag/" data-type="Accessories" data-price="149.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-style-july-30/duffel-bag/duffel-bag.jpg" alt="KomalC Genuine Leather Duffel Bag">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">KomalC Genuine Leather Duffel Bag</div>
+          <div class="prod-price">CA$149.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-style-july-30/loafers/" data-type="Footwear" data-price="38.80" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-style-july-30/loafers/loafers.jpg" alt="Salkin Luxury Designer Penny Loafers">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Salkin Luxury Designer Penny Loafers</div>
+          <div class="prod-price">CA$38.80</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-style-july-30/pants/" data-type="Bottoms" data-price="24.28" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-style-july-30/pants/pants.jpg" alt="Manfinity Homme Minimalist Casual Suit Pants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Homme Minimalist Casual Suit Pants</div>
+          <div class="prod-price">CA$24.28</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/old-money/old-money-style-july-30/shirt/" data-type="Dress &amp; Polo" data-price="20.45" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/old-money/old-money-style-july-30/shirt/shirt.jpg" alt="Men's Casual Button-Down Long Sleeve Striped Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">Men's Casual Button-Down Long Sleeve Striped Shirt</div>
+          <div class="prod-price">CA$20.45</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-aug-26/hoodie/" data-type="Hoodies/Flannels" data-price="21.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-aug-26/hoodie/hoodie.jpg" alt="Men's Solid Color Dropped Shoulder Long Sleeve Drawstring Pocket Casual Hoodie">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Men's Solid Color Dropped Shoulder Long Sleeve Drawstring Pocket Casual Hoodie</div>
+          <div class="prod-price">CA$21.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-aug-26/jacket/" data-type="Jackets" data-price="267.95" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-aug-26/jacket/jacket.jpg" alt="Decrum Shirt Collar Style Mens Leather Car Coat">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">Decrum Shirt Collar Style Mens Leather Car Coat</div>
+          <div class="prod-price">$267.95</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-aug-26/pants/" data-type="Bottoms" data-price="" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-aug-26/pants/pants.jpg" alt="Men's Snow Ski Fleece Lined Pants - SnowVenture M054">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Men's Snow Ski Fleece Lined Pants - SnowVenture M054</div>
+          <div class="prod-price">See Price on Site</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-fit-sept-3/jeans/" data-type="Jeans/Chinos" data-price="30.07" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-fit-sept-3/jeans/jeans.jpg" alt="Manfinity Homme Men's Straight Loose Fit Multi-Pocket Casual Denim Jeans">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Manfinity Homme Men's Straight Loose Fit Multi-Pocket Casual Denim Jeans</div>
+          <div class="prod-price">CA$30.07</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-fit-sept-3/plaid/" data-type="Hoodies/Flannels" data-price="23.21" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-fit-sept-3/plaid/plaid.jpg" alt="Men's Long Sleeve Brushed Plaid Shirt - Black &amp; White">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Men's Long Sleeve Brushed Plaid Shirt - Black &amp; White</div>
+          <div class="prod-price">CA$23.21</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-fit-sept-3/tee/" data-type="Tees &amp; Graphics" data-price="31.54" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-fit-sept-3/tee/tee.jpg" alt="Team Fan Apparel NFL Adult Team Block Tagless T-Shirt - Vikings">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Team Fan Apparel NFL Adult Team Block Tagless T-Shirt - Vikings</div>
+          <div class="prod-price">$31.54</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-outfit-aug-15/pants/" data-type="Bottoms" data-price="17.57" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-outfit-aug-15/pants/pants.jpg" alt="Men's Black Cuffed Jogger Sweatpants with Orange Square Patch">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Men's Black Cuffed Jogger Sweatpants with Orange Square Patch</div>
+          <div class="prod-price">CA$17.57</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-outfit-aug-15/sweatshirt/" data-type="Hoodies/Flannels" data-price="15.90" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-outfit-aug-15/sweatshirt/sweatshirt.jpg" alt="Men's Casual Solid Color Crew Neck Sweatshirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Men's Casual Solid Color Crew Neck Sweatshirt</div>
+          <div class="prod-price">CA$15.90</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-outfit-sept-1/jacket/" data-type="Jackets" data-price="69.99" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-outfit-sept-1/jacket/jacket.jpg" alt="HOOD CREW Mens Casual Lightweight Faux Leather Motorcycle Jacket">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">HOOD CREW Mens Casual Lightweight Faux Leather Motorcycle Jacket</div>
+          <div class="prod-price">$69.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-outfit-sept-1/jeans/" data-type="Jeans/Chinos" data-price="23.23" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-outfit-sept-1/jeans/jeans.jpg" alt="Rustler Mens Relaxed Fit Jeans">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Rustler Mens Relaxed Fit Jeans</div>
+          <div class="prod-price">$23.23</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/streetwear/streetwear-outfit-sept-1/tee/" data-type="Tees &amp; Graphics" data-price="11.32" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/streetwear/streetwear-outfit-sept-1/tee/tee.jpg" alt="Daypath Men's Brown Cuff Splice Car Slogan Print T-Shirt">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Daypath Men's Brown Cuff Splice Car Slogan Print T-Shirt</div>
+          <div class="prod-price">CA$11.32</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/wedding/wedding-outfit-sept-6/belt/" data-type="Accessories" data-price="4.20" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/wedding/wedding-outfit-sept-6/belt/belt.jpg" alt="Square Buckle Versatile Fashion Men's Belt">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">Square Buckle Versatile Fashion Men's Belt</div>
+          <div class="prod-price">CA$4.20</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/wedding/wedding-outfit-sept-6/pants/" data-type="Bottoms" data-price="24.48" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/wedding/wedding-outfit-sept-6/pants/pants.jpg" alt="Men's Retro Money Pattern Casual Business Trousers">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Men's Retro Money Pattern Casual Business Trousers</div>
+          <div class="prod-price">CA$24.48</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/wedding/wedding-outfit-sept-6/shirt/" data-type="Dress &amp; Polo" data-price="16.96" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/wedding/wedding-outfit-sept-6/shirt/shirt.jpg" alt="Men's Striped Gentleman's Elegant Minimalist Striped Shirt">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">Men's Striped Gentleman's Elegant Minimalist Striped Shirt</div>
+          <div class="prod-price">CA$16.96</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../outfits/wedding/wedding-outfit-sept-6/watch/" data-type="Accessories" data-price="4.30" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../outfits/wedding/wedding-outfit-sept-6/watch/watch.jpg" alt="Men Watch Brown PU Strap Casual Round Dial Quartz Watch">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">Men Watch Brown PU Strap Casual Round Dial Quartz Watch</div>
+          <div class="prod-price">CA$4.30</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/everyday-fit-check/everyday-fit-check-aug-11/jeans/" data-type="Jeans/Chinos" data-price="38.38" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/everyday-fit-check/everyday-fit-check-aug-11/jeans/jeans.jpg" alt="Men's Y2K Straight Leg Washed Casual Jeans">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Men's Y2K Straight Leg Washed Casual Jeans</div>
+          <div class="prod-price">CA$38.38</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/everyday-fit-check/everyday-fit-check-aug-11/plaid-shirt/" data-type="Hoodies/Flannels" data-price="21.88" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/everyday-fit-check/everyday-fit-check-aug-11/plaid-shirt/plaid-shirt.jpg" alt="STEELVANCE Men's Brown Plaid Short Sleeve Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">STEELVANCE Men's Brown Plaid Short Sleeve Shirt</div>
+          <div class="prod-price">CA$21.88</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/everyday-fit-check/everyday-fit-check-aug-11/tee/" data-type="Tees &amp; Graphics" data-price="12.88" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/everyday-fit-check/everyday-fit-check-aug-11/tee/tee.jpg" alt="Manfinity Homme Men's Plain Round Neck Short Sleeve Casual Top">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Manfinity Homme Men's Plain Round Neck Short Sleeve Casual Top</div>
+          <div class="prod-price">CA$12.88</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/flash-deals/flash-deals-aug-24/briefs/" data-type="Gifts &amp; Extras" data-price="39.95" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/flash-deals/flash-deals-aug-24/briefs/briefs.jpg" alt="SAXX Underwear Co. Men's Daytripper Relaxed Fit Boxer Brief Fly 3-Pack">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">SAXX Underwear Co. Men's Daytripper Relaxed Fit Boxer Brief Fly 3-Pack</div>
+          <div class="prod-price">$39.95 · 50% off</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/flash-deals/flash-deals-aug-24/jeans/" data-type="Jeans/Chinos" data-price="25.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/flash-deals/flash-deals-aug-24/jeans/jeans.jpg" alt="Levi Strauss Signature Gold Mens Straight Fit Jeans">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Levi Strauss Signature Gold Mens Straight Fit Jeans</div>
+          <div class="prod-price">$25.99 · 30% off</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/flash-deals/flash-deals-aug-24/shirt/" data-type="Tees &amp; Graphics" data-price="14.33" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/flash-deals/flash-deals-aug-24/shirt/shirt.jpg" alt="Cute Cat Ramen Anime T-Shirt For Unisex">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Cute Cat Ramen Anime T-Shirt For Unisex</div>
+          <div class="prod-price">CA$14.33</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/flash-deals/flash-deals-aug-28/blazer/" data-type="Jackets" data-price="79.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/flash-deals/flash-deals-aug-28/blazer/blazer.jpg" alt="COOFANDY Mens Sport Coat Casual Blazer One Button Business Dress Jacket">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">COOFANDY Mens Sport Coat Casual Blazer One Button Business Dress Jacket</div>
+          <div class="prod-price">$79.99 · 16% off</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/flash-deals/flash-deals-aug-28/briefs/" data-type="Gifts &amp; Extras" data-price="72.07" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/flash-deals/flash-deals-aug-28/briefs/briefs.jpg" alt="SAXX Underwear Co. Men's Ultra Super Soft Boxer Brief Fly 3-Pack">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">SAXX Underwear Co. Men's Ultra Super Soft Boxer Brief Fly 3-Pack</div>
+          <div class="prod-price">$72.07 · 30% off</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/flash-deals/flash-deals-aug-28/linen-shirt/" data-type="Dress &amp; Polo" data-price="32.39" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/flash-deals/flash-deals-aug-28/linen-shirt/linen-shirt.jpg" alt="COOFANDY Men's Linen Shirts Short Sleeve Casual Button Down">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">COOFANDY Men's Linen Shirts Short Sleeve Casual Button Down</div>
+          <div class="prod-price">$32.39 · 30% off</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gameday-fit-check/gameday-fit-aug-23/bomber/" data-type="Jackets" data-price="153.12" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gameday-fit-check/gameday-fit-aug-23/bomber/bomber.jpg" alt="Ultra Game Mens NFL Official Hooded Bomber Satin Jacket">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">Ultra Game Mens NFL Official Hooded Bomber Satin Jacket</div>
+          <div class="prod-price">$153.12</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gameday-fit-check/gameday-fit-aug-23/high-tops/" data-type="Footwear" data-price="59.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gameday-fit-check/gameday-fit-aug-23/high-tops/high-tops.jpg" alt="OBIBEAR Unisex Barefoot High Top Canvas Shoes">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">OBIBEAR Unisex Barefoot High Top Canvas Shoes</div>
+          <div class="prod-price">$59.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gameday-fit-check/gameday-fit-aug-23/joggers/" data-type="Bottoms" data-price="17.32" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gameday-fit-check/gameday-fit-aug-23/joggers/joggers.jpg" alt="Men's Solid Color Minimalist Knit Jogger Pants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Men's Solid Color Minimalist Knit Jogger Pants</div>
+          <div class="prod-price">CA$17.32</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gameday-fit-check/gameday-fit-aug-23/shirt/" data-type="Tees &amp; Graphics" data-price="31.08" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gameday-fit-check/gameday-fit-aug-23/shirt/shirt.jpg" alt="Team Fan Apparel NFL Gameday Pittsburgh Steelers T-Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Team Fan Apparel NFL Gameday Pittsburgh Steelers T-Shirt</div>
+          <div class="prod-price">$31.08</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gameday-fit-check/gameday-fit-check-aug-12/jeans/" data-type="Jeans/Chinos" data-price="38.49" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gameday-fit-check/gameday-fit-check-aug-12/jeans/jeans.jpg" alt="Men's Cat Scratch Textured Elastic Slim Fit Tapered Jeans">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jeans/Chinos</div>
+          <div class="prod-name">Men's Cat Scratch Textured Elastic Slim Fit Tapered Jeans</div>
+          <div class="prod-price">CA$38.49</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gameday-fit-check/gameday-fit-check-aug-12/jersey/" data-type="Tees &amp; Graphics" data-price="239.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gameday-fit-check/gameday-fit-check-aug-12/jersey/jersey.jpg" alt="Bryce Hall Jersey">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Bryce Hall Jersey</div>
+          <div class="prod-price">$239.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gameday-fit-check/gameday-fit-check-aug-12/long-sleeve/" data-type="Tees &amp; Graphics" data-price="14.97" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gameday-fit-check/gameday-fit-check-aug-12/long-sleeve/long-sleeve.jpg" alt="Men's Casual Solid Color Long Sleeve T-Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Men's Casual Solid Color Long Sleeve T-Shirt</div>
+          <div class="prod-price">CA$14.97</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/NFL-gift-guide-aug-30/beer-stein/" data-type="Gifts &amp; Extras" data-price="24.29" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/NFL-gift-guide-aug-30/beer-stein/beer-stein.jpg" alt="Inglasco NFL Green Bay Packers Banner Beer Stein Mug with Handle, 18-Ounce">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">Inglasco NFL Green Bay Packers Banner Beer Stein Mug with Handle, 18-Ounce</div>
+          <div class="prod-price">$24.29</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/NFL-gift-guide-aug-30/can-cooler/" data-type="Gifts &amp; Extras" data-price="25.63" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/NFL-gift-guide-aug-30/can-cooler/can-cooler.jpg" alt="Simple Modern Los Angeles Chargers Can Cooler for 12oz Cans">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">Simple Modern Los Angeles Chargers Can Cooler for 12oz Cans</div>
+          <div class="prod-price">$25.63</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/NFL-gift-guide-aug-30/spatula/" data-type="Gifts &amp; Extras" data-price="23.18" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/NFL-gift-guide-aug-30/spatula/spatula.jpg" alt="uTheFan NFL New York Jets Laser-Etched Sportula">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">uTheFan NFL New York Jets Laser-Etched Sportula</div>
+          <div class="prod-price">$23.18</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/commanders-gifts-aug-22/coasters/" data-type="Gifts &amp; Extras" data-price="30.59" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/commanders-gifts-aug-22/coasters/coasters.jpg" alt="Rico Industries NFL Washington Commanders Classic Favorites PVC Coaster Set">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">Rico Industries NFL Washington Commanders Classic Favorites PVC Coaster Set</div>
+          <div class="prod-price">$30.59</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/commanders-gifts-aug-22/desk-pad/" data-type="Gifts &amp; Extras" data-price="36.39" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/commanders-gifts-aug-22/desk-pad/desk-pad.jpg" alt="YouTheFan NFL Washington Commanders Logo Series Desk Pad">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">YouTheFan NFL Washington Commanders Logo Series Desk Pad</div>
+          <div class="prod-price">$36.39</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/commanders-gifts-aug-22/funko/" data-type="Gifts &amp; Extras" data-price="39.95" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/commanders-gifts-aug-22/funko/funko.jpg" alt="NFL Commanders Jayden Daniels Funko Pop!">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">NFL Commanders Jayden Daniels Funko Pop!</div>
+          <div class="prod-price">$39.95</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/commanders-gifts-aug-22/headcover/" data-type="Gifts &amp; Extras" data-price="40.77" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/commanders-gifts-aug-22/headcover/headcover.jpg" alt="Team Golf NFL Vintage Driver Golf Club Headcover">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">Team Golf NFL Vintage Driver Golf Club Headcover</div>
+          <div class="prod-price">$40.77</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/commanders-gifts-aug-22/tumbler/" data-type="Gifts &amp; Extras" data-price="29.34" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/commanders-gifts-aug-22/tumbler/tumbler.jpg" alt="Simple Modern Washington Commanders Coffee Mug with Flip Lid | 16oz">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Gifts &amp; Extras</div>
+          <div class="prod-name">Simple Modern Washington Commanders Coffee Mug with Flip Lid | 16oz</div>
+          <div class="prod-price">$29.34</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gameday-gift-guide-aug-15/bengals-shirt/" data-type="Tees &amp; Graphics" data-price="49.17" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gameday-gift-guide-aug-15/bengals-shirt/bengals-shirt.jpg" alt="Team Fan Apparel NFL Cincinnati Bengals Adult Team Block T-Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Team Fan Apparel NFL Cincinnati Bengals Adult Team Block T-Shirt</div>
+          <div class="prod-price">$49.17</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gameday-gift-guide-aug-15/bills-jacket/" data-type="Jackets" data-price="136.27" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gameday-gift-guide-aug-15/bills-jacket/bills-jacket.jpg" alt="Ultra Game Mens NFL Official Supreme Satin Jacket - Buffalo Bills">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">Ultra Game Mens NFL Official Supreme Satin Jacket - Buffalo Bills</div>
+          <div class="prod-price">$136.27</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gameday-gift-guide-aug-15/packers-bracelet/" data-type="Accessories" data-price="29.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gameday-gift-guide-aug-15/packers-bracelet/packers-bracelet.jpg" alt="NFL Unisex Green Bay Packers Silicone Rubber Wrist Band Bracelet Set of 4">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">NFL Unisex Green Bay Packers Silicone Rubber Wrist Band Bracelet Set of 4</div>
+          <div class="prod-price">$29.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gameday-gift-guide-aug-15/raiders-hat/" data-type="Accessories" data-price="65.94" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gameday-gift-guide-aug-15/raiders-hat/raiders-hat.jpg" alt="New Era NFL 39THIRTY Las Vegas Raiders Stretch Fit Cap">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">New Era NFL 39THIRTY Las Vegas Raiders Stretch Fit Cap</div>
+          <div class="prod-price">$65.94</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gameday-gift-guide-aug-15/ravens-socks/" data-type="Accessories" data-price="35.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gameday-gift-guide-aug-15/ravens-socks/ravens-socks.jpg" alt="NFL Men's 3-Pack Sport Crew Fan Socks - Baltimore Ravens">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">NFL Men's 3-Pack Sport Crew Fan Socks - Baltimore Ravens</div>
+          <div class="prod-price">$35.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gift-guide-sept-4/bengals-jacket/" data-type="Jackets" data-price="144.27" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gift-guide-sept-4/bengals-jacket/bengals-jacket.jpg" alt="NFL Mens Classic Varsity Coaches Jacket - Cincinnati Bengals">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">NFL Mens Classic Varsity Coaches Jacket - Cincinnati Bengals</div>
+          <div class="prod-price">$144.27</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gift-guide-sept-4/gibbs-tee/" data-type="Tees &amp; Graphics" data-price="10.07" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gift-guide-sept-4/gibbs-tee/gibbs-tee.jpg" alt="Jahmyr Gibbs Go Off T-Shirt">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Jahmyr Gibbs Go Off T-Shirt</div>
+          <div class="prod-price">CA$10.07</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gift-guide-sept-4/leather-jacket/" data-type="Jackets" data-price="69.99" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gift-guide-sept-4/leather-jacket/leather-jacket.jpg" alt="HOOD CREW Mens Casual Lightweight Faux Leather Motorcycle Jacket">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">HOOD CREW Mens Casual Lightweight Faux Leather Motorcycle Jacket</div>
+          <div class="prod-price">$69.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gift-guide-sept-4/loafers/" data-type="Footwear" data-price="33.30" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gift-guide-sept-4/loafers/loafers.jpg" alt="Salkin Classic Designer Men's Moccasin Shoes - Luxury Suede Loafers">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Salkin Classic Designer Men's Moccasin Shoes - Luxury Suede Loafers</div>
+          <div class="prod-price">CA$33.30</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/gift-guides/gift-guide-sept-4/michelob-tee/" data-type="Tees &amp; Graphics" data-price="21.61" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/gift-guides/gift-guide-sept-4/michelob-tee/michelob-tee.jpg" alt="Michelob Ultra Golden Retriever Cotton T-Shirt">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Michelob Ultra Golden Retriever Cotton T-Shirt</div>
+          <div class="prod-price">CA$21.61</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/other/this-or-that-aug-14/adams-shirt/" data-type="Tees &amp; Graphics" data-price="18.54" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/other/this-or-that-aug-14/adams-shirt/Adams%20Shirt.jpg" alt="Davante Adams Custom Vintage Bootleg Style Tee">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Davante Adams Custom Vintage Bootleg Style Tee</div>
+          <div class="prod-price">CA$18.54</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/other/this-or-that-aug-14/darnold-shirt/" data-type="Tees &amp; Graphics" data-price="33.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/other/this-or-that-aug-14/darnold-shirt/Darnold%20Shirt.jpg" alt="Seattle Sam Darnold Bootleg Style Throwback T-Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Seattle Sam Darnold Bootleg Style Throwback T-Shirt</div>
+          <div class="prod-price">$33.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/other/this-or-that-aug-21/jackson-shirt/" data-type="Tees &amp; Graphics" data-price="15.68" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/other/this-or-that-aug-21/jackson-shirt/jackson-shirt.jpg" alt="Lamar Jackson Retro Jersey Tee - Vintage Sports Fan Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Lamar Jackson Retro Jersey Tee - Vintage Sports Fan Shirt</div>
+          <div class="prod-price">CA$15.68</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/other/this-or-that-aug-21/kelce-shirt/" data-type="Tees &amp; Graphics" data-price="15.68" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/other/this-or-that-aug-21/kelce-shirt/kelce-shirt.jpg" alt="Travis Kelce Tshirt - American Face Limited Design">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">Travis Kelce Tshirt - American Face Limited Design</div>
+          <div class="prod-price">CA$15.68</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-10/hoodie/" data-type="Hoodies/Flannels" data-price="67.63" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-10/hoodie/hoodie.jpg" alt="Champion Mens Powerblend Full Zip Hoodie">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Champion Mens Powerblend Full Zip Hoodie</div>
+          <div class="prod-price">$67.63</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-10/pants/" data-type="Bottoms" data-price="24.28" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-10/pants/pants.jpg" alt="Manfinity Homme Men's Solid Color Button Front Pocket Minimalist Casual Suit Pants">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Bottoms</div>
+          <div class="prod-name">Manfinity Homme Men's Solid Color Button Front Pocket Minimalist Casual Suit Pants</div>
+          <div class="prod-price">CA$24.28</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-10/polo/" data-type="Dress &amp; Polo" data-price="10.94" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-10/polo/polo.jpg" alt="Men's Summer Solid Color Short Sleeve Casual Commute Button Polo Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Dress &amp; Polo</div>
+          <div class="prod-name">Men's Summer Solid Color Short Sleeve Casual Commute Button Polo Shirt</div>
+          <div class="prod-price">$10.94</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-17/duffel/" data-type="Accessories" data-price="52.45" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-17/duffel/duffel.jpg" alt="Nike Unisex NK BRSLA S DUFF - 9.5 (41L) Duffel Bag">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Accessories</div>
+          <div class="prod-name">Nike Unisex NK BRSLA S DUFF - 9.5 (41L) Duffel Bag</div>
+          <div class="prod-price">CA$52.45</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-17/jacket/" data-type="Jackets" data-price="52.99" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-17/jacket/jacket.jpg" alt="BGOWATU Men's Lightweight Jackets Casual Full Zip Windbreaker">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">BGOWATU Men's Lightweight Jackets Casual Full Zip Windbreaker</div>
+          <div class="prod-price">$52.99</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-17/sweatshirt/" data-type="Hoodies/Flannels" data-price="180" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-17/sweatshirt/sweatshirt.jpg" alt="Lacoste Mens Classic Fit Fleece Sweatshirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Lacoste Mens Classic Fit Fleece Sweatshirt</div>
+          <div class="prod-price">$180</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-26/jacket/" data-type="Jackets" data-price="56.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-26/jacket/jacket.jpg" alt="DAZY Men's Solid Brown Suede Jacket And Coat">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Jackets</div>
+          <div class="prod-name">DAZY Men's Solid Brown Suede Jacket And Coat</div>
+          <div class="prod-price">CA$56.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-26/tee/" data-type="Tees &amp; Graphics" data-price="14.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-26/tee/tee.jpg" alt="EGENSIO Men's Casual Colorblock Patchwork T-Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Tees &amp; Graphics</div>
+          <div class="prod-name">EGENSIO Men's Casual Colorblock Patchwork T-Shirt</div>
+          <div class="prod-price">CA$14.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-26/zip-up/" data-type="Hoodies/Flannels" data-price="31.09" data-new="no">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-26/zip-up/zip-up.jpg" alt="Manfinity VCAY Men's Woven Casual Everyday Loose Fit Long Sleeve Zip-Up Shirt">
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">Manfinity VCAY Men's Woven Casual Everyday Loose Fit Long Sleeve Zip-Up Shirt</div>
+          <div class="prod-price">CA$31.09</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-31/shoes/" data-type="Footwear" data-price="52.36" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-31/shoes/shoes.jpg" alt="Men's Black Artificial Leather Business Dress Shoes">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Men's Black Artificial Leather Business Dress Shoes</div>
+          <div class="prod-price">CA$52.36</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-31/sneakers/" data-type="Footwear" data-price="54" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-31/sneakers/sneakers.jpg" alt="Adidas Mens Grand Court 3.0 Sneaker">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Footwear</div>
+          <div class="prod-name">Adidas Mens Grand Court 3.0 Sneaker</div>
+          <div class="prod-price">$54</div>
+        </div>
+      </a>
+      <a class="card-tile" href="../videos/trending-products/trending-products-aug-31/sweater/" data-type="Hoodies/Flannels" data-price="28.09" data-new="yes">
+        <div class="thumb-wrap">
+          <img class="card-thumb" src="../videos/trending-products/trending-products-aug-31/sweater/sweater.jpg" alt="DAZY Men's Summer Half-Zip Solid Apricot Color Knit Sweater">
+        <div class="new-badge">New This Week</div>
+        </div>
+        <div class="card-body">
+          <div class="item-tag">Hoodies/Flannels</div>
+          <div class="prod-name">DAZY Men's Summer Half-Zip Solid Apricot Color Knit Sweater</div>
+          <div class="prod-price">CA$28.09</div>
+        </div>
+      </a>
+    </div>
+    <div id="no-results" class="hidden">No products match these filters.</div>
+  </div>
+
+  <footer>
+    <div class="fine-print">
+      As an Amazon Associate, SHEIN affiliate, and Moosehill (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through the links above.<br>
+      Prices and availability may have changed since this was published — check the retailer page for current details.
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.card-tile'));
+  var typeChips = document.querySelectorAll('[data-filter-group="type"] .chip');
+  var priceChips = document.querySelectorAll('[data-filter-group="price"] .chip');
+  var countEl = document.getElementById('result-count');
+  var noResults = document.getElementById('no-results');
+  var currentType = 'all';
+  var currentPrice = 'all';
+
+  function priceMatches(tile){
+    if(currentPrice === 'all') return true;
+    var raw = tile.getAttribute('data-price');
+    if(!raw) return false;
+    var p = parseFloat(raw);
+    if(isNaN(p)) return false;
+    if(currentPrice === 'under25') return p < 25;
+    if(currentPrice === '25to50') return p >= 25 && p <= 50;
+    if(currentPrice === 'over50') return p > 50;
+    return true;
+  }
+
+  function typeMatches(tile){
+    if(currentType === 'all') return true;
+    return tile.getAttribute('data-type') === currentType;
+  }
+
+  function applyFilters(){
+    var visible = 0;
+    tiles.forEach(function(tile){
+      var show = typeMatches(tile) && priceMatches(tile);
+      tile.classList.toggle('hidden', !show);
+      if(show) visible++;
+    });
+    countEl.textContent = visible + ' of ' + tiles.length + ' products';
+    noResults.classList.toggle('hidden', visible !== 0);
+  }
+
+  function wireGroup(chips, setter){
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chips.forEach(function(c){ c.classList.remove('active'); });
+        chip.classList.add('active');
+        setter(chip.getAttribute('data-value'));
+        applyFilters();
+      });
+    });
+  }
+
+  wireGroup(typeChips, function(v){ currentType = v; });
+  wireGroup(priceChips, function(v){ currentPrice = v; });
+
+  applyFilters();
+})();
+</script>
+</body>
+</html>
