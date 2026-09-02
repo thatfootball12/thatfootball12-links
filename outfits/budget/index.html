@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Budget Outfits • ThatFootball12</title>
 <meta property="og:title" content="Budget Outfits - ThatFootball12" />
-<meta property="og:description" content="Budget-friendly shoppable outfits — coming soon." />
+<meta property="og:description" content="Every shoppable Budget outfit drop from ThatFootball12." />
 <meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
 <meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/outfits/budget/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ThatFootball12" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Budget Outfits - ThatFootball12" />
-<meta name="twitter:description" content="Budget-friendly shoppable outfits — coming soon." />
+<meta name="twitter:description" content="Every shoppable Budget outfit drop from ThatFootball12." />
 <meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -41,6 +41,16 @@
       radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
   }
   .wrap{width:100%;max-width:480px;}
+  .hero{
+    width:100%;
+    height:220px;
+    background-size:cover;
+    background-position:center;
+    border-radius:16px;
+    margin-bottom:28px;
+    border:3px solid var(--panel-line);
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  }
   header{text-align:center;margin-bottom:20px;}
   .badge{
     display:inline-flex;align-items:center;gap:8px;
@@ -83,7 +93,6 @@
     border-radius:12px;
     padding:22px;
     margin-bottom:26px;
-    text-align:center;
   }
   .section h3{
     font-family:'Oswald',sans-serif;
@@ -91,12 +100,74 @@
     letter-spacing:1.5px;
     text-transform:uppercase;
     color:var(--gold);
-    margin-bottom:12px;
+    margin-bottom:18px;
+    text-align:center;
   }
-  .section p{
-    font-size:14px;
-    line-height:1.6;
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+  }
+  a.card-tile{
+    display:flex;
+    flex-direction:column;
+    background:var(--ink);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    overflow:hidden;
+    text-decoration:none;
+    color:var(--bone);
+    transition:all .2s ease;
+  }
+  a.card-tile:hover{
+    border-color:var(--gold);
+    transform:translateY(-3px);
+  }
+  .card-thumb{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    background:var(--panel);
+  }
+  .card-thumb-placeholder{
+    width:100%;
+    aspect-ratio:1/1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    background:repeating-linear-gradient(45deg, var(--panel), var(--panel) 10px, #15110c 10px, #15110c 20px);
+    border-bottom:1px solid var(--panel-line);
     color:var(--bone-dim);
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    text-align:center;
+    padding:8px;
+  }
+  .card-thumb-placeholder .icon{font-size:22px;}
+  .card-body{padding:10px 12px 14px;}
+  .card-date{
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+  .card-caption{
+    font-size:12px;
+    line-height:1.4;
+    color:var(--bone-dim);
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
   }
   footer{margin-top:40px;text-align:center;}
   .fine-print{
@@ -108,17 +179,27 @@
 <body>
 <div class="wrap">
 
+  <div class="hero" style="background-image: url('../../cover.jpg');"></div>
+
   <a class="back" href="../">← Back to Outfit Categories</a>
 
   <header>
     <div class="badge">Budget</div>
     <h1>BUDGET <span>OUTFITS</span></h1>
-    <div class="tagline">Shoppable Looks • Game Day & Everyday Style</div>
+    <div class="tagline">1 Shoppable Look</div>
   </header>
 
   <div class="section">
-    <h3>🚧 Coming Soon</h3>
-    <p>We're putting together budget-friendly outfit picks for this category. Check back soon.</p>
+    <h3>💸 All Budget Drops</h3>
+    <div class="grid">
+      <a class="card-tile" href="budget-graduation-sept-8/">
+        <img class="card-thumb" src="budget-graduation-sept-8/outfit-preview.jpg" alt="Budget Graduation - September 8th, 2026">
+        <div class="card-body">
+          <div class="card-date">Sept 8th, 2026</div>
+          <div class="card-caption">Solid color button-up, classic dress pants, leather belt, and a minimalist quartz watch — full graduation-ready look without breaking the budget.</div>
+        </div>
+      </a>
+    </div>
   </div>
 
   <footer>
