@@ -141,6 +141,105 @@
   }
   .chip:hover{border-color:var(--gold);color:var(--bone);}
   .chip.active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
+  .filter-sublabel{
+    font-family:'Oswald',sans-serif;
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    opacity:.7;
+    margin:10px 0 6px;
+  }
+  .theme-details{margin-bottom:0;}
+  .theme-toggle{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.3px;
+    text-transform:uppercase;
+    padding:9px 12px;
+    border-radius:8px;
+    border:1px solid var(--panel-line);
+    background:var(--ink);
+    color:var(--bone-dim);
+    cursor:pointer;
+    list-style:none;
+  }
+  .theme-toggle::-webkit-details-marker{display:none;}
+  .theme-toggle:hover{border-color:var(--gold);color:var(--bone);}
+  .theme-toggle .arrow{transition:transform .15s ease;}
+  .theme-details[open] .theme-toggle{border-color:var(--gold);color:var(--bone);}
+  .theme-details[open] .theme-toggle .arrow{transform:rotate(180deg);}
+  .controls-row{
+    display:flex;
+    gap:12px;
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:18px;
+  }
+  .controls-row .filter-group{flex:1;margin-bottom:0;}
+  .search-input{
+    width:100%;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    padding:9px 12px;
+    border-radius:8px;
+    border:1px solid var(--panel-line);
+    background:var(--ink);
+    color:var(--bone);
+    outline:none;
+  }
+  .search-input::placeholder{color:var(--bone-dim);}
+  .search-input:focus{border-color:var(--gold);}
+  .sort-select{
+    width:100%;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    padding:9px 12px;
+    border-radius:8px;
+    border:1px solid var(--panel-line);
+    background:var(--ink);
+    color:var(--bone);
+    outline:none;
+    cursor:pointer;
+  }
+  .sort-select:focus{border-color:var(--gold);}
+  .active-filters-bar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-bottom:10px;
+  }
+  .active-filters-bar.hidden{display:none;}
+  .active-filters-bar button{
+    background:none;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .active-filters-bar button:hover{background:var(--gold);color:var(--ink);}
   .result-count{
     text-align:center;
     font-family:'Oswald',sans-serif;
@@ -294,9 +393,59 @@
         <button class="chip" data-value="over50">$50+</button>
       </div>
     </div>
+    <details class="filter-group theme-details" id="theme-details" data-filter-group="theme">
+      <summary class="theme-toggle">
+        <span>Browse by theme</span>
+        <span class="arrow">▾</span>
+      </summary>
+      <div class="filter-chips" style="margin-top:10px;">
+        <button class="chip active" data-value="all">All Themes</button>
+      </div>
+      <div class="filter-sublabel">Outfit Themes</div>
+      <div class="filter-chips">
+        <button class="chip" data-value="budget">Budget</button>
+        <button class="chip" data-value="business-casual">Business Casual</button>
+        <button class="chip" data-value="casual">Casual</button>
+        <button class="chip" data-value="date-night">Date Night</button>
+        <button class="chip" data-value="gameday">Gameday</button>
+        <button class="chip" data-value="motor-streetwear">Motor Streetwear</button>
+        <button class="chip" data-value="night-out">Night Out</button>
+        <button class="chip" data-value="old-money">Old Money</button>
+        <button class="chip" data-value="streetwear">Streetwear</button>
+        <button class="chip" data-value="wedding">Wedding</button>
+      </div>
+      <div class="filter-sublabel">Video Categories</div>
+      <div class="filter-chips">
+        <button class="chip" data-value="everyday-fit-check">Everyday Fit Check</button>
+        <button class="chip" data-value="flash-deals">Flash Deals</button>
+        <button class="chip" data-value="gameday-fit-check">Gameday Fit Check</button>
+        <button class="chip" data-value="gift-guides">Gift Guides</button>
+        <button class="chip" data-value="trending-products">Trending Products</button>
+      </div>
+    </details>
+  </div>
+
+  <div class="active-filters-bar hidden" id="active-filters-bar">
+    <span id="active-filters-text">0 active filters</span>
+    <button id="clear-all-btn" type="button">Clear all</button>
   </div>
 
   <div class="result-count" id="result-count">271 of 271 products</div>
+
+  <div class="controls-row">
+    <div class="filter-group">
+      <div class="filter-label">Search</div>
+      <input type="search" id="search-input" class="search-input" placeholder="Search products…" autocomplete="off">
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Sort</div>
+      <select id="sort-select" class="sort-select">
+        <option value="newest">Newest First</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+      </select>
+    </div>
+  </div>
 
   <div class="section">
     <div class="grid" id="product-grid">
@@ -319,11 +468,29 @@
   var noResults = document.getElementById('no-results');
   var countEl = document.getElementById('result-count');
   var taglineEl = document.querySelector('.tagline');
+  var searchInput = document.getElementById('search-input');
+  var sortSelect = document.getElementById('sort-select');
+  var activeFiltersBar = document.getElementById('active-filters-bar');
+  var activeFiltersText = document.getElementById('active-filters-text');
+  var clearAllBtn = document.getElementById('clear-all-btn');
+  var themeDetails = document.getElementById('theme-details');
+
   var typeChips = document.querySelectorAll('[data-filter-group="type"] .chip');
   var priceChips = document.querySelectorAll('[data-filter-group="price"] .chip');
+  var themeChips = document.querySelectorAll('[data-filter-group="theme"] .chip');
+
+  var VALID_TYPES = ['Jackets','Hoodies/Flannels','Tees & Graphics','Dress & Polo','Jeans/Chinos','Bottoms','Accessories','Footwear','Gifts & Extras'];
+  var VALID_PRICES = ['under25','25to50','over50'];
+  var VALID_THEMES = ['budget','business-casual','casual','date-night','gameday','motor-streetwear','night-out','old-money','streetwear','wedding','everyday-fit-check','flash-deals','gameday-fit-check','gift-guides','trending-products'];
+  var VALID_SORTS = ['newest','price-asc','price-desc'];
+
   var currentType = 'all';
   var currentPrice = 'all';
-  var tiles = [];
+  var currentTheme = 'all';
+  var currentSort = 'newest';
+  var searchTerm = '';
+
+  var entries = []; // {el, p, index}
 
   function priceText(p){
     if(p.retailer === 'Amazon') return 'Check price on Amazon';
@@ -341,6 +508,7 @@
     a.setAttribute('data-type', p.item_type);
     a.setAttribute('data-price', p.price === null ? '' : p.price);
     a.setAttribute('data-new', p.data_new);
+    a.setAttribute('data-theme', p.theme);
 
     var thumbWrap = document.createElement('div');
     thumbWrap.className = 'thumb-wrap';
@@ -390,58 +558,182 @@
     return a;
   }
 
-  function priceMatches(tile){
+  function typeMatches(p){
+    return currentType === 'all' || p.item_type === currentType;
+  }
+
+  function priceMatches(p){
     if(currentPrice === 'all') return true;
-    var raw = tile.getAttribute('data-price');
-    if(!raw) return false;
-    var p = parseFloat(raw);
-    if(isNaN(p)) return false;
-    if(currentPrice === 'under25') return p < 25;
-    if(currentPrice === '25to50') return p >= 25 && p <= 50;
-    if(currentPrice === 'over50') return p > 50;
+    if(p.price === null) return false;
+    var v = p.price;
+    if(currentPrice === 'under25') return v < 25;
+    if(currentPrice === '25to50') return v >= 25 && v <= 50;
+    if(currentPrice === 'over50') return v > 50;
     return true;
   }
 
-  function typeMatches(tile){
-    if(currentType === 'all') return true;
-    return tile.getAttribute('data-type') === currentType;
+  function themeMatches(p){
+    return currentTheme === 'all' || p.theme === currentTheme;
   }
 
-  function applyFilters(){
+  function searchMatches(p){
+    if(!searchTerm) return true;
+    return p.name.toLowerCase().indexOf(searchTerm) !== -1;
+  }
+
+  function sortedEntries(){
+    var arr = entries.slice();
+    if(currentSort === 'price-asc' || currentSort === 'price-desc'){
+      var withPrice = arr.filter(function(e){ return e.p.price !== null; });
+      var noPrice = arr.filter(function(e){ return e.p.price === null; });
+      withPrice.sort(function(a,b){
+        var diff = a.p.price - b.p.price;
+        if(diff !== 0) return currentSort === 'price-asc' ? diff : -diff;
+        return a.index - b.index;
+      });
+      noPrice.sort(function(a,b){ return a.index - b.index; });
+      return withPrice.concat(noPrice);
+    }
+    // 'newest' (default): data_new=yes first, then existing catalog order
+    arr.sort(function(a,b){
+      var an = a.p.data_new === 'yes' ? 0 : 1;
+      var bn = b.p.data_new === 'yes' ? 0 : 1;
+      if(an !== bn) return an - bn;
+      return a.index - b.index;
+    });
+    return arr;
+  }
+
+  function activeFilterCount(){
+    var n = 0;
+    if(currentType !== 'all') n++;
+    if(currentPrice !== 'all') n++;
+    if(currentTheme !== 'all') n++;
+    if(searchTerm) n++;
+    return n;
+  }
+
+  function updateURL(){
+    var params = new URLSearchParams();
+    if(currentTheme !== 'all') params.set('theme', currentTheme);
+    if(currentType !== 'all') params.set('type', currentType);
+    if(currentPrice !== 'all') params.set('price', currentPrice);
+    if(currentSort !== 'newest') params.set('sort', currentSort);
+    if(searchTerm) params.set('q', searchTerm);
+    var qs = params.toString();
+    var newUrl = window.location.pathname + (qs ? '?' + qs : '');
+    history.replaceState(null, '', newUrl);
+  }
+
+  function applyAll(){
+    var order = sortedEntries();
     var visible = 0;
-    tiles.forEach(function(tile){
-      var show = typeMatches(tile) && priceMatches(tile);
-      tile.classList.toggle('hidden', !show);
+    order.forEach(function(entry){
+      grid.appendChild(entry.el);
+      var show = typeMatches(entry.p) && priceMatches(entry.p) && themeMatches(entry.p) && searchMatches(entry.p);
+      entry.el.classList.toggle('hidden', !show);
       if(show) visible++;
     });
-    countEl.textContent = visible + ' of ' + tiles.length + ' products';
+    countEl.textContent = visible + ' of ' + entries.length + ' products';
     noResults.classList.toggle('hidden', visible !== 0);
+
+    var n = activeFilterCount();
+    if(n > 0){
+      activeFiltersBar.classList.remove('hidden');
+      activeFiltersText.textContent = n + ' active filter' + (n === 1 ? '' : 's');
+    } else {
+      activeFiltersBar.classList.add('hidden');
+    }
+
+    updateURL();
+  }
+
+  function setActiveChip(chips, value){
+    chips.forEach(function(c){
+      c.classList.toggle('active', c.getAttribute('data-value') === value);
+    });
   }
 
   function wireGroup(chips, setter){
     chips.forEach(function(chip){
       chip.addEventListener('click', function(){
-        chips.forEach(function(c){ c.classList.remove('active'); });
-        chip.classList.add('active');
-        setter(chip.getAttribute('data-value'));
-        applyFilters();
+        var v = chip.getAttribute('data-value');
+        setter(v);
+        setActiveChip(chips, v);
+        applyAll();
       });
     });
   }
 
   wireGroup(typeChips, function(v){ currentType = v; });
   wireGroup(priceChips, function(v){ currentPrice = v; });
+  wireGroup(themeChips, function(v){ currentTheme = v; });
+
+  var searchDebounceTimer = null;
+  searchInput.addEventListener('input', function(){
+    var val = searchInput.value;
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(function(){
+      searchTerm = val.trim().toLowerCase();
+      applyAll();
+    }, 300);
+  });
+
+  sortSelect.addEventListener('change', function(){
+    var v = VALID_SORTS.indexOf(sortSelect.value) !== -1 ? sortSelect.value : 'newest';
+    currentSort = v;
+    applyAll();
+  });
+
+  clearAllBtn.addEventListener('click', function(){
+    currentType = 'all';
+    currentPrice = 'all';
+    currentTheme = 'all';
+    searchTerm = '';
+    searchInput.value = '';
+    setActiveChip(typeChips, 'all');
+    setActiveChip(priceChips, 'all');
+    setActiveChip(themeChips, 'all');
+    themeDetails.open = false;
+    applyAll();
+  });
+
+  function readInitialStateFromURL(){
+    var params;
+    try {
+      params = new URLSearchParams(window.location.search);
+    } catch(e){
+      return;
+    }
+    var theme = params.get('theme');
+    if(theme && VALID_THEMES.indexOf(theme) !== -1){ currentTheme = theme; }
+    var type = params.get('type');
+    if(type && VALID_TYPES.indexOf(type) !== -1){ currentType = type; }
+    var price = params.get('price');
+    if(price && VALID_PRICES.indexOf(price) !== -1){ currentPrice = price; }
+    var sort = params.get('sort');
+    if(sort && VALID_SORTS.indexOf(sort) !== -1){ currentSort = sort; }
+    var q = params.get('q');
+    if(q){ searchTerm = q.trim().toLowerCase(); }
+  }
+
+  readInitialStateFromURL();
+  setActiveChip(typeChips, currentType);
+  setActiveChip(priceChips, currentPrice);
+  setActiveChip(themeChips, currentTheme);
+  if(currentTheme !== 'all'){ themeDetails.open = true; }
+  if(searchTerm){ searchInput.value = searchTerm; }
+  sortSelect.value = currentSort;
 
   fetch('../products.json')
     .then(function(r){ return r.json(); })
     .then(function(products){
-      products.forEach(function(p){
-        var tile = buildTile(p);
-        grid.appendChild(tile);
-        tiles.push(tile);
+      products.forEach(function(p, i){
+        var el = buildTile(p);
+        entries.push({el: el, p: p, index: i});
       });
       if(taglineEl){ taglineEl.textContent = products.length + ' Shoppable Items'; }
-      applyFilters();
+      applyAll();
     })
     .catch(function(err){
       noResults.textContent = 'Could not load products right now. Please refresh.';
