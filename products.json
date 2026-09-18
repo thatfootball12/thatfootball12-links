@@ -16,7 +16,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-sept-17/hoodie/hoodie-424.jpeg"
   },
   {
     "id": "trending-products/trending-products-sept-17/sweater",
@@ -35,7 +36,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "yes",
-    "discount_percent": 5
+    "discount_percent": 5,
+    "thumbnail": "videos/trending-products/trending-products-sept-17/sweater/sweater-424.jpeg"
   },
   {
     "id": "trending-products/trending-products-sept-17/jumper",
@@ -54,7 +56,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "yes",
-    "discount_percent": 5
+    "discount_percent": 5,
+    "thumbnail": "videos/trending-products/trending-products-sept-17/jumper/jumper-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-17/hat",
@@ -73,7 +76,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-sept-17/hat/hat-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-17/golf-pants",
@@ -92,7 +96,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-sept-17/golf-pants/golf-pants-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-17/trunks",
@@ -111,7 +116,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-sept-17/trunks/trunks-424.jpeg"
   },
   {
     "id": "gift-guides/cardinals-gift-guide-sept-17/can-cooler",
@@ -130,7 +136,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/cardinals-gift-guide-sept-17/can-cooler/can-cooler-424.jpeg"
   },
   {
     "id": "gift-guides/cardinals-gift-guide-sept-17/desk-mat",
@@ -149,7 +156,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/cardinals-gift-guide-sept-17/desk-mat/desk-mat-424.jpeg"
   },
   {
     "id": "gift-guides/cardinals-gift-guide-sept-17/tee",
@@ -168,7 +176,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/cardinals-gift-guide-sept-17/tee/tee-424.jpeg"
   },
   {
     "id": "business-casual/business-casual-sept-10/sweater",
@@ -187,7 +196,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-sept-10/sweater/sweater-424.jpeg"
   },
   {
     "id": "business-casual/business-casual-sept-10/pants",
@@ -206,7 +216,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-sept-10/pants/pants-424.jpeg"
   },
   {
     "id": "business-casual/business-casual-sept-10/belt",
@@ -225,7 +236,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-sept-10/belt/belt-424.jpeg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-10/jacket",
@@ -244,7 +256,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 5
+    "discount_percent": 5,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-10/jacket/jacket-424.jpeg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-10/sweatshirt",
@@ -263,7 +276,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 5
+    "discount_percent": 5,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-10/sweatshirt/sweatshirt-424.jpeg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-10/jeans",
@@ -282,7 +296,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-10/jeans/jeans-424.jpeg"
   },
   {
     "id": "business-casual/business-casual-sept-10/shoes",
@@ -301,7 +316,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 2
+    "discount_percent": 2,
+    "thumbnail": "outfits/business-casual/business-casual-sept-10/shoes/shoes-424.jpeg"
   },
   {
     "id": "date-night/date-night-sept-10/sweatshirt",
@@ -320,7 +336,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-sept-10/sweatshirt/sweatshirt-424.jpeg"
   },
   {
     "id": "date-night/date-night-sept-10/jeans",
@@ -339,7 +356,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-sept-10/jeans/jeans-424.jpeg"
   },
   {
     "id": "date-night/date-night-sept-10/vest",
@@ -358,7 +376,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 2
+    "discount_percent": 2,
+    "thumbnail": "outfits/date-night/date-night-sept-10/vest/vest-424.jpeg"
   },
   {
     "id": "date-night/date-night-sept-10/boots",
@@ -377,7 +396,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-sept-10/boots/boots-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-10/joggers",
@@ -396,7 +416,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 2
+    "discount_percent": 2,
+    "thumbnail": "outfits/casual/casual-outfit-sept-10/joggers/joggers-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-10/hoodie",
@@ -415,7 +436,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-sept-10/hoodie/hoodie-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-10/hat",
@@ -434,7 +456,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-sept-10/hat/hat-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-10/sandals",
@@ -453,7 +476,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 4
+    "discount_percent": 4,
+    "thumbnail": "outfits/casual/casual-outfit-sept-10/sandals/sandals-424.jpeg"
   },
   {
     "id": "gameday/gameday-sept-10/jacket",
@@ -472,7 +496,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-sept-10/jacket/jacket-424.jpeg"
   },
   {
     "id": "gameday/gameday-sept-10/jeans",
@@ -491,7 +516,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-sept-10/jeans/jeans-424.jpeg"
   },
   {
     "id": "gameday/gameday-sept-10/tee",
@@ -510,7 +536,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-sept-10/tee/tee-424.jpeg"
   },
   {
     "id": "old-money/old-money-sept-10/polo",
@@ -529,7 +556,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-sept-10/polo/polo-424.jpeg"
   },
   {
     "id": "old-money/old-money-sept-10/pants",
@@ -548,7 +576,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 5
+    "discount_percent": 5,
+    "thumbnail": "outfits/old-money/old-money-sept-10/pants/pants-424.jpeg"
   },
   {
     "id": "old-money/old-money-sept-10/shoes",
@@ -567,7 +596,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 10
+    "discount_percent": 10,
+    "thumbnail": "outfits/old-money/old-money-sept-10/shoes/shoes-424.jpeg"
   },
   {
     "id": "night-out/night-out-sept-10/shirt",
@@ -586,7 +616,8 @@
     "theme": "night-out",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/night-out/night-out-sept-10/shirt/shirt-424.jpeg"
   },
   {
     "id": "night-out/night-out-sept-10/tee",
@@ -605,7 +636,8 @@
     "theme": "night-out",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/night-out/night-out-sept-10/tee/tee-424.jpeg"
   },
   {
     "id": "night-out/night-out-sept-10/pants",
@@ -624,7 +656,8 @@
     "theme": "night-out",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 18
+    "discount_percent": 18,
+    "thumbnail": "outfits/night-out/night-out-sept-10/pants/pants-424.jpeg"
   },
   {
     "id": "night-out/night-out-sept-10/glasses",
@@ -643,7 +676,8 @@
     "theme": "night-out",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/night-out/night-out-sept-10/glasses/glasses-424.jpeg"
   },
   {
     "id": "budget/budget-wedding-sept-10/shirt",
@@ -662,7 +696,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 8
+    "discount_percent": 8,
+    "thumbnail": "outfits/budget/budget-wedding-sept-10/shirt/shirt-424.jpeg"
   },
   {
     "id": "budget/budget-wedding-sept-10/pants",
@@ -681,7 +716,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 10
+    "discount_percent": 10,
+    "thumbnail": "outfits/budget/budget-wedding-sept-10/pants/pants-424.jpeg"
   },
   {
     "id": "budget/budget-wedding-sept-10/belt",
@@ -700,7 +736,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": 2
+    "discount_percent": 2,
+    "thumbnail": "outfits/budget/budget-wedding-sept-10/belt/belt-424.jpeg"
   },
   {
     "id": "budget/budget-wedding-sept-10/watch",
@@ -719,7 +756,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "yes",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-wedding-sept-10/watch/watch-424.jpeg"
   },
   {
     "id": "trending-products/trending-products-sept-9/pants",
@@ -738,7 +776,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": 4
+    "discount_percent": 4,
+    "thumbnail": "videos/trending-products/trending-products-sept-9/pants/pants-424.jpeg"
   },
   {
     "id": "trending-products/trending-products-sept-9/polo",
@@ -757,7 +796,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-sept-9/polo/polo-424.jpeg"
   },
   {
     "id": "trending-products/trending-products-sept-9/tee",
@@ -776,7 +816,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-sept-9/tee/tee-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-9/cargo-pants",
@@ -795,7 +836,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-sept-9/cargo-pants/cargo-pants-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-9/compression-shirt",
@@ -814,7 +856,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": 4
+    "discount_percent": 4,
+    "thumbnail": "videos/flash-deals/flash-deals-sept-9/compression-shirt/compression-shirt-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-9/tee",
@@ -833,7 +876,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-sept-9/tee/tee-424.jpeg"
   },
   {
     "id": "gift-guides/jets-gift-guide-sept-9/tumbler",
@@ -852,7 +896,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/jets-gift-guide-sept-9/tumbler/tumbler-424.jpeg"
   },
   {
     "id": "gift-guides/jets-gift-guide-sept-9/wall-art",
@@ -871,7 +916,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/jets-gift-guide-sept-9/wall-art/wall-art-424.jpeg"
   },
   {
     "id": "gift-guides/jets-gift-guide-sept-9/banner-flag",
@@ -890,7 +936,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/jets-gift-guide-sept-9/banner-flag/banner-flag-424.jpeg"
   },
   {
     "id": "business-casual/business-casual-sept-9/sweater",
@@ -909,7 +956,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-sept-9/sweater/sweater-424.jpeg"
   },
   {
     "id": "business-casual/business-casual-sept-9/pants",
@@ -928,7 +976,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-sept-9/pants/pants-424.jpeg"
   },
   {
     "id": "business-casual/business-casual-sept-9/loafers",
@@ -947,7 +996,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-sept-9/loafers/loafers-424.jpeg"
   },
   {
     "id": "business-casual/business-casual-sept-9/watch",
@@ -966,7 +1016,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-sept-9/watch/watch-424.jpeg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-9/jacket",
@@ -985,7 +1036,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-9/jacket/jacket-424.jpeg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-9/sweatshirt",
@@ -1004,7 +1056,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": 59
+    "discount_percent": 59,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-9/sweatshirt/sweatshirt-424.jpeg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-9/jeans",
@@ -1023,7 +1076,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-9/jeans/jeans-424.jpeg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-9/shoes",
@@ -1042,7 +1096,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-9/shoes/shoes-424.jpeg"
   },
   {
     "id": "date-night/date-night-sept-9/blazer",
@@ -1061,7 +1116,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-sept-9/blazer/blazer-424.jpeg"
   },
   {
     "id": "date-night/date-night-sept-9/dress-shirt",
@@ -1080,7 +1136,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-sept-9/dress-shirt/dress-shirt-424.jpeg"
   },
   {
     "id": "date-night/date-night-sept-9/pants",
@@ -1099,7 +1156,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": 2
+    "discount_percent": 2,
+    "thumbnail": "outfits/date-night/date-night-sept-9/pants/pants-424.jpeg"
   },
   {
     "id": "date-night/date-night-sept-9/boots",
@@ -1118,7 +1176,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-sept-9/boots/boots-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-9/jacket",
@@ -1137,7 +1196,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": 55
+    "discount_percent": 55,
+    "thumbnail": "outfits/casual/casual-outfit-sept-9/jacket/jacket-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-9/jeans",
@@ -1156,7 +1216,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": 3
+    "discount_percent": 3,
+    "thumbnail": "outfits/casual/casual-outfit-sept-9/jeans/jeans-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-9/shoes",
@@ -1175,7 +1236,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-sept-9/shoes/shoes-424.jpeg"
   },
   {
     "id": "gameday/gameday-sept-9/jacket",
@@ -1194,7 +1256,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-sept-9/jacket/jacket-424.jpeg"
   },
   {
     "id": "gameday/gameday-sept-9/tee",
@@ -1213,7 +1276,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-sept-9/tee/tee-424.jpeg"
   },
   {
     "id": "gameday/gameday-sept-9/jeans",
@@ -1232,7 +1296,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": 3
+    "discount_percent": 3,
+    "thumbnail": "outfits/gameday/gameday-sept-9/jeans/jeans-424.jpeg"
   },
   {
     "id": "gameday/gameday-sept-9/sneakers",
@@ -1251,7 +1316,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": 3
+    "discount_percent": 3,
+    "thumbnail": "outfits/gameday/gameday-sept-9/sneakers/sneakers-424.jpeg"
   },
   {
     "id": "wedding/wedding-outfit-sept-9/blazer",
@@ -1270,7 +1336,8 @@
     "theme": "wedding",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/wedding/wedding-outfit-sept-9/blazer/blazer-424.jpeg"
   },
   {
     "id": "wedding/wedding-outfit-sept-9/shirt",
@@ -1289,7 +1356,8 @@
     "theme": "wedding",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": 3
+    "discount_percent": 3,
+    "thumbnail": "outfits/wedding/wedding-outfit-sept-9/shirt/shirt-424.jpeg"
   },
   {
     "id": "wedding/wedding-outfit-sept-9/trousers",
@@ -1308,7 +1376,8 @@
     "theme": "wedding",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/wedding/wedding-outfit-sept-9/trousers/trousers-424.jpeg"
   },
   {
     "id": "wedding/wedding-outfit-sept-9/loafers",
@@ -1327,7 +1396,8 @@
     "theme": "wedding",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": 1
+    "discount_percent": 1,
+    "thumbnail": "outfits/wedding/wedding-outfit-sept-9/loafers/loafers-424.jpeg"
   },
   {
     "id": "budget/budget-graduation-sept-8/button-up",
@@ -1346,7 +1416,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-graduation-sept-8/button-up/button-up-424.jpg"
   },
   {
     "id": "budget/budget-graduation-sept-8/dress-pants",
@@ -1365,7 +1436,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-graduation-sept-8/dress-pants/dress-pants-424.jpg"
   },
   {
     "id": "budget/budget-graduation-sept-8/belt",
@@ -1384,7 +1456,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-graduation-sept-8/belt/belt-424.jpg"
   },
   {
     "id": "budget/budget-graduation-sept-8/watch",
@@ -1403,7 +1476,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-graduation-sept-8/watch/watch-424.jpg"
   },
   {
     "id": "business-casual/job-interview-sept-8/shirt",
@@ -1422,7 +1496,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/job-interview-sept-8/shirt/shirt-424.jpg"
   },
   {
     "id": "business-casual/job-interview-sept-8/tie",
@@ -1441,7 +1516,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/job-interview-sept-8/tie/tie-424.jpg"
   },
   {
     "id": "business-casual/job-interview-sept-8/suit",
@@ -1460,7 +1536,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/job-interview-sept-8/suit/suit-424.jpg"
   },
   {
     "id": "business-casual/job-interview-sept-8/dress-shoes",
@@ -1479,7 +1556,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/job-interview-sept-8/dress-shoes/dress-shoes-424.jpg"
   },
   {
     "id": "casual/housewarming-sept-8/button-down",
@@ -1498,7 +1576,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/housewarming-sept-8/button-down/button-down-424.jpg"
   },
   {
     "id": "casual/housewarming-sept-8/tee",
@@ -1517,7 +1596,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/housewarming-sept-8/tee/tee-424.jpg"
   },
   {
     "id": "casual/housewarming-sept-8/cargo-pants",
@@ -1536,7 +1616,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/housewarming-sept-8/cargo-pants/cargo-pants-424.jpg"
   },
   {
     "id": "casual/casual-outfit-sept-8/hoodie",
@@ -1555,7 +1636,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-sept-8/hoodie/hoodie-424.jpg"
   },
   {
     "id": "casual/casual-outfit-sept-8/pants",
@@ -1574,7 +1656,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-sept-8/pants/pants-424.jpg"
   },
   {
     "id": "casual/casual-outfit-sept-8/slippers",
@@ -1593,7 +1676,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-sept-8/slippers/slippers-424.jpg"
   },
   {
     "id": "gameday/gameday-sept-8/tee",
@@ -1612,7 +1696,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-sept-8/tee/tee-424.jpg"
   },
   {
     "id": "gameday/gameday-sept-8/hat",
@@ -1631,7 +1716,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-sept-8/hat/hat-424.jpg"
   },
   {
     "id": "gameday/gameday-sept-8/jeans",
@@ -1650,7 +1736,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-sept-8/jeans/jeans-424.jpg"
   },
   {
     "id": "old-money/old-money-sept-8/quarter-zip",
@@ -1669,7 +1756,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-sept-8/quarter-zip/quarter-zip-424.jpg"
   },
   {
     "id": "old-money/old-money-sept-8/pants",
@@ -1688,7 +1776,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-sept-8/pants/pants-424.jpg"
   },
   {
     "id": "old-money/old-money-sept-8/loafers",
@@ -1707,7 +1796,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-sept-8/loafers/loafers-424.jpg"
   },
   {
     "id": "old-money/old-money-sept-8/watch",
@@ -1726,7 +1816,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-sept-8/watch/watch-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-8/jacket",
@@ -1745,7 +1836,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-8/jacket/jacket-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-8/shirt",
@@ -1764,7 +1856,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-8/shirt/shirt-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-8/jeans",
@@ -1783,7 +1876,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-8/jeans/jeans-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-sept-8/necklace",
@@ -1802,7 +1896,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-sept-8/necklace/necklace-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-10/pants",
@@ -1821,7 +1916,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-10/pants/pants-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-10/shirt",
@@ -1840,7 +1936,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-10/shirt/shirt-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-10/shoes",
@@ -1859,7 +1956,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-10/shoes/shoes-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-10/watch",
@@ -1878,7 +1976,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-10/watch/watch-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-17/chinos",
@@ -1897,7 +1996,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-17/chinos/chinos-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-17/loafers",
@@ -1916,7 +2016,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-17/loafers/loafers-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-17/watch",
@@ -1935,7 +2036,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-17/watch/watch-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-17/zip-up",
@@ -1954,7 +2056,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-17/zip-up/zip-up-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-24/cardigan",
@@ -1973,7 +2076,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-24/cardigan/cardigan-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-24/chinos",
@@ -1992,7 +2096,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-24/chinos/chinos-424.jpg"
   },
   {
     "id": "business-casual/business-casual-aug-24/dress-shirt",
@@ -2011,7 +2116,8 @@
     "theme": "business-casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/business-casual/business-casual-aug-24/dress-shirt/dress-shirt-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-12/denim-shorts",
@@ -2030,7 +2136,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-12/denim-shorts/denim-shorts-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-12/flannel",
@@ -2049,7 +2156,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-12/flannel/flannel-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-12/tee",
@@ -2068,7 +2176,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-12/tee/tee-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-12/watch",
@@ -2087,7 +2196,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-12/watch/watch-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-15/jeans",
@@ -2106,7 +2216,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-15/jeans/jeans-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-15/plaid-shirt",
@@ -2125,7 +2236,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-15/plaid-shirt/plaid-shirt-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-15/tee",
@@ -2144,7 +2256,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-15/tee/tee-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-22/flannel",
@@ -2163,7 +2276,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-22/flannel/flannel-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-22/jeans",
@@ -2182,7 +2296,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-22/jeans/jeans-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-22/tee",
@@ -2201,7 +2316,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-22/tee/tee-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-29/cardigan",
@@ -2220,7 +2336,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-29/cardigan/cardigan-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-29/pants",
@@ -2239,7 +2356,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-29/pants/pants-424.jpg"
   },
   {
     "id": "casual/casual-outfit-aug-29/tee",
@@ -2258,7 +2376,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-aug-29/tee/tee-424.jpg"
   },
   {
     "id": "casual/casual-outfit-sept-4/pants",
@@ -2277,7 +2396,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-sept-4/pants/pants-424.jpg"
   },
   {
     "id": "casual/casual-outfit-sept-4/sweatshirt",
@@ -2296,7 +2416,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-sept-4/sweatshirt/sweatshirt-424.jpg"
   },
   {
     "id": "casual/casual-outfit-sept-4/watch",
@@ -2315,7 +2436,8 @@
     "theme": "casual",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/casual/casual-outfit-sept-4/watch/watch-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-13/belt",
@@ -2334,7 +2456,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-13/belt/belt-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-13/shirt",
@@ -2353,7 +2476,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-13/shirt/shirt-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-13/shoes",
@@ -2372,7 +2496,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-13/shoes/shoes-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-13/shorts",
@@ -2391,7 +2516,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-13/shorts/shorts-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-14/pants",
@@ -2410,7 +2536,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-14/pants/pants-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-14/shirt",
@@ -2429,7 +2556,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-14/shirt/shirt-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-20/blazer",
@@ -2448,7 +2576,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-20/blazer/blazer-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-20/jeans",
@@ -2467,7 +2596,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-20/jeans/jeans-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-20/shirt",
@@ -2486,7 +2616,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-20/shirt/shirt-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-20/watch",
@@ -2505,7 +2636,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-20/watch/watch-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-27/button-up",
@@ -2524,7 +2656,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-27/button-up/button-up-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-27/pants",
@@ -2543,7 +2676,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-27/pants/pants-424.jpg"
   },
   {
     "id": "date-night/date-night-aug-27/tee",
@@ -2562,7 +2696,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-aug-27/tee/tee-424.jpg"
   },
   {
     "id": "date-night/date-night-sept-2/jeans",
@@ -2581,7 +2716,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-sept-2/jeans/jeans-424.jpg"
   },
   {
     "id": "date-night/date-night-sept-2/polo",
@@ -2600,7 +2736,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-sept-2/polo/polo-424.jpg"
   },
   {
     "id": "date-night/date-night-sept-2/quarter-zip",
@@ -2619,7 +2756,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/date-night-sept-2/quarter-zip/quarter-zip-424.jpg"
   },
   {
     "id": "date-night/night-out-aug-31/chinos",
@@ -2638,7 +2776,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/night-out-aug-31/chinos/chinos-424.jpg"
   },
   {
     "id": "date-night/night-out-aug-31/loafers",
@@ -2657,7 +2796,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/night-out-aug-31/loafers/loafers-424.jpg"
   },
   {
     "id": "date-night/night-out-aug-31/quarter-zip",
@@ -2676,7 +2816,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/night-out-aug-31/quarter-zip/quarter-zip-424.jpg"
   },
   {
     "id": "date-night/night-out-aug-31/tee",
@@ -2695,7 +2836,8 @@
     "theme": "date-night",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/date-night/night-out-aug-31/tee/tee-424.jpg"
   },
   {
     "id": "gameday/casual-gameday-aug-13/jeans",
@@ -2714,7 +2856,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/casual-gameday-aug-13/jeans/jeans-424.jpg"
   },
   {
     "id": "gameday/casual-gameday-aug-13/shirt",
@@ -2733,7 +2876,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/casual-gameday-aug-13/shirt/shirt-424.jpg"
   },
   {
     "id": "gameday/casual-gameday-aug-21/beanie",
@@ -2752,7 +2896,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/casual-gameday-aug-21/beanie/beanie-424.jpg"
   },
   {
     "id": "gameday/casual-gameday-aug-21/bracelet",
@@ -2771,7 +2916,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/casual-gameday-aug-21/bracelet/bracelet-424.jpg"
   },
   {
     "id": "gameday/casual-gameday-aug-21/hoodie",
@@ -2790,7 +2936,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/casual-gameday-aug-21/hoodie/hoodie-424.jpg"
   },
   {
     "id": "gameday/casual-gameday-aug-21/pants",
@@ -2809,7 +2956,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/casual-gameday-aug-21/pants/pants-424.jpg"
   },
   {
     "id": "gameday/casual-gameday-outfit-aug-14/shirt",
@@ -2828,7 +2976,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/casual-gameday-outfit-aug-14/shirt/shirt-424.jpg"
   },
   {
     "id": "gameday/casual-gameday-outfit-aug-14/shorts",
@@ -2847,7 +2996,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/casual-gameday-outfit-aug-14/shorts/shorts-424.jpg"
   },
   {
     "id": "gameday/casual-gameday-outfit-aug-14/slides",
@@ -2866,7 +3016,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/casual-gameday-outfit-aug-14/slides/slides-424.jpg"
   },
   {
     "id": "gameday/fantasy-football-sept-5/hat",
@@ -2885,7 +3036,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/fantasy-football-sept-5/hat/hat-424.jpg"
   },
   {
     "id": "gameday/fantasy-football-sept-5/pants",
@@ -2904,7 +3056,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/fantasy-football-sept-5/pants/pants-424.jpg"
   },
   {
     "id": "gameday/fantasy-football-sept-5/tee",
@@ -2923,7 +3076,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/fantasy-football-sept-5/tee/tee-424.jpg"
   },
   {
     "id": "gameday/game-day-aug-28/hat",
@@ -2942,7 +3096,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/game-day-aug-28/hat/hat-424.jpg"
   },
   {
     "id": "gameday/game-day-aug-28/hoodie",
@@ -2961,7 +3116,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/game-day-aug-28/hoodie/hoodie-424.jpg"
   },
   {
     "id": "gameday/game-day-aug-28/jeans",
@@ -2980,7 +3136,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/game-day-aug-28/jeans/jeans-424.jpg"
   },
   {
     "id": "gameday/gameday-outfit-aug-30/hoodie",
@@ -2999,7 +3156,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-outfit-aug-30/hoodie/hoodie-424.jpg"
   },
   {
     "id": "gameday/gameday-outfit-aug-30/jeans",
@@ -3018,7 +3176,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-outfit-aug-30/jeans/jeans-424.jpg"
   },
   {
     "id": "gameday/gameday-outfit-aug-30/jersey",
@@ -3037,7 +3196,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-outfit-aug-30/jersey/jersey-424.jpg"
   },
   {
     "id": "gameday/gameday-outfit-aug-30/sneakers",
@@ -3056,7 +3216,8 @@
     "theme": "gameday",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-outfit-aug-30/sneakers/sneakers-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-aug-12/glasses",
@@ -3075,7 +3236,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-aug-12/glasses/glasses-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-aug-12/jacket",
@@ -3094,7 +3256,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-aug-12/jacket/jacket-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-aug-12/jeans",
@@ -3113,7 +3276,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-aug-12/jeans/jeans-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-aug-12/shirt",
@@ -3132,7 +3296,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-aug-12/shirt/shirt-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-aug-19/cargo-pants",
@@ -3151,7 +3316,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-aug-19/cargo-pants/cargo-pants-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-aug-19/hoodie",
@@ -3170,7 +3336,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-aug-19/hoodie/hoodie-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-aug-19/jacket",
@@ -3189,7 +3356,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-aug-19/jacket/jacket-424.jpg"
   },
   {
     "id": "motor-streetwear/motor-streetwear-aug-19/sneakers",
@@ -3208,7 +3376,8 @@
     "theme": "motor-streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/motor-streetwear/motor-streetwear-aug-19/sneakers/sneakers-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-11/duffel-bag",
@@ -3227,7 +3396,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": null
   },
   {
     "id": "old-money/old-money-aug-11/loafers",
@@ -3246,7 +3416,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": null
   },
   {
     "id": "old-money/old-money-aug-11/pants",
@@ -3265,7 +3436,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": null
   },
   {
     "id": "old-money/old-money-aug-11/shirt",
@@ -3284,7 +3456,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": null
   },
   {
     "id": "old-money/old-money-aug-18/dress-shoes",
@@ -3303,7 +3476,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-aug-18/dress-shoes/dress-shoes-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-18/overcoat",
@@ -3322,7 +3496,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-aug-18/overcoat/overcoat-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-18/sweater",
@@ -3341,7 +3516,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-aug-18/sweater/sweater-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-18/trousers",
@@ -3360,7 +3536,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-aug-18/trousers/trousers-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-25/belt",
@@ -3379,7 +3556,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-aug-25/belt/belt-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-25/chinos",
@@ -3398,7 +3576,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-aug-25/chinos/chinos-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-25/loafers",
@@ -3417,7 +3596,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-aug-25/loafers/loafers-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-25/polo",
@@ -3436,7 +3616,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-aug-25/polo/polo-424.jpg"
   },
   {
     "id": "old-money/old-money-style-july-30/duffel-bag",
@@ -3455,7 +3636,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-style-july-30/duffel-bag/duffel-bag-424.jpg"
   },
   {
     "id": "old-money/old-money-style-july-30/loafers",
@@ -3474,7 +3656,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-style-july-30/loafers/loafers-424.jpg"
   },
   {
     "id": "old-money/old-money-style-july-30/pants",
@@ -3493,7 +3676,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-style-july-30/pants/pants-424.jpg"
   },
   {
     "id": "old-money/old-money-style-july-30/shirt",
@@ -3512,7 +3696,8 @@
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/old-money/old-money-style-july-30/shirt/shirt-424.jpg"
   },
   {
     "id": "streetwear/streetwear-aug-26/hoodie",
@@ -3531,7 +3716,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-aug-26/hoodie/hoodie-424.jpg"
   },
   {
     "id": "streetwear/streetwear-aug-26/jacket",
@@ -3550,7 +3736,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-aug-26/jacket/jacket-424.jpg"
   },
   {
     "id": "streetwear/streetwear-aug-26/pants",
@@ -3569,7 +3756,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-aug-26/pants/pants-424.jpg"
   },
   {
     "id": "streetwear/streetwear-fit-sept-3/jeans",
@@ -3588,7 +3776,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-fit-sept-3/jeans/jeans-424.jpg"
   },
   {
     "id": "streetwear/streetwear-fit-sept-3/plaid",
@@ -3607,7 +3796,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-fit-sept-3/plaid/plaid-424.jpg"
   },
   {
     "id": "streetwear/streetwear-fit-sept-3/tee",
@@ -3626,7 +3816,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-fit-sept-3/tee/tee-424.jpg"
   },
   {
     "id": "streetwear/streetwear-outfit-aug-15/pants",
@@ -3645,7 +3836,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-outfit-aug-15/pants/pants-424.jpg"
   },
   {
     "id": "streetwear/streetwear-outfit-aug-15/sweatshirt",
@@ -3664,7 +3856,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-outfit-aug-15/sweatshirt/sweatshirt-424.jpg"
   },
   {
     "id": "streetwear/streetwear-outfit-sept-1/jacket",
@@ -3683,7 +3876,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-outfit-sept-1/jacket/jacket-424.jpg"
   },
   {
     "id": "streetwear/streetwear-outfit-sept-1/jeans",
@@ -3702,7 +3896,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-outfit-sept-1/jeans/jeans-424.jpg"
   },
   {
     "id": "streetwear/streetwear-outfit-sept-1/tee",
@@ -3721,7 +3916,8 @@
     "theme": "streetwear",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/streetwear/streetwear-outfit-sept-1/tee/tee-424.jpg"
   },
   {
     "id": "wedding/wedding-outfit-sept-6/belt",
@@ -3740,7 +3936,8 @@
     "theme": "wedding",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/wedding/wedding-outfit-sept-6/belt/belt-424.jpg"
   },
   {
     "id": "wedding/wedding-outfit-sept-6/pants",
@@ -3759,7 +3956,8 @@
     "theme": "wedding",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/wedding/wedding-outfit-sept-6/pants/pants-424.jpg"
   },
   {
     "id": "wedding/wedding-outfit-sept-6/shirt",
@@ -3778,7 +3976,8 @@
     "theme": "wedding",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/wedding/wedding-outfit-sept-6/shirt/shirt-424.jpg"
   },
   {
     "id": "wedding/wedding-outfit-sept-6/watch",
@@ -3797,7 +3996,8 @@
     "theme": "wedding",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/wedding/wedding-outfit-sept-6/watch/watch-424.jpg"
   },
   {
     "id": "everyday-fit-check/everyday-fit-check-aug-11/jeans",
@@ -3816,7 +4016,8 @@
     "theme": "everyday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/everyday-fit-check/everyday-fit-check-aug-11/jeans/jeans-424.jpg"
   },
   {
     "id": "everyday-fit-check/everyday-fit-check-aug-11/plaid-shirt",
@@ -3835,7 +4036,8 @@
     "theme": "everyday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/everyday-fit-check/everyday-fit-check-aug-11/plaid-shirt/plaid-shirt-424.jpg"
   },
   {
     "id": "everyday-fit-check/everyday-fit-check-aug-11/tee",
@@ -3854,7 +4056,8 @@
     "theme": "everyday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/everyday-fit-check/everyday-fit-check-aug-11/tee/tee-424.jpg"
   },
   {
     "id": "flash-deals/flash-deals-aug-24/briefs",
@@ -3873,7 +4076,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-aug-24/briefs/briefs-424.jpg"
   },
   {
     "id": "flash-deals/flash-deals-aug-24/jeans",
@@ -3892,7 +4096,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-aug-24/jeans/jeans-424.jpg"
   },
   {
     "id": "flash-deals/flash-deals-aug-24/shirt",
@@ -3911,7 +4116,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-aug-24/shirt/shirt-424.jpg"
   },
   {
     "id": "flash-deals/flash-deals-aug-28/blazer",
@@ -3930,7 +4136,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-aug-28/blazer/blazer-424.jpg"
   },
   {
     "id": "flash-deals/flash-deals-aug-28/briefs",
@@ -3949,7 +4156,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-aug-28/briefs/briefs-424.jpg"
   },
   {
     "id": "flash-deals/flash-deals-aug-28/linen-shirt",
@@ -3968,7 +4176,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-aug-28/linen-shirt/linen-shirt-424.jpg"
   },
   {
     "id": "gameday-fit-check/gameday-fit-aug-23/bomber",
@@ -3987,7 +4196,8 @@
     "theme": "gameday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gameday-fit-check/gameday-fit-aug-23/bomber/bomber-424.jpg"
   },
   {
     "id": "gameday-fit-check/gameday-fit-aug-23/high-tops",
@@ -4006,7 +4216,8 @@
     "theme": "gameday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gameday-fit-check/gameday-fit-aug-23/high-tops/high-tops-424.jpg"
   },
   {
     "id": "gameday-fit-check/gameday-fit-aug-23/joggers",
@@ -4025,7 +4236,8 @@
     "theme": "gameday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gameday-fit-check/gameday-fit-aug-23/joggers/joggers-424.jpg"
   },
   {
     "id": "gameday-fit-check/gameday-fit-aug-23/shirt",
@@ -4044,7 +4256,8 @@
     "theme": "gameday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gameday-fit-check/gameday-fit-aug-23/shirt/shirt-424.jpg"
   },
   {
     "id": "gameday-fit-check/gameday-fit-check-aug-12/jeans",
@@ -4063,7 +4276,8 @@
     "theme": "gameday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gameday-fit-check/gameday-fit-check-aug-12/jeans/jeans-424.jpg"
   },
   {
     "id": "gameday-fit-check/gameday-fit-check-aug-12/jersey",
@@ -4082,7 +4296,8 @@
     "theme": "gameday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gameday-fit-check/gameday-fit-check-aug-12/jersey/jersey-424.jpg"
   },
   {
     "id": "gameday-fit-check/gameday-fit-check-aug-12/long-sleeve",
@@ -4101,7 +4316,8 @@
     "theme": "gameday-fit-check",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gameday-fit-check/gameday-fit-check-aug-12/long-sleeve/long-sleeve-424.jpg"
   },
   {
     "id": "gift-guides/NFL-gift-guide-aug-30/beer-stein",
@@ -4120,7 +4336,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/NFL-gift-guide-aug-30/beer-stein/beer-stein-424.jpg"
   },
   {
     "id": "gift-guides/NFL-gift-guide-aug-30/can-cooler",
@@ -4139,7 +4356,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/NFL-gift-guide-aug-30/can-cooler/can-cooler-424.jpg"
   },
   {
     "id": "gift-guides/NFL-gift-guide-aug-30/spatula",
@@ -4158,7 +4376,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/NFL-gift-guide-aug-30/spatula/spatula-424.jpg"
   },
   {
     "id": "gift-guides/commanders-gifts-aug-22/coasters",
@@ -4177,7 +4396,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/commanders-gifts-aug-22/coasters/coasters-424.jpg"
   },
   {
     "id": "gift-guides/commanders-gifts-aug-22/desk-pad",
@@ -4196,7 +4416,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/commanders-gifts-aug-22/desk-pad/desk-pad-424.jpg"
   },
   {
     "id": "gift-guides/commanders-gifts-aug-22/funko",
@@ -4215,7 +4436,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/commanders-gifts-aug-22/funko/funko-424.jpg"
   },
   {
     "id": "gift-guides/commanders-gifts-aug-22/headcover",
@@ -4234,7 +4456,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/commanders-gifts-aug-22/headcover/headcover-424.jpg"
   },
   {
     "id": "gift-guides/commanders-gifts-aug-22/tumbler",
@@ -4253,7 +4476,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/commanders-gifts-aug-22/tumbler/tumbler-424.jpg"
   },
   {
     "id": "gift-guides/gameday-gift-guide-aug-15/bengals-shirt",
@@ -4272,7 +4496,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gameday-gift-guide-aug-15/bengals-shirt/bengals-shirt-424.jpg"
   },
   {
     "id": "gift-guides/gameday-gift-guide-aug-15/bills-jacket",
@@ -4291,7 +4516,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gameday-gift-guide-aug-15/bills-jacket/bills-jacket-424.jpg"
   },
   {
     "id": "gift-guides/gameday-gift-guide-aug-15/packers-bracelet",
@@ -4310,7 +4536,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gameday-gift-guide-aug-15/packers-bracelet/packers-bracelet-424.jpg"
   },
   {
     "id": "gift-guides/gameday-gift-guide-aug-15/raiders-hat",
@@ -4329,7 +4556,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gameday-gift-guide-aug-15/raiders-hat/raiders-hat-424.jpg"
   },
   {
     "id": "gift-guides/gameday-gift-guide-aug-15/ravens-socks",
@@ -4348,7 +4576,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gameday-gift-guide-aug-15/ravens-socks/ravens-socks-424.jpg"
   },
   {
     "id": "gift-guides/gift-guide-sept-4/bengals-jacket",
@@ -4367,7 +4596,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gift-guide-sept-4/bengals-jacket/bengals-jacket-424.jpg"
   },
   {
     "id": "gift-guides/gift-guide-sept-4/gibbs-tee",
@@ -4386,7 +4616,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gift-guide-sept-4/gibbs-tee/gibbs-tee-424.jpg"
   },
   {
     "id": "gift-guides/gift-guide-sept-4/leather-jacket",
@@ -4405,7 +4636,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gift-guide-sept-4/leather-jacket/leather-jacket-424.jpg"
   },
   {
     "id": "gift-guides/gift-guide-sept-4/loafers",
@@ -4424,7 +4656,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gift-guide-sept-4/loafers/loafers-424.jpg"
   },
   {
     "id": "gift-guides/gift-guide-sept-4/michelob-tee",
@@ -4443,7 +4676,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gift-guide-sept-4/michelob-tee/michelob-tee-424.jpg"
   },
   {
     "id": "other/this-or-that-aug-14/adams-shirt",
@@ -4462,7 +4696,8 @@
     "theme": "other",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/other/this-or-that-aug-14/adams-shirt/Adams%20Shirt-424.jpg"
   },
   {
     "id": "other/this-or-that-aug-14/darnold-shirt",
@@ -4481,7 +4716,8 @@
     "theme": "other",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/other/this-or-that-aug-14/darnold-shirt/Darnold%20Shirt-424.jpg"
   },
   {
     "id": "other/this-or-that-aug-21/jackson-shirt",
@@ -4500,7 +4736,8 @@
     "theme": "other",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/other/this-or-that-aug-21/jackson-shirt/jackson-shirt-424.jpg"
   },
   {
     "id": "other/this-or-that-aug-21/kelce-shirt",
@@ -4519,7 +4756,8 @@
     "theme": "other",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/other/this-or-that-aug-21/kelce-shirt/kelce-shirt-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-10/hoodie",
@@ -4538,7 +4776,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-10/hoodie/hoodie-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-10/pants",
@@ -4557,7 +4796,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-10/pants/pants-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-10/polo",
@@ -4576,7 +4816,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-10/polo/polo-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-17/duffel",
@@ -4595,7 +4836,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-17/duffel/duffel-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-17/jacket",
@@ -4614,7 +4856,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-17/jacket/jacket-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-17/sweatshirt",
@@ -4633,7 +4876,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-17/sweatshirt/sweatshirt-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-26/jacket",
@@ -4652,7 +4896,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-26/jacket/jacket-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-26/tee",
@@ -4671,7 +4916,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-26/tee/tee-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-26/zip-up",
@@ -4690,7 +4936,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-26/zip-up/zip-up-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-31/shoes",
@@ -4709,7 +4956,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-31/shoes/shoes-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-31/sneakers",
@@ -4728,7 +4976,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-31/sneakers/sneakers-424.jpg"
   },
   {
     "id": "trending-products/trending-products-aug-31/sweater",
@@ -4747,7 +4996,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-31/sweater/sweater-424.jpg"
   },
   {
     "id": "trending-products/trending-products-sept-4/suit-set",
@@ -4766,7 +5016,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-sept-4/suit-set/suit-set-424.jpeg"
   },
   {
     "id": "trending-products/trending-products-sept-4/jacket",
@@ -4785,7 +5036,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-sept-4/jacket/jacket-424.jpeg"
   },
   {
     "id": "trending-products/trending-products-sept-4/tank-top",
@@ -4804,7 +5056,8 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-sept-4/tank-top/tank-top-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-4/linen-shirt",
@@ -4823,7 +5076,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-sept-4/linen-shirt/linen-shirt-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-4/cargo-pants",
@@ -4842,7 +5096,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/flash-deals/flash-deals-sept-4/cargo-pants/cargo-pants-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-4/sweater",
@@ -4861,7 +5116,8 @@
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": 20
+    "discount_percent": 20,
+    "thumbnail": "videos/flash-deals/flash-deals-sept-4/sweater/sweater-424.jpeg"
   },
   {
     "id": "gift-guides/giants-gift-guide-sept-4/tumbler",
@@ -4880,7 +5136,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/giants-gift-guide-sept-4/tumbler/tumbler-424.jpeg"
   },
   {
     "id": "gift-guides/giants-gift-guide-sept-4/wall-art",
@@ -4899,7 +5156,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/giants-gift-guide-sept-4/wall-art/wall-art-424.jpeg"
   },
   {
     "id": "gift-guides/giants-gift-guide-sept-4/golf-balls",
@@ -4918,7 +5176,8 @@
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/giants-gift-guide-sept-4/golf-balls/golf-balls-424.jpeg"
   },
   {
     "id": "budget/budget-business-formal-sept-4/blazer",
@@ -4937,7 +5196,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-business-formal-sept-4/blazer/blazer-424.jpeg"
   },
   {
     "id": "budget/budget-business-formal-sept-4/tie",
@@ -4956,7 +5216,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-business-formal-sept-4/tie/tie-424.jpeg"
   },
   {
     "id": "budget/budget-business-formal-sept-4/pants",
@@ -4975,7 +5236,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-business-formal-sept-4/pants/pants-424.jpeg"
   },
   {
     "id": "budget/budget-business-formal-sept-4/dress-shirt",
@@ -4994,7 +5256,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-business-formal-sept-4/dress-shirt/dress-shirt-424.jpeg"
   },
   {
     "id": "budget/budget-sharp-formal-sept-4/blazer",
@@ -5013,7 +5276,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-sharp-formal-sept-4/blazer/blazer-424.jpeg"
   },
   {
     "id": "budget/budget-sharp-formal-sept-4/dress-shirt",
@@ -5032,7 +5296,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-sharp-formal-sept-4/dress-shirt/dress-shirt-424.jpeg"
   },
   {
     "id": "budget/budget-sharp-formal-sept-4/pants",
@@ -5051,7 +5316,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-sharp-formal-sept-4/pants/pants-424.jpeg"
   },
   {
     "id": "budget/budget-sharp-formal-sept-4/watch",
@@ -5070,7 +5336,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-sharp-formal-sept-4/watch/watch-424.jpeg"
   },
   {
     "id": "budget/budget-blazer-casual-sept-4/blazer",
@@ -5089,7 +5356,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-blazer-casual-sept-4/blazer/blazer-424.jpeg"
   },
   {
     "id": "budget/budget-blazer-casual-sept-4/tee",
@@ -5108,7 +5376,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-blazer-casual-sept-4/tee/tee-424.jpeg"
   },
   {
     "id": "budget/budget-blazer-casual-sept-4/jeans",
@@ -5127,7 +5396,8 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-blazer-casual-sept-4/jeans/jeans-424.jpeg"
   },
   {
     "id": "budget/budget-blazer-casual-sept-4/shoes",
@@ -5146,6 +5416,7 @@
     "theme": "budget",
     "source": "outfits",
     "data_new": "no",
-    "discount_percent": null
+    "discount_percent": null,
+    "thumbnail": "outfits/budget/budget-blazer-casual-sept-4/shoes/shoes-424.jpeg"
   }
 ]
