@@ -523,6 +523,15 @@
       img.className = 'card-thumb';
       img.src = '../' + p.image;
       img.alt = p.name;
+      // Deliberately no width/height attributes here: .card-thumb forces a
+      // 1:1 crop via CSS aspect-ratio (object-fit:cover) that differs from
+      // most source images' native ratio. Setting width/height maps the
+      // image's real pixel size to a presentational height hint, which wins
+      // over aspect-ratio in this engine's cascade and breaks the square
+      // crop. aspect-ratio:1/1 + width:100% already reserves the correct
+      // space with zero layout shift, without needing per-image dimensions.
+      img.loading = 'lazy';
+      img.decoding = 'async';
       thumbWrap.appendChild(img);
     }
 
@@ -625,15 +634,28 @@
     history.replaceState(null, '', newUrl);
   }
 
+  var EAGER_TILE_COUNT = 6;
+  var initialRenderDone = false;
+
   function applyAll(){
     var order = sortedEntries();
     var visible = 0;
     order.forEach(function(entry){
-      grid.appendChild(entry.el);
       var show = typeMatches(entry.p) && priceMatches(entry.p) && themeMatches(entry.p) && searchMatches(entry.p);
+      if(show){
+        visible++;
+        if(!initialRenderDone && visible <= EAGER_TILE_COUNT){
+          var img = entry.el.querySelector('img.card-thumb');
+          if(img){
+            img.loading = 'eager';
+            img.setAttribute('fetchpriority', 'high');
+          }
+        }
+      }
+      grid.appendChild(entry.el);
       entry.el.classList.toggle('hidden', !show);
-      if(show) visible++;
     });
+    initialRenderDone = true;
     countEl.textContent = visible + ' of ' + entries.length + ' products';
     noResults.classList.toggle('hidden', visible !== 0);
 
