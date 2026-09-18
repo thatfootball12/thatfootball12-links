@@ -11,3 +11,22 @@ redirect stubs that keep pre-restructure Pinterest links working** —
 they are not build leftovers, orphaned artifacts, or duplicates to clean
 up. Do not delete, move, or modify them, in this task or in any later
 cleanup pass, without explicit instruction to do so.
+
+## Weekly batch checklist
+
+Run `python sync_catalog.py` as the last step of every weekly batch,
+before committing. Nothing in the batch pipeline (`parse_shein.py` ->
+`classify.py` -> `fetch_images.py` -> `build_outfits.py`) touches
+`products.json` — those four scripts only get you to a proposed outfit
+grouping in `outfits.csv`. Someone still hand-creates the actual outfit
+directories, downloads photos, writes the detail pages, and inserts
+category-page cards, and it's easy to finish that step without also
+updating the catalog. That's exactly what happened to the Sept 15
+business-casual, old-money, and streetwear batches — nine products with
+complete, live pages that never appeared in the shop grid until caught
+weeks later. `sync_catalog.py` scans `outfits/` and `videos/` for detail
+pages missing a `products.json` record (plus the reverse: stale records
+whose page no longer exists, and records with a missing thumbnail) and
+reports them. Pass `--append` to add the missing records automatically —
+it still flags `item_type` and `data_new` for manual review on every new
+record, since neither has a reliable source outside human judgment.
