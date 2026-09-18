@@ -521,7 +521,7 @@
     } else {
       var img = document.createElement('img');
       img.className = 'card-thumb';
-      img.src = '../' + p.image;
+      img.src = '../' + (p.thumbnail || p.image);
       img.alt = p.name;
       // Deliberately no width/height attributes here: .card-thumb forces a
       // 1:1 crop via CSS aspect-ratio (object-fit:cover) that differs from
