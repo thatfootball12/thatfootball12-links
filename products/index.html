@@ -113,6 +113,15 @@
     top:12px;
     z-index:10;
   }
+  /* Below 768px there isn't enough vertical room for a pinned filter
+     panel without eating into product visibility, and a sticky element
+     this close to result-count/active-filters-bar/currency-note will
+     always transiently cover them while scrolling past. Simplest fix
+     for mobile: let the whole filter block scroll away normally instead
+     of pinning it. */
+  @media (max-width:767px){
+    .filters{position:static;}
+  }
   .filter-group{margin-bottom:14px;}
   .filter-group:last-child{margin-bottom:0;}
   .filter-label{
