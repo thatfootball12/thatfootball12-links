@@ -1,0 +1,63 @@
+name: Weekly Affiliate Link Check
+
+# Distinct from "Weekly Broken Link Check" (link-check.yml), which uses
+# lychee against every .html file's links generically. That tool can't
+# tell a live SHEIN product from a dead one — onelink.shein.com always
+# returns HTTP 200 with a client-side redirect, whether the destination
+# product still exists or not. This workflow checks the 280 outbound
+# affiliate URLs in products.json specifically, with SHEIN- and
+# Amazon-aware dead-link detection. See check_affiliate_links.py for the
+# full explanation of how each retailer is checked.
+
+on:
+  schedule:
+    # Runs every Monday at 10:00 AM UTC — an hour after the general
+    # broken-link check, so their issues don't land at the same time.
+    - cron: '0 10 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+
+jobs:
+  check-affiliate-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run affiliate link check
+        id: check
+        run: python3 check_affiliate_links.py
+        continue-on-error: true
+
+      - name: Ensure tracking label exists
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create affiliate-link-check \
+            --description "Weekly affiliate outbound-link health check" \
+            --color "B60205" \
+            --force
+
+      - name: Open or update tracking issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="Weekly affiliate link check"
+          BODY_FILE="link_check_report.md"
+
+          EXISTING=$(gh issue list --label affiliate-link-check --state open --json number --jq '.[0].number')
+
+          if [ -n "$EXISTING" ]; then
+            echo "Updating existing issue #$EXISTING"
+            gh issue edit "$EXISTING" --body-file "$BODY_FILE"
+          else
+            echo "Creating new issue"
+            gh issue create --title "$TITLE" --body-file "$BODY_FILE" --label affiliate-link-check
+          fi
