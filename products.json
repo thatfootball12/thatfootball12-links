@@ -800,26 +800,6 @@
     "thumbnail": "videos/trending-products/trending-products-sept-9/polo/polo-424.jpeg"
   },
   {
-    "id": "trending-products/trending-products-sept-9/tee",
-    "slug": "tee",
-    "name": "GymBeat Men's Spider Web Pattern Print Contrast Color Crew Neck Short Sleeve Sports T-Shirt",
-    "item_type": "Tees & Graphics",
-    "price": null,
-    "currency": null,
-    "currency_source": null,
-    "retailer": "SHEIN",
-    "outbound_url": "https://onelink.shein.com/51/617q5c7776o0",
-    "image": "videos/trending-products/trending-products-sept-9/tee/tee.jpeg",
-    "image_pending": false,
-    "detail_page_url": "videos/trending-products/trending-products-sept-9/tee/index.html",
-    "campaign": "trending-products-sept-9",
-    "theme": "trending-products",
-    "source": "videos",
-    "data_new": "no",
-    "discount_percent": null,
-    "thumbnail": "videos/trending-products/trending-products-sept-9/tee/tee-424.jpeg"
-  },
-  {
     "id": "flash-deals/flash-deals-sept-9/cargo-pants",
     "slug": "cargo-pants",
     "name": "SPOSULEI Mens Ripstop Cargo Work Tactical Pants",
