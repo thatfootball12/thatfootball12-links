@@ -213,6 +213,16 @@
     cursor:pointer;
   }
   .sort-select:focus{border-color:var(--gold);}
+  .currency-note{
+    text-align:center;
+    font-family:'Poppins',sans-serif;
+    font-size:11px;
+    font-weight:400;
+    color:var(--bone-dim);
+    opacity:.75;
+    margin-bottom:10px;
+  }
+  .currency-note.hidden{display:none;}
   .active-filters-bar{
     display:flex;
     align-items:center;
@@ -425,6 +435,8 @@
     </details>
   </div>
 
+  <div class="currency-note hidden" id="currency-note">Prices shown in CAD</div>
+
   <div class="active-filters-bar hidden" id="active-filters-bar">
     <span id="active-filters-text">0 active filters</span>
     <button id="clear-all-btn" type="button">Clear all</button>
@@ -474,6 +486,7 @@
   var activeFiltersText = document.getElementById('active-filters-text');
   var clearAllBtn = document.getElementById('clear-all-btn');
   var themeDetails = document.getElementById('theme-details');
+  var currencyNote = document.getElementById('currency-note');
 
   var typeChips = document.querySelectorAll('[data-filter-group="type"] .chip');
   var priceChips = document.querySelectorAll('[data-filter-group="price"] .chip');
@@ -640,10 +653,12 @@
   function applyAll(){
     var order = sortedEntries();
     var visible = 0;
+    var cadVisible = false;
     order.forEach(function(entry){
       var show = typeMatches(entry.p) && priceMatches(entry.p) && themeMatches(entry.p) && searchMatches(entry.p);
       if(show){
         visible++;
+        if(entry.p.currency === 'CAD' && entry.p.retailer !== 'Amazon'){ cadVisible = true; }
         if(!initialRenderDone && visible <= EAGER_TILE_COUNT){
           var img = entry.el.querySelector('img.card-thumb');
           if(img){
@@ -658,6 +673,7 @@
     initialRenderDone = true;
     countEl.textContent = visible + ' of ' + entries.length + ' products';
     noResults.classList.toggle('hidden', visible !== 0);
+    currencyNote.classList.toggle('hidden', !cadVisible);
 
     var n = activeFilterCount();
     if(n > 0){
