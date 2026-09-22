@@ -5589,15 +5589,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/53/62mybe8294bv?ismg_ol=Jt6QTusgmXq_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/trending-products/trending-products-sept-22/blazer/blazer.jpeg",
+    "image_pending": false,
     "detail_page_url": "videos/trending-products/trending-products-sept-22/blazer/index.html",
     "campaign": "trending-products-sept-22",
     "theme": "trending-products",
     "source": "videos",
     "data_new": "yes",
     "discount_percent": 2,
-    "thumbnail": null
+    "thumbnail": "videos/trending-products/trending-products-sept-22/blazer/blazer-424.jpeg"
   },
   {
     "id": "trending-products/trending-products-sept-22/sweater",
@@ -5609,15 +5609,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/53/62myeiotm53x?ismg_ol=4QkqRQTcFO0_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/trending-products/trending-products-sept-22/sweater/sweater.jpeg",
+    "image_pending": false,
     "detail_page_url": "videos/trending-products/trending-products-sept-22/sweater/index.html",
     "campaign": "trending-products-sept-22",
     "theme": "trending-products",
     "source": "videos",
     "data_new": "yes",
     "discount_percent": 25,
-    "thumbnail": null
+    "thumbnail": "videos/trending-products/trending-products-sept-22/sweater/sweater-424.jpeg"
   },
   {
     "id": "trending-products/trending-products-sept-22/jeans",
@@ -5629,15 +5629,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/53/62myhr3n8occ?ismg_ol=AnJaNz3IRrj_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/trending-products/trending-products-sept-22/jeans/jeans.jpeg",
+    "image_pending": false,
     "detail_page_url": "videos/trending-products/trending-products-sept-22/jeans/index.html",
     "campaign": "trending-products-sept-22",
     "theme": "trending-products",
     "source": "videos",
     "data_new": "yes",
     "discount_percent": 20,
-    "thumbnail": null
+    "thumbnail": "videos/trending-products/trending-products-sept-22/jeans/jeans-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-22/rain-jacket",
@@ -5649,15 +5649,15 @@
     "currency_source": "resolved redirect",
     "retailer": "Amazon",
     "outbound_url": "https://amzn.to/3TGZtrF",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/flash-deals/flash-deals-sept-22/rain-jacket/rain-jacket.jpeg",
+    "image_pending": false,
     "detail_page_url": "videos/flash-deals/flash-deals-sept-22/rain-jacket/index.html",
     "campaign": "flash-deals-sept-22",
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "yes",
     "discount_percent": 10,
-    "thumbnail": null
+    "thumbnail": "videos/flash-deals/flash-deals-sept-22/rain-jacket/rain-jacket-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-22/puffer-jacket",
@@ -5669,15 +5669,15 @@
     "currency_source": "resolved redirect",
     "retailer": "Amazon",
     "outbound_url": "https://amzn.to/4yR9d1B",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/flash-deals/flash-deals-sept-22/puffer-jacket/puffer-jacket.jpeg",
+    "image_pending": false,
     "detail_page_url": "videos/flash-deals/flash-deals-sept-22/puffer-jacket/index.html",
     "campaign": "flash-deals-sept-22",
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "yes",
     "discount_percent": 10,
-    "thumbnail": null
+    "thumbnail": "videos/flash-deals/flash-deals-sept-22/puffer-jacket/puffer-jacket-424.jpeg"
   },
   {
     "id": "flash-deals/flash-deals-sept-22/dress-shirt",
@@ -5689,15 +5689,15 @@
     "currency_source": "resolved redirect",
     "retailer": "Amazon",
     "outbound_url": "https://amzn.to/4hj1mTl",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/flash-deals/flash-deals-sept-22/dress-shirt/dress-shirt.jpeg",
+    "image_pending": false,
     "detail_page_url": "videos/flash-deals/flash-deals-sept-22/dress-shirt/index.html",
     "campaign": "flash-deals-sept-22",
     "theme": "flash-deals",
     "source": "videos",
     "data_new": "yes",
     "discount_percent": 28,
-    "thumbnail": null
+    "thumbnail": "videos/flash-deals/flash-deals-sept-22/dress-shirt/dress-shirt-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-22/flannel",
@@ -5709,15 +5709,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/53/62n1h0f4q5ux?ismg_ol=IdC1xdeXi2W_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/casual/casual-outfit-sept-22/flannel/flannel.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/casual/casual-outfit-sept-22/flannel/index.html",
     "campaign": "casual-outfit-sept-22",
     "theme": "casual",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/casual/casual-outfit-sept-22/flannel/flannel-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-22/jeans",
@@ -5729,15 +5729,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/53/62n1kujaklmm?ismg_ol=C4zjWpHUnTq_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/casual/casual-outfit-sept-22/jeans/jeans.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/casual/casual-outfit-sept-22/jeans/index.html",
     "campaign": "casual-outfit-sept-22",
     "theme": "casual",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/casual/casual-outfit-sept-22/jeans/jeans-424.jpeg"
   },
   {
     "id": "casual/casual-outfit-sept-22/bracelet",
@@ -5749,15 +5749,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/53/62n1nf9qxa9h?ismg_ol=0EVridPaqq8_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/casual/casual-outfit-sept-22/bracelet/bracelet.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/casual/casual-outfit-sept-22/bracelet/index.html",
     "campaign": "casual-outfit-sept-22",
     "theme": "casual",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": 2,
-    "thumbnail": null
+    "thumbnail": "outfits/casual/casual-outfit-sept-22/bracelet/bracelet-424.jpeg"
   },
   {
     "id": "gift-guides/packers-gift-guide-sept-22/socks",
@@ -5769,15 +5769,15 @@
     "currency_source": "resolved redirect",
     "retailer": "Amazon",
     "outbound_url": "https://amzn.to/4dPRkIb",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/packers-gift-guide-sept-22/socks/socks.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/packers-gift-guide-sept-22/socks/index.html",
     "campaign": "packers-gift-guide-sept-22",
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "videos/gift-guides/packers-gift-guide-sept-22/socks/socks-424.jpg"
   },
   {
     "id": "gift-guides/packers-gift-guide-sept-22/tumbler",
@@ -5789,15 +5789,15 @@
     "currency_source": "resolved redirect",
     "retailer": "Amazon",
     "outbound_url": "https://amzn.to/46zgKWE",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/packers-gift-guide-sept-22/tumbler/tumbler.jpeg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/packers-gift-guide-sept-22/tumbler/index.html",
     "campaign": "packers-gift-guide-sept-22",
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "videos/gift-guides/packers-gift-guide-sept-22/tumbler/tumbler-424.jpeg"
   },
   {
     "id": "gift-guides/packers-gift-guide-sept-22/rug",
@@ -5809,15 +5809,15 @@
     "currency_source": "resolved redirect",
     "retailer": "Amazon",
     "outbound_url": "https://amzn.to/3V69X4b",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/packers-gift-guide-sept-22/rug/rug.jpeg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/packers-gift-guide-sept-22/rug/index.html",
     "campaign": "packers-gift-guide-sept-22",
     "theme": "gift-guides",
     "source": "videos",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "videos/gift-guides/packers-gift-guide-sept-22/rug/rug-424.jpeg"
   },
   {
     "id": "gameday/chargers-game-day-sept-22/hoodie",
@@ -5829,15 +5829,15 @@
     "currency_source": "resolved redirect",
     "retailer": "Amazon",
     "outbound_url": "https://amzn.to/4xvTL9T",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/chargers-game-day-sept-22/hoodie/hoodie.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/chargers-game-day-sept-22/hoodie/index.html",
     "campaign": "chargers-game-day-sept-22",
     "theme": "gameday",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/gameday/chargers-game-day-sept-22/hoodie/hoodie-424.jpg"
   },
   {
     "id": "gameday/chargers-game-day-sept-22/hat",
@@ -5849,15 +5849,15 @@
     "currency_source": "resolved redirect",
     "retailer": "Amazon",
     "outbound_url": "https://amzn.to/4AkWbeh",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/chargers-game-day-sept-22/hat/hat.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/chargers-game-day-sept-22/hat/index.html",
     "campaign": "chargers-game-day-sept-22",
     "theme": "gameday",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/gameday/chargers-game-day-sept-22/hat/hat-424.jpeg"
   },
   {
     "id": "gameday/chargers-game-day-sept-22/jeans",
@@ -5869,15 +5869,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/53/62n3fpp01nd1?ismg_ol=2bb1S4tfuu3_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/chargers-game-day-sept-22/jeans/jeans.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/chargers-game-day-sept-22/jeans/index.html",
     "campaign": "chargers-game-day-sept-22",
     "theme": "gameday",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": 20,
-    "thumbnail": null
+    "thumbnail": "outfits/gameday/chargers-game-day-sept-22/jeans/jeans-424.jpeg"
   },
   {
     "id": "gameday/chargers-game-day-sept-22/shoes",
@@ -5889,15 +5889,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/53/62n3hgtznekv?ismg_ol=2rKC6ekOC9r_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/chargers-game-day-sept-22/shoes/shoes.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/chargers-game-day-sept-22/shoes/index.html",
     "campaign": "chargers-game-day-sept-22",
     "theme": "gameday",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/gameday/chargers-game-day-sept-22/shoes/shoes-424.jpeg"
   },
   {
     "id": "budget/budget-outfit-sept-22/zip-up",
@@ -5909,15 +5909,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/49/602fzpx7cuh7?ismg_ol=L8OQ9Hxs5Cx_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/budget/budget-outfit-sept-22/zip-up/zip-up.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/budget/budget-outfit-sept-22/zip-up/index.html",
     "campaign": "budget-outfit-sept-22",
     "theme": "budget",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": 3,
-    "thumbnail": null
+    "thumbnail": "outfits/budget/budget-outfit-sept-22/zip-up/zip-up-424.jpeg"
   },
   {
     "id": "budget/budget-outfit-sept-22/shirt",
@@ -5929,15 +5929,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/53/62ughb9kxbf8?ismg_ol=LiaoHiOlthv_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/budget/budget-outfit-sept-22/shirt/shirt.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/budget/budget-outfit-sept-22/shirt/index.html",
     "campaign": "budget-outfit-sept-22",
     "theme": "budget",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/budget/budget-outfit-sept-22/shirt/shirt-424.jpeg"
   },
   {
     "id": "budget/budget-outfit-sept-22/chinos",
@@ -5949,14 +5949,14 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/49/602ggrju3wcq?ismg_ol=8eFvh3uQXQt_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/budget/budget-outfit-sept-22/chinos/chinos.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/budget/budget-outfit-sept-22/chinos/index.html",
     "campaign": "budget-outfit-sept-22",
     "theme": "budget",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": 3,
-    "thumbnail": null
+    "thumbnail": "outfits/budget/budget-outfit-sept-22/chinos/chinos-424.jpeg"
   }
 ]
