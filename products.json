@@ -4736,7 +4736,7 @@
     "theme": "trending-products",
     "source": "videos",
     "data_new": "no",
-    "discount_percent": null,
+    "discount_percent": 8,
     "thumbnail": "videos/trending-products/trending-products-aug-10/polo/polo-424.jpg"
   },
   {
