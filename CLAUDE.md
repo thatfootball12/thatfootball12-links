@@ -42,3 +42,16 @@ exists (Google treats a Product without `image` as an invalid merchant
 listing). `sync_catalog.py`'s report item 4 flags any page whose
 block is missing or stale, so a clean `sync_catalog.py` run means the
 schema is current too.
+
+Then run `python write_sitemap.py` and commit the regenerated
+`sitemap.xml` with the batch. It lists the homepage, the shop grid,
+every category and campaign page, and every product detail page in
+`products.json`, and leaves out redirect pages (the root redirect
+stubs and retired campaign pages, detected by their meta refresh) and
+`archive/`. `<lastmod>` comes from each file's last git commit, with
+today's date for anything not committed yet, so running it right before
+the batch commit gives new pages the batch date. `sync_catalog.py`'s
+report item 5 flags pages missing from `sitemap.xml` and entries whose
+page is gone. So the order is: `sync_catalog.py` (plus `--append` if
+needed), then `add_product_schema.py`, then `write_sitemap.py`, then
+`sync_catalog.py` once more to confirm it's clean.

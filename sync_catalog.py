@@ -38,6 +38,11 @@ Report (always runs):
   4. Product detail pages whose schema.org JSON-LD block is missing, stale,
      or present where it shouldn't be (see add_product_schema.py; run it
      to fix whatever this flags).
+  5. sitemap.xml drift: pages (from products.json and the outfits/ and
+     videos/ walk) missing from sitemap.xml, sitemap.xml entries whose
+     page no longer exists on disk, and entries that shouldn't be there
+     (e.g. a page that became a redirect). See write_sitemap.py; run it
+     to fix whatever this flags.
 
 Append (--append only):
   For each detail page found in (1), build a record the same way the
@@ -78,6 +83,7 @@ import urllib.request
 from PIL import Image
 
 import add_product_schema
+import write_sitemap
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -328,6 +334,25 @@ def main():
         if st != "ok":
             schema_issues.append((p["id"], st))
 
+    sitemap_issues = []
+    in_sitemap = write_sitemap.sitemap_urls()
+    if in_sitemap is None:
+        sitemap_issues.append(("sitemap.xml does not exist", ""))
+    else:
+        expected = [u for u, _ in write_sitemap.expected_urls()]
+        expected_set, sitemap_set = set(expected), set(in_sitemap)
+        for url in expected:
+            if url not in sitemap_set:
+                sitemap_issues.append(("missing from sitemap.xml", url))
+        for url in in_sitemap:
+            if url in expected_set:
+                continue
+            page = write_sitemap.page_for(url)
+            if page is None or not os.path.isfile(os.path.join(REPO, page.replace("/", os.sep))):
+                sitemap_issues.append(("in sitemap.xml but page no longer exists", url))
+            else:
+                sitemap_issues.append(("in sitemap.xml but shouldn't be (redirect or excluded page)", url))
+
     print("=== sync_catalog.py report ===\n")
     print(f"Detail pages scanned on disk: {len(fs_pages)}")
     print(f"Records in products.json: {len(products)}\n")
@@ -355,9 +380,18 @@ def main():
         print("   Run: python add_product_schema.py")
     print()
 
-    if not missing_from_catalog and not orphaned_records and not missing_thumbnails and not schema_issues:
+    print(f"5. sitemap.xml entries missing, stale, or unwanted: {len(sitemap_issues)}")
+    for why, url in sitemap_issues:
+        print(f"   {why}: {url}" if url else f"   {why}")
+    if sitemap_issues:
+        print("   Run: python write_sitemap.py")
+    print()
+
+    if (not missing_from_catalog and not orphaned_records and not missing_thumbnails
+            and not schema_issues and not sitemap_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
-              "detail page and thumbnail exist, and every schema block is current.\n")
+              "detail page and thumbnail exist, every schema block is current, and "
+              "sitemap.xml matches the pages on disk.\n")
 
     if not args.append:
         if missing_from_catalog:

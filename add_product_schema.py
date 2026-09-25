@@ -109,7 +109,8 @@ def expected_block(p, page_html):
     }
     body = json.dumps(data, indent=2, ensure_ascii=False).replace("</", "<\\/")
     nl = "\r\n" if "\r\n" in page_html else "\n"
-    return nl.join([START, '<script type="application/ld+json">', body, "</script>", END]) + nl
+    lines = [START, '<script type="application/ld+json">'] + body.split("\n") + ["</script>", END]
+    return nl.join(lines) + nl
 
 
 def current_block(page_html):
@@ -138,7 +139,10 @@ def status(p, page_html):
         return "unwanted" if have is not None else "ok"
     if have is None:
         return "missing"
-    return "ok" if have == want else "stale"
+    # Compare ignoring line endings: git's autocrlf converts them on
+    # checkout/commit, which isn't a content change.
+    same = have.replace("\r\n", "\n") == want.replace("\r\n", "\n")
+    return "ok" if same else "stale"
 
 
 def main():
