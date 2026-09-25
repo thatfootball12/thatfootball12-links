@@ -30,6 +30,16 @@ for the investigation this is based on):
       3. If it does match, GET that destination URL too and check its
          status (catches a plain 404 on a delisted product ID).
 
+    Some removed onelinks skip the interstitial entirely: the onelink
+    request is server-side redirected (urllib follows it) straight to the
+    SHEIN homepage, e.g. https://ca.shein.com/?cdn_rsite=ak&ref=www&...,
+    which returns 200 with homepage HTML and no <input id="url">. So
+    before parsing the interstitial, check the request's final URL: if it
+    ended on a non-onelink shein.com URL that isn't a product page, treat
+    as DEAD ("redirected to SHEIN homepage"). If it ended directly on a
+    product page, that 200 already confirms it. Anything else that lacks
+    the embedded URL stays INCONCLUSIVE.
+
     Known limitation, deliberately not solved here: a sold-out-but-still-
     listed SHEIN product returns 200 with a normal-looking product URL,
     but the actual page content (stock status) only renders after
@@ -58,6 +68,7 @@ import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -117,7 +128,7 @@ def check_generic(url):
 
 
 def check_shein(url):
-    status, _final_url, body, err = get(url)
+    status, final_url, body, err = get(url)
     if err is not None or status is None:
         return status_verdict(status, err, " (onelink)")
     if status in (404, 410):
@@ -126,6 +137,14 @@ def check_shein(url):
         return "INCONCLUSIVE", f"onelink returned HTTP {status} (likely bot-blocked)"
     if status != 200:
         return "INCONCLUSIVE", f"onelink returned unexpected HTTP {status}"
+
+    final_host = (urllib.parse.urlsplit(final_url or "").hostname or "").lower()
+    if final_host != "onelink.shein.com" and (
+        final_host == "shein.com" or final_host.endswith(".shein.com")
+    ):
+        if SHEIN_PRODUCT_PATTERN_RE.search(final_url):
+            return "OK", f"product page confirmed (onelink redirected, HTTP {status})"
+        return "DEAD", f"redirected to SHEIN homepage: {final_url[:120]}"
 
     m = SHEIN_URL_INPUT_RE.search(body or "")
     if not m:
