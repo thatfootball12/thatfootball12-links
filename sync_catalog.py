@@ -35,6 +35,9 @@ Report (always runs):
   1. Detail pages on disk with no products.json record.
   2. products.json records whose detail page no longer exists on disk.
   3. products.json records whose thumbnail file is missing on disk.
+  4. Product detail pages whose schema.org JSON-LD block is missing, stale,
+     or present where it shouldn't be (see add_product_schema.py; run it
+     to fix whatever this flags).
 
 Append (--append only):
   For each detail page found in (1), build a record the same way the
@@ -73,6 +76,8 @@ import urllib.parse
 import urllib.request
 
 from PIL import Image
+
+import add_product_schema
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -314,6 +319,15 @@ def main():
         if not os.path.isfile(thumb_path):
             missing_thumbnails.append((p["id"], p["thumbnail"]))
 
+    schema_issues = []
+    for p in products:
+        page = os.path.join(REPO, p["detail_page_url"].replace("/", os.sep))
+        if not os.path.isfile(page):
+            continue  # already reported in (2)
+        st = add_product_schema.status(p, add_product_schema.read_page(page))
+        if st != "ok":
+            schema_issues.append((p["id"], st))
+
     print("=== sync_catalog.py report ===\n")
     print(f"Detail pages scanned on disk: {len(fs_pages)}")
     print(f"Records in products.json: {len(products)}\n")
@@ -334,9 +348,16 @@ def main():
         print(f"   {pid} -> {thumb}")
     print()
 
-    if not missing_from_catalog and not orphaned_records and not missing_thumbnails:
+    print(f"4. Detail pages with a missing/stale product schema block: {len(schema_issues)}")
+    for pid, st in schema_issues:
+        print(f"   {pid} ({st})")
+    if schema_issues:
+        print("   Run: python add_product_schema.py")
+    print()
+
+    if not missing_from_catalog and not orphaned_records and not missing_thumbnails and not schema_issues:
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
-              "detail page and thumbnail exist.\n")
+              "detail page and thumbnail exist, and every schema block is current.\n")
 
     if not args.append:
         if missing_from_catalog:

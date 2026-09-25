@@ -30,3 +30,15 @@ whose page no longer exists, and records with a missing thumbnail) and
 reports them. Pass `--append` to add the missing records automatically —
 it still flags `item_type` and `data_new` for manual review on every new
 record, since neither has a reliable source outside human judgment.
+
+Then run `python add_product_schema.py` (after any `--append`, since it
+reads `products.json`). It writes the schema.org Product JSON-LD block
+into every SHEIN detail page's `<head>` between
+`<!-- product-schema:start/end -->` markers, and refreshes any block
+whose price, description, or link has changed. Amazon and Awin pages
+deliberately get no block (no price is shown on them, so there's nothing
+to mark up), and neither do `image_pending` pages until their photo
+exists (Google treats a Product without `image` as an invalid merchant
+listing). `sync_catalog.py`'s report item 4 flags any page whose
+block is missing or stale, so a clean `sync_catalog.py` run means the
+schema is current too.
