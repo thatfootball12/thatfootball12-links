@@ -4720,6 +4720,26 @@
     "thumbnail": "videos/trending-products/trending-products-aug-10/pants/pants-424.jpg"
   },
   {
+    "id": "trending-products/trending-products-aug-10/polo",
+    "slug": "polo",
+    "name": "Men's Summer Solid Color Short Sleeve Casual Commute Button Polo Shirt",
+    "item_type": "Dress & Polo",
+    "price": 13.84,
+    "currency": "CAD",
+    "currency_source": "meta tag",
+    "retailer": "SHEIN",
+    "outbound_url": "https://onelink.shein.com/49/5zpmgenq021u",
+    "image": "videos/trending-products/trending-products-aug-10/polo/polo.jpg",
+    "image_pending": false,
+    "detail_page_url": "videos/trending-products/trending-products-aug-10/polo/index.html",
+    "campaign": "trending-products-aug-10",
+    "theme": "trending-products",
+    "source": "videos",
+    "data_new": "no",
+    "discount_percent": null,
+    "thumbnail": "videos/trending-products/trending-products-aug-10/polo/polo-424.jpg"
+  },
+  {
     "id": "trending-products/trending-products-aug-17/duffel",
     "slug": "duffel",
     "name": "Nike Unisex NK BRSLA S DUFF - 9.5 (41L) Duffel Bag",
