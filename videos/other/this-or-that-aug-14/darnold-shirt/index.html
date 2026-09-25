@@ -2,6 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- analytics:start -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E3HV1TFPEN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E3HV1TFPEN');
+</script>
+<script>
+(function () {
+  var P = {"retailer": "Amazon", "product_id": "other/this-or-that-aug-14/darnold-shirt", "product_name": "Seattle Sam Darnold Bootleg Style Throwback T-Shirt"}, C = null, SEL = "a.shop";
+  var SKIP = /(^|\.)(tiktok\.com|instagram\.com|pin\.it|pinterest\.[a-z.]+)$/;
+  function retailer(host) {
+    if (/(^|\.)amazon\.|(^|\.)amzn\.to$/.test(host)) return 'Amazon';
+    if (/(^|\.)shein\.com$/.test(host)) return 'SHEIN';
+    if (/(^|\.)awin1\.com$|(^|\.)tidd\.ly$/.test(host)) return 'Awin';
+    if (/(^|\.)tee\.pub$|(^|\.)teepublic\.com$/.test(host)) return 'TeePublic';
+    if (/(^|\.)redbubble\.com$/.test(host)) return 'Redbubble';
+    return host;
+  }
+  function linkParams(a) {
+    var host = a.hostname.replace(/^www\./, '');
+    if (SKIP.test(host)) return null;
+    var t = a.querySelector('.link-text'), img = a.querySelector('img[alt]');
+    var name = (t ? t.textContent : img ? img.alt : a.textContent).replace(/\s+/g, ' ').trim();
+    var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return { retailer: retailer(host), product_id: C + '/' + slug, product_name: name };
+  }
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest(SEL) : null;
+    if (!a || !/^https?:$/.test(a.protocol)) return;
+    var params = P || linkParams(a);
+    if (!params) return;
+    try { gtag('event', 'affiliate_click', params); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>
+<!-- analytics:end -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sam Darnold Shirt • ThatFootball12</title>
 <meta property="og:title" content="Seattle Sam Darnold Bootleg Style Throwback T-Shirt" />

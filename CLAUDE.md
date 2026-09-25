@@ -43,6 +43,19 @@ listing). `sync_catalog.py`'s report item 4 flags any page whose
 block is missing or stale, so a clean `sync_catalog.py` run means the
 schema is current too.
 
+Then run `python add_analytics.py`. It writes the Google Analytics 4 tag
+(`G-E3HV1TFPEN`) into every site page's `<head>`, right after
+`<meta charset>`, between `<!-- analytics:start/end -->` markers. On
+product detail pages it adds `affiliate_click` tracking for the `.shop`
+link, with parameters from the page's `products.json` record (value and
+currency for SHEIN only). On legacy link-list campaign pages and the
+homepage it tracks the `.link-card`/`.affiliate-banner` links from their
+domain and text. New batch pages and changed product records get picked
+up automatically. It deliberately leaves out `archive/`, the root
+redirect stubs, and the `googlec…html` Search Console file.
+`sync_catalog.py`'s report item 6 flags any page whose block is missing
+or stale, and any detail page with no outbound `.shop` link.
+
 Then run `python write_sitemap.py` and commit the regenerated
 `sitemap.xml` with the batch. It lists the homepage, the shop grid,
 every category and campaign page, and every product detail page in
@@ -51,7 +64,11 @@ stubs and retired campaign pages, detected by their meta refresh) and
 `archive/`. `<lastmod>` comes from each file's last git commit, with
 today's date for anything not committed yet, so running it right before
 the batch commit gives new pages the batch date. `sync_catalog.py`'s
-report item 5 flags pages missing from `sitemap.xml` and entries whose
-page is gone. So the order is: `sync_catalog.py` (plus `--append` if
-needed), then `add_product_schema.py`, then `write_sitemap.py`, then
+report item 5 flags pages missing from `sitemap.xml`, entries whose
+page is gone, and out-of-date `<lastmod>` dates.
+
+So the order is: `sync_catalog.py` (plus `--append` if needed), then
+`add_product_schema.py`, then `add_analytics.py`, then
+`write_sitemap.py` last among the writers (both scripts before it edit
+pages, and each edit moves that page's `<lastmod>`), then
 `sync_catalog.py` once more to confirm it's clean.

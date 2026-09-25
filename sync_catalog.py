@@ -43,6 +43,10 @@ Report (always runs):
      page no longer exists on disk, and entries that shouldn't be there
      (e.g. a page that became a redirect). See write_sitemap.py; run it
      to fix whatever this flags.
+  6. Google Analytics: pages whose gtag/affiliate_click block is missing,
+     stale, or present where it shouldn't be, and product detail pages
+     with no outbound .shop link for the click handler to catch. See
+     add_analytics.py; run it to fix whatever this flags.
 
 Append (--append only):
   For each detail page found in (1), build a record the same way the
@@ -84,6 +88,7 @@ from PIL import Image
 
 import add_product_schema
 import write_sitemap
+import add_analytics
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -352,6 +357,12 @@ def main():
                 sitemap_issues.append(("in sitemap.xml but page no longer exists", url))
             else:
                 sitemap_issues.append(("in sitemap.xml but shouldn't be (redirect or excluded page)", url))
+        if not sitemap_issues and write_sitemap.is_stale():
+            sitemap_issues.append(("sitemap.xml has out-of-date <lastmod> dates", ""))
+
+    analytics_issues = [(rel, f"{st} analytics block") for rel, st in add_analytics.audit()]
+    analytics_issues += [(rel, "no outbound .shop link for the click handler")
+                         for rel in add_analytics.untracked_links()]
 
     print("=== sync_catalog.py report ===\n")
     print(f"Detail pages scanned on disk: {len(fs_pages)}")
@@ -387,11 +398,20 @@ def main():
         print("   Run: python write_sitemap.py")
     print()
 
+    print(f"6. Pages with a missing/stale Google Analytics block or untracked .shop link: "
+          f"{len(analytics_issues)}")
+    for rel, why in analytics_issues:
+        print(f"   {rel} ({why})")
+    if analytics_issues:
+        print("   Run: python add_analytics.py")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not missing_thumbnails
-            and not schema_issues and not sitemap_issues):
+            and not schema_issues and not sitemap_issues and not analytics_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
-              "detail page and thumbnail exist, every schema block is current, and "
-              "sitemap.xml matches the pages on disk.\n")
+              "detail page and thumbnail exist, every schema block is current, "
+              "sitemap.xml matches the pages on disk, and every page has current "
+              "analytics tracking.\n")
 
     if not args.append:
         if missing_from_catalog:
