@@ -144,16 +144,25 @@ def sitemap_urls():
         return LOC_RE.findall(f.read())
 
 
+def _current():
+    if not os.path.isfile(SITEMAP):
+        return None
+    with open(SITEMAP, encoding="utf-8", newline="") as f:
+        return f.read().replace("\r\n", "\n")
+
+
+def is_stale():
+    """True if regenerating would change sitemap.xml (e.g. a <lastmod>)."""
+    return _current() != build()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="report only, change nothing")
     args = ap.parse_args()
 
     new = build()
-    old = None
-    if os.path.isfile(SITEMAP):
-        with open(SITEMAP, encoding="utf-8", newline="") as f:
-            old = f.read().replace("\r\n", "\n")
+    old = _current()
     count = new.count("<url>")
     if old == new:
         print(f"sitemap.xml up to date ({count} URLs).")
