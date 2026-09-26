@@ -47,6 +47,12 @@ Report (always runs):
      stale, or present where it shouldn't be, and product detail pages
      with no outbound .shop link for the click handler to catch. See
      add_analytics.py; run it to fix whatever this flags.
+  7. Open "PHOTO NEEDED" comments: every .html file (and line) carrying
+     one. These mark campaign-level photo problems, like a campaign whose
+     outfit-preview.jpg is wrong, that no products.json field tracks.
+     No script can fix them (someone has to source a photo), so they
+     don't block the "Clean" line for items 1-6, but the summary line
+     names them on every run until the comment is removed.
 
 Append (--append only):
   For each detail page found in (1), build a record the same way the
@@ -364,6 +370,13 @@ def main():
     analytics_issues += [(rel, "no outbound .shop link for the click handler")
                          for rel in add_analytics.untracked_links()]
 
+    photo_needed = []
+    for rel in add_analytics.all_html():
+        with open(os.path.join(REPO, rel.replace("/", os.sep)), encoding="utf-8", errors="replace") as f:
+            for lineno, line in enumerate(f, 1):
+                if "PHOTO NEEDED" in line:
+                    photo_needed.append((rel, lineno))
+
     print("=== sync_catalog.py report ===\n")
     print(f"Detail pages scanned on disk: {len(fs_pages)}")
     print(f"Records in products.json: {len(products)}\n")
@@ -406,12 +419,22 @@ def main():
         print("   Run: python add_analytics.py")
     print()
 
+    print(f"7. Open PHOTO NEEDED comments (a photo has to be sourced by hand): {len(photo_needed)}")
+    for rel, lineno in photo_needed:
+        print(f"   {rel}:{lineno}")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page and thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, and every page has current "
-              "analytics tracking.\n")
+              "analytics tracking.")
+        if photo_needed:
+            files = len({rel for rel, _ in photo_needed})
+            print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
+                  "— see item 7.")
+        print()
 
     if not args.append:
         if missing_from_catalog:
