@@ -72,3 +72,10 @@ So the order is: `sync_catalog.py` (plus `--append` if needed), then
 `write_sitemap.py` last among the writers (both scripts before it edit
 pages, and each edit moves that page's `<lastmod>`), then
 `sync_catalog.py` once more to confirm it's clean.
+
+When a page needs a photo that has to be sourced by hand at the
+campaign level (e.g. a wrong or missing `outfit-preview.jpg`, which no
+`products.json` field tracks), leave an HTML comment containing
+`PHOTO NEEDED` at the spot. `sync_catalog.py` report item 7 lists every
+one, and its summary line keeps naming them until the comment is
+removed along with the fix.
