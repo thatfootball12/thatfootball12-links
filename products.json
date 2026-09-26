@@ -3349,15 +3349,15 @@
     "currency_source": "link domain",
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B01LVURXJM/ref=cm_sw_r_as_gl_api_gl_i_1AAK1WC2TYF1GV09FFV1?linkCode=ml1&tag=thatfootbal05-20&linkId=63e66e2198f0834e946033bd0bd0c379",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/old-money/old-money-aug-11/duffel-bag/duffel-bag.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/old-money/old-money-aug-11/duffel-bag/index.html",
     "campaign": "old-money-aug-11",
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/old-money/old-money-aug-11/duffel-bag/duffel-bag-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-11/loafers",
@@ -3369,15 +3369,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/45/5xdl20rylito",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/old-money/old-money-aug-11/loafers/loafers.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/old-money/old-money-aug-11/loafers/index.html",
     "campaign": "old-money-aug-11",
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/old-money/old-money-aug-11/loafers/loafers-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-11/pants",
@@ -3389,15 +3389,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/45/5xdkz28axb2s",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/old-money/old-money-aug-11/pants/pants.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/old-money/old-money-aug-11/pants/index.html",
     "campaign": "old-money-aug-11",
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/old-money/old-money-aug-11/pants/pants-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-11/shirt",
@@ -3409,15 +3409,15 @@
     "currency_source": "meta tag",
     "retailer": "SHEIN",
     "outbound_url": "https://onelink.shein.com/45/5xdkw7monpcd",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/old-money/old-money-aug-11/shirt/shirt.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/old-money/old-money-aug-11/shirt/index.html",
     "campaign": "old-money-aug-11",
     "theme": "old-money",
     "source": "outfits",
     "data_new": "no",
     "discount_percent": null,
-    "thumbnail": null
+    "thumbnail": "outfits/old-money/old-money-aug-11/shirt/shirt-424.jpg"
   },
   {
     "id": "old-money/old-money-aug-18/dress-shoes",
