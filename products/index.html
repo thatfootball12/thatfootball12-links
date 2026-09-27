@@ -301,6 +301,7 @@
   }
   a.card-tile.hidden{display:none;}
   .thumb-wrap{position:relative;}
+  .thumb-wrap picture{display:block;}
   .card-thumb{
     width:100%;
     aspect-ratio:1/1;
@@ -553,7 +554,6 @@
     } else {
       var img = document.createElement('img');
       img.className = 'card-thumb';
-      img.src = '../' + (p.thumbnail || p.image);
       img.alt = p.name;
       // Deliberately no width/height attributes here: .card-thumb forces a
       // 1:1 crop via CSS aspect-ratio (object-fit:cover) that differs from
@@ -564,7 +564,24 @@
       // space with zero layout shift, without needing per-image dimensions.
       img.loading = 'lazy';
       img.decoding = 'async';
-      thumbWrap.appendChild(img);
+      // WebP <source> only when the record names one: a WebP-capable browser
+      // uses the <source> and shows a broken image if it 404s instead of
+      // falling back to the JPEG, so it's never guessed from the JPEG's name.
+      // The <img> goes into the <picture> before src is set; a detached img
+      // starts fetching the moment src is assigned, which would download the
+      // JPEG as well as the WebP.
+      if(p.thumbnail_webp){
+        var pic = document.createElement('picture');
+        var source = document.createElement('source');
+        source.type = 'image/webp';
+        source.srcset = '../' + p.thumbnail_webp;
+        pic.appendChild(source);
+        pic.appendChild(img);
+        thumbWrap.appendChild(pic);
+      } else {
+        thumbWrap.appendChild(img);
+      }
+      img.src = '../' + (p.thumbnail || p.image);
     }
 
     if(p.data_new === 'yes'){
