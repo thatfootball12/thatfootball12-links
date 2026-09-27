@@ -34,7 +34,8 @@ Scope:
 Report (always runs):
   1. Detail pages on disk with no products.json record.
   2. products.json records whose detail page no longer exists on disk.
-  3. products.json records whose thumbnail file is missing on disk.
+  3. products.json records whose thumbnail or thumbnail_webp file is
+     missing on disk (or whose thumbnail_webp field isn't set).
   4. Product detail pages whose schema.org JSON-LD block is missing, stale,
      or present where it shouldn't be (see add_product_schema.py; run it
      to fix whatever this flags).
@@ -53,6 +54,21 @@ Report (always runs):
      No script can fix them (someone has to source a photo), so they
      don't block the "Clean" line for items 1-6, but the summary line
      names them on every run until the comment is removed.
+  8. <picture> WebP sources on any page whose srcset doesn't resolve to a
+     file (URL-decoded, relative to the page), contains an unencoded space,
+     or shows a different picture than the <img> JPEG beside it (e.g. a
+     replaced photo whose WebP wasn't regenerated). Unlike a slow image, a
+     missing WebP <source> is a broken image in every WebP-capable browser:
+     it never falls back to the <img> JPEG. Item 3 applies the same
+     missing/mismatch checks to products.json's thumbnail_webp.
+
+WebP (--fill-webp):
+  Category-page tiles and the products/ grid serve each -424 thumbnail as a
+  <picture> with a same-named .webp <source> and the JPEG <img> as fallback.
+  --fill-webp generates any WebP that items 3 and 8 report missing (from
+  the full-size original, 424 wide, quality 80, never upscaled) and sets
+  thumbnail_webp on the records. --append does the same for new records.
+  Hero banners, detail-page photos and og:image/twitter:image stay JPEG.
 
 Append (--append only):
   For each detail page found in (1), build a record the same way the
@@ -70,7 +86,7 @@ Append (--append only):
       awin1.com/tidd.ly).
     - theme/campaign/source/slug derived from the folder path.
     - a 424px-wide thumbnail derivative generated at quality 85, matching
-      the rest of the catalog (never upscaled).
+      the rest of the catalog (never upscaled), plus its WebP sibling.
   item_type and data_new have no source anywhere outside human judgment —
   they are never inferred. Appended records get item_type: null and
   data_new: null, and are listed in the report as needing manual review
@@ -90,7 +106,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from PIL import Image
+from PIL import Image, ImageChops, ImageStat
 
 import add_product_schema
 import write_sitemap
@@ -100,12 +116,18 @@ REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
 THUMB_TARGET_WIDTH = 424
 THUMB_QUALITY = 85
+# WebP's quality scale isn't comparable to JPEG's; 80 measured ~46% smaller
+# than the quality-85 JPEG thumbnails across the catalog with no visible loss.
+WEBP_QUALITY = 80
+WEBP_MATCH_THRESHOLD = 15  # see webp_mismatch()
 
 IMG_META_AMOUNT_RE = re.compile(r'<meta property="product:price:amount" content="([^"]*)"')
 IMG_META_CURRENCY_RE = re.compile(r'<meta property="product:price:currency" content="([^"]*)"')
 SHOP_LINK_RE = re.compile(r'<a class="shop" href="([^"]+)"')
 H1_RE = re.compile(r'<h1>(.*?)</h1>', re.DOTALL)
 IMG_TAG_RE = re.compile(r'<img src="([^"]+)"')
+# (webp srcset, fallback <img> src) for each <picture>
+WEBP_PICTURE_RE = re.compile(r'<source type="image/webp" srcset="([^"]*)">\s*<img[^>]*?\ssrc="([^"]*)"')
 
 
 def find_detail_pages():
@@ -274,6 +296,7 @@ def build_record(rel_path):
         "data_new": None,
         "discount_percent": None,
         "thumbnail": None,
+        "thumbnail_webp": None,
     }
 
     if record["item_type"] is None:
@@ -310,13 +333,150 @@ def generate_thumbnail(image_rel):
     return thumb_rel
 
 
+def webp_rel_for(thumb_rel):
+    """x/y-424.jpg -> x/y-424.webp. Keeps the input's URL encoding (products.json
+    and the pages store URL-encoded paths, e.g. Darnold%20Shirt-424.jpg)."""
+    return os.path.splitext(thumb_rel)[0] + ".webp"
+
+
+def _abs(rel):
+    return os.path.join(REPO, urllib.parse.unquote(rel).replace("/", os.sep))
+
+
+def _mean_diff(a, b):
+    """Mean per-channel pixel difference (0-255) between two same-size RGB images."""
+    return sum(ImageStat.Stat(ImageChops.difference(a, b)).mean) / 3
+
+
+def webp_mismatch(webp_abs, jpeg_abs):
+    """None if the WebP shows the same picture as its JPEG, else why not.
+    Same-picture pairs measured at most ~5 mean difference across the catalog
+    (encoder noise); two different photos measure ~60+."""
+    with Image.open(webp_abs) as w, Image.open(jpeg_abs) as j:
+        if w.size != j.size:
+            return f"doesn't match its JPEG ({w.width}x{w.height} vs {j.width}x{j.height})"
+        d = _mean_diff(w.convert("RGB"), j.convert("RGB"))
+    return f"doesn't match its JPEG (pixel difference {d:.0f})" if d > WEBP_MATCH_THRESHOLD else None
+
+
+def generate_webp(thumb_rel):
+    """Writes the WebP sibling of a -424 thumbnail and returns its
+    repo-root-relative path, or None if the -424 JPEG doesn't exist.
+
+    Encoded from the full-size original (x/y.jpg for x/y-424.jpg), resized to
+    424 wide the same way generate_thumbnail() does and never upscaled, so it
+    isn't a re-compression of the JPEG thumbnail. But only when that resize
+    reproduces the JPEG thumbnail: some -424 files are deliberately not a
+    plain resize (gameday-july24's is a close-up crop so its tile differs
+    from gameday-jaguars-july30's), and a WebP built from the original would
+    silently swap in the other picture for every WebP-capable browser. Those
+    are encoded from the -424 JPEG itself."""
+    thumb_abs = _abs(thumb_rel)
+    if not os.path.isfile(thumb_abs):
+        return None
+    root, ext = os.path.splitext(thumb_rel)
+    original_abs = _abs(re.sub(r"-424$", "", root) + ext)
+    with Image.open(thumb_abs) as t:
+        thumb = t.convert("RGB")
+    im = thumb
+    if os.path.isfile(original_abs):
+        with Image.open(original_abs) as o:
+            o = o.convert("RGB")
+            if o.width > THUMB_TARGET_WIDTH:
+                o = o.resize((THUMB_TARGET_WIDTH, round(o.height * THUMB_TARGET_WIDTH / o.width)),
+                             Image.LANCZOS)
+        if o.size == thumb.size and _mean_diff(o, thumb) <= WEBP_MATCH_THRESHOLD:
+            im = o
+    webp_rel = webp_rel_for(thumb_rel)
+    im.save(_abs(webp_rel), "WEBP", quality=WEBP_QUALITY, method=6)
+    return webp_rel
+
+
+def webp_source_issues():
+    """Every <source type="image/webp"> on a page must resolve to a file. A
+    browser that supports WebP uses the <source> and never falls back to the
+    <img> JPEG when it 404s, so a missing file is a broken image, not a
+    slower one. The srcset value is resolved the way a browser would:
+    relative to the page, URL-decoded. A literal space (not %20) is flagged
+    separately: srcset splits candidates on whitespace, so the part after the
+    space is read as a size descriptor and the URL is wrong. The WebP must
+    also show the same picture as the <img> fallback beside it, or a photo
+    replaced without regenerating its WebP keeps showing the old one."""
+    issues = []
+    for rel in add_analytics.all_html():
+        page = os.path.join(REPO, rel.replace("/", os.sep))
+        with open(page, encoding="utf-8", errors="replace") as f:
+            content = f.read()
+        for src, fallback in WEBP_PICTURE_RE.findall(content):
+            if re.search(r"\s", src.strip()):
+                issues.append((rel, src, "unencoded whitespace in srcset (use %20)"))
+                continue
+            target = os.path.join(os.path.dirname(page), urllib.parse.unquote(src).replace("/", os.sep))
+            if not os.path.isfile(target):
+                issues.append((rel, src, "file missing"))
+                continue
+            jpeg = os.path.join(os.path.dirname(page), urllib.parse.unquote(fallback).replace("/", os.sep))
+            if os.path.isfile(jpeg):
+                why = webp_mismatch(target, jpeg)
+                if why:
+                    issues.append((rel, src, why))
+    return issues
+
+
+def fill_webp(products):
+    """--fill-webp: give every record with a thumbnail a WebP sibling and a
+    thumbnail_webp field, and (re)generate the file behind any page's
+    <source> that is missing or no longer matches its <img> JPEG."""
+    print("=== Filling WebP thumbnails ===\n")
+    made = 0
+    for p in products:
+        if p["image_pending"] or not p.get("thumbnail"):
+            continue
+        webp = p.get("thumbnail_webp")
+        if (webp and os.path.isfile(_abs(webp)) and os.path.isfile(_abs(p["thumbnail"]))
+                and not webp_mismatch(_abs(webp), _abs(p["thumbnail"]))):
+            continue
+        webp = generate_webp(p["thumbnail"])
+        if webp:
+            p["thumbnail_webp"] = webp
+            made += 1
+        else:
+            print(f"   could not generate WebP for {p['id']} (no source image)")
+    if made:
+        save_products(products)
+    print(f"products.json records: {made} WebP thumbnail(s) generated")
+
+    pages = 0
+    for rel, src, why in webp_source_issues():
+        if why.startswith("unencoded whitespace"):
+            continue
+        page_dir = os.path.dirname(rel)
+        stem = os.path.splitext(src)[0]
+        for ext in (".jpg", ".jpeg"):
+            thumb_rel = f"{page_dir}/{stem}{ext}"
+            if os.path.isfile(_abs(thumb_rel)):
+                generate_webp(thumb_rel)
+                pages += 1
+                break
+        else:
+            print(f"   {rel}: no -424 JPEG next to {src} to build it from")
+    print(f"page <source> files: {pages} WebP thumbnail(s) generated\n")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--append", action="store_true",
                          help="Append missing records to products.json (default: report only)")
+    parser.add_argument("--fill-webp", action="store_true",
+                         help="Generate missing WebP thumbnails for products.json records and "
+                              "set their thumbnail_webp field (default: report only)")
     args = parser.parse_args()
 
     products = load_products()
+
+    if args.fill_webp:
+        fill_webp(products)
+
     by_detail_url = {p["detail_page_url"]: p for p in products}
 
     fs_pages = set(find_detail_pages())
@@ -335,6 +495,16 @@ def main():
         thumb_path = os.path.join(REPO, urllib.parse.unquote(p["thumbnail"]).replace("/", os.sep))
         if not os.path.isfile(thumb_path):
             missing_thumbnails.append((p["id"], p["thumbnail"]))
+        if not p.get("thumbnail_webp"):
+            missing_thumbnails.append((p["id"], "no thumbnail_webp field set"))
+        elif not os.path.isfile(_abs(p["thumbnail_webp"])):
+            missing_thumbnails.append((p["id"], p["thumbnail_webp"]))
+        elif os.path.isfile(thumb_path):
+            why = webp_mismatch(_abs(p["thumbnail_webp"]), thumb_path)
+            if why:
+                missing_thumbnails.append((p["id"], f"{p['thumbnail_webp']} {why}"))
+
+    webp_issues = webp_source_issues()
 
     schema_issues = []
     for p in products:
@@ -392,9 +562,12 @@ def main():
         print(f"   {p['id']} -> {rel}")
     print()
 
-    print(f"3. products.json records with a missing thumbnail file: {len(missing_thumbnails)}")
+    print(f"3. products.json records with a missing thumbnail or WebP thumbnail file: "
+          f"{len(missing_thumbnails)}")
     for pid, thumb in missing_thumbnails:
         print(f"   {pid} -> {thumb}")
+    if missing_thumbnails:
+        print("   Run: python sync_catalog.py --fill-webp  (fixes WebP entries only)")
     print()
 
     print(f"4. Detail pages with a missing/stale product schema block: {len(schema_issues)}")
@@ -424,12 +597,22 @@ def main():
         print(f"   {rel}:{lineno}")
     print()
 
+    print(f"8. <picture> WebP sources that won't load or don't match their JPEG "
+          f"(browsers don't fall back to the JPEG): {len(webp_issues)}")
+    for rel, src, why in webp_issues:
+        print(f"   {rel}: {src} ({why})")
+    if any(not why.startswith("unencoded whitespace") for _, _, why in webp_issues):
+        print("   Run: python sync_catalog.py --fill-webp  (regenerates missing or mismatched "
+              "files; fix unencoded spaces by hand)")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not missing_thumbnails
-            and not schema_issues and not sitemap_issues and not analytics_issues):
+            and not schema_issues and not sitemap_issues and not analytics_issues
+            and not webp_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
-              "detail page and thumbnail exist, every schema block is current, "
-              "sitemap.xml matches the pages on disk, and every page has current "
-              "analytics tracking.")
+              "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
+              "sitemap.xml matches the pages on disk, every page has current "
+              "analytics tracking, and every <picture> WebP source loads.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
@@ -454,6 +637,7 @@ def main():
             thumb = generate_thumbnail(record["image"])
             if thumb:
                 record["thumbnail"] = thumb
+                record["thumbnail_webp"] = generate_webp(thumb)
             else:
                 flags.append("thumbnail generation failed — source image missing")
         products.append(record)
