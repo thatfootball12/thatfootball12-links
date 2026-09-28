@@ -44,10 +44,15 @@ Report (always runs):
      page no longer exists on disk, and entries that shouldn't be there
      (e.g. a page that became a redirect). See write_sitemap.py; run it
      to fix whatever this flags.
-  6. Google Analytics: pages whose gtag/affiliate_click block is missing,
-     stale, or present where it shouldn't be, and product detail pages
-     with no outbound .shop link for the click handler to catch. See
-     add_analytics.py; run it to fix whatever this flags.
+  6. Google Analytics and consent: pages whose consent-gated gtag /
+     affiliate_click block or site footer (privacy link, "Cookie
+     settings", affiliate disclosure) is missing, stale, or present where
+     it shouldn't be; a missing privacy/index.html; any page loading
+     googletagmanager.com outside the managed block (an ungated tag that
+     would ignore the visitor's choice); and product detail pages with no
+     outbound .shop link for the click handler to catch. See
+     add_analytics.py; run it to fix whatever this flags (except an
+     ungated tag, which has to be removed by hand).
   7. Open "PHOTO NEEDED" comments: every .html file (and line) carrying
      one. These mark campaign-level photo problems, like a campaign whose
      outfit-preview.jpg is wrong, that no products.json field tracks.
@@ -536,7 +541,11 @@ def main():
         if not sitemap_issues and write_sitemap.is_stale():
             sitemap_issues.append(("sitemap.xml has out-of-date <lastmod> dates", ""))
 
-    analytics_issues = [(rel, f"{st} analytics block") for rel, st in add_analytics.audit()]
+    analytics_issues = list(add_analytics.audit())
+    if not os.path.isfile(os.path.join(REPO, add_analytics.PRIVACY_PAGE.replace("/", os.sep))):
+        analytics_issues.append((add_analytics.PRIVACY_PAGE, "privacy page missing; banner and footer link to it"))
+    analytics_issues += [(rel, "googletagmanager.com loaded outside the consent gate; remove by hand")
+                         for rel in add_analytics.ungated_tags()]
     analytics_issues += [(rel, "no outbound .shop link for the click handler")
                          for rel in add_analytics.untracked_links()]
 
@@ -584,7 +593,8 @@ def main():
         print("   Run: python write_sitemap.py")
     print()
 
-    print(f"6. Pages with a missing/stale Google Analytics block or untracked .shop link: "
+    print(f"6. Pages with a missing/stale consent-gated analytics block or site footer, "
+          f"ungated Google tag, or untracked .shop link: "
           f"{len(analytics_issues)}")
     for rel, why in analytics_issues:
         print(f"   {rel} ({why})")
@@ -611,8 +621,8 @@ def main():
             and not webp_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
-              "sitemap.xml matches the pages on disk, every page has current "
-              "analytics tracking, and every <picture> WebP source loads.")
+              "sitemap.xml matches the pages on disk, every page has current consent-gated "
+              "analytics tracking and site footer, and every <picture> WebP source loads.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
