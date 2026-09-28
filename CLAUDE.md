@@ -53,6 +53,14 @@ homepage it tracks the `.link-card`/`.affiliate-banner` links from their
 domain and text. New batch pages and changed product records get picked
 up automatically. It deliberately leaves out `archive/`, the root
 redirect stubs, and the `googlec…html` Search Console file.
+The tag is consent-gated: gtag.js doesn't load until the visitor clicks
+Accept on the cookie banner, and the same script writes a site footer
+(`<!-- site-footer:start/end -->`, before `</body>`) with the affiliate
+disclosure, a link to `privacy/`, and a "Cookie settings" button to
+change the choice. Never paste a raw Google tag into a page: it would
+load regardless of the visitor's choice, and report item 6 flags it.
+If `privacy/index.html` changes materially, bump `CONSENT_VERSION` in
+`add_analytics.py` so every visitor gets asked again.
 `sync_catalog.py`'s report item 6 flags any page whose block is missing
 or stale, and any detail page with no outbound `.shop` link.
 
