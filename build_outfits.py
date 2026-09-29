@@ -18,7 +18,7 @@ unused.
 """
 
 import csv
-import itertools
+import re
 
 # Colors that read as visually incompatible together in one outfit.
 # Deliberately short and conservative — most combos are fine, this only
@@ -69,6 +69,51 @@ def registers_compatible(reg_a, reg_b):
     return frozenset([reg_a, reg_b]) in COMPATIBLE_REGISTERS
 
 
+# NFL teams by nickname, for keeping gameday outfits to one team. Only
+# gameday-register items are checked, so a SHEIN "Eagle Print Shirt" or a
+# phone "Chargers" listing never gets read as team gear.
+NFL_TEAMS = [
+    "49ers", "bears", "bengals", "bills", "broncos", "browns", "buccaneers",
+    "cardinals", "chargers", "chiefs", "colts", "commanders", "cowboys",
+    "dolphins", "eagles", "falcons", "giants", "jaguars", "jets", "lions",
+    "packers", "panthers", "patriots", "raiders", "rams", "ravens", "saints",
+    "seahawks", "steelers", "texans", "titans", "vikings",
+]
+
+# Titles that name only a player (or city) and not the team. Hand-maintained:
+# add an entry when a batch has a player jersey or tee without the nickname.
+TEAM_ALIASES = {
+    "kelce": "chiefs",
+    "ja'marr chase": "bengals",
+    "cincinnati": "bengals",
+    "bijan robinson": "falcons",
+    "drake maye": "patriots",
+}
+
+
+def item_team(item):
+    """The NFL team an item belongs to, or None if it's team-neutral."""
+    if item["register"] != "gameday":
+        return None
+    t = item["title"].lower()
+    for team in NFL_TEAMS:
+        if re.search(rf"\b{re.escape(team)}\b", t):
+            return team
+    for alias, team in TEAM_ALIASES.items():
+        if re.search(rf"\b{re.escape(alias)}\b", t):
+            return team
+    return None
+
+
+def outfit_team(items):
+    """The single team these items commit to, None if all are neutral, or
+    False if they already mix two teams."""
+    teams = {item_team(i) for i in items} - {None}
+    if len(teams) > 1:
+        return False
+    return teams.pop() if teams else None
+
+
 def outfit_register(items):
     """The non-neutral register driving this outfit, if any — used for
     naming/labeling. Returns 'casual' if every item is neutral."""
@@ -91,76 +136,94 @@ def build_outfits(products):
         return [], "Need at least one 'base' and one 'bottom' item to build any outfit."
 
     outfits = []
-    used_pairs = set()  # (base title, bottom title) — avoid the same core twice
-    used_bases = set()
-    used_bottoms = set()
+    seen_combos = set()  # full (base, bottom, layer, footwear, accessory) tuples
+    usage = {}           # title -> times used so far, for preferring fresh items
+    used_layers = set()
 
-    for base, bottom in itertools.product(bases, bottoms):
-        key = (base["title"], bottom["title"])
-        if key in used_pairs:
-            continue
-        # Don't let one item anchor every outfit — each base and each
-        # bottom is used at most once across the whole batch, so 5
-        # outfits mean 5 different core looks, not one tee styled 5 ways.
-        if base["title"] in used_bases or bottom["title"] in used_bottoms:
-            continue
-        if colors_clash(base["color"], bottom["color"]):
-            continue
-        if not registers_compatible(base["register"], bottom["register"]):
-            continue
+    def prefer_fresh(pool):
+        # Stable sort, least-used first (file order breaks ties). Reuse is
+        # allowed, but a batch where every outfit shares one pair of jeans
+        # isn't useful when alternatives exist.
+        return sorted(pool, key=lambda i: usage.get(i["title"], 0))
 
-        core = [base, bottom]
+    # Each base anchors at most one outfit, so every outfit is a distinct
+    # core look. Bottoms, footwear, and accessories CAN repeat across
+    # outfits; layers stay one-per-batch. The only hard rule is that the
+    # exact same full combination never appears twice.
+    for base in bases:
+        candidates = [
+            bottom for bottom in prefer_fresh(bottoms)
+            if not colors_clash(base["color"], bottom["color"])
+            and registers_compatible(base["register"], bottom["register"])
+            and outfit_team([base, bottom]) is not False
+        ]
 
-        # Layer, footwear, accessory are optional add-ons, not required
-        # slots. Only add one if it's register-compatible with the core
-        # AND hasn't already been used in a previous outfit — reusing the
-        # one hat/jacket across every outfit is worse than leaving it off.
-        def pick_addon(pool, used_titles):
-            for item in pool:
-                if item["title"] in used_titles:
-                    continue
-                if not registers_compatible(item["register"], outfit_register(core)):
-                    continue
-                if any(colors_clash(item["color"], c["color"]) for c in core):
-                    continue
-                return item
-            return None
+        for bottom in candidates:
+            core = [base, bottom]
 
-        used_addons = set()
-        for o in outfits:
-            for slot_name in ("layer", "footwear", "accessory"):
-                if o.get(f"{slot_name}_title"):
-                    used_addons.add(o[f"{slot_name}_title"])
+            # Layer, footwear, accessory are optional add-ons, not required
+            # slots. Only add one if it's register-compatible with the core.
+            # For gameday outfits, try gameday add-ons first (team jackets,
+            # beanies, socks) so a fan tee doesn't end up with only generic
+            # pieces just because those come earlier in the CSV.
+            #
+            # Team rule: an add-on from the outfit's team comes first, then
+            # team-neutral items. Gear from a different team is never used,
+            # even if that leaves the slot empty.
+            def pick_addon(pool, exclude_titles, chosen):
+                team = outfit_team(chosen)
+                gameday = outfit_register(core) == "gameday"
+                pool = sorted(pool, key=lambda i: (
+                    not (team and item_team(i) == team),
+                    not (gameday and i["register"] == "gameday"),
+                ))
+                for item in pool:
+                    if item["title"] in exclude_titles:
+                        continue
+                    if outfit_team(chosen + [item]) is False:
+                        continue
+                    if not registers_compatible(item["register"], outfit_register(core)):
+                        continue
+                    if any(colors_clash(item["color"], c["color"]) for c in core):
+                        continue
+                    return item
+                return None
 
-        layer = pick_addon(layers, used_addons)
-        shoe = pick_addon(footwear, used_addons | ({layer["title"]} if layer else set()))
-        acc = pick_addon(accessories, used_addons | ({layer["title"]} if layer else set())
-                          | ({shoe["title"]} if shoe else set()))
+            chosen = list(core)
+            layer = pick_addon([l for l in layers if l["title"] not in used_layers], set(), chosen)
+            chosen += [layer] if layer else []
+            shoe = pick_addon(prefer_fresh(footwear), set(), chosen)
+            chosen += [shoe] if shoe else []
+            acc = pick_addon(prefer_fresh(accessories), {x["title"] for x in chosen}, chosen)
 
-        items = core + [x for x in [layer, shoe, acc] if x]
-        total = sum(float(x["price"]) for x in items)
+            combo = tuple(x["title"] if x else "" for x in (base, bottom, layer, shoe, acc))
+            if combo in seen_combos:
+                continue
 
-        outfits.append({
-            "outfit_id": f"outfit_{len(outfits) + 1}",
-            "register": outfit_register(items),
-            "base": base["title"],
-            "bottom": bottom["title"],
-            "layer": layer["title"] if layer else "",
-            "layer_title": layer["title"] if layer else "",
-            "footwear": shoe["title"] if shoe else "",
-            "footwear_title": shoe["title"] if shoe else "",
-            "accessory": acc["title"] if acc else "",
-            "accessory_title": acc["title"] if acc else "",
-            "total_price": f"{total:.2f}",
-            "missing_slots": ", ".join(
-                s for s, present in
-                [("layer", bool(layer)), ("footwear", bool(shoe)), ("accessory", bool(acc))]
-                if not present
-            ),
-        })
-        used_pairs.add(key)
-        used_bases.add(base["title"])
-        used_bottoms.add(bottom["title"])
+            items = core + [x for x in [layer, shoe, acc] if x]
+            total = sum(float(x["price"]) for x in items)
+
+            outfits.append({
+                "outfit_id": f"outfit_{len(outfits) + 1}",
+                "register": outfit_register(items),
+                "base": base["title"],
+                "bottom": bottom["title"],
+                "layer": layer["title"] if layer else "",
+                "footwear": shoe["title"] if shoe else "",
+                "accessory": acc["title"] if acc else "",
+                "total_price": f"{total:.2f}",
+                "missing_slots": ", ".join(
+                    s for s, present in
+                    [("layer", bool(layer)), ("footwear", bool(shoe)), ("accessory", bool(acc))]
+                    if not present
+                ),
+            })
+            seen_combos.add(combo)
+            for x in items:
+                usage[x["title"]] = usage.get(x["title"], 0) + 1
+            if layer:
+                used_layers.add(layer["title"])
+            break
 
     return outfits, None
 
@@ -184,7 +247,7 @@ def main():
 
     # Cap output: a real weekly batch should be 2-5 solid outfits, not
     # every mathematically valid base x bottom combination.
-    MAX_OUTFITS = 5
+    MAX_OUTFITS = 14
     kept = outfits[:MAX_OUTFITS]
     dropped = len(outfits) - len(kept)
 

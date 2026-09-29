@@ -13,17 +13,26 @@ guesses get corrected by hand in the CSV before outfit-building runs.
 """
 
 import csv
+import re
 
 # Order matters: more specific terms checked first so e.g. "cargo pants"
 # doesn't get missed by a looser "pants" rule elsewhere.
 SLOT_RULES = [
-    ("outer", ["jacket", "coat", "parka", "windbreaker", "puffer", "overshirt", "shacket"]),
+    ("outer", ["jacket", "coat", "parka", "windbreaker", "puffer", "overshirt", "shacket", "blazer",
+               "overcoat", "topcoat", "raincoat", "trenchcoat", "waistcoat"]),
     ("mid", ["sweater", "hoodie", "sweatshirt", "cardigan", "flannel", "pullover", "fleece"]),
     ("base", ["t-shirt", "tshirt", "tee", "polo", "shirt", "tank"]),
-    ("footwear", ["shoes", "sneakers", "boots", "sandals", "slippers", "loafers"]),
-    ("bottom", ["pants", "trousers", "jeans", "shorts", "chinos", "joggers"]),
-    ("accessory", ["hat", "cap", "beanie", "belt", "bag", "watch", "sunglasses", "scarf", "wallet"]),
+    ("footwear", ["shoe", "sneaker", "boot", "sandal", "slipper", "loafer"]),
+    ("bottom", ["pants", "trousers", "jeans", "shorts", "chinos", "joggers", "sweatpants", "trackpants"]),
+    ("accessory", ["hat", "cap", "beanie", "belt", "bag", "watch", "sunglasses", "scarf", "wallet",
+                   "necktie", "tie", "pocket square", "necklace", "gloves"]),
 ]
+
+
+def has_keyword(text, keyword):
+    """Whole-word match, allowing a plural suffix. Plain substring matching
+    misfires on titles like "Steel Toe Shoes" ("tee" inside "steel")."""
+    return re.search(rf"\b{re.escape(keyword)}(?:e?s)?\b", text) is not None
 
 COLOR_WORDS = [
     "black", "white", "grey", "gray", "navy", "blue", "green", "brown",
@@ -43,14 +52,14 @@ REGISTER_RULES = [
 def classify_slot(title):
     t = title.lower()
     for slot, keywords in SLOT_RULES:
-        if any(kw in t for kw in keywords):
+        if any(has_keyword(t, kw) for kw in keywords):
             return slot
     return "UNCLASSIFIED"
 
 
 def classify_color(title):
     t = title.lower()
-    found = [c for c in COLOR_WORDS if c in t]
+    found = [c for c in COLOR_WORDS if has_keyword(t, c)]
     if not found:
         return ""
     # dedupe gray/grey
@@ -72,7 +81,7 @@ def needs_image_check(title):
     The script has no way to verify the photo itself, so any title naming
     a specific color gets flagged for a manual look before publishing."""
     t = title.lower()
-    return any(c in t for c in COLOR_WORDS)
+    return any(has_keyword(t, c) for c in COLOR_WORDS)
 
 
 def main():
