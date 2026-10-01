@@ -4,10 +4,11 @@ name: Weekly Affiliate Link Check
 # lychee against every .html file's links generically. That tool can't
 # tell a live SHEIN product from a dead one — onelink.shein.com always
 # returns HTTP 200 with a client-side redirect, whether the destination
-# product still exists or not. This workflow checks the 280 outbound
-# affiliate URLs in products.json specifically, with SHEIN- and
-# Amazon-aware dead-link detection. See check_affiliate_links.py for the
-# full explanation of how each retailer is checked.
+# product still exists or not. This workflow checks the SHEIN and Awin
+# outbound affiliate URLs in products.json specifically, with SHEIN-aware
+# dead-link detection (Amazon links are skipped). See
+# check_affiliate_links.py for the full explanation of how each retailer
+# is checked.
 
 on:
   schedule:
