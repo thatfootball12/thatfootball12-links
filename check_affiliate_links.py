@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Checks every outbound_url in products.json and reports which affiliate
-links are dead versus inconclusive (bot-blocked/timed out, not actually
-verified dead). Never modifies products.json or any page — this is a
+Checks the SHEIN and Awin outbound_urls in products.json and reports
+which affiliate links are dead versus inconclusive (bot-blocked/timed
+out, not actually verified dead). Never modifies products.json or any page — this is a
 report-only tool. Meant to run weekly via
 .github/workflows/affiliate-link-check.yml, which opens or updates a
 single GitHub issue with the results.
@@ -13,10 +13,11 @@ Usage:
 Detection approach (see the weekly-link-checker branch's PR description
 for the investigation this is based on):
 
-  - Amazon (amazon.com/amazon.ca/amzn.to) and Awin (tidd.ly/awin1.com):
-    plain GET request following redirects. Amazon's servers reject HEAD
-    with 405 across the board (confirmed empirically against ~90 live
-    links) — GET is required, not just kinder.
+  - Amazon (amazon.com/amazon.ca/amzn.to): skipped entirely. Not
+    checked, not counted in the totals, and left out of the report (and
+    so the GitHub issue).
+
+  - Awin (tidd.ly/awin1.com): plain GET request following redirects.
 
   - SHEIN (onelink.shein.com): these are NOT server-side HTTP redirects.
     A GET returns 200 with an HTML interstitial page containing
@@ -55,8 +56,8 @@ Verdicts:
   - OK: the link resolves to a live destination.
   - DEAD: confirmed 404/410, or a SHEIN link that no longer leads to a
     product page at all.
-  - INCONCLUSIVE: 403/429 or a timeout/connection error. Both Amazon and
-    SHEIN block automated requests sometimes — a false "dead" report from
+  - INCONCLUSIVE: 403/429 or a timeout/connection error. SHEIN blocks
+    automated requests sometimes — a false "dead" report from
     a momentary block is worse than no report, so these are never counted
     as dead.
 """
@@ -89,11 +90,13 @@ def classify_domain(url):
         return "amazon"
     if "onelink.shein.com" in u:
         return "shein"
+    if "tidd.ly" in u or "awin1.com" in u:
+        return "awin"
     return "other"
 
 
 def get(url):
-    """GET (never HEAD — Amazon rejects HEAD with 405). Returns
+    """GET (never HEAD — some retailers reject it with 405). Returns
     (status, final_url, body_or_None, error_or_None)."""
     req = urllib.request.Request(url, headers={"User-Agent": UA}, method="GET")
     try:
@@ -122,7 +125,7 @@ def status_verdict(status, err, context=""):
 
 
 def check_generic(url):
-    """Amazon and Awin: one GET, follow redirects, read the status."""
+    """Awin (and anything else not SHEIN): one GET, follow redirects, read the status."""
     status, _final_url, _body, err = get(url)
     return status_verdict(status, err)
 
@@ -166,11 +169,14 @@ def main():
     with open(PRODUCTS_JSON, encoding="utf-8") as f:
         products = json.load(f)
 
+    # Amazon links are skipped entirely: not checked, not counted, not reported.
+    products = [p for p in products if classify_domain(p["outbound_url"]) != "amazon"]
+
     by_url = {}
     for p in products:
         by_url.setdefault(p["outbound_url"], []).append(p)
 
-    print(f"Total products: {len(products)}")
+    print(f"Products to check (Amazon excluded): {len(products)}")
     print(f"Unique URLs to check: {len(by_url)}\n")
 
     results = {}
@@ -197,7 +203,7 @@ def main():
     ok_count = sum(1 for r in rows if r["verdict"] == "OK")
 
     lines = []
-    lines.append(f"_Checked {len(products)} products, {len(by_url)} unique outbound URLs._\n")
+    lines.append(f"_Checked {len(products)} SHEIN/Awin products, {len(by_url)} unique outbound URLs._\n")
     lines.append(f"- OK: {ok_count}")
     lines.append(f"- Dead: {len(dead)}")
     lines.append(f"- Inconclusive: {len(inconclusive)}\n")
