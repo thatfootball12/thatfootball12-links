@@ -10,7 +10,10 @@ but sit outside both `outfits/` and `videos/`. **These are intentional
 redirect stubs that keep pre-restructure Pinterest links working** —
 they are not build leftovers, orphaned artifacts, or duplicates to clean
 up. Do not delete, move, or modify them, in this task or in any later
-cleanup pass, without explicit instruction to do so.
+cleanup pass, without explicit instruction to do so. The one sanctioned
+edit is the `<!-- favicons:start/end -->` block that `add_favicons.py`
+maintains in their `<head>` (added on explicit instruction); leave it
+there.
 
 ## Weekly batch checklist
 
@@ -64,6 +67,15 @@ If `privacy/index.html` changes materially, bump `CONSENT_VERSION` in
 `sync_catalog.py`'s report item 6 flags any page whose block is missing
 or stale, and any detail page with no outbound `.shop` link.
 
+Then run `python add_favicons.py`. It writes the favicon and
+apple-touch-icon `<link>` tags (icons in `assets/icons/`, relative
+hrefs) right before `</head>` on every page, root redirect stubs and
+`archive/` included, between `<!-- favicons:start/end -->` markers. A
+new page copied from an existing one already carries the block, and the
+script corrects its relative path if the new page sits at a different
+depth. `sync_catalog.py`'s report item 9 flags any page whose block is
+missing or stale.
+
 Then run `python write_sitemap.py` and commit the regenerated
 `sitemap.xml` with the batch. It lists the homepage, the shop grid,
 every category and campaign page, and every product detail page in
@@ -77,7 +89,8 @@ page is gone, and out-of-date `<lastmod>` dates.
 
 So the order is: `sync_catalog.py` (plus `--append` if needed), then
 `add_product_schema.py`, then `add_analytics.py`, then
-`write_sitemap.py` last among the writers (both scripts before it edit
+`add_favicons.py`, then `write_sitemap.py` last among the writers (the
+scripts before it edit
 pages, and each edit moves that page's `<lastmod>`), then
 `sync_catalog.py` once more to confirm it's clean.
 
