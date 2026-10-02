@@ -13,7 +13,7 @@ Usage:
 Detection approach (see the weekly-link-checker branch's PR description
 for the investigation this is based on):
 
-  - Amazon (amazon.com/amazon.ca/amzn.to): skipped entirely. Not
+  - Amazon (amazon.com/amazon.ca/amzn.to/link.amazon): skipped entirely. Not
     checked, not counted in the totals, and left out of the report (and
     so the GitHub issue).
 
@@ -86,7 +86,7 @@ SHEIN_PRODUCT_PATTERN_RE = re.compile(r"-p-\d+-cat-\d+\.html")
 
 def classify_domain(url):
     u = url.lower()
-    if "amazon.com" in u or "amazon.ca" in u or "amzn.to" in u:
+    if "amazon.com" in u or "amazon.ca" in u or "amzn.to" in u or "://link.amazon/" in u:
         return "amazon"
     if "onelink.shein.com" in u:
         return "shein"
