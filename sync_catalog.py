@@ -66,6 +66,9 @@ Report (always runs):
      missing WebP <source> is a broken image in every WebP-capable browser:
      it never falls back to the <img> JPEG. Item 3 applies the same
      missing/mismatch checks to products.json's thumbnail_webp.
+  9. Favicons: pages whose favicon / apple-touch-icon block is missing or
+     stale, and icon files missing from assets/icons/. See
+     add_favicons.py; run it to fix the pages.
 
 WebP (--fill-webp):
   Category-page tiles and the products/ grid serve each -424 thumbnail as a
@@ -116,6 +119,7 @@ from PIL import Image, ImageChops, ImageStat
 import add_product_schema
 import write_sitemap
 import add_analytics
+import add_favicons
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -510,6 +514,8 @@ def main():
                 missing_thumbnails.append((p["id"], f"{p['thumbnail_webp']} {why}"))
 
     webp_issues = webp_source_issues()
+    favicon_issues = add_favicons.audit()
+    favicon_issues += [(path, "icon file missing") for path in add_favicons.missing_icons()]
 
     schema_issues = []
     for p in products:
@@ -616,13 +622,21 @@ def main():
               "files; fix unencoded spaces by hand)")
     print()
 
+    print(f"9. Pages with a missing/stale favicon block, or missing icon files: {len(favicon_issues)}")
+    for rel, why in favicon_issues:
+        print(f"   {rel} ({why})")
+    if any(why != "icon file missing" for _, why in favicon_issues):
+        print("   Run: python add_favicons.py")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
-            and not webp_issues):
+            and not webp_issues and not favicon_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
-              "analytics tracking and site footer, and every <picture> WebP source loads.")
+              "analytics tracking and site footer, every <picture> WebP source loads, and every "
+              "page has a current favicon block.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
