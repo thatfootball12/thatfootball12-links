@@ -85,12 +85,12 @@ Append (--append only):
     - price/currency: SHEIN and Awin from the page's own
       product:price:amount / product:price:currency meta tags (matches the
       page's own displayed price); Amazon by outbound link domain
-      (amazon.ca -> CAD, amazon.com -> USD, amzn.to -> resolve the redirect
-      to see which). Never falls back to a guess: if no signal exists for
+      (amazon.ca -> CAD, amazon.com -> USD, amzn.to / link.amazon -> resolve
+      the redirect to see which). Never falls back to a guess: if no signal exists for
       a field, that field is left null and the product is flagged in the
       report rather than silently included with made-up data.
     - retailer classified by the outbound link's domain, same rule as the
-      original extraction (amazon.com/amazon.ca/amzn.to, onelink.shein.com,
+      original extraction (amazon.com/amazon.ca/amzn.to/link.amazon, onelink.shein.com,
       awin1.com/tidd.ly).
     - theme/campaign/source/slug derived from the folder path.
     - a 424px-wide thumbnail derivative generated at quality 85, matching
@@ -167,7 +167,7 @@ def classify_retailer(url):
     if not url:
         return None
     u = url.lower()
-    if "amazon.com" in u or "amazon.ca" in u or "amzn.to" in u:
+    if "amazon.com" in u or "amazon.ca" in u or "amzn.to" in u or "://link.amazon/" in u:
         return "Amazon"
     if "shein.com" in u:
         return "SHEIN"
@@ -183,7 +183,8 @@ def resolve_redirect(url):
     if url in _redirect_cache:
         return _redirect_cache[url]
     try:
-        req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "Mozilla/5.0"})
+        # GET, not HEAD: link.amazon's redirect hop (amzlinks.in) 404s on HEAD.
+        req = urllib.request.Request(url, method="GET", headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=10) as resp:
             final = resp.geturl()
         _redirect_cache[url] = ("ok", final)
@@ -200,7 +201,7 @@ def amazon_currency(url):
         return "CAD", "link domain"
     if "amazon.com" in u:
         return "USD", "link domain"
-    if "amzn.to" in u:
+    if "amzn.to" in u or "://link.amazon/" in u:
         status, val = resolve_redirect(url)
         if status != "ok":
             return None, f"unresolved redirect ({val})"
@@ -210,7 +211,7 @@ def amazon_currency(url):
         if "amazon.com" in vl:
             return "USD", "resolved redirect"
         return None, f"redirect landed on unrecognized domain ({val})"
-    return None, "not an amazon.com/amazon.ca/amzn.to link"
+    return None, "not an amazon.com/amazon.ca/amzn.to/link.amazon link"
 
 
 def build_record(rel_path):
