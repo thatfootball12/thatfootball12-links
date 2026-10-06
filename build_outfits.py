@@ -88,6 +88,9 @@ TEAM_ALIASES = {
     "cincinnati": "bengals",
     "bijan robinson": "falcons",
     "drake maye": "patriots",
+    # NHL: not in NFL_TEAMS, so the team has to come from an alias.
+    "leafs": "maple leafs",
+    "matthews": "maple leafs",
 }
 
 
@@ -245,9 +248,9 @@ def main():
     # first — those are the ones worth reviewing before the thinner ones.
     outfits.sort(key=lambda o: len(o["missing_slots"]))
 
-    # Cap output: a real weekly batch should be 2-5 solid outfits, not
+    # Cap output at roughly one weekly batch (14-17 outfits lately), not
     # every mathematically valid base x bottom combination.
-    MAX_OUTFITS = 14
+    MAX_OUTFITS = 17
     kept = outfits[:MAX_OUTFITS]
     dropped = len(outfits) - len(kept)
 

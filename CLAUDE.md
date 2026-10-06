@@ -100,3 +100,8 @@ campaign level (e.g. a wrong or missing `outfit-preview.jpg`, which no
 `PHOTO NEEDED` at the spot. `sync_catalog.py` report item 7 lists every
 one, and its summary line keeps naming them until the comment is
 removed along with the fix.
+
+Working-file commits (`batch.txt`, `parsed_products.csv`,
+`classified_products.csv`, `outfits.csv`) must blank the `price` of
+every Amazon row and the `total_price` of any outfit that includes an
+Amazon item. The repo is the live Pages site, so those CSVs are public.
