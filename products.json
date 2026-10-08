@@ -9795,16 +9795,16 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://link.amazon/B0aLNpcm5",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-pink-out-bold-oct-7/cap/cap.jpeg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-pink-out-bold-oct-7/cap/index.html",
     "campaign": "gameday-pink-out-bold-oct-7",
     "theme": "gameday",
     "source": "outfits",
     "data_new": "yes",
     "discount_percent": null,
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-pink-out-bold-oct-7/cap/cap-424.jpeg",
+    "thumbnail_webp": "outfits/gameday/gameday-pink-out-bold-oct-7/cap/cap-424.webp"
   },
   {
     "id": "gameday/gameday-pink-out-bold-oct-7/hoodie",
