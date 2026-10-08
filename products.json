@@ -9952,5 +9952,26 @@
     "discount_percent": null,
     "thumbnail": null,
     "thumbnail_webp": null
+  },
+  {
+    "id": "gameday/gameday-pink-out-soft-oct-7/bracelet",
+    "slug": "bracelet",
+    "name": "Pink Silicone Breast Cancer Awareness Wristbands (20-pack)",
+    "item_type": "Accessories",
+    "price": null,
+    "currency": null,
+    "currency_source": null,
+    "retailer": "Amazon",
+    "outbound_url": "https://link.amazon/B00t4T7ox",
+    "image": "outfits/gameday/gameday-pink-out-soft-oct-7/bracelet/bracelet.jpeg",
+    "image_pending": false,
+    "detail_page_url": "outfits/gameday/gameday-pink-out-soft-oct-7/bracelet/index.html",
+    "campaign": "gameday-pink-out-soft-oct-7",
+    "theme": "gameday",
+    "source": "outfits",
+    "data_new": "yes",
+    "discount_percent": null,
+    "thumbnail": "outfits/gameday/gameday-pink-out-soft-oct-7/bracelet/bracelet-424.jpeg",
+    "thumbnail_webp": "outfits/gameday/gameday-pink-out-soft-oct-7/bracelet/bracelet-424.webp"
   }
 ]

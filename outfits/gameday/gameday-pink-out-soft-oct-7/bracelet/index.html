@@ -11,7 +11,7 @@
 <script>
 (function () {
   var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 1, MAX_AGE = 365 * 864e5;
-  var PRIVACY = '../../../privacy/', LABELS = { granted: 'Accepted', denied: 'Declined' };
+  var PRIVACY = '../../../../privacy/', LABELS = { granted: 'Accepted', denied: 'Declined' };
   var loaded = false, bar = null;
   function stored() {
     try {
@@ -119,81 +119,85 @@
   .tf12-foot button{background:none;border:0;font:inherit;cursor:pointer;}
   .tf12-foot a:hover,.tf12-foot button:hover{color:#D4A017;}
 </style>
+<script>
+(function () {
+  var P = {"retailer": "Amazon", "product_id": "gameday/gameday-pink-out-soft-oct-7/bracelet", "product_name": "Pink Silicone Breast Cancer Awareness Wristbands (20-pack)"}, C = null, SEL = "a.shop";
+  var SKIP = /(^|\.)(tiktok\.com|instagram\.com|pin\.it|pinterest\.[a-z.]+)$/;
+  function retailer(host) {
+    if (/(^|\.)amazon\.|(^|\.)amzn\.to$/.test(host)) return 'Amazon';
+    if (/(^|\.)shein\.com$/.test(host)) return 'SHEIN';
+    if (/(^|\.)awin1\.com$|(^|\.)tidd\.ly$/.test(host)) return 'Awin';
+    if (/(^|\.)tee\.pub$|(^|\.)teepublic\.com$/.test(host)) return 'TeePublic';
+    if (/(^|\.)redbubble\.com$/.test(host)) return 'Redbubble';
+    return host;
+  }
+  function linkParams(a) {
+    var host = a.hostname.replace(/^www\./, '');
+    if (SKIP.test(host)) return null;
+    var t = a.querySelector('.link-text'), img = a.querySelector('img[alt]');
+    var name = (t ? t.textContent : img ? img.alt : a.textContent).replace(/\s+/g, ' ').trim();
+    var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return { retailer: retailer(host), product_id: C + '/' + slug, product_name: name };
+  }
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest(SEL) : null;
+    if (!a || !/^https?:$/.test(a.protocol)) return;
+    var params = P || linkParams(a);
+    if (!params) return;
+    try { gtag('event', 'affiliate_click', params); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>
 <!-- analytics:end -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pink Out Gameday Fit for Men • ThatFootball12</title>
-<meta property="og:title" content="Pink Out Gameday Fit for Men" />
-<meta property="og:description" content="Pink without going all in: a soft pink sweater under a denim jacket, with stonewashed tapered jeans and tan sneakers. Built for a pink out game or a fall watch party. This image was created with AI and features AI-generated people." />
-<meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
-<meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/outfits/gameday/gameday-pink-out-soft-oct-7/" />
-<meta property="og:type" content="article" />
+<title>Pink Ribbon Awareness Wristbands • ThatFootball12</title>
+<meta property="og:title" content="Pink Silicone Breast Cancer Awareness Wristbands (20-pack)" />
+<meta property="og:description" content="Pink silicone wristbands with the awareness ribbon. A 20-pack, enough to share with the whole watch party." />
+<meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/outfits/gameday/gameday-pink-out-soft-oct-7/bracelet/bracelet.jpeg" />
+<meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/outfits/gameday/gameday-pink-out-soft-oct-7/bracelet/" />
+<meta property="og:type" content="product" />
 <meta property="og:site_name" content="ThatFootball12" />
+<meta property="og:availability" content="instock" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Pink Out Gameday Fit for Men" />
-<meta name="twitter:description" content="Pink without going all in: a soft pink sweater under a denim jacket, with stonewashed tapered jeans and tan sneakers. Built for a pink out game or a fall watch party. This image was created with AI and features AI-generated people." />
-<meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
+<meta name="twitter:title" content="Pink Silicone Breast Cancer Awareness Wristbands (20-pack)" />
+<meta name="twitter:description" content="Pink silicone wristbands with the awareness ribbon. A 20-pack, enough to share with the whole watch party." />
+<meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/outfits/gameday/gameday-pink-out-soft-oct-7/bracelet/bracelet.jpeg" />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{--ink:#0D0D0D;--panel:#18140F;--gold:#D4A017;--crimson:#C8102E;--bone:#F3EFE6;--bone-dim:#B8B2A4;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--ink);color:var(--bone);font-family:'Poppins',sans-serif;min-height:100vh;display:flex;justify-content:center;padding:32px 16px 64px;}
-  .wrap{width:100%;max-width:480px;}
-  .hero{width:100%;height:220px;background-size:cover;background-position:center;border-radius:16px;margin-bottom:28px;border:3px solid #2A2620;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
-  .hero-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:repeating-linear-gradient(45deg, var(--panel), var(--panel) 10px, #15110c 10px, #15110c 20px);color:var(--bone-dim);font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-align:center;}
-  .hero-placeholder .icon{font-size:28px;}
-  header{text-align:center;margin-bottom:28px;}
-  .badge{display:inline-block;border:1px solid #2A2620;padding:5px 14px;border-radius:999px;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
-  h1{font-family:'Anton',sans-serif;font-size:40px;line-height:.95;text-transform:uppercase;}
-  h1 span{color:var(--gold);}
-  .tagline{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--bone-dim);margin-top:8px;}
-  a.card{display:block;background:var(--panel);border:1px solid #2A2620;border-radius:12px;padding:18px;margin-bottom:12px;text-decoration:none;color:var(--bone);transition:.2s;}
-  a.card:hover{border-color:var(--gold);transform:translateY(-2px);}
-  .card-title{font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;text-transform:uppercase;margin-bottom:4px;}
-  .card-price{color:var(--gold);font-size:14px;font-weight:500;}
-  .ai-note{margin:-18px 0 24px;text-align:center;font-size:11px;line-height:1.5;color:var(--bone-dim);}
+  .wrap{width:100%;max-width:420px;}
+  img{width:100%;height:auto;border-radius:12px;margin-bottom:20px;border:2px solid #2A2620;}
+  h1{font-family:'Anton',sans-serif;font-size:28px;line-height:1.1;margin-bottom:8px;}
+  .price{color:var(--gold);font-size:22px;font-weight:600;margin-bottom:16px;}
+  p{font-size:15px;line-height:1.5;color:var(--bone-dim);margin-bottom:28px;}
+  .shop{display:block;text-align:center;background:var(--crimson);color:#fff;font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:1px;text-transform:uppercase;padding:16px;border-radius:10px;text-decoration:none;}
+  .back{display:block;text-align:center;margin-top:20px;color:var(--gold);font-size:13px;text-decoration:none;}
 </style>
 <!-- favicons:start -->
-<link rel="icon" href="../../../assets/icons/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../../../assets/icons/icon-192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../../../assets/icons/apple-touch-icon.png">
+<link rel="icon" href="../../../../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../../../assets/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../assets/icons/apple-touch-icon.png">
 <!-- favicons:end -->
 </head>
 <body>
 <div class="wrap">
-  <!-- PHOTO NEEDED: outfit-preview.jpg not delivered yet. Swap this placeholder for the .hero div (and og:image/twitter:image) once it lands. -->
-  <div class="hero hero-placeholder"><span class="icon">📷</span>Photo Coming Soon</div>
-  <p class="ai-note">This image was created with AI and features AI-generated people.</p>
-  <header>
-    <div class="badge">Gameday Outfit</div>
-    <h1>THAT<span>FOOTBALL</span>12</h1>
-    <div class="tagline">October 7th, 2026</div>
-  </header>
-  <a class="card" href="jacket/">
-    <div class="card-title">Street Style Denim Jacket</div>
-    <div class="card-price">CA$46.90</div>
-  </a>
-  <a class="card" href="sweater/">
-    <div class="card-title">Pink Crew Neck Sweater</div>
-    <div class="card-price">CA$24.81</div>
-  </a>
-  <a class="card" href="jeans/">
-    <div class="card-title">Stonewashed Tapered Jeans</div>
-    <div class="card-price">CA$37.83</div>
-  </a>
-  <a class="card" href="sneakers/">
-    <div class="card-title">Lace-Up Skate Sneakers</div>
-    <div class="card-price">CA$30.77</div>
-  </a>
-  <a class="card" href="bracelet/">
-    <div class="card-title">Pink Ribbon Awareness Wristbands</div>
-    <div class="card-price">Check price on Amazon</div>
-  </a>
+  <img src="bracelet.jpeg" alt="Pink Ribbon Awareness Wristbands" width="1170" height="1260" loading="eager" decoding="async">
+  <h1>Pink Silicone Breast Cancer Awareness Wristbands (20-pack)</h1>
+  <div class="price">Check price on Amazon</div>
+  <p>Pink silicone wristbands with the awareness ribbon. A 20-pack, enough to share with the whole watch party.</p>
+  <a class="shop" href="https://link.amazon/B00t4T7ox" target="_blank" rel="noopener">Shop Now</a>
+  <a class="back" href="../" onclick="if(history.length>1){history.back();return false;}">← Back to Outfit</a>
 </div>
 <!-- site-footer:start -->
 <div class="tf12-foot">
   <p>As an Amazon Associate, SHEIN affiliate, and Moosehill (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through links on this site.</p>
-  <p class="tf12-foot-links"><a href="../../../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
+  <p class="tf12-foot-links"><a href="../../../../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
 </div>
 <!-- site-footer:end -->
 </body>
