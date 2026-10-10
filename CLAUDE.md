@@ -97,6 +97,25 @@ scripts before it edit
 pages, and each edit moves that page's `<lastmod>`), then
 `sync_catalog.py` once more to confirm it's clean.
 
+Once the batch's outfit photos are wired up (and its `products.json`
+records exist, since the price comes from there), run
+`py -3 make_outfit_pin.py --batch <date>` (e.g. `--batch oct-12`, which
+also covers `-oct-12-2`, `-oct-12-3`, ...). It writes the Pinterest pin
+image `outfit-pin.jpg` into each campaign folder from its
+`outfit-preview.*`, with the price overlay that used to be added by hand
+in Gemini: "UNDER $X!" from the outfit's total rounded up to the next
+$5, or "FULL FIT ↓" when any item has no stored price (Amazon, Awin),
+under "SHOP THE LOOK" ("ON SALE NOW" if any item has a discount). The
+site keeps using the plain `outfit-preview`, which the script never
+modifies. It prints one line per pin naming the path it took:
+`overlay` (text in a fade over the photo's own floor) or `shrink` (photo
+shrunk onto a 2:3 canvas with the text in new space below it).
+`outfit-preview` must be the clean Gemini photo with NO text on it: the
+script adds its own, so a preview with a baked-in price ends up with two
+(most oct-5 and oct-12 previews have one). New Gemini photos should be
+2:3 with empty floor in the bottom quarter; that gets the `overlay`
+path, the target look. Anything else falls back to `shrink`.
+
 When a page needs a photo that has to be sourced by hand at the
 campaign level (e.g. a wrong or missing `outfit-preview.jpg`, which no
 `products.json` field tracks), leave an HTML comment containing
