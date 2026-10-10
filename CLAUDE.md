@@ -33,6 +33,9 @@ whose page no longer exists, and records with a missing thumbnail) and
 reports them. Pass `--append` to add the missing records automatically —
 it still flags `item_type` and `data_new` for manual review on every new
 record, since neither has a reliable source outside human judgment.
+Items 1 and 2 (page with no record, record with no page) make the script
+exit 1, and the `catalog-check.yml` workflow runs it on every push and
+PR to main, so a batch that skips this step fails CI.
 
 Then run `python add_product_schema.py` (after any `--append`, since it
 reads `products.json`). It writes the schema.org Product JSON-LD block
