@@ -115,6 +115,8 @@ script adds its own, so a preview with a baked-in price ends up with two
 (most oct-5 and oct-12 previews have one). New Gemini photos should be
 2:3 with empty floor in the bottom quarter; that gets the `overlay`
 path, the target look. Anything else falls back to `shrink`.
+Commit the `outfit-pin.jpg` files with the batch: their URLs on the
+live site are the public Media URLs for the Pinterest bulk upload.
 
 When a page needs a photo that has to be sourced by hand at the
 campaign level (e.g. a wrong or missing `outfit-preview.jpg`, which no
