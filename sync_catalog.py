@@ -70,6 +70,11 @@ Report (always runs):
      stale, and icon files missing from assets/icons/. See
      add_favicons.py; run it to fix the pages.
 
+Exit status: 1 when item 1 or 2 is non-zero (report-only runs; --append
+fixes item 1 and exits 0), else 0. The catalog-check GitHub workflow runs
+the report on every push and pull request to main, so a batch can't land
+with a page missing from products.json or a record whose page is gone.
+
 WebP (--fill-webp):
   Category-page tiles and the products/ grid serve each -424 thumbnail as a
   <picture> with a same-named .webp <source> and the JPEG <img> as fallback.
@@ -648,6 +653,10 @@ def main():
         if missing_from_catalog:
             print("Run with --append to add the missing records (item_type and data_new will "
                   "still need manual review afterward — see per-record flags).")
+        # Items 1 and 2 fail the run (and the catalog-check CI workflow): a
+        # page missing from products.json is invisible in the shop grid.
+        if missing_from_catalog or orphaned_records:
+            sys.exit(1)
         return
 
     if not missing_from_catalog:

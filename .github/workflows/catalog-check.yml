@@ -1,0 +1,39 @@
+name: Catalog Check
+
+# Fails when a product detail page has no products.json record, or a
+# products.json record's page no longer exists (sync_catalog.py report
+# items 1 and 2). Pages missing from products.json never show up in the
+# shop grid, which is how the Sept 15 batch went unnoticed for weeks.
+# Fix a failure locally with: python sync_catalog.py --append
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  catalog-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          # sync_catalog.py reads each page's last commit date for its
+          # sitemap <lastmod> report; a shallow clone would misreport it.
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Pillow
+        run: pip install Pillow
+
+      - name: Run sync_catalog.py
+        run: python3 sync_catalog.py
