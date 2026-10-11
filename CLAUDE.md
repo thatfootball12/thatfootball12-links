@@ -97,6 +97,22 @@ scripts before it edit
 pages, and each edit moves that page's `<lastmod>`), then
 `sync_catalog.py` once more to confirm it's clean.
 
+Once the batch is wired up (product photos in place and `products.json`
+records written, since the price comes from there), run
+`py -3 make_product_pin.py --pick 20 --batch <date>` (e.g.
+`--batch oct-12`, which also covers `-oct-12-2`, `-oct-12-3`, ...). It
+picks the batch's 20 best SHEIN deals (any with `discount_percent` of
+20 or more first, biggest discount first, then the rest cheapest first;
+smaller discounts don't count), prints the list, and writes the
+Pinterest pin `product-pin.jpg` into each product's folder: a 1000x1500
+pin with the product photo above "SHOP NOW" / "UNDER $X!" (the price
+rounded up: to the next dollar under $10, else to the next $5). Amazon
+and Awin products, products with no price, and `image_pending` products
+are skipped. The product's own photo is never modified. Add `--dry-run`
+to see the list without writing anything. Commit the `product-pin.jpg`
+files with the batch: their URLs on the live site are the public Media
+URLs for the Pinterest bulk upload.
+
 When a page needs a photo that has to be sourced by hand at the
 campaign level (e.g. a wrong or missing `outfit-preview.jpg`, which no
 `products.json` field tracks), leave an HTML comment containing
