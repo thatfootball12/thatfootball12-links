@@ -32,8 +32,8 @@ outfit usually is. Nothing else about the photo changes, and the
 original outfit-preview.* is never written to. The site keeps using the
 plain outfit-preview; outfit-pin.jpg is only for Pinterest.
 
-Price: the outfit's products.json prices (every record whose detail page
-sits under the campaign folder) are totalled and rounded up to the next
+Price: the outfit's products.json prices (every record its page's cards
+link to, including items reused from another campaign) are totalled and rounded up to the next
 $5, giving "UNDER $X!" (112.30 -> UNDER $115!). An exact multiple of $5
 goes up to the next one (115.00 -> UNDER $120!) so the claim stays true.
 If any item has no stored price (Amazon, Awin) the total would be
@@ -82,7 +82,28 @@ def find_preview(campaign_dir):
     return None
 
 
+CARD_HREF_RE = re.compile(r'<a class="card" href="([^"]+)"')
+
+
 def campaign_products(campaign_dir, products):
+    """The records the outfit page's cards link to. A card can point at a
+    page in another campaign (an item reused from an earlier outfit), so
+    the folder alone would miss it and understate the total. Falls back to
+    every record under the folder when the page has no cards."""
+    by_page = {p.get("detail_page_url"): p for p in products}
+    page = os.path.join(campaign_dir, "index.html")
+    hrefs = []
+    if os.path.exists(page):
+        with open(page, encoding="utf-8") as f:
+            hrefs = CARD_HREF_RE.findall(f.read())
+    items = []
+    for href in hrefs:
+        target = os.path.normpath(os.path.join(campaign_dir, href, "index.html"))
+        rec = by_page.get(os.path.relpath(target, REPO).replace(os.sep, "/"))
+        if rec and rec not in items:
+            items.append(rec)
+    if items:
+        return items
     rel = os.path.relpath(campaign_dir, REPO).replace(os.sep, "/").rstrip("/") + "/"
     return [p for p in products if (p.get("detail_page_url") or "").startswith(rel)]
 
