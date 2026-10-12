@@ -67,6 +67,8 @@ campaign, category or product that doesn't exist. The slot categories,
 style rules, budget tiers and exclusions live in the same file. Run
 `py -3 outfit_generator.py` to see each theme's pool sizes and which
 budget tiers can build an outfit (the page greys out the rest).
+Out-of-season categories go in `seasonal_off` (Shorts and Sandals &
+Slides are off for the winter): delete an entry to bring it back.
 
 Then run `python add_product_schema.py` (after any `--append`, since it
 reads `products.json`). It writes the schema.org Product JSON-LD block

@@ -694,6 +694,7 @@
   function buildRecords(products){
     var never = [];
     gen.rules.forEach(function(r){ if(r.never) never = never.concat(r.never); });
+    never = never.concat(gen.seasonal_off || []); // out of season: left out of every slot
     products.forEach(function(p, i){
       if(gen.exclude.indexOf(p.id) !== -1) return;
       var placed = placeProduct(p);

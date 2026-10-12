@@ -55,9 +55,10 @@ def priced(p):
 
 def records(products, cat_cfg, gen):
     """Products the generator may use: placed by categories.json (so not
-    hidden), not excluded, not banned by a 'never' rule. Each is
-    {"p": product, "cat": "tab/sub" or "tab", "index": n}."""
+    hidden), not excluded, not banned by a 'never' rule or seasonal_off.
+    Each is {"p": product, "cat": "tab/sub" or "tab", "index": n}."""
     never = [pat for r in gen["rules"] if "never" in r for pat in r["never"]]
+    never += gen.get("seasonal_off", [])
     out = []
     for i, p in enumerate(products):
         if p["id"] in gen["exclude"]:
@@ -188,6 +189,8 @@ def audit(products, cat_cfg=None, gen=None):
     for slot, spec in gen["slots"].items():
         for pat in spec["allow"] + spec.get("fan_gear", []):
             check_pattern(pat, f"slots.{slot}")
+    for pat in gen.get("seasonal_off", []):
+        check_pattern(pat, "seasonal_off")
     for s in gen["base_slots"] + gen["extra_slots"]:
         if s not in gen["slots"]:
             errors.append(f"generator.json names slot '{s}', which isn't in slots")
