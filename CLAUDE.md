@@ -135,6 +135,32 @@ to see the list without writing anything. Commit the `product-pin.jpg`
 files with the batch: their URLs on the live site are the public Media
 URLs for the Pinterest bulk upload.
 
+Once the batch (with its `outfit-pin.jpg` and `product-pin.jpg` files)
+is merged and live, write the pin copy into
+`pinterest/pins_<date>.json` and run
+`py -3 make_pinterest_csv.py <date>` (e.g. `oct-19`). It builds
+`pinterest/pinterest_bulk_<date>.csv` in Pinterest's bulk-upload
+template layout (split into `_1`, `_2`, ... over Pinterest's 200-row
+limit) plus `pinterest_bulk_<date>_report.md`. The description is the
+copy + the disclosure from `pinterest/pin_settings.json` (the
+SHEIN-only wording when every item in the pin is SHEIN, else the
+SHEIN + Amazon one) (+ "Image created with AI." on every outfit pin and
+Amazon product pin) + the hashtags. Pins are scheduled across the batch week (Mon–Sun), 2 outfit
+pins a day with gameday first, product pins filling the days evenly,
+08:00–21:00 Atlantic, written as UTC (Pinterest reads Publish date as
+UTC). It validates everything first and writes no CSV if anything
+fails: every Link and Media URL must return 200 on the live site (so
+the pin images must be pushed first), titles ≤ 100 and full
+descriptions ≤ 500 characters, no duplicates, no past publish times,
+no "$" in the copy of a pin with an Amazon item, no retailer the
+disclosures don't cover (Awin needs its own wording first), and every board and
+section must be listed in `pin_settings.json`. Keep that list identical
+to the Pinterest account, emojis included: Pinterest silently creates
+any board or section it doesn't recognise. The CSV has no column for
+alt text or the AI-modified label, so the report lists both to add by
+hand after upload. `--dry-run` validates and prints the report without
+writing anything.
+
 When a page needs a photo that has to be sourced by hand at the
 campaign level (e.g. a wrong or missing `outfit-preview.jpg`, which no
 `products.json` field tracks), leave an HTML comment containing
