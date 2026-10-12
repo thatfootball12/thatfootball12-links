@@ -33,9 +33,29 @@ whose page no longer exists, and records with a missing thumbnail) and
 reports them. Pass `--append` to add the missing records automatically —
 it still flags `item_type` and `data_new` for manual review on every new
 record, since neither has a reliable source outside human judgment.
+New records get an `added` date from the campaign slug.
 Items 1 and 2 (page with no record, record with no page) make the script
 exit 1, and the `catalog-check.yml` workflow runs it on every push and
 PR to main, so a batch that skips this step fails CI.
+
+**New item_type? Add it to `categories.json`.** The products page
+(`products/`) puts every product in a tab (Outerwear, Tops, Bottoms,
+Footwear, Accessories, Fan Gear) and a sub-chip using the rules in
+`categories.json`: `item_types` maps each `item_type` to a tab, and
+keywords in the product name pick the sub-chip. `sync_catalog.py`
+report item 10 fails (exit 1, so CI fails) when any record's
+`item_type` isn't listed in `item_types`, so a batch can't land with
+products that have no tab. Item 10 also fails on a record with no valid
+`added` date. `--append` sets `added` (YYYY-MM-DD, used by the Newest
+sort) from the campaign slug's date, so check it on new records. Item 10
+warns, without failing, about any product whose name has a team name
+but nothing that shows it's licensed (add its id to `fan_gear.include`
+or `fan_gear.exclude`), and about any product that matches no
+sub-chip (add a keyword, or an `overrides` entry). Fan Gear is
+officially licensed items only. To take a product off the products page
+but keep its detail page live (old pins still work), add its id to
+`hidden`. Run `py -3 categories.py` to see every tab and sub-chip with
+its count.
 
 Then run `python add_product_schema.py` (after any `--append`, since it
 reads `products.json`). It writes the schema.org Product JSON-LD block
@@ -90,8 +110,9 @@ the batch commit gives new pages the batch date. `sync_catalog.py`'s
 report item 5 flags pages missing from `sitemap.xml`, entries whose
 page is gone, and out-of-date `<lastmod>` dates.
 
-So the order is: `sync_catalog.py` (plus `--append` if needed), then
-`add_product_schema.py`, then `add_analytics.py`, then
+So the order is: `sync_catalog.py` (plus `--append` if needed, then set
+`item_type`/`data_new`, check `added`, and add any new item_type to
+`categories.json`), then `add_product_schema.py`, then `add_analytics.py`, then
 `add_favicons.py`, then `write_sitemap.py` last among the writers (the
 scripts before it edit
 pages, and each edit moves that page's `<lastmod>`), then

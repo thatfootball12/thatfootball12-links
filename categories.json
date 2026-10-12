@@ -1,0 +1,123 @@
+{
+  "_comment": [
+    "Tabs and sub-chips for the products/ page. products/index.html and sync_catalog.py (via categories.py) both read this file; keep the matching rules simple enough that both agree.",
+    "How a product is placed: (1) ids in 'hidden' are left off the page entirely (their detail pages stay live); (2) an id in 'overrides' goes straight to that 'tab' or 'tab/sub'; (3) Fan Gear if fan_gear matches (see below); (4) otherwise the tab from item_types[item_type].",
+    "Within the tab, the sub is the first sub (in match_order, else display order) whose keywords appear in the name as whole words, case-insensitive; else item_types[item_type].sub; else no sub (the product still shows under the tab's All chip).",
+    "Fan Gear = officially licensed only: a licensed_keywords match, OR a licensed_brands match together with a team name, OR an id in fan_gear.include. A team name on its own never qualifies (sync_catalog.py warns so someone can decide). fan_gear.exclude keeps an id out.",
+    "Every item_type in products.json must be listed in item_types, or sync_catalog.py fails CI."
+  ],
+  "item_types": {
+    "Jackets": {"tab": "outerwear", "sub": "jackets"},
+    "Hoodies/Flannels": {"tab": "tops", "sub": "hoodies"},
+    "Tees & Graphics": {"tab": "tops", "sub": "tees"},
+    "Dress & Polo": {"tab": "tops", "sub": "shirts"},
+    "Jeans/Chinos": {"tab": "bottoms", "sub": "jeans"},
+    "Bottoms": {"tab": "bottoms", "sub": "pants"},
+    "Footwear": {"tab": "footwear", "sub": "sneakers"},
+    "Accessories": {"tab": "accessories", "sub": null},
+    "Gifts & Extras": {"tab": "accessories", "sub": null}
+  },
+  "tabs": [
+    {
+      "slug": "outerwear",
+      "label": "Outerwear",
+      "subs": [
+        {"slug": "jackets", "label": "Jackets", "keywords": []},
+        {"slug": "leather-suede", "label": "Leather & Suede", "keywords": ["leather", "pu", "suede", "suedette"]},
+        {"slug": "coats", "label": "Coats & Puffers", "keywords": ["coat", "overcoat", "puffer", "padded", "parka", "trench"]},
+        {"slug": "blazers-suits", "label": "Blazers & Suits", "keywords": ["blazer", "suit", "sport coat"]}
+      ],
+      "match_order": ["blazers-suits", "leather-suede", "coats", "jackets"]
+    },
+    {
+      "slug": "tops",
+      "label": "Tops",
+      "subs": [
+        {"slug": "tees", "label": "Tees", "keywords": ["t-shirt", "tshirt", "tee", "undershirt", "tank top", "henley", "compression"]},
+        {"slug": "shirts", "label": "Shirts", "keywords": ["shirt", "shirts", "flannel", "button-down", "button-up"]},
+        {"slug": "hoodies", "label": "Hoodies & Sweatshirts", "keywords": ["hoodie", "hooded", "sweatshirt"]},
+        {"slug": "sweaters", "label": "Sweaters & Cardigans", "keywords": ["sweater", "cardigan", "jumper", "turtleneck"]},
+        {"slug": "polos", "label": "Polos", "keywords": ["polo"]}
+      ],
+      "match_order": ["polos", "hoodies", "sweaters", "tees", "shirts"]
+    },
+    {
+      "slug": "bottoms",
+      "label": "Bottoms",
+      "subs": [
+        {"slug": "jeans", "label": "Jeans", "keywords": ["jeans", "denim"]},
+        {"slug": "pants", "label": "Pants & Chinos", "keywords": ["pants", "trousers", "chinos", "khaki"]},
+        {"slug": "joggers", "label": "Joggers & Sweats", "keywords": ["jogger", "joggers", "sweatpants", "jogging pants"]},
+        {"slug": "cargo", "label": "Cargo", "keywords": ["cargo", "tactical"]},
+        {"slug": "shorts", "label": "Shorts", "keywords": ["shorts"]},
+        {"slug": "underwear", "label": "Underwear", "keywords": ["underwear", "boxer brief", "boxer briefs", "trunk", "trunks"]}
+      ],
+      "match_order": ["shorts", "jeans", "joggers", "cargo", "underwear", "pants"]
+    },
+    {
+      "slug": "footwear",
+      "label": "Footwear",
+      "subs": [
+        {"slug": "sneakers", "label": "Sneakers", "keywords": []},
+        {"slug": "boots", "label": "Boots", "keywords": ["boot", "boots"]},
+        {"slug": "dress-shoes", "label": "Dress Shoes & Loafers", "keywords": ["loafer", "loafers", "oxford", "oxfords", "dress shoes", "formal shoes", "moccasin", "boat shoes", "leather shoes", "derby"]},
+        {"slug": "sandals", "label": "Sandals & Slides", "keywords": ["sandal", "sandals", "slide sandals", "slippers"]}
+      ],
+      "match_order": ["boots", "dress-shoes", "sandals", "sneakers"]
+    },
+    {
+      "slug": "accessories",
+      "label": "Accessories",
+      "subs": [
+        {"slug": "hats", "label": "Hats & Beanies", "keywords": ["hat", "cap", "beanie"]},
+        {"slug": "watches", "label": "Watches", "keywords": ["watch", "watches", "wristwatch"]},
+        {"slug": "belts", "label": "Belts", "keywords": ["belt", "belts"]},
+        {"slug": "bags", "label": "Bags & Wallets", "keywords": ["bag", "duffel", "wallet"]},
+        {"slug": "jewelry", "label": "Jewelry", "keywords": ["necklace", "bracelet", "bangle", "wristband", "wristbands", "chain"]},
+        {"slug": "cold-weather", "label": "Cold Weather", "keywords": ["scarf", "gloves", "snood", "hand warmer"]},
+        {"slug": "eyewear", "label": "Eyewear", "keywords": ["glasses", "sunglasses"]},
+        {"slug": "ties", "label": "Ties", "keywords": ["tie", "necktie", "pocket square"]}
+      ]
+    },
+    {
+      "slug": "fan-gear",
+      "label": "Fan Gear",
+      "subs": [
+        {"slug": "jerseys", "label": "Jerseys", "keywords": ["jersey"]},
+        {"slug": "tees", "label": "Tees", "keywords": ["t-shirt", "tee", "crew neck", "top"]},
+        {"slug": "outerwear", "label": "Jackets & Hoodies", "keywords": ["jacket", "hooded", "hoodie", "sweatshirt"]},
+        {"slug": "hats", "label": "Hats", "keywords": ["hat", "cap", "beanie"]},
+        {"slug": "accessories", "label": "Accessories", "keywords": ["socks", "wrist band", "wristband", "headcover", "golf balls"]},
+        {"slug": "home", "label": "Home & Gifts", "keywords": ["mug", "tumbler", "cooler", "flag", "wall art", "desk mat", "desk pad", "coaster", "sportula", "stein", "pop!"]}
+      ],
+      "match_order": ["jerseys", "hats", "outerwear", "tees", "accessories", "home"]
+    }
+  ],
+  "fan_gear": {
+    "tab": "fan-gear",
+    "licensed_keywords": ["nfl", "ncaa", "nhl", "nba", "mlb", "officially licensed", "pro line", "fanatics"],
+    "licensed_brands": ["new era", "'47", "ultra game", "junk food", "team fan apparel", "foco", "simple modern", "youthefan", "uthefan", "inglasco", "rico industries", "funko", "team golf", "philcos", "sports vault"],
+    "teams": ["cardinals", "falcons", "ravens", "bills", "panthers", "bears", "bengals", "browns", "cowboys", "broncos", "lions", "packers", "texans", "colts", "jaguars", "chiefs", "raiders", "chargers", "rams", "dolphins", "vikings", "patriots", "saints", "giants", "jets", "eagles", "steelers", "49ers", "seahawks", "buccaneers", "titans", "commanders", "maple leafs"],
+    "include": ["gift-guides/cardinals-gift-guide-sept-17/desk-mat"],
+    "exclude": []
+  },
+  "overrides": {
+    "gameday/fantasy-football-sept-5/tee": "tops/tees",
+    "gift-guides/gift-guide-oct-19/sling-bag": "accessories/bags",
+    "flash-deals/flash-deals-sept-17/trunks": "bottoms/underwear",
+    "flash-deals/flash-deals-aug-24/briefs": "bottoms/underwear",
+    "flash-deals/flash-deals-aug-28/briefs": "bottoms/underwear",
+    "gift-guides/packers-gift-guide-sept-22/rug": "accessories"
+  },
+  "hidden": [
+    "gameday/casual-gameday-aug-13/shirt",
+    "gift-guides/gift-guide-sept-4/gibbs-tee",
+    "other/this-or-that-aug-14/darnold-shirt",
+    "other/this-or-that-aug-21/jackson-shirt",
+    "other/this-or-that-aug-21/kelce-shirt",
+    "gameday/gameday-oct-5-2/tee",
+    "gameday/gameday-oct-5-3/jersey",
+    "gameday-fit-check/gameday-fit-check-aug-12/jersey",
+    "gift-guides/packers-gift-guide-sept-22/socks"
+  ]
+}
