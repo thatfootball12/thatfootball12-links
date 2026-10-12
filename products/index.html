@@ -225,6 +225,26 @@
   /* Category tabs and sub-chips. Phones: one row each that scrolls
      sideways (the page edge fades so it's clear there's more). Desktop:
      rows wrap, and the bar sticks to the top while the grid scrolls. */
+  a.fit-banner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px;
+    padding:12px 16px;
+    border:1px solid var(--gold);
+    border-radius:12px;
+    background:#1F1A13;
+    color:var(--bone);
+    font-family:'Oswald',sans-serif;
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:.3px;
+    text-decoration:none;
+  }
+  a.fit-banner b{color:var(--gold);font-weight:600;white-space:nowrap;}
+  a.fit-banner:hover{background:#2a210f;}
+  a.fit-banner:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
   .catnav{
     background:var(--panel);
     border:1px solid var(--panel-line);
@@ -574,6 +594,8 @@
     <h1>ALL <span>PRODUCTS</span></h1>
     <div class="tagline">Shoppable Items</div>
   </header>
+
+  <a class="fit-banner" href="../generator/"><span>🎲 Can't decide?</span><b>Let us build your fit →</b></a>
 
   <nav class="catnav" aria-label="Product categories">
     <div class="chip-row tabs" id="tab-chips"></div>

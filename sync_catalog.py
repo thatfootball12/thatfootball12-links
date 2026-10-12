@@ -77,8 +77,15 @@ Report (always runs):
      that isn't in products.json; warnings (don't fail) for a product
      that names a team with nothing showing it's licensed (kept out of
      Fan Gear until someone decides) and one that matches no sub-chip.
+ 11. Outfit generator (generator.json, via outfit_generator.py): errors
+     for a campaign in products.json that generator.json doesn't list
+     (under a theme or unthemed), a listed campaign that doesn't exist or
+     is listed twice, slot / rule categories that aren't categories.json
+     tabs or subs, unknown exclude ids or borrow targets, outfit-link
+     code collisions, and a theme that can't build any outfit; warnings
+     (don't fail) for a theme/slot with fewer than 5 products.
 
-Exit status: 1 when item 1, 2 or 10 has an error (report-only runs;
+Exit status: 1 when item 1, 2, 10 or 11 has an error (report-only runs;
 --append fixes item 1 and exits 0), else 0. The catalog-check GitHub
 workflow runs the report on every push and pull request to main, so a
 batch can't land with a page missing from products.json, a record whose
@@ -139,6 +146,7 @@ import write_sitemap
 import add_analytics
 import add_favicons
 import categories
+import outfit_generator
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -577,6 +585,7 @@ def main():
                          for rel in add_analytics.untracked_links()]
 
     category_errors, category_warnings = categories.audit(products, categories.load())
+    generator_errors, generator_warnings = ([], []) if category_errors else outfit_generator.audit(products)
 
     photo_needed = []
     for rel in add_analytics.all_html():
@@ -663,14 +672,28 @@ def main():
               "Missing added? Set it to the batch date (YYYY-MM-DD).")
     print()
 
+    print(f"11. Outfit generator (generator.json) errors: {len(generator_errors)} "
+          f"(warnings: {len(generator_warnings)})")
+    if category_errors:
+        print("   Skipped until item 10 is clean (the generator builds on categories.json).")
+    for e in generator_errors:
+        print(f"   ERROR {e}")
+    for w in generator_warnings:
+        print(f"   warn  {w}")
+    if generator_errors:
+        print("   New campaign? Add it to a theme's campaigns (or unthemed) in generator.json.")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
-            and not webp_issues and not favicon_issues and not category_errors):
+            and not webp_issues and not favicon_issues and not category_errors
+            and not generator_errors):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
               "analytics tracking and site footer, every <picture> WebP source loads, every "
-              "page has a current favicon block, and every product has a products/ page tab.")
+              "page has a current favicon block, every product has a products/ page tab, and "
+              "generator.json covers every campaign.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
@@ -681,10 +704,10 @@ def main():
         if missing_from_catalog:
             print("Run with --append to add the missing records (item_type and data_new will "
                   "still need manual review afterward — see per-record flags).")
-        # Items 1, 2 and 10 fail the run (and the catalog-check CI workflow):
+        # Items 1, 2, 10 and 11 fail the run (and the catalog-check CI workflow):
         # a page missing from products.json is invisible in the shop grid,
         # and so is a product whose item_type has no tab in categories.json.
-        if missing_from_catalog or orphaned_records or category_errors:
+        if missing_from_catalog or orphaned_records or category_errors or generator_errors:
             sys.exit(1)
         return
 

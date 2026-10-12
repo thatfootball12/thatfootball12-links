@@ -90,6 +90,7 @@ def expected_urls():
     entries = [
         ("index.html", ["index.html"]),
         ("products/index.html", ["products/index.html", "products.json"]),
+        ("generator/index.html", ["generator/index.html", "generator.json"]),
     ]
     if os.path.isfile(_abs("privacy/index.html")):
         entries.append(("privacy/index.html", ["privacy/index.html"]))
