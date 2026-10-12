@@ -57,6 +57,17 @@ but keep its detail page live (old pins still work), add its id to
 `hidden`. Run `py -3 categories.py` to see every tab and sub-chip with
 its count.
 
+**New campaign? Add it to `generator.json` themes.** The Random Outfit
+Generator (`generator/`) only shuffles products from campaigns listed
+under one of its themes (Gameday, Date Night, Business Casual,
+Streetwear, Casual) or under `unthemed` (Theme = Any only).
+`sync_catalog.py` report item 11 fails (exit 1, so CI fails) when a
+campaign in `products.json` isn't listed, or `generator.json` names a
+campaign, category or product that doesn't exist. The slot categories,
+style rules, budget tiers and exclusions live in the same file. Run
+`py -3 outfit_generator.py` to see each theme's pool sizes and which
+budget tiers can build an outfit (the page greys out the rest).
+
 Then run `python add_product_schema.py` (after any `--append`, since it
 reads `products.json`). It writes the schema.org Product JSON-LD block
 into every SHEIN detail page's `<head>` between
@@ -112,7 +123,8 @@ page is gone, and out-of-date `<lastmod>` dates.
 
 So the order is: `sync_catalog.py` (plus `--append` if needed, then set
 `item_type`/`data_new`, check `added`, and add any new item_type to
-`categories.json`), then `add_product_schema.py`, then `add_analytics.py`, then
+`categories.json` and any new campaign to `generator.json`), then
+`add_product_schema.py`, then `add_analytics.py`, then
 `add_favicons.py`, then `write_sitemap.py` last among the writers (the
 scripts before it edit
 pages, and each edit moves that page's `<lastmod>`), then

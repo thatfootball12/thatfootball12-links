@@ -14,7 +14,7 @@ sync_catalog.py imports audit(), untracked_links() and ungated_tags()
 from here and reports any page whose blocks are missing, stale, or
 present where they shouldn't be.
 
-Pages (487): homepage, shop grid, the privacy page, the outfits/ and
+Pages: homepage, shop grid, outfit generator, the privacy page, the outfits/ and
 videos/ hubs, every category page, every campaign page (legacy link-list
 pages and redirect pages like the retired this-or-that-aug-14 included),
 and every product detail page. Redirect pages (meta refresh) get the
@@ -312,7 +312,8 @@ def targets():
     """{repo-relative page: tracking config or None (gtag only)}.
     A tracking config is (product params or None, context, selector)."""
     out = {rel: None for rel in
-           ["index.html", "products/index.html", "outfits/index.html", "videos/index.html"]
+           ["index.html", "products/index.html", "generator/index.html", "outfits/index.html",
+            "videos/index.html"]
            + _rel_glob("outfits/*/index.html") + _rel_glob("videos/*/index.html")}
     if os.path.isfile(_abs(PRIVACY_PAGE)):
         out[PRIVACY_PAGE] = None

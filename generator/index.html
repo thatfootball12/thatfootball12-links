@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- analytics:start -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+</script>
+<!-- Google tag (gtag.js): loaded only after the visitor accepts analytics cookies. See add_analytics.py. -->
+<script>
+(function () {
+  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 1, MAX_AGE = 365 * 864e5;
+  var PRIVACY = '../privacy/', LABELS = { granted: 'Accepted', denied: 'Declined' };
+  var loaded = false, bar = null;
+  function stored() {
+    try {
+      var c = JSON.parse(localStorage.getItem(KEY));
+      if (c && c.v === VERSION && Date.now() - c.ts < MAX_AGE && LABELS[c.choice]) return c.choice;
+    } catch (e) {}
+    return null;
+  }
+  function store(choice) {
+    try { localStorage.setItem(KEY, JSON.stringify({ v: VERSION, choice: choice, ts: Date.now() })); } catch (e) {}
+  }
+  function load() {
+    if (loaded) return;
+    loaded = true;
+    dataLayer.length = 0;
+    gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', ID);
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+    document.head.appendChild(s);
+  }
+  function clearCookies() {
+    var host = location.hostname;
+    document.cookie.split(';').forEach(function (c) {
+      var name = c.split('=')[0].trim();
+      if (!/^_ga(_|$)/.test(name)) return;
+      ['', host, '.' + host].forEach(function (d) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : '');
+      });
+    });
+  }
+  function showStatus() {
+    var choice = stored(), els = document.querySelectorAll('[data-tf12-consent-status]');
+    for (var i = 0; i < els.length; i++) els[i].textContent = LABELS[choice] || 'Not chosen yet';
+    if (bar) bar.querySelector('.tf12-consent-now').hidden = !choice;
+  }
+  function hide() {
+    if (!bar) return;
+    bar.hidden = true;
+    document.body.style.paddingBottom = '';
+  }
+  function show(focus) {
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'tf12-consent';
+      bar.setAttribute('role', 'region');
+      bar.setAttribute('aria-label', 'Cookie choice');
+      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out? Nothing is tracked unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
+        '<p class="tf12-consent-now">Current choice: <b data-tf12-consent-status></b></p>' +
+        '<div class="tf12-consent-btns"><button type="button" data-tf12-choice="denied">Decline</button>' +
+        '<button type="button" data-tf12-choice="granted">Accept</button></div>';
+      document.body.appendChild(bar);
+    }
+    bar.hidden = false;
+    showStatus();
+    pad();
+    if (focus) bar.querySelector('button').focus();
+  }
+  function pad() {
+    if (bar && !bar.hidden) document.body.style.paddingBottom = (bar.offsetHeight + 24) + 'px';
+  }
+  window.addEventListener('resize', pad);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(pad);
+  function choose(choice) {
+    store(choice);
+    hide();
+    showStatus();
+    if (choice === 'granted') return load();
+    if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
+    clearCookies();
+    if (loaded) location.reload();
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-tf12-choice], [data-tf12-consent-open]') : null;
+    if (!t) return;
+    if (t.hasAttribute('data-tf12-consent-open')) show(true);
+    else choose(t.getAttribute('data-tf12-choice'));
+  });
+  var initial = stored();
+  if (initial === 'granted') load();
+  function ready() {
+    showStatus();
+    if (!initial) show(false);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
+  else ready();
+})();
+</script>
+<style>
+  .tf12-consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:2147483000;max-width:560px;margin:0 auto;padding:14px 16px;background:#18140F;color:#F3EFE6;border:1px solid #2A2620;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.55);font:13px/1.5 'Poppins',system-ui,sans-serif;text-align:left;}
+  .tf12-consent[hidden],.tf12-consent [hidden]{display:none;}
+  .tf12-consent p{margin:0 0 12px;font-size:13px;line-height:1.5;color:#F3EFE6;}
+  .tf12-consent a{color:#D4A017;}
+  .tf12-consent .tf12-consent-now{color:#B8B2A4;}
+  .tf12-consent-btns{display:flex;gap:10px;}
+  .tf12-consent-btns button{flex:1 1 0;min-height:44px;padding:10px 12px;border:1px solid #F3EFE6;border-radius:8px;background:transparent;color:#F3EFE6;font:600 14px/1 'Oswald',system-ui,sans-serif;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+  .tf12-consent-btns button:hover,.tf12-consent-btns button:focus-visible{background:#F3EFE6;color:#0D0D0D;}
+  body{flex-wrap:wrap;align-content:flex-start;}
+  .tf12-foot{flex:0 0 100%;margin-top:32px;text-align:center;font:11px/1.6 'Poppins',system-ui,sans-serif;color:#B8B2A4;}
+  .tf12-foot p{max-width:520px;margin:0 auto 4px;font-size:11px;line-height:1.6;color:#B8B2A4;}
+  .tf12-foot .tf12-foot-links{font-size:13px;}
+  .tf12-foot a,.tf12-foot button{display:inline-block;padding:6px 4px;color:#B8B2A4;text-decoration:underline;text-underline-offset:2px;}
+  .tf12-foot button{background:none;border:0;font:inherit;cursor:pointer;}
+  .tf12-foot a:hover,.tf12-foot button:hover{color:#D4A017;}
+</style>
+<!-- analytics:end -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Me a Fit • ThatFootball12</title>
+<meta name="description" content="Shuffle a full outfit from ThatFootball12's picks: top, bottom, shoes and an extra, by theme and budget.">
+<meta property="og:title" content="Build Me a Fit - ThatFootball12" />
+<meta property="og:description" content="Shuffle a full outfit from ThatFootball12's picks: pick a theme and a budget, lock what you like, swap the rest." />
+<meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
+<meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/generator/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ThatFootball12" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Build Me a Fit - ThatFootball12" />
+<meta name="twitter:description" content="Shuffle a full outfit from ThatFootball12's picks: pick a theme and a budget, lock what you like, swap the rest." />
+<meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D0D0D;
+    --panel:#18140F;
+    --panel-line:#2A2620;
+    --gold:#D4A017;
+    --crimson:#C8102E;
+    --bone:#F3EFE6;
+    --bone-dim:#B8B2A4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:24px 16px 64px;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(212,160,23,0.08), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
+  }
+  .wrap{width:100%;max-width:480px;min-width:0;}
+  @media (min-width:768px){
+    .wrap{max-width:1080px;}
+  }
+  .back{
+    display:block;
+    text-align:center;
+    margin-bottom:18px;
+    color:var(--gold);
+    font-size:13px;
+    text-decoration:none;
+  }
+  .back a{color:var(--gold);text-decoration:none;}
+  header{text-align:center;margin-bottom:18px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--panel-line);
+    padding:5px 14px;border-radius:999px;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--crimson);display:inline-block;}
+  h1{
+    font-family:'Anton',sans-serif;
+    font-size:44px;
+    letter-spacing:1px;
+    line-height:0.95;
+    color:var(--bone);
+    text-transform:uppercase;
+  }
+  h1 span{color:var(--gold);}
+  .tagline{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-top:8px;
+  }
+
+  .controls{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    padding:14px 0;
+    margin-bottom:14px;
+  }
+  @media (min-width:768px){
+    .controls{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0 8px;}
+  }
+  .control + .control{margin-top:12px;}
+  @media (min-width:768px){
+    .control + .control{margin-top:0;}
+  }
+  .control-label{
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin:0 14px 8px;
+  }
+  /* Phones: one row that scrolls sideways. Desktop: rows wrap. */
+  .chip-row{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:7px;
+    overflow-x:auto;
+    padding:2px 14px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .chip-row::-webkit-scrollbar{display:none;}
+  @media (min-width:768px){
+    .chip-row{flex-wrap:wrap;overflow-x:visible;}
+  }
+  .chip{
+    flex:0 0 auto;
+    min-height:38px;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.3px;
+    text-transform:uppercase;
+    white-space:nowrap;
+    padding:7px 14px;
+    border-radius:999px;
+    border:1px solid var(--panel-line);
+    background:var(--ink);
+    color:var(--bone-dim);
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .chip:hover{border-color:var(--gold);color:var(--bone);}
+  .chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .chip.active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
+  .chip.off{opacity:.4;cursor:not-allowed;text-decoration:line-through;}
+  .chip.off:hover{border-color:var(--panel-line);color:var(--bone-dim);}
+  .chip.off.active{opacity:.7;}
+  .tier-hint{
+    margin:8px 14px 0;
+    font-size:11px;
+    color:var(--bone-dim);
+  }
+  .tier-hint[hidden]{display:none;}
+
+  .shuffle{
+    display:block;
+    width:100%;
+    min-height:58px;
+    margin:0 0 16px;
+    font-family:'Anton',sans-serif;
+    font-size:26px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--ink);
+    background:var(--gold);
+    border:0;
+    border-radius:12px;
+    cursor:pointer;
+    box-shadow:0 8px 22px rgba(212,160,23,.25);
+    transition:transform .12s ease, filter .12s ease;
+  }
+  .shuffle:hover{filter:brightness(1.08);}
+  .shuffle:active{transform:scale(.98);}
+  .shuffle:focus-visible{outline:3px solid var(--bone);outline-offset:3px;}
+  .shuffle:disabled{opacity:.6;cursor:wait;}
+
+  .message{
+    background:var(--panel);
+    border:1px solid var(--gold);
+    border-radius:12px;
+    padding:14px 16px;
+    margin-bottom:14px;
+    font-size:13px;
+    line-height:1.5;
+    text-align:center;
+  }
+  .message[hidden]{display:none;}
+  .message button{
+    margin-top:10px;
+    background:var(--gold);
+    color:var(--ink);
+    border:0;
+    border-radius:999px;
+    padding:8px 16px;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    cursor:pointer;
+  }
+  .note{
+    font-size:12px;
+    color:var(--bone-dim);
+    text-align:center;
+    margin-bottom:12px;
+  }
+  .note[hidden]{display:none;}
+
+  .outfit{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:12px;
+    margin-bottom:16px;
+  }
+  .outfit[hidden]{display:none;}
+  @media (min-width:768px){
+    .outfit{grid-template-columns:repeat(4, minmax(0,1fr));gap:16px;}
+  }
+  .slot-card{
+    display:flex;
+    flex-direction:column;
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    overflow:hidden;
+    min-width:0;
+    transition:border-color .2s ease;
+  }
+  .slot-card.locked{border-color:var(--gold);}
+  .slot-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:6px;
+    padding:8px 10px 7px;
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  .slot-label{color:var(--gold);}
+  .slot-kind{color:var(--bone-dim);font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .slot-photo{position:relative;display:block;}
+  .slot-photo picture{display:block;}
+  .slot-photo img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    background:var(--ink);
+  }
+  .photo-placeholder{
+    width:100%;
+    aspect-ratio:1/1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    background:repeating-linear-gradient(45deg, var(--panel), var(--panel) 10px, #15110c 10px, #15110c 20px);
+    color:var(--bone-dim);
+    font-family:'Oswald',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  .sale-badge{
+    position:absolute;
+    top:6px;
+    right:6px;
+    background:var(--gold);
+    color:var(--ink);
+    font-family:'Oswald',sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    padding:3px 7px;
+    border-radius:6px;
+  }
+  .lock-badge{
+    position:absolute;
+    top:6px;
+    left:6px;
+    background:var(--ink);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    font-family:'Oswald',sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    padding:2px 6px;
+    border-radius:6px;
+  }
+  .lock-badge[hidden]{display:none;}
+  .slot-body{padding:9px 10px 10px;display:flex;flex-direction:column;flex:1 1 auto;}
+  .slot-name{
+    font-size:12px;
+    font-weight:500;
+    line-height:1.35;
+    margin-bottom:6px;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    min-height:2.7em;
+  }
+  .slot-price{
+    font-family:'Oswald',sans-serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--gold);
+    margin-bottom:9px;
+  }
+  .slot-price.check{font-size:12px;font-weight:500;color:var(--bone);}
+  .slot-actions{display:flex;gap:6px;margin-top:auto;}
+  .icon-btn{
+    flex:0 0 40px;
+    height:40px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+    line-height:1;
+    border-radius:8px;
+    border:1px solid var(--panel-line);
+    background:var(--ink);
+    color:var(--bone);
+    cursor:pointer;
+    filter:grayscale(1);
+    opacity:.75;
+  }
+  .icon-btn:hover{border-color:var(--gold);opacity:1;}
+  .icon-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .icon-btn[aria-pressed="true"]{border-color:var(--gold);background:#2a210f;filter:none;opacity:1;}
+  .icon-btn.swap{filter:none;opacity:1;}
+  .shop-btn{
+    flex:1 1 auto;
+    min-width:0;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:40px;
+    border-radius:8px;
+    background:var(--gold);
+    color:var(--ink);
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    text-decoration:none;
+  }
+  .shop-btn:hover{filter:brightness(1.08);}
+  .shop-btn:focus-visible{outline:2px solid var(--bone);outline-offset:2px;}
+
+  .summary{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    padding:14px 16px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px 16px;
+    margin-bottom:12px;
+  }
+  .summary[hidden]{display:none;}
+  .total{
+    font-family:'Oswald',sans-serif;
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:.5px;
+    color:var(--bone);
+  }
+  .total b{color:var(--gold);font-weight:600;}
+  .total-extra{display:block;font-family:'Poppins',sans-serif;font-size:12px;font-weight:400;color:var(--bone-dim);letter-spacing:0;}
+  .copy-btn{
+    min-height:40px;
+    padding:8px 16px;
+    border-radius:999px;
+    border:1px solid var(--gold);
+    background:transparent;
+    color:var(--gold);
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    cursor:pointer;
+  }
+  .copy-btn:hover{background:var(--gold);color:var(--ink);}
+  .copy-fallback{width:100%;font:12px 'Poppins',sans-serif;padding:8px;border-radius:8px;border:1px solid var(--panel-line);background:var(--ink);color:var(--bone);}
+  .copy-fallback[hidden]{display:none;}
+  .fine{
+    font-size:11px;
+    color:var(--bone-dim);
+    text-align:center;
+    line-height:1.6;
+  }
+  .browse{
+    display:block;
+    text-align:center;
+    margin-top:22px;
+    color:var(--gold);
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    text-decoration:none;
+  }
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+</style>
+<!-- favicons:start -->
+<link rel="icon" href="../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+<!-- favicons:end -->
+</head>
+<body>
+<div class="wrap">
+
+  <div class="back"><a href="../">← Back to Home</a> · <a href="../products/">Shop all products</a></div>
+
+  <header>
+    <div class="badge">ThatFootball12 Fit Builder</div>
+    <h1>BUILD ME A <span>FIT</span></h1>
+    <div class="tagline">Pick a theme &amp; budget · lock what you like · shuffle the rest</div>
+  </header>
+
+  <div class="controls">
+    <div class="control">
+      <div class="control-label" id="theme-label">Theme</div>
+      <div class="chip-row" id="theme-chips" role="group" aria-labelledby="theme-label"></div>
+    </div>
+    <div class="control">
+      <div class="control-label" id="budget-label">Budget</div>
+      <div class="chip-row" id="budget-chips" role="group" aria-labelledby="budget-label"></div>
+      <p class="tier-hint" id="tier-hint" hidden></p>
+    </div>
+  </div>
+
+  <button type="button" class="shuffle" id="shuffle-btn" disabled>🎲 Shuffle</button>
+
+  <div class="message" id="message" role="status" hidden></div>
+  <p class="note" id="note" role="status" hidden></p>
+
+  <div class="outfit" id="outfit" aria-live="polite"></div>
+
+  <div class="summary" id="summary" hidden>
+    <div class="total" id="total"></div>
+    <button type="button" class="copy-btn" id="copy-btn">🔗 Copy link</button>
+    <input type="text" class="copy-fallback" id="copy-fallback" readonly hidden aria-label="Outfit link">
+  </div>
+  <p class="fine">Prices may change; check the retailer page for current details. Prices shown in CAD.</p>
+
+  <a class="browse" href="../products/">Browse every product →</a>
+
+</div>
+
+<script>
+(function(){
+  // Outfit generator. Rules and pools come from ../generator.json, each
+  // product's tab/sub from ../categories.json (placeProduct() below is the
+  // same as on products/). outfit_generator.py is the Python copy of
+  // buildPools / compatible / feasible / shortCode, which sync_catalog.py
+  // uses to check generator.json; change them together.
+  //
+  // The outfit lives in the URL hash so it can be shared or pinned:
+  //   #<theme or any>/<budget or any>/<top>.<bottom>.<shoes>.<extra>
+  // where each piece is shortCode(product id). A code that no longer
+  // matches a product in that slot's pool gets that slot reshuffled.
+
+  var outfitEl = document.getElementById('outfit');
+  var shuffleBtn = document.getElementById('shuffle-btn');
+  var messageEl = document.getElementById('message');
+  var noteEl = document.getElementById('note');
+  var summaryEl = document.getElementById('summary');
+  var totalEl = document.getElementById('total');
+  var copyBtn = document.getElementById('copy-btn');
+  var copyFallback = document.getElementById('copy-fallback');
+  var themeRow = document.getElementById('theme-chips');
+  var budgetRow = document.getElementById('budget-chips');
+  var tierHint = document.getElementById('tier-hint');
+
+  var SLOT_ORDER = ['top', 'bottom', 'shoes', 'extra'];
+  var NODE_LIMIT = 200000; // safety cap on one search
+
+  var cats, gen, records = [], byCode = {}, poolCache = {}, tierCache = {};
+  var state = {
+    theme: 'any',
+    budget: null,                      // number or null for Any
+    pieces: {top: null, bottom: null, shoes: null, extra: null}, // records
+    extraKind: null,                   // 'outerwear' | 'accessory'
+    locks: {top: false, bottom: false, shoes: false, extra: false}
+  };
+
+  // --- categories.json placement (same as products/) -------------------
+
+  var tabsBySlug = {};
+  function isWordChar(c){ return !!c && /[a-z0-9]/.test(c); }
+  function hasWord(name, words){
+    var low = name.toLowerCase();
+    for(var i = 0; i < words.length; i++){
+      var w = words[i], start = 0, at;
+      while((at = low.indexOf(w, start)) !== -1){
+        if(!isWordChar(low.charAt(at - 1)) && !isWordChar(low.charAt(at + w.length))) return true;
+        start = at + 1;
+      }
+    }
+    return false;
+  }
+  function isFanGear(p){
+    var fg = cats.fan_gear, name = p.name || '';
+    if(fg.exclude.indexOf(p.id) !== -1) return false;
+    if(fg.include.indexOf(p.id) !== -1) return true;
+    if(hasWord(name, fg.licensed_keywords)) return true;
+    return hasWord(name, fg.licensed_brands) && hasWord(name, fg.teams);
+  }
+  function matchSub(tabSlug, name){
+    var tab = tabsBySlug[tabSlug], bySlug = {};
+    tab.subs.forEach(function(s){ bySlug[s.slug] = s; });
+    var order = tab.match_order || tab.subs.map(function(s){ return s.slug; });
+    for(var i = 0; i < order.length; i++){
+      var s = bySlug[order[i]];
+      if(s.keywords.length && hasWord(name, s.keywords)) return s.slug;
+    }
+    return null;
+  }
+  function placeProduct(p){
+    if(cats.hidden.indexOf(p.id) !== -1) return null;
+    var ov = cats.overrides[p.id];
+    if(ov){
+      var parts = ov.split('/');
+      return {tab: parts[0], sub: parts[1] || null};
+    }
+    var name = p.name || '';
+    if(isFanGear(p)) return {tab: cats.fan_gear.tab, sub: matchSub(cats.fan_gear.tab, name)};
+    var m = cats.item_types[p.item_type];
+    if(!m) return null;
+    return {tab: m.tab, sub: matchSub(m.tab, name) || m.sub || null};
+  }
+  function subLabel(cat){
+    var parts = cat.split('/'), t = tabsBySlug[parts[0]];
+    if(!t) return '';
+    for(var i = 0; i < t.subs.length; i++){ if(t.subs[i].slug === parts[1]) return t.subs[i].label; }
+    return t.label;
+  }
+
+  // --- generator.json pools and rules (mirror of outfit_generator.py) --
+
+  function shortCode(id){
+    var h = 0x811c9dc5;
+    var bytes = unescape(encodeURIComponent(id));
+    for(var i = 0; i < bytes.length; i++){
+      h ^= bytes.charCodeAt(i);
+      h = Math.imul(h, 0x01000193) >>> 0;
+    }
+    var s = h.toString(36);
+    while(s.length < 7) s = '0' + s;
+    return s;
+  }
+  function matches(cat, patterns){
+    for(var i = 0; i < patterns.length; i++){
+      var p = patterns[i];
+      if(cat === p || cat.indexOf(p + '/') === 0) return true;
+    }
+    return false;
+  }
+  function isPriced(p){ return p.retailer !== 'Amazon' && typeof p.price === 'number'; }
+  function linkKey(r){ return r.p.outbound_url || r.p.id; }
+
+  function buildRecords(products){
+    var never = [];
+    gen.rules.forEach(function(r){ if(r.never) never = never.concat(r.never); });
+    products.forEach(function(p, i){
+      if(gen.exclude.indexOf(p.id) !== -1) return;
+      var placed = placeProduct(p);
+      if(!placed) return;
+      var cat = placed.tab + (placed.sub ? '/' + placed.sub : '');
+      if(matches(cat, never)) return;
+      var r = {p: p, cat: cat, index: i, code: shortCode(p.id)};
+      records.push(r);
+      byCode[r.code] = r;
+    });
+  }
+
+  function dedupe(list){
+    var best = {}, keys = [];
+    list.forEach(function(r){
+      var k = linkKey(r), cur = best[k];
+      if(!cur){ keys.push(k); best[k] = r; return; }
+      if(r.p.added > cur.p.added || (r.p.added === cur.p.added && r.index < cur.index)) best[k] = r;
+    });
+    return keys.map(function(k){ return best[k]; }).sort(function(a, b){ return a.index - b.index; });
+  }
+
+  function themeBySlug(slug){
+    for(var i = 0; i < gen.themes.length; i++){ if(gen.themes[i].slug === slug) return gen.themes[i]; }
+    return null;
+  }
+
+  function buildPools(slug){
+    if(poolCache[slug]) return poolCache[slug];
+    var theme = themeBySlug(slug), pools = {};
+    Object.keys(gen.slots).forEach(function(slot){
+      var spec = gen.slots[slot], camps = null;
+      if(theme){
+        camps = {};
+        theme.campaigns.forEach(function(c){ camps[c] = true; });
+        if(theme.borrow && theme.borrow.slots.indexOf(slot) !== -1){
+          themeBySlug(theme.borrow.from).campaigns.forEach(function(c){ camps[c] = true; });
+        }
+      }
+      var chosen = records.filter(function(r){
+        return (!camps || camps[r.p.campaign]) && matches(r.cat, spec.allow);
+      });
+      if(theme && theme.fan_gear && spec.fan_gear){
+        chosen = chosen.concat(records.filter(function(r){ return matches(r.cat, spec.fan_gear); }));
+      }
+      pools[slot] = dedupe(chosen);
+    });
+    poolCache[slug] = pools;
+    return pools;
+  }
+
+  function compatible(catList){
+    for(var n = 0; n < gen.rules.length; n++){
+      var rule = gen.rules[n];
+      if(!rule['if']) continue;
+      for(var i = 0; i < catList.length; i++){
+        if(!matches(catList[i], rule['if'])) continue;
+        var others = catList.slice(0, i).concat(catList.slice(i + 1));
+        if(rule.not_with && others.some(function(o){ return matches(o, rule.not_with); })) return false;
+        if(rule.only_with && !others.some(function(o){ return matches(o, rule.only_with); })) return false;
+      }
+    }
+    return true;
+  }
+
+  // Can this theme build any outfit under this budget? Same search as
+  // feasible() in outfit_generator.py; decides which budget chips grey out.
+  function feasible(pools, budget){
+    var key = budget;
+    var sorted = {};
+    Object.keys(pools).forEach(function(s){
+      sorted[s] = pools[s].filter(function(r){ return isPriced(r.p); })
+        .sort(function(a, b){ return a.p.price - b.p.price; });
+    });
+    var base = gen.base_slots;
+    var extraMins = gen.extra_slots.filter(function(s){ return sorted[s].length; })
+      .map(function(s){ return sorted[s][0].p.price; });
+    if(!extraMins.length || base.some(function(s){ return !sorted[s].length; })) return false;
+    var extraMin = Math.min.apply(null, extraMins);
+    var restMin = [];
+    for(var i = 0; i <= base.length; i++){
+      var sum = extraMin;
+      for(var j = i; j < base.length; j++) sum += sorted[base[j]][0].p.price;
+      restMin.push(sum);
+    }
+    function dfs(i, total, catList){
+      if(total + restMin[i] >= key) return false;
+      if(i === base.length){
+        for(var e = 0; e < gen.extra_slots.length; e++){
+          var list = sorted[gen.extra_slots[e]];
+          for(var k = 0; k < list.length; k++){
+            if(total + list[k].p.price >= key) break;
+            if(compatible(catList.concat([list[k].cat]))) return true;
+          }
+        }
+        return false;
+      }
+      var pool = sorted[base[i]];
+      for(var m = 0; m < pool.length; m++){
+        var r = pool[m];
+        if(total + r.p.price + restMin[i + 1] >= key) break;
+        var next = catList.concat([r.cat]);
+        if(compatible(next) && dfs(i + 1, total + r.p.price, next)) return true;
+      }
+      return false;
+    }
+    return dfs(0, 0, []);
+  }
+
+  function tiersFor(slug){
+    if(!tierCache[slug]){
+      var pools = buildPools(slug), ok = {};
+      gen.budgets.forEach(function(b){ ok[b] = feasible(pools, b); });
+      tierCache[slug] = ok;
+    }
+    return tierCache[slug];
+  }
+
+  // --- picking an outfit ------------------------------------------------
+
+  function shuffled(arr){
+    var a = arr.slice();
+    for(var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function usable(r){ return state.budget === null || isPriced(r.p); }
+
+  // fixed: {slot: record} pieces that must stay; avoid: {slot: record} to
+  // skip if anything else fits (swap). Returns {pieces, extraKind} or null.
+  function solve(pools, fixed, avoid){
+    var budget = state.budget === null ? Infinity : state.budget;
+    var kinds = shuffled(gen.extra_slots);
+    if(fixed.extra) kinds = [fixed.extraKind];
+    var cands = {};
+    function minPrice(list){
+      var m = Infinity;
+      list.forEach(function(r){ if(isPriced(r.p) && r.p.price < m) m = r.p.price; });
+      return m;
+    }
+    SLOT_ORDER.forEach(function(slot){
+      var list;
+      if(fixed[slot]) list = [fixed[slot]];
+      else if(slot === 'extra'){
+        list = [];
+        kinds.forEach(function(k){ list = list.concat(shuffled(pools[k].filter(usable))); });
+      } else list = shuffled(pools[slot].filter(usable));
+      if(avoid && avoid[slot] && list.length > 1){
+        var a = avoid[slot];
+        list = list.filter(function(r){ return linkKey(r) !== linkKey(a); }).concat([a]);
+      }
+      cands[slot] = list;
+    });
+    // Fixed slots first, so a clash between locked pieces shows up at once.
+    var order = SLOT_ORDER.filter(function(s){ return fixed[s]; })
+      .concat(SLOT_ORDER.filter(function(s){ return !fixed[s]; }));
+    var mins = order.map(function(s){ return budget === Infinity ? 0 : minPrice(cands[s]); });
+    var rest = [];
+    for(var i = 0; i <= order.length; i++){
+      var sum = 0;
+      for(var j = i; j < order.length; j++) sum += mins[j];
+      rest.push(sum);
+    }
+    var chosen = {}, nodes = 0;
+    function cost(r){ return budget === Infinity ? 0 : r.p.price; }
+    function dfs(i, total, catList){
+      if(++nodes > NODE_LIMIT) return false;
+      if(i === order.length) return true;
+      var list = cands[order[i]];
+      for(var k = 0; k < list.length; k++){
+        var r = list[k], t = total + cost(r);
+        if(budget !== Infinity && t + rest[i + 1] >= budget) continue;
+        var next = catList.concat([r.cat]);
+        if(!compatible(next)) continue;
+        chosen[order[i]] = r;
+        if(dfs(i + 1, t, next)) return true;
+      }
+      return false;
+    }
+    if(!dfs(0, 0, [])) return null;
+    var extraKind = fixed.extra ? fixed.extraKind : extraKindOf(chosen.extra, pools);
+    return {pieces: chosen, extraKind: extraKind};
+  }
+
+  function extraKindOf(r, pools){
+    for(var i = 0; i < gen.extra_slots.length; i++){
+      var k = gen.extra_slots[i];
+      if(pools[k].some(function(x){ return linkKey(x) === linkKey(r); })) return k;
+    }
+    return gen.extra_slots[0];
+  }
+
+  // The record in this slot's pool for the same product, or null.
+  function inPool(r, slot, pools){
+    if(!r) return null;
+    var kinds = slot === 'extra' ? gen.extra_slots : [slot];
+    for(var i = 0; i < kinds.length; i++){
+      var list = pools[kinds[i]];
+      for(var j = 0; j < list.length; j++){ if(linkKey(list[j]) === linkKey(r)) return list[j]; }
+    }
+    return null;
+  }
+
+  function themeLabel(){
+    var t = themeBySlug(state.theme);
+    return t ? t.label : 'outfit';
+  }
+
+  // Shuffle every unlocked slot (or just `only`). Locked pieces that no
+  // longer fit the theme or budget are unlocked first, with a note.
+  function shuffle(only){
+    var pools = buildPools(state.theme);
+    var fixed = {}, avoid = null, dropped = [], why = '';
+    SLOT_ORDER.forEach(function(slot){
+      var cur = state.pieces[slot];
+      var keep = only ? slot !== only : state.locks[slot];
+      if(!keep || !cur) return;
+      var r = inPool(cur, slot, pools);
+      if(!r || !usable(r)){
+        if(state.locks[slot]){
+          dropped.push(slotName(slot));
+          why = r ? 'it has no listed price, so it can’t count toward a budget' : 'it isn’t one of the ' + themeLabel() + ' picks';
+        }
+        state.locks[slot] = false;
+        return;
+      }
+      fixed[slot] = r;
+    });
+    if(fixed.extra) fixed.extraKind = extraKindOf(fixed.extra, pools);
+    if(only && state.pieces[only]){ avoid = {}; avoid[only] = state.pieces[only]; }
+
+    var result = solve(pools, fixed, avoid);
+    if(!result && only){
+      // A swap only fails if nothing else fits next to the other three.
+      showNote('Nothing else fits that slot with the other pieces' + (state.budget ? ' under $' + state.budget : '') + '.');
+      return;
+    }
+    if(!result){
+      var hadLocks = SLOT_ORDER.some(function(s){ return fixed[s]; });
+      showNoResult(hadLocks);
+      return;
+    }
+    if(only && result.pieces[only] && state.pieces[only] && linkKey(result.pieces[only]) === linkKey(state.pieces[only])){
+      showNote('That’s the only ' + slotName(only).toLowerCase() + ' that fits with the other pieces' + (state.budget ? ' under $' + state.budget : '') + '.');
+    } else if(dropped.length){
+      showNote('Unlocked ' + dropped.join(' and ').toLowerCase() + ': ' + why + '.');
+    } else {
+      showNote('');
+    }
+    state.pieces = result.pieces;
+    state.extraKind = result.extraKind;
+    hideMessage();
+    render();
+    writeHash();
+  }
+
+  function slotName(slot){
+    if(slot === 'extra') return gen.slots[state.extraKind || gen.extra_slots[0]].label;
+    return gen.slots[slot].label;
+  }
+
+  // --- messages ---------------------------------------------------------
+
+  function nextTier(){
+    var ok = tiersFor(state.theme);
+    for(var i = 0; i < gen.budgets.length; i++){
+      var b = gen.budgets[i];
+      if(state.budget !== null && b > state.budget && ok[b]) return b;
+    }
+    return null;
+  }
+
+  function showNoResult(hadLocks){
+    var budgetText = state.budget === null ? '' : ' under $' + state.budget;
+    var html, next = state.budget === null ? null : nextTier();
+    if(hadLocks){
+      html = 'No ' + esc(themeLabel()) + ' outfit fits' + budgetText + ' with your locked pieces. Unlock something' +
+        (state.budget !== null ? ' or try a higher budget' : '') + '.';
+    } else {
+      html = 'We can’t build a ' + esc(themeLabel()) + ' outfit' + budgetText + ' right now. ' +
+        (next ? 'Try Under $' + next + '.' : 'Try a higher budget or Any.');
+    }
+    messageEl.innerHTML = '<p>' + html + '</p>';
+    if(state.budget !== null){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = next && !hadLocks ? 'Try under $' + next : 'Try any budget';
+      btn.addEventListener('click', function(){ setBudget(next && !hadLocks ? next : null); });
+      messageEl.appendChild(btn);
+    }
+    messageEl.hidden = false;
+    outfitEl.hidden = true;
+    summaryEl.hidden = true;
+    writeHash();
+  }
+  function hideMessage(){ messageEl.hidden = true; outfitEl.hidden = false; summaryEl.hidden = false; }
+  function showNote(text){ noteEl.textContent = text; noteEl.hidden = !text; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  // --- rendering -------------------------------------------------------
+
+  function priceText(p){
+    if(p.retailer === 'Amazon') return 'Check price on Amazon';
+    if(!isPriced(p)) return 'See price on site';
+    return (p.currency === 'CAD' ? 'CA$' : '$') + p.price.toFixed(2);
+  }
+
+  function photo(p){
+    var a = document.createElement('a');
+    a.className = 'slot-photo';
+    a.href = '../' + p.detail_page_url.replace(/index\.html$/, '');
+    a.tabIndex = -1;
+    a.setAttribute('aria-hidden', 'true');
+    if(p.image_pending || !p.image){
+      var ph = document.createElement('div');
+      ph.className = 'photo-placeholder';
+      ph.textContent = 'Photo coming soon';
+      a.appendChild(ph);
+    } else {
+      var img = document.createElement('img');
+      img.alt = '';
+      img.decoding = 'async';
+      // <img> goes into <picture> before src is set, so only one of the
+      // WebP / JPEG gets downloaded (see products/index.html).
+      if(p.thumbnail_webp){
+        var pic = document.createElement('picture');
+        var source = document.createElement('source');
+        source.type = 'image/webp';
+        source.srcset = '../' + p.thumbnail_webp;
+        pic.appendChild(source);
+        pic.appendChild(img);
+        a.appendChild(pic);
+      } else {
+        a.appendChild(img);
+      }
+      img.src = '../' + (p.thumbnail || p.image);
+    }
+    if(p.discount_percent){
+      var sale = document.createElement('span');
+      sale.className = 'sale-badge';
+      sale.textContent = 'On Sale';
+      a.appendChild(sale);
+    }
+    var lock = document.createElement('span');
+    lock.className = 'lock-badge';
+    lock.textContent = 'Locked';
+    a.appendChild(lock);
+    return a;
+  }
+
+  function card(slot){
+    var r = state.pieces[slot], p = r.p, name = slotName(slot);
+    var el = document.createElement('article');
+    el.className = 'slot-card' + (state.locks[slot] ? ' locked' : '');
+    el.setAttribute('aria-label', name);
+
+    var head = document.createElement('div');
+    head.className = 'slot-head';
+    head.innerHTML = '<span class="slot-label"></span><span class="slot-kind"></span>';
+    head.firstChild.textContent = name;
+    head.lastChild.textContent = subLabel(r.cat);
+    el.appendChild(head);
+
+    var ph = photo(p);
+    ph.querySelector('.lock-badge').hidden = !state.locks[slot];
+    el.appendChild(ph);
+
+    var body = document.createElement('div');
+    body.className = 'slot-body';
+    var nm = document.createElement('div');
+    nm.className = 'slot-name';
+    nm.textContent = p.name;
+    var price = document.createElement('div');
+    price.className = 'slot-price' + (isPriced(p) ? '' : ' check');
+    price.textContent = priceText(p);
+
+    var actions = document.createElement('div');
+    actions.className = 'slot-actions';
+    var lockBtn = document.createElement('button');
+    lockBtn.type = 'button';
+    lockBtn.className = 'icon-btn lock';
+    lockBtn.textContent = '🔒';
+    lockBtn.setAttribute('aria-pressed', state.locks[slot] ? 'true' : 'false');
+    lockBtn.setAttribute('aria-label', (state.locks[slot] ? 'Unlock ' : 'Lock ') + name.toLowerCase());
+    lockBtn.title = state.locks[slot] ? 'Locked: stays when you shuffle' : 'Lock: keep this on shuffle';
+    lockBtn.addEventListener('click', function(){
+      state.locks[slot] = !state.locks[slot];
+      render();
+      var again = outfitEl.querySelector('[data-slot="' + slot + '"] .lock');
+      if(again) again.focus();
+    });
+    var swapBtn = document.createElement('button');
+    swapBtn.type = 'button';
+    swapBtn.className = 'icon-btn swap';
+    swapBtn.textContent = '🔄';
+    swapBtn.setAttribute('aria-label', 'Swap ' + name.toLowerCase());
+    swapBtn.title = 'Swap just this piece';
+    swapBtn.addEventListener('click', function(){
+      shuffle(slot);
+      var again = outfitEl.querySelector('[data-slot="' + slot + '"] .swap');
+      if(again) again.focus();
+    });
+    var shop = document.createElement('a');
+    shop.className = 'shop-btn';
+    shop.href = '../' + p.detail_page_url.replace(/index\.html$/, '');
+    shop.textContent = 'Shop';
+    shop.setAttribute('aria-label', 'Shop ' + p.name);
+    actions.appendChild(lockBtn);
+    actions.appendChild(swapBtn);
+    actions.appendChild(shop);
+
+    body.appendChild(nm);
+    body.appendChild(price);
+    body.appendChild(actions);
+    el.appendChild(body);
+    el.setAttribute('data-slot', slot);
+    el.setAttribute('data-code', r.code);
+    return el;
+  }
+
+  function render(){
+    outfitEl.innerHTML = '';
+    SLOT_ORDER.forEach(function(slot){ if(state.pieces[slot]) outfitEl.appendChild(card(slot)); });
+    var total = 0, amazon = 0, unpriced = 0;
+    SLOT_ORDER.forEach(function(slot){
+      var p = state.pieces[slot] && state.pieces[slot].p;
+      if(!p) return;
+      if(isPriced(p)) total += p.price;
+      else if(p.retailer === 'Amazon') amazon++;
+      else unpriced++;
+    });
+    var extra = [];
+    if(amazon) extra.push('+ ' + amazon + ' Amazon item' + (amazon > 1 ? 's' : '') + ' (check price on Amazon)');
+    if(unpriced) extra.push('+ ' + unpriced + ' item' + (unpriced > 1 ? 's' : '') + ' with no listed price');
+    totalEl.innerHTML = 'Total: <b>CA$' + total.toFixed(2) + '</b>' +
+      (extra.length ? '<span class="total-extra">' + esc(extra.join(' · ')) + '</span>' : '');
+    copyFallback.hidden = true;
+    copyBtn.textContent = '🔗 Copy link';
+  }
+
+  // --- controls --------------------------------------------------------
+
+  function chip(label, value, active){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip' + (active ? ' active' : '');
+    b.textContent = label;
+    b.setAttribute('data-value', value);
+    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    return b;
+  }
+
+  function renderControls(){
+    themeRow.innerHTML = '';
+    themeRow.appendChild(chip('Any', 'any', state.theme === 'any'));
+    gen.themes.forEach(function(t){ themeRow.appendChild(chip(t.label, t.slug, state.theme === t.slug)); });
+
+    var ok = tiersFor(state.theme);
+    budgetRow.innerHTML = '';
+    budgetRow.appendChild(chip('Any', 'any', state.budget === null));
+    gen.budgets.forEach(function(b){
+      var c = chip('Under $' + b, String(b), state.budget === b);
+      if(!ok[b]){
+        // Not `disabled`, so the tooltip still shows and a tap can explain.
+        c.classList.add('off');
+        c.setAttribute('aria-disabled', 'true');
+        c.title = 'No ' + (state.theme === 'any' ? '' : themeLabel() + ' ') + 'outfit fits under $' + b + ' yet';
+      }
+      budgetRow.appendChild(c);
+    });
+    tierHint.hidden = true;
+  }
+
+  function setTheme(slug){
+    state.theme = slug;
+    renderControls();
+    shuffle();
+  }
+  function setBudget(b){
+    state.budget = b;
+    renderControls();
+    shuffle();
+  }
+
+  themeRow.addEventListener('click', function(e){
+    var c = e.target.closest('.chip');
+    if(c && c.getAttribute('data-value') !== state.theme) setTheme(c.getAttribute('data-value'));
+  });
+  budgetRow.addEventListener('click', function(e){
+    var c = e.target.closest('.chip');
+    if(!c) return;
+    if(c.classList.contains('off')){
+      tierHint.textContent = c.title + '. Try a higher budget.';
+      tierHint.hidden = false;
+      return;
+    }
+    var v = c.getAttribute('data-value');
+    var b = v === 'any' ? null : Number(v);
+    if(b !== state.budget) setBudget(b);
+  });
+  shuffleBtn.addEventListener('click', function(){ shuffle(); });
+
+  copyBtn.addEventListener('click', function(){
+    var url = location.href;
+    function fallback(){
+      copyFallback.value = url;
+      copyFallback.hidden = false;
+      copyFallback.focus();
+      copyFallback.select();
+      copyBtn.textContent = 'Copy the link below';
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){ copyBtn.textContent = '✓ Link copied'; }, fallback);
+    } else {
+      fallback();
+    }
+  });
+
+  // --- URL hash ---------------------------------------------------------
+
+  function writeHash(){
+    var parts = [state.theme, state.budget === null ? 'any' : String(state.budget)];
+    if(SLOT_ORDER.every(function(s){ return state.pieces[s]; }) && outfitEl.hidden === false){
+      parts.push(SLOT_ORDER.map(function(s){ return state.pieces[s].code; }).join('.'));
+    }
+    history.replaceState(null, '', location.pathname + location.search + '#' + parts.join('/'));
+  }
+
+  // Restore #theme/budget/codes. Pieces whose code is gone or no longer in
+  // that slot's pool (or no longer fit the rules/budget) are reshuffled.
+  function readHash(){
+    var parts = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/');
+    var theme = parts[0] && themeBySlug(parts[0]) ? parts[0] : 'any';
+    var b = Number(parts[1]);
+    state.theme = theme;
+    state.budget = gen.budgets.indexOf(b) !== -1 ? b : null;
+    state.locks = {top: false, bottom: false, shoes: false, extra: false};
+    renderControls();
+    var codes = (parts[2] || '').split('.');
+    if(codes.length !== 4){ shuffle(); return; }
+
+    var pools = buildPools(state.theme), fixed = {}, stale = 0;
+    SLOT_ORDER.forEach(function(slot, i){
+      var r = inPool(byCode[codes[i]], slot, pools);
+      if(r && usable(r)) fixed[slot] = r;
+      else stale++;
+    });
+    if(fixed.extra) fixed.extraKind = extraKindOf(fixed.extra, pools);
+    var result = solve(pools, fixed, null);
+    // If the saved pieces clash now (rules or prices changed), let go of
+    // them one at a time, the extra first, until an outfit fits.
+    var dropOrder = ['extra', 'shoes', 'bottom', 'top'];
+    for(var i = 0; !result && i < dropOrder.length; i++){
+      if(fixed[dropOrder[i]]){ delete fixed[dropOrder[i]]; stale++; }
+      if(dropOrder[i] === 'extra') delete fixed.extraKind;
+      result = solve(pools, fixed, null);
+    }
+    if(!result){ showNoResult(false); return; }
+    state.pieces = result.pieces;
+    state.extraKind = result.extraKind;
+    hideMessage();
+    showNote(stale ? 'Some pieces from this link aren’t available anymore, so we picked new ones.' : '');
+    render();
+    writeHash();
+  }
+
+  window.addEventListener('hashchange', function(){
+    // Only react to links pasted or edited by hand, not our own updates.
+    var codes = SLOT_ORDER.map(function(s){ return state.pieces[s] ? state.pieces[s].code : ''; }).join('.');
+    var mine = '#' + [state.theme, state.budget === null ? 'any' : state.budget, codes].join('/');
+    if(location.hash !== mine) readHash();
+  });
+
+  // --- start -----------------------------------------------------------
+
+  function getJSON(url){
+    return fetch(url).then(function(r){
+      if(!r.ok) throw new Error(url + ' ' + r.status);
+      return r.json();
+    });
+  }
+
+  Promise.all([getJSON('../products.json'), getJSON('../categories.json'), getJSON('../generator.json')])
+    .then(function(res){
+      cats = res[1];
+      gen = res[2];
+      cats.tabs.forEach(function(t){ tabsBySlug[t.slug] = t; });
+      buildRecords(res[0]);
+      shuffleBtn.disabled = false;
+      readHash();
+    })
+    .catch(function(err){
+      messageEl.innerHTML = '<p>Could not load the outfit picks right now. Please refresh.</p>';
+      messageEl.hidden = false;
+      console.error('Failed to load the generator data', err);
+    });
+})();
+</script>
+<!-- site-footer:start -->
+<div class="tf12-foot">
+  <p>As an Amazon Associate, SHEIN affiliate, and Moosehill (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through links on this site.</p>
+  <p class="tf12-foot-links"><a href="../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
+</div>
+<!-- site-footer:end -->
+</body>
+</html>

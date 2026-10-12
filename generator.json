@@ -1,0 +1,349 @@
+{
+  "_comment": [
+    "Random Outfit Generator (generator/). generator/index.html reads this file; outfit_generator.py applies the same rules in Python and sync_catalog.py (report item 11) checks it.",
+    "themes[].campaigns + unthemed must list every campaign in products.json exactly once (a missing or unknown campaign fails CI). Unthemed campaigns only appear under Theme = Any.",
+    "slots: which categories.json tabs/subs ('tab' or 'tab/sub') can fill each slot. fan_gear subs are added only for a theme with \"fan_gear\": true, and come from every campaign. Fan Gear never appears otherwise.",
+    "Each outfit is top + bottom + shoes + one extra slot, picked at random from extra_slots (falling back to the other when the first has nothing valid).",
+    "borrow: a theme also draws those slots from another theme's campaigns.",
+    "exclude: product ids never used (suit sets clash with the Bottom slot; golf items aren't wearable). categories.json 'hidden' products are always left out too.",
+    "rules: 'never' bans a category outright; 'if' + 'not_with' bans two categories in the same outfit; 'if' + 'only_with' allows the 'if' category only alongside one of the listed ones.",
+    "budgets: the tiers offered (CAD, total of the four items). A budget only uses priced items (no Amazon) and the total must stay under it."
+  ],
+  "budgets": [
+    60,
+    80,
+    100
+  ],
+  "themes": [
+    {
+      "slug": "gameday",
+      "label": "Gameday",
+      "fan_gear": true,
+      "campaigns": [
+        "casual-gameday-aug-13",
+        "casual-gameday-aug-21",
+        "casual-gameday-outfit-aug-14",
+        "chargers-game-day-sept-22",
+        "fantasy-football-sept-5",
+        "game-day-aug-28",
+        "gameday-fit-aug-23",
+        "gameday-fit-check-aug-12",
+        "gameday-fit-check-oct-19",
+        "gameday-oct-12",
+        "gameday-oct-12-2",
+        "gameday-oct-19",
+        "gameday-oct-19-2",
+        "gameday-oct-19-3",
+        "gameday-oct-5",
+        "gameday-oct-5-2",
+        "gameday-oct-5-3",
+        "gameday-oct-5-4",
+        "gameday-outfit-aug-30",
+        "gameday-pink-out-bold-oct-7",
+        "gameday-pink-out-soft-oct-7",
+        "gameday-sept-10",
+        "gameday-sept-28",
+        "gameday-sept-28-2",
+        "gameday-sept-8",
+        "gameday-sept-9"
+      ]
+    },
+    {
+      "slug": "date-night",
+      "label": "Date Night",
+      "borrow": {
+        "from": "business-casual",
+        "slots": [
+          "shoes",
+          "outerwear",
+          "accessory"
+        ]
+      },
+      "campaigns": [
+        "date-night-aug-13",
+        "date-night-aug-14",
+        "date-night-aug-20",
+        "date-night-aug-27",
+        "date-night-oct-19",
+        "date-night-sept-10",
+        "date-night-sept-2",
+        "date-night-sept-9",
+        "night-out-aug-31",
+        "night-out-oct-19",
+        "night-out-sept-10"
+      ]
+    },
+    {
+      "slug": "business-casual",
+      "label": "Business Casual",
+      "campaigns": [
+        "budget-business-formal-sept-4",
+        "budget-graduation-sept-8",
+        "budget-sharp-formal-sept-4",
+        "budget-wedding-sept-10",
+        "business-casual-aug-10",
+        "business-casual-aug-17",
+        "business-casual-aug-24",
+        "business-casual-oct-12",
+        "business-casual-oct-12-2",
+        "business-casual-oct-12-3",
+        "business-casual-oct-12-4",
+        "business-casual-oct-12-5",
+        "business-casual-oct-12-6",
+        "business-casual-oct-19",
+        "business-casual-oct-19-2",
+        "business-casual-oct-5",
+        "business-casual-oct-5-2",
+        "business-casual-oct-5-3",
+        "business-casual-sept-10",
+        "business-casual-sept-15",
+        "business-casual-sept-28",
+        "business-casual-sept-9",
+        "formal-outfit-sept-28",
+        "job-interview-sept-8",
+        "old-money-aug-11",
+        "old-money-aug-18",
+        "old-money-aug-25",
+        "old-money-oct-19",
+        "old-money-sept-10",
+        "old-money-sept-15",
+        "old-money-sept-28",
+        "old-money-sept-8",
+        "old-money-style-july-30",
+        "wedding-outfit-oct-19",
+        "wedding-outfit-sept-28",
+        "wedding-outfit-sept-6",
+        "wedding-outfit-sept-9"
+      ]
+    },
+    {
+      "slug": "streetwear",
+      "label": "Streetwear",
+      "campaigns": [
+        "motor-streetwear-aug-12",
+        "motor-streetwear-aug-19",
+        "motor-streetwear-sept-10",
+        "motor-streetwear-sept-8",
+        "motor-streetwear-sept-9",
+        "streetwear-aug-26",
+        "streetwear-fit-sept-3",
+        "streetwear-outfit-aug-15",
+        "streetwear-outfit-oct-12",
+        "streetwear-outfit-oct-12-2",
+        "streetwear-outfit-oct-12-3",
+        "streetwear-outfit-oct-19",
+        "streetwear-outfit-oct-5",
+        "streetwear-outfit-oct-5-2",
+        "streetwear-outfit-oct-5-3",
+        "streetwear-outfit-oct-5-4",
+        "streetwear-outfit-sept-1",
+        "streetwear-outfit-sept-15",
+        "streetwear-outfit-sept-28",
+        "streetwear-outfit-sept-28-2"
+      ]
+    },
+    {
+      "slug": "casual",
+      "label": "Casual",
+      "campaigns": [
+        "budget-blazer-casual-sept-4",
+        "budget-outfit-oct-19",
+        "budget-outfit-sept-22",
+        "budget-outfit-sept-28",
+        "casual-outfit-aug-12",
+        "casual-outfit-aug-15",
+        "casual-outfit-aug-22",
+        "casual-outfit-aug-29",
+        "casual-outfit-oct-12",
+        "casual-outfit-oct-12-2",
+        "casual-outfit-oct-12-3",
+        "casual-outfit-oct-12-4",
+        "casual-outfit-oct-12-5",
+        "casual-outfit-oct-12-6",
+        "casual-outfit-oct-19",
+        "casual-outfit-oct-19-2",
+        "casual-outfit-oct-5",
+        "casual-outfit-oct-5-2",
+        "casual-outfit-oct-5-3",
+        "casual-outfit-sept-10",
+        "casual-outfit-sept-22",
+        "casual-outfit-sept-28",
+        "casual-outfit-sept-28-2",
+        "casual-outfit-sept-4",
+        "casual-outfit-sept-8",
+        "casual-outfit-sept-9",
+        "everyday-fit-check-aug-11",
+        "housewarming-sept-8"
+      ]
+    }
+  ],
+  "unthemed": [
+    "NFL-gift-guide-aug-30",
+    "cardinals-gift-guide-sept-17",
+    "commanders-gifts-aug-22",
+    "flash-deals-aug-24",
+    "flash-deals-aug-28",
+    "flash-deals-oct-5",
+    "flash-deals-sept-17",
+    "flash-deals-sept-22",
+    "flash-deals-sept-4",
+    "flash-deals-sept-9",
+    "gameday-gift-guide-aug-15",
+    "giants-gift-guide-sept-4",
+    "gift-guide-oct-19",
+    "gift-guide-oct-5",
+    "gift-guide-sept-4",
+    "jets-gift-guide-sept-9",
+    "packers-gift-guide-sept-22",
+    "this-or-that-aug-14",
+    "this-or-that-aug-21",
+    "trending-products-aug-10",
+    "trending-products-aug-17",
+    "trending-products-aug-26",
+    "trending-products-aug-31",
+    "trending-products-oct-19",
+    "trending-products-oct-19-2",
+    "trending-products-oct-19-3",
+    "trending-products-oct-19-4",
+    "trending-products-oct-5",
+    "trending-products-sept-17",
+    "trending-products-sept-22",
+    "trending-products-sept-4",
+    "trending-products-sept-9"
+  ],
+  "slots": {
+    "top": {
+      "label": "Top",
+      "allow": [
+        "tops/tees",
+        "tops/shirts",
+        "tops/hoodies",
+        "tops/sweaters",
+        "tops/polos"
+      ],
+      "fan_gear": [
+        "fan-gear/jerseys",
+        "fan-gear/tees"
+      ]
+    },
+    "bottom": {
+      "label": "Bottom",
+      "allow": [
+        "bottoms/jeans",
+        "bottoms/pants",
+        "bottoms/joggers",
+        "bottoms/cargo",
+        "bottoms/shorts"
+      ]
+    },
+    "shoes": {
+      "label": "Shoes",
+      "allow": [
+        "footwear"
+      ]
+    },
+    "outerwear": {
+      "label": "Outerwear",
+      "allow": [
+        "outerwear/jackets",
+        "outerwear/leather-suede",
+        "outerwear/coats",
+        "outerwear/blazers-suits"
+      ],
+      "fan_gear": [
+        "fan-gear/outerwear"
+      ]
+    },
+    "accessory": {
+      "label": "Accessory",
+      "allow": [
+        "accessories/hats",
+        "accessories/watches",
+        "accessories/belts",
+        "accessories/jewelry",
+        "accessories/cold-weather",
+        "accessories/eyewear",
+        "accessories/ties"
+      ],
+      "fan_gear": [
+        "fan-gear/hats",
+        "fan-gear/accessories"
+      ]
+    }
+  },
+  "base_slots": [
+    "top",
+    "bottom",
+    "shoes"
+  ],
+  "extra_slots": [
+    "outerwear",
+    "accessory"
+  ],
+  "exclude": [
+    "business-casual/job-interview-sept-8/suit",
+    "trending-products/trending-products-sept-4/suit-set",
+    "business-casual/business-casual-oct-12-3/suit",
+    "wedding/wedding-outfit-oct-19/suit",
+    "gift-guides/commanders-gifts-aug-22/headcover",
+    "gift-guides/giants-gift-guide-sept-4/golf-balls"
+  ],
+  "rules": [
+    {
+      "never": [
+        "bottoms/underwear"
+      ],
+      "why": "Underwear is never part of a shown outfit."
+    },
+    {
+      "if": [
+        "bottoms/shorts"
+      ],
+      "not_with": [
+        "outerwear/coats",
+        "accessories/cold-weather"
+      ],
+      "why": "Shorts don't go with winter coats or scarves and gloves."
+    },
+    {
+      "if": [
+        "footwear/dress-shoes"
+      ],
+      "not_with": [
+        "bottoms/joggers"
+      ],
+      "why": "Loafers and dress shoes clash with joggers and sweats."
+    },
+    {
+      "if": [
+        "footwear/sandals"
+      ],
+      "not_with": [
+        "outerwear",
+        "fan-gear/outerwear",
+        "accessories/cold-weather"
+      ],
+      "why": "Sandals and slides are warm-weather only."
+    },
+    {
+      "if": [
+        "accessories/ties"
+      ],
+      "only_with": [
+        "tops/shirts"
+      ],
+      "why": "A tie needs a collared shirt."
+    },
+    {
+      "if": [
+        "outerwear/blazers-suits"
+      ],
+      "not_with": [
+        "tops/hoodies",
+        "bottoms/joggers",
+        "bottoms/shorts"
+      ],
+      "why": "Blazers stay smart: no hoodies, joggers or shorts."
+    }
+  ]
+}

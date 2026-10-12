@@ -235,6 +235,25 @@
     margin-bottom:18px;
     text-align:center;
   }
+  a.fit-cta{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    min-height:56px;
+    margin:0 0 26px;
+    padding:14px 18px;
+    border-radius:12px;
+    background:var(--gold);
+    color:var(--ink);
+    font-family:'Anton',sans-serif;
+    font-size:22px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    text-decoration:none;
+    box-shadow:0 8px 22px rgba(212,160,23,.25);
+    transition:transform .15s ease, filter .15s ease;
+  }
+  a.fit-cta:hover{filter:brightness(1.08);transform:translateY(-2px);}
+  a.fit-cta:focus-visible{outline:3px solid var(--bone);outline-offset:3px;}
+  a.fit-cta small{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.5px;font-weight:600;opacity:.8;}
   a.link-card{
     display:flex;align-items:center;gap:12px;
     background:var(--panel);
@@ -346,6 +365,9 @@
     <h1>THAT<span>FOOTBALL</span>12</h1>
     <div class="tagline">NFL Fan Gear • Game Day Style • Men's Fashion</div>
   </header>
+
+  <!-- OUTFIT GENERATOR -->
+  <a class="fit-cta" href="generator/">🎲 Build me a fit <small>→</small></a>
 
   <!-- NEW USER SHEIN DEAL -->
   <div class="section" style="background:#1F1A13; border-color:var(--gold); text-align:center;">
