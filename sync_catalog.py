@@ -69,11 +69,20 @@ Report (always runs):
   9. Favicons: pages whose favicon / apple-touch-icon block is missing or
      stale, and icon files missing from assets/icons/. See
      add_favicons.py; run it to fix the pages.
+ 10. products/ page categories (categories.json, via categories.py):
+     errors for any record whose item_type isn't in categories.json
+     item_types (so it would have no tab), any record without a valid
+     YYYY-MM-DD "added" date (the Newest sort), and any id in
+     categories.json overrides / hidden / fan_gear include / exclude
+     that isn't in products.json; warnings (don't fail) for a product
+     that names a team with nothing showing it's licensed (kept out of
+     Fan Gear until someone decides) and one that matches no sub-chip.
 
-Exit status: 1 when item 1 or 2 is non-zero (report-only runs; --append
-fixes item 1 and exits 0), else 0. The catalog-check GitHub workflow runs
-the report on every push and pull request to main, so a batch can't land
-with a page missing from products.json or a record whose page is gone.
+Exit status: 1 when item 1, 2 or 10 has an error (report-only runs;
+--append fixes item 1 and exits 0), else 0. The catalog-check GitHub
+workflow runs the report on every push and pull request to main, so a
+batch can't land with a page missing from products.json, a record whose
+page is gone, or a product the products/ page can't put in a tab.
 
 WebP (--fill-webp):
   Category-page tiles and the products/ grid serve each -424 thumbnail as a
@@ -100,6 +109,9 @@ Append (--append only):
     - theme/campaign/source/slug derived from the folder path.
     - a 424px-wide thumbnail derivative generated at quality 85, matching
       the rest of the catalog (never upscaled), plus its WebP sibling.
+    - added (the products/ page's Newest sort) from the campaign slug's
+      date, e.g. gameday-oct-19 -> 2026-10-19 (the year nearest today), or
+      today's date if the slug has none.
   item_type and data_new have no source anywhere outside human judgment —
   they are never inferred. Appended records get item_type: null and
   data_new: null, and are listed in the report as needing manual review
@@ -107,6 +119,7 @@ Append (--append only):
 """
 
 import argparse
+import datetime
 import glob
 import html
 import json
@@ -125,6 +138,7 @@ import add_product_schema
 import write_sitemap
 import add_analytics
 import add_favicons
+import categories
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -309,6 +323,7 @@ def build_record(rel_path):
         "theme": theme,
         "source": source,
         "data_new": None,
+        "added": categories.added_from_campaign(campaign) or datetime.date.today().isoformat(),
         "discount_percent": None,
         "thumbnail": None,
         "thumbnail_webp": None,
@@ -561,6 +576,8 @@ def main():
     analytics_issues += [(rel, "no outbound .shop link for the click handler")
                          for rel in add_analytics.untracked_links()]
 
+    category_errors, category_warnings = categories.audit(products, categories.load())
+
     photo_needed = []
     for rel in add_analytics.all_html():
         with open(os.path.join(REPO, rel.replace("/", os.sep)), encoding="utf-8", errors="replace") as f:
@@ -635,14 +652,25 @@ def main():
         print("   Run: python add_favicons.py")
     print()
 
+    print(f"10. products/ page category errors: {len(category_errors)} "
+          f"(warnings: {len(category_warnings)})")
+    for e in category_errors:
+        print(f"   ERROR {e}")
+    for w in category_warnings:
+        print(f"   warn  {w}")
+    if category_errors:
+        print("   New item_type? Add it to categories.json item_types (and any sub-chip keywords). "
+              "Missing added? Set it to the batch date (YYYY-MM-DD).")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
-            and not webp_issues and not favicon_issues):
+            and not webp_issues and not favicon_issues and not category_errors):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
-              "analytics tracking and site footer, every <picture> WebP source loads, and every "
-              "page has a current favicon block.")
+              "analytics tracking and site footer, every <picture> WebP source loads, every "
+              "page has a current favicon block, and every product has a products/ page tab.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
@@ -653,9 +681,10 @@ def main():
         if missing_from_catalog:
             print("Run with --append to add the missing records (item_type and data_new will "
                   "still need manual review afterward — see per-record flags).")
-        # Items 1 and 2 fail the run (and the catalog-check CI workflow): a
-        # page missing from products.json is invisible in the shop grid.
-        if missing_from_catalog or orphaned_records:
+        # Items 1, 2 and 10 fail the run (and the catalog-check CI workflow):
+        # a page missing from products.json is invisible in the shop grid,
+        # and so is a product whose item_type has no tab in categories.json.
+        if missing_from_catalog or orphaned_records or category_errors:
             sys.exit(1)
         return
 
@@ -683,7 +712,8 @@ def main():
     save_products(products)
     print(f"\nAppended {appended} record(s). Total products.json entries: {len(products)}")
     print("Review the FLAG lines above before this batch is considered done — "
-          "item_type and data_new need a human decision on every new record.")
+          "item_type and data_new need a human decision on every new record, and a new "
+          "item_type needs adding to categories.json.")
 
 
 if __name__ == "__main__":

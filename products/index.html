@@ -123,14 +123,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop All Products • ThatFootball12</title>
 <meta property="og:title" content="Shop All Products - ThatFootball12" />
-<meta property="og:description" content="Every shoppable product from ThatFootball12 in one catalog — filter by type and price." />
+<meta property="og:description" content="Every shoppable product from ThatFootball12 in one catalog — browse by category, filter by price and store." />
 <meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
 <meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/products/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ThatFootball12" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Shop All Products - ThatFootball12" />
-<meta name="twitter:description" content="Every shoppable product from ThatFootball12 in one catalog — filter by type and price." />
+<meta name="twitter:description" content="Every shoppable product from ThatFootball12 in one catalog — browse by category, filter by price and store." />
 <meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/cover.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -158,7 +158,10 @@
       radial-gradient(circle at 15% 0%, rgba(212,160,23,0.08), transparent 40%),
       radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
   }
-  .wrap{width:100%;max-width:480px;}
+  .wrap{width:100%;max-width:480px;min-width:0;}
+  @media (min-width:768px){
+    .wrap{max-width:1080px;}
+  }
   .hero{
     width:100%;
     height:220px;
@@ -168,6 +171,9 @@
     margin-bottom:28px;
     border:3px solid var(--panel-line);
     box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  }
+  @media (min-width:768px){
+    .hero{height:260px;}
   }
   header{text-align:center;margin-bottom:20px;}
   .badge{
@@ -209,38 +215,84 @@
     background:var(--panel);
     border:1px solid var(--panel-line);
     border-radius:12px;
-    padding:22px;
+    padding:16px;
     margin-bottom:26px;
   }
-  .section h3{
-    font-family:'Oswald',sans-serif;
-    font-size:16px;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:18px;
-    text-align:center;
+  @media (min-width:768px){
+    .section{padding:22px;}
   }
+
+  /* Category tabs and sub-chips. Phones: one row each that scrolls
+     sideways (the page edge fades so it's clear there's more). Desktop:
+     rows wrap, and the bar sticks to the top while the grid scrolls. */
+  .catnav{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    padding:12px 0;
+    margin-bottom:12px;
+  }
+  @media (min-width:768px){
+    .catnav{position:sticky;top:0;z-index:10;padding:14px 4px;box-shadow:0 8px 20px rgba(0,0,0,.45);}
+  }
+  .chip-row{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:7px;
+    overflow-x:auto;
+    padding:2px 12px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    scroll-padding:0 12px;
+  }
+  .chip-row::-webkit-scrollbar{display:none;}
+  @media (min-width:768px){
+    .chip-row{flex-wrap:wrap;overflow-x:visible;}
+  }
+  .chip-row + .chip-row{margin-top:9px;}
+  .chip-row.sub{padding-top:9px;border-top:1px solid var(--panel-line);}
+  .chip-row[hidden]{display:none;}
+  .chip{
+    flex:0 0 auto;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    min-height:36px;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.3px;
+    text-transform:uppercase;
+    white-space:nowrap;
+    padding:7px 13px;
+    border-radius:999px;
+    border:1px solid var(--panel-line);
+    background:var(--ink);
+    color:var(--bone-dim);
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .chip:hover{border-color:var(--gold);color:var(--bone);}
+  .chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .chip.active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
+  .chip .n{font-weight:500;font-size:11px;opacity:.75;}
+  .chip.empty{opacity:.45;}
+  .chip-row.tabs .chip{font-size:13px;min-height:40px;padding:8px 15px;}
+  .chip-row.sub .chip{font-size:11px;min-height:34px;}
+
   .filters{
     background:var(--panel);
     border:1px solid var(--panel-line);
     border-radius:12px;
-    padding:18px 18px 20px;
+    padding:16px;
     margin-bottom:18px;
-    position:sticky;
-    top:12px;
-    z-index:10;
   }
-  /* Below 768px there isn't enough vertical room for a pinned filter
-     panel without eating into product visibility, and a sticky element
-     this close to result-count/active-filters-bar/currency-note will
-     always transiently cover them while scrolling past. Simplest fix
-     for mobile: let the whole filter block scroll away normally instead
-     of pinning it. */
-  @media (max-width:767px){
-    .filters{position:static;}
+  @media (min-width:768px){
+    .filters{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px 22px;align-items:start;}
+    .filters .filter-group{margin-bottom:0;}
+    .filters .wide{grid-column:1 / -1;}
   }
-  .filter-group{margin-bottom:14px;}
+  .filter-group{margin-bottom:14px;min-width:0;}
   .filter-group:last-child{margin-bottom:0;}
   .filter-label{
     font-family:'Oswald',sans-serif;
@@ -252,22 +304,10 @@
     margin-bottom:8px;
   }
   .filter-chips{display:flex;flex-wrap:wrap;gap:7px;}
-  .chip{
-    font-family:'Oswald',sans-serif;
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:0.3px;
-    text-transform:uppercase;
-    padding:7px 12px;
-    border-radius:999px;
-    border:1px solid var(--panel-line);
-    background:var(--ink);
-    color:var(--bone-dim);
-    cursor:pointer;
-    transition:all .15s ease;
-  }
-  .chip:hover{border-color:var(--gold);color:var(--bone);}
-  .chip.active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
+  .filter-chips .chip{font-size:11px;min-height:34px;padding:6px 12px;}
+  .search-sort{display:flex;gap:10px;}
+  .search-sort .search-input{flex:1 1 auto;min-width:0;}
+  .search-sort .sort-select{flex:0 0 auto;width:auto;max-width:48%;}
   .filter-sublabel{
     font-family:'Oswald',sans-serif;
     font-size:9px;
@@ -301,21 +341,12 @@
   .theme-toggle .arrow{transition:transform .15s ease;}
   .theme-details[open] .theme-toggle{border-color:var(--gold);color:var(--bone);}
   .theme-details[open] .theme-toggle .arrow{transform:rotate(180deg);}
-  .controls-row{
-    display:flex;
-    gap:12px;
-    background:var(--panel);
-    border:1px solid var(--panel-line);
-    border-radius:12px;
-    padding:16px 18px;
-    margin-bottom:18px;
-  }
-  .controls-row .filter-group{flex:1;margin-bottom:0;}
   .search-input{
     width:100%;
     font-family:'Poppins',sans-serif;
-    font-size:13px;
-    padding:9px 12px;
+    font-size:16px;
+    padding:8px 12px;
+    min-height:40px;
     border-radius:8px;
     border:1px solid var(--panel-line);
     background:var(--ink);
@@ -331,7 +362,8 @@
     font-weight:600;
     letter-spacing:.5px;
     text-transform:uppercase;
-    padding:9px 12px;
+    padding:8px 10px;
+    min-height:40px;
     border-radius:8px;
     border:1px solid var(--panel-line);
     background:var(--ink);
@@ -363,7 +395,7 @@
     margin-bottom:10px;
   }
   .active-filters-bar.hidden{display:none;}
-  .active-filters-bar button{
+  .clear-btn{
     background:none;
     border:1px solid var(--gold);
     color:var(--gold);
@@ -372,11 +404,11 @@
     font-weight:600;
     letter-spacing:.5px;
     text-transform:uppercase;
-    padding:4px 10px;
+    padding:5px 12px;
     border-radius:999px;
     cursor:pointer;
   }
-  .active-filters-bar button:hover{background:var(--gold);color:var(--ink);}
+  .clear-btn:hover{background:var(--gold);color:var(--ink);}
   .result-count{
     text-align:center;
     font-family:'Oswald',sans-serif;
@@ -389,25 +421,36 @@
   }
   .grid{
     display:grid;
-    grid-template-columns:repeat(2, 1fr);
+    grid-template-columns:repeat(2, minmax(0,1fr));
     gap:12px;
   }
-  a.card-tile{
+  @media (min-width:768px){
+    .grid{grid-template-columns:repeat(3, minmax(0,1fr));gap:16px;}
+  }
+  @media (min-width:1024px){
+    .grid{grid-template-columns:repeat(4, minmax(0,1fr));}
+  }
+  .card-tile{
     display:flex;
     flex-direction:column;
     background:var(--ink);
     border:1px solid var(--panel-line);
     border-radius:12px;
     overflow:hidden;
-    text-decoration:none;
-    color:var(--bone);
-    transition:all .2s ease;
+    transition:border-color .2s ease, transform .2s ease;
   }
-  a.card-tile:hover{
+  .card-tile:hover{
     border-color:var(--gold);
     transform:translateY(-3px);
   }
-  a.card-tile.hidden{display:none;}
+  .card-tile.hidden{display:none;}
+  a.card-link{
+    display:flex;
+    flex-direction:column;
+    flex:1 1 auto;
+    text-decoration:none;
+    color:var(--bone);
+  }
   .thumb-wrap{position:relative;}
   .thumb-wrap picture{display:block;}
   .card-thumb{
@@ -438,12 +481,9 @@
     padding:8px;
   }
   .card-thumb-placeholder .icon{font-size:22px;}
-  .new-badge{
+  .new-badge,.sale-badge{
     position:absolute;
     top:6px;
-    left:6px;
-    background:var(--crimson);
-    color:#fff;
     font-family:'Oswald',sans-serif;
     font-size:9px;
     font-weight:700;
@@ -453,16 +493,23 @@
     border-radius:6px;
     z-index:2;
   }
-  .card-body{padding:10px 12px 14px;}
-  .item-tag{
+  .new-badge{left:6px;background:var(--crimson);color:#fff;}
+  .sale-badge{right:6px;background:var(--gold);color:var(--ink);}
+  .card-body{padding:10px 12px 12px;flex:1 1 auto;display:flex;flex-direction:column;}
+  .card-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:6px;
+    margin-bottom:4px;
     font-family:'Oswald',sans-serif;
     font-size:9px;
     font-weight:600;
     letter-spacing:1px;
     text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:4px;
   }
+  .item-tag{color:var(--gold);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .retailer{color:var(--bone-dim);flex:0 0 auto;font-weight:500;}
   .prod-name{
     font-size:12px;
     font-weight:500;
@@ -474,17 +521,33 @@
     overflow:hidden;
   }
   .prod-price{
+    margin-top:auto;
     font-family:'Oswald',sans-serif;
     font-size:13px;
     font-weight:600;
     color:var(--gold);
   }
+  .prod-price.check{font-size:12px;font-weight:500;color:var(--bone);}
+  a.outfit-link{
+    display:block;
+    padding:9px 12px 10px;
+    border-top:1px solid var(--panel-line);
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    text-decoration:none;
+  }
+  a.outfit-link:hover,a.outfit-link:focus-visible{color:var(--gold);}
   #no-results{
     text-align:center;
     font-size:13px;
     color:var(--bone-dim);
     padding:30px 10px;
   }
+  #no-results p{margin-bottom:12px;}
   #no-results.hidden{display:none;}
   footer{margin-top:40px;text-align:center;}
   .fine-print{
@@ -509,62 +572,72 @@
   <header>
     <div class="badge">ThatFootball12 Shop</div>
     <h1>ALL <span>PRODUCTS</span></h1>
-    <div class="tagline">271 Shoppable Items</div>
+    <div class="tagline">Shoppable Items</div>
   </header>
 
+  <nav class="catnav" aria-label="Product categories">
+    <div class="chip-row tabs" id="tab-chips"></div>
+    <div class="chip-row sub" id="sub-chips" hidden></div>
+  </nav>
+
   <div class="filters">
-    <div class="filter-group" data-filter-group="type">
-      <div class="filter-label">Item Type</div>
+    <div class="filter-group wide">
+      <label class="filter-label" for="search-input">Search &amp; sort</label>
+      <div class="search-sort">
+        <input type="search" id="search-input" class="search-input" placeholder="Search products…" autocomplete="off">
+        <select id="sort-select" class="sort-select" aria-label="Sort">
+          <option value="newest">Newest</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="price-desc">Price: High → Low</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter-group" data-filter-group="retailer">
+      <div class="filter-label">Store</div>
       <div class="filter-chips">
-        <button class="chip active" data-value="all">All Types</button>
-        <button class="chip" data-value="Jackets">Jackets</button>
-        <button class="chip" data-value="Hoodies/Flannels">Hoodies/Flannels</button>
-        <button class="chip" data-value="Tees &amp; Graphics">Tees &amp; Graphics</button>
-        <button class="chip" data-value="Dress &amp; Polo">Dress &amp; Polo</button>
-        <button class="chip" data-value="Jeans/Chinos">Jeans/Chinos</button>
-        <button class="chip" data-value="Bottoms">Bottoms</button>
-        <button class="chip" data-value="Accessories">Accessories</button>
-        <button class="chip" data-value="Footwear">Footwear</button>
-        <button class="chip" data-value="Gifts &amp; Extras">Gifts &amp; Extras</button>
+        <button type="button" class="chip active" data-value="all">All</button>
+        <button type="button" class="chip" data-value="shein">SHEIN</button>
+        <button type="button" class="chip" data-value="amazon">Amazon</button>
+        <button type="button" class="chip" data-value="other">Other</button>
       </div>
     </div>
     <div class="filter-group" data-filter-group="price">
       <div class="filter-label">Price</div>
       <div class="filter-chips">
-        <button class="chip active" data-value="all">All Prices</button>
-        <button class="chip" data-value="under25">Under $25</button>
-        <button class="chip" data-value="25to50">$25–50</button>
-        <button class="chip" data-value="over50">$50+</button>
+        <button type="button" class="chip active" data-value="all">All Prices</button>
+        <button type="button" class="chip" data-value="under25">Under $25</button>
+        <button type="button" class="chip" data-value="25to50">$25–50</button>
+        <button type="button" class="chip" data-value="over50">$50+</button>
       </div>
     </div>
-    <details class="filter-group theme-details" id="theme-details" data-filter-group="theme">
+    <details class="filter-group theme-details wide" id="theme-details" data-filter-group="theme">
       <summary class="theme-toggle">
         <span>Browse by theme</span>
         <span class="arrow">▾</span>
       </summary>
       <div class="filter-chips" style="margin-top:10px;">
-        <button class="chip active" data-value="all">All Themes</button>
+        <button type="button" class="chip active" data-value="all">All Themes</button>
       </div>
       <div class="filter-sublabel">Outfit Themes</div>
       <div class="filter-chips">
-        <button class="chip" data-value="budget">Budget</button>
-        <button class="chip" data-value="business-casual">Business Casual</button>
-        <button class="chip" data-value="casual">Casual</button>
-        <button class="chip" data-value="date-night">Date Night</button>
-        <button class="chip" data-value="gameday">Gameday</button>
-        <button class="chip" data-value="motor-streetwear">Motor Streetwear</button>
-        <button class="chip" data-value="night-out">Night Out</button>
-        <button class="chip" data-value="old-money">Old Money</button>
-        <button class="chip" data-value="streetwear">Streetwear</button>
-        <button class="chip" data-value="wedding">Wedding</button>
+        <button type="button" class="chip" data-value="budget">Budget</button>
+        <button type="button" class="chip" data-value="business-casual">Business Casual</button>
+        <button type="button" class="chip" data-value="casual">Casual</button>
+        <button type="button" class="chip" data-value="date-night">Date Night</button>
+        <button type="button" class="chip" data-value="gameday">Gameday</button>
+        <button type="button" class="chip" data-value="motor-streetwear">Motor Streetwear</button>
+        <button type="button" class="chip" data-value="night-out">Night Out</button>
+        <button type="button" class="chip" data-value="old-money">Old Money</button>
+        <button type="button" class="chip" data-value="streetwear">Streetwear</button>
+        <button type="button" class="chip" data-value="wedding">Wedding</button>
       </div>
       <div class="filter-sublabel">Video Categories</div>
       <div class="filter-chips">
-        <button class="chip" data-value="everyday-fit-check">Everyday Fit Check</button>
-        <button class="chip" data-value="flash-deals">Flash Deals</button>
-        <button class="chip" data-value="gameday-fit-check">Gameday Fit Check</button>
-        <button class="chip" data-value="gift-guides">Gift Guides</button>
-        <button class="chip" data-value="trending-products">Trending Products</button>
+        <button type="button" class="chip" data-value="everyday-fit-check">Everyday Fit Check</button>
+        <button type="button" class="chip" data-value="flash-deals">Flash Deals</button>
+        <button type="button" class="chip" data-value="gameday-fit-check">Gameday Fit Check</button>
+        <button type="button" class="chip" data-value="gift-guides">Gift Guides</button>
+        <button type="button" class="chip" data-value="trending-products">Trending Products</button>
       </div>
     </details>
   </div>
@@ -573,30 +646,18 @@
 
   <div class="active-filters-bar hidden" id="active-filters-bar">
     <span id="active-filters-text">0 active filters</span>
-    <button id="clear-all-btn" type="button">Clear all</button>
+    <button id="clear-all-btn" class="clear-btn" type="button">Clear all</button>
   </div>
 
-  <div class="result-count" id="result-count">271 of 271 products</div>
-
-  <div class="controls-row">
-    <div class="filter-group">
-      <div class="filter-label">Search</div>
-      <input type="search" id="search-input" class="search-input" placeholder="Search products…" autocomplete="off">
-    </div>
-    <div class="filter-group">
-      <div class="filter-label">Sort</div>
-      <select id="sort-select" class="sort-select">
-        <option value="newest">Newest First</option>
-        <option value="price-asc">Price: Low to High</option>
-        <option value="price-desc">Price: High to Low</option>
-      </select>
-    </div>
-  </div>
+  <div class="result-count" id="result-count" aria-live="polite">Loading products…</div>
 
   <div class="section">
     <div class="grid" id="product-grid">
     </div>
-    <div id="no-results" class="hidden">No products match these filters.</div>
+    <div id="no-results" class="hidden">
+      <p id="no-results-text">No products match your search and filters.</p>
+      <button type="button" class="clear-btn" id="no-results-clear">Clear search &amp; filters</button>
+    </div>
   </div>
 
   <footer>
@@ -610,6 +671,15 @@
 
 <script>
 (function(){
+  // Tabs and sub-chips come from ../categories.json; placeProduct() below
+  // is the browser copy of place() in categories.py, which sync_catalog.py
+  // uses to check every product lands in a tab. Change the two together.
+  //
+  // The selected tab lives in the URL hash so it can be linked (and used
+  // as a pin destination): #footwear, #tops/hoodies. Picking a tab pushes
+  // a history entry, so Back returns to the previous one. Search, sort,
+  // store, price and theme are kept in the query string (replaceState) so
+  // a reload keeps them, but never in the hash.
   var grid = document.getElementById('product-grid');
   var noResults = document.getElementById('no-results');
   var countEl = document.getElementById('result-count');
@@ -618,44 +688,105 @@
   var sortSelect = document.getElementById('sort-select');
   var activeFiltersBar = document.getElementById('active-filters-bar');
   var activeFiltersText = document.getElementById('active-filters-text');
-  var clearAllBtn = document.getElementById('clear-all-btn');
   var themeDetails = document.getElementById('theme-details');
   var currencyNote = document.getElementById('currency-note');
+  var tabRow = document.getElementById('tab-chips');
+  var subRow = document.getElementById('sub-chips');
 
-  var typeChips = document.querySelectorAll('[data-filter-group="type"] .chip');
+  var retailerChips = document.querySelectorAll('[data-filter-group="retailer"] .chip');
   var priceChips = document.querySelectorAll('[data-filter-group="price"] .chip');
   var themeChips = document.querySelectorAll('[data-filter-group="theme"] .chip');
 
-  var VALID_TYPES = ['Jackets','Hoodies/Flannels','Tees & Graphics','Dress & Polo','Jeans/Chinos','Bottoms','Accessories','Footwear','Gifts & Extras'];
+  var VALID_RETAILERS = ['shein','amazon','other'];
   var VALID_PRICES = ['under25','25to50','over50'];
   var VALID_THEMES = ['budget','business-casual','casual','date-night','gameday','motor-streetwear','night-out','old-money','streetwear','wedding','everyday-fit-check','flash-deals','gameday-fit-check','gift-guides','trending-products'];
   var VALID_SORTS = ['newest','price-asc','price-desc'];
+  var RETAILER_LABEL = {SHEIN:'SHEIN', Amazon:'Amazon', Awin:'Moosehill'};
 
-  var currentType = 'all';
+  var cats = null;          // categories.json
+  var tabsBySlug = {};
+  var currentTab = 'all';
+  var currentSub = 'all';
+  var currentRetailer = 'all';
   var currentPrice = 'all';
   var currentTheme = 'all';
   var currentSort = 'newest';
   var searchTerm = '';
 
-  var entries = []; // {el, p, index}
+  var entries = []; // {el, p, index, tab, sub}
+
+  // --- placing products (mirror of categories.py) ---------------------
+
+  function isWordChar(c){ return !!c && /[a-z0-9]/.test(c); }
+  function hasWord(name, words){
+    var low = name.toLowerCase();
+    for(var i = 0; i < words.length; i++){
+      var w = words[i], start = 0, at;
+      while((at = low.indexOf(w, start)) !== -1){
+        if(!isWordChar(low.charAt(at - 1)) && !isWordChar(low.charAt(at + w.length))) return true;
+        start = at + 1;
+      }
+    }
+    return false;
+  }
+  function isFanGear(p){
+    var fg = cats.fan_gear, name = p.name || '';
+    if(fg.exclude.indexOf(p.id) !== -1) return false;
+    if(fg.include.indexOf(p.id) !== -1) return true;
+    if(hasWord(name, fg.licensed_keywords)) return true;
+    return hasWord(name, fg.licensed_brands) && hasWord(name, fg.teams);
+  }
+  function matchSub(tabSlug, name){
+    var tab = tabsBySlug[tabSlug], bySlug = {};
+    tab.subs.forEach(function(s){ bySlug[s.slug] = s; });
+    var order = tab.match_order || tab.subs.map(function(s){ return s.slug; });
+    for(var i = 0; i < order.length; i++){
+      var s = bySlug[order[i]];
+      if(s.keywords.length && hasWord(name, s.keywords)) return s.slug;
+    }
+    return null;
+  }
+  function placeProduct(p){
+    if(cats.hidden.indexOf(p.id) !== -1) return null;
+    var ov = cats.overrides[p.id];
+    if(ov){
+      var parts = ov.split('/');
+      return {tab: parts[0], sub: parts[1] || null};
+    }
+    var name = p.name || '';
+    if(isFanGear(p)){
+      return {tab: cats.fan_gear.tab, sub: matchSub(cats.fan_gear.tab, name)};
+    }
+    var m = cats.item_types[p.item_type];
+    if(!m) return null;
+    return {tab: m.tab, sub: matchSub(m.tab, name) || m.sub || null};
+  }
+
+  // --- cards -----------------------------------------------------------
+
+  function hasPrice(p){ return p.retailer !== 'Amazon' && typeof p.price === 'number'; }
 
   function priceText(p){
     if(p.retailer === 'Amazon') return 'Check price on Amazon';
-    if(p.price === null) return 'See Price on Site';
+    if(!hasPrice(p)) return 'See price on site';
     var symbol = p.currency === 'CAD' ? 'CA$' : '$';
-    var text = symbol + p.price.toFixed(2);
-    if(p.discount_percent){ text += ' \u00b7 ' + p.discount_percent + '% off'; }
-    return text;
+    return symbol + p.price.toFixed(2);
   }
 
-  function buildTile(p){
+  function subLabel(tab, sub){
+    var t = tabsBySlug[tab];
+    if(!t) return '';
+    for(var i = 0; i < t.subs.length; i++){ if(t.subs[i].slug === sub) return t.subs[i].label; }
+    return t.label;
+  }
+
+  function buildTile(p, place){
+    var tile = document.createElement('div');
+    tile.className = 'card-tile';
+
     var a = document.createElement('a');
-    a.className = 'card-tile';
+    a.className = 'card-link';
     a.href = '../' + p.detail_page_url.replace(/index\.html$/, '');
-    a.setAttribute('data-type', p.item_type);
-    a.setAttribute('data-price', p.price === null ? '' : p.price);
-    a.setAttribute('data-new', p.data_new);
-    a.setAttribute('data-theme', p.theme);
 
     var thumbWrap = document.createElement('div');
     thumbWrap.className = 'thumb-wrap';
@@ -663,7 +794,7 @@
     if(p.image_pending || !p.image){
       var ph = document.createElement('div');
       ph.className = 'card-thumb-placeholder';
-      ph.innerHTML = '<span class="icon">\ud83d\udcf7</span>Photo Coming Soon';
+      ph.innerHTML = '<span class="icon">📷</span>Photo Coming Soon';
       thumbWrap.appendChild(ph);
     } else {
       var img = document.createElement('img');
@@ -704,111 +835,212 @@
       badge.textContent = 'New This Week';
       thumbWrap.appendChild(badge);
     }
+    if(p.discount_percent){
+      var sale = document.createElement('div');
+      sale.className = 'sale-badge';
+      sale.textContent = 'On Sale';
+      thumbWrap.appendChild(sale);
+    }
 
     var body = document.createElement('div');
     body.className = 'card-body';
 
-    var tag = document.createElement('div');
+    var meta = document.createElement('div');
+    meta.className = 'card-meta';
+    var tag = document.createElement('span');
     tag.className = 'item-tag';
-    tag.textContent = p.item_type;
+    tag.textContent = subLabel(place.tab, place.sub);
+    var store = document.createElement('span');
+    store.className = 'retailer';
+    store.textContent = RETAILER_LABEL[p.retailer] || p.retailer || '';
+    meta.appendChild(tag);
+    meta.appendChild(store);
 
     var name = document.createElement('div');
     name.className = 'prod-name';
     name.textContent = p.name;
 
     var price = document.createElement('div');
-    price.className = 'prod-price';
+    price.className = 'prod-price' + (hasPrice(p) ? '' : ' check');
     price.textContent = priceText(p);
 
-    body.appendChild(tag);
+    body.appendChild(meta);
     body.appendChild(name);
     body.appendChild(price);
-
     a.appendChild(thumbWrap);
     a.appendChild(body);
+    tile.appendChild(a);
 
-    return a;
+    // Outfit products live at outfits/<theme>/<campaign>/<slug>/; the
+    // outfit page is the campaign folder. Video and gift-guide products
+    // aren't part of an outfit, so they get no link.
+    if(p.source === 'outfits'){
+      var outfit = document.createElement('a');
+      outfit.className = 'outfit-link';
+      outfit.href = '../' + p.detail_page_url.split('/').slice(0, 3).join('/') + '/';
+      outfit.textContent = 'Seen in this outfit →';
+      tile.appendChild(outfit);
+    }
+    return tile;
   }
 
-  function typeMatches(p){
-    return currentType === 'all' || p.item_type === currentType;
-  }
+  // --- filtering -------------------------------------------------------
 
+  function retailerMatches(p){
+    if(currentRetailer === 'all') return true;
+    if(currentRetailer === 'shein') return p.retailer === 'SHEIN';
+    if(currentRetailer === 'amazon') return p.retailer === 'Amazon';
+    return p.retailer !== 'SHEIN' && p.retailer !== 'Amazon';
+  }
+  // Amazon prices are never shown, so Amazon items only appear under
+  // All Prices (as do any items with no stored price).
   function priceMatches(p){
     if(currentPrice === 'all') return true;
-    if(p.price === null) return false;
+    if(!hasPrice(p)) return false;
     var v = p.price;
     if(currentPrice === 'under25') return v < 25;
     if(currentPrice === '25to50') return v >= 25 && v <= 50;
     if(currentPrice === 'over50') return v > 50;
     return true;
   }
-
-  function themeMatches(p){
-    return currentTheme === 'all' || p.theme === currentTheme;
+  function themeMatches(p){ return currentTheme === 'all' || p.theme === currentTheme; }
+  function searchMatches(p){ return !searchTerm || (p.name || '').toLowerCase().indexOf(searchTerm) !== -1; }
+  function baseMatches(e){
+    return retailerMatches(e.p) && priceMatches(e.p) && themeMatches(e.p) && searchMatches(e.p);
+  }
+  function tabMatches(e){
+    if(currentTab === 'all') return true;
+    if(e.tab !== currentTab) return false;
+    return currentSub === 'all' || e.sub === currentSub;
   }
 
-  function searchMatches(p){
-    if(!searchTerm) return true;
-    return p.name.toLowerCase().indexOf(searchTerm) !== -1;
+  function byNewest(a, b){
+    if(a.p.added !== b.p.added) return a.p.added < b.p.added ? 1 : -1;
+    return a.index - b.index;
   }
-
   function sortedEntries(){
     var arr = entries.slice();
     if(currentSort === 'price-asc' || currentSort === 'price-desc'){
-      var withPrice = arr.filter(function(e){ return e.p.price !== null; });
-      var noPrice = arr.filter(function(e){ return e.p.price === null; });
+      var withPrice = arr.filter(function(e){ return hasPrice(e.p); });
+      var noPrice = arr.filter(function(e){ return !hasPrice(e.p); });
       withPrice.sort(function(a,b){
         var diff = a.p.price - b.p.price;
         if(diff !== 0) return currentSort === 'price-asc' ? diff : -diff;
-        return a.index - b.index;
+        return byNewest(a, b);
       });
-      noPrice.sort(function(a,b){ return a.index - b.index; });
+      noPrice.sort(byNewest);
       return withPrice.concat(noPrice);
     }
-    // 'newest' (default): data_new=yes first, then existing catalog order
-    arr.sort(function(a,b){
-      var an = a.p.data_new === 'yes' ? 0 : 1;
-      var bn = b.p.data_new === 'yes' ? 0 : 1;
-      if(an !== bn) return an - bn;
-      return a.index - b.index;
-    });
-    return arr;
+    return arr.sort(byNewest);
   }
+
+  // --- chips -----------------------------------------------------------
+
+  function makeChip(label, value, count, active){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip' + (active ? ' active' : '') + (count === 0 ? ' empty' : '');
+    b.setAttribute('data-value', value);
+    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    b.appendChild(document.createTextNode(label + ' '));
+    var n = document.createElement('span');
+    n.className = 'n';
+    n.textContent = count;
+    b.appendChild(n);
+    return b;
+  }
+
+  // Counts reflect the other filters (store, price, theme, search), so each
+  // chip says how many products picking it would show.
+  function renderChips(){
+    var base = entries.filter(baseMatches);
+    var tabCount = {}, subCount = {};
+    base.forEach(function(e){
+      tabCount[e.tab] = (tabCount[e.tab] || 0) + 1;
+      if(e.tab === currentTab && e.sub) subCount[e.sub] = (subCount[e.sub] || 0) + 1;
+    });
+    tabRow.innerHTML = '';
+    tabRow.appendChild(makeChip('All', '', base.length, currentTab === 'all'));
+    cats.tabs.forEach(function(t){
+      tabRow.appendChild(makeChip(t.label, t.slug, tabCount[t.slug] || 0, currentTab === t.slug));
+    });
+    subRow.innerHTML = '';
+    if(currentTab === 'all'){ subRow.hidden = true; return; }
+    var tab = tabsBySlug[currentTab];
+    subRow.hidden = false;
+    subRow.appendChild(makeChip('All ' + tab.label, tab.slug, tabCount[tab.slug] || 0, currentSub === 'all'));
+    tab.subs.forEach(function(s){
+      subRow.appendChild(makeChip(s.label, tab.slug + '/' + s.slug, subCount[s.slug] || 0, currentSub === s.slug));
+    });
+  }
+
+  function scrollActiveIntoView(row){
+    var active = row.querySelector('.chip.active');
+    if(!active || row.scrollWidth <= row.clientWidth) return;
+    var left = active.offsetLeft - (row.clientWidth - active.offsetWidth) / 2;
+    row.scrollLeft = Math.max(0, left);
+  }
+
+  // --- URL -------------------------------------------------------------
+
+  function hashFor(tab, sub){
+    if(tab === 'all') return '';
+    return '#' + tab + (sub !== 'all' ? '/' + sub : '');
+  }
+  function readHash(){
+    var raw = decodeURIComponent((location.hash || '').replace(/^#\/?/, '')).toLowerCase();
+    var parts = raw.split('/');
+    var tab = tabsBySlug[parts[0]] ? parts[0] : 'all';
+    var sub = 'all';
+    if(tab !== 'all' && parts[1]){
+      tabsBySlug[tab].subs.forEach(function(s){ if(s.slug === parts[1]) sub = s.slug; });
+    }
+    currentTab = tab;
+    currentSub = sub;
+  }
+  function updateQuery(){
+    var params = new URLSearchParams();
+    if(currentTheme !== 'all') params.set('theme', currentTheme);
+    if(currentRetailer !== 'all') params.set('store', currentRetailer);
+    if(currentPrice !== 'all') params.set('price', currentPrice);
+    if(currentSort !== 'newest') params.set('sort', currentSort);
+    if(searchTerm) params.set('q', searchTerm);
+    var qs = params.toString();
+    history.replaceState(history.state, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+  }
+  function selectTab(tab, sub){
+    var target = hashFor(tab, sub);
+    if(target === location.hash) return;
+    // pushState (not location.hash = '') so All leaves no bare "#".
+    history.pushState(null, '', location.pathname + location.search + target);
+    readHash();
+    applyAll();
+  }
+
+  // --- render ----------------------------------------------------------
+
+  var EAGER_TILE_COUNT = 6;
+  var initialRenderDone = false;
 
   function activeFilterCount(){
     var n = 0;
-    if(currentType !== 'all') n++;
+    if(currentTab !== 'all') n++;
+    if(currentRetailer !== 'all') n++;
     if(currentPrice !== 'all') n++;
     if(currentTheme !== 'all') n++;
     if(searchTerm) n++;
     return n;
   }
 
-  function updateURL(){
-    var params = new URLSearchParams();
-    if(currentTheme !== 'all') params.set('theme', currentTheme);
-    if(currentType !== 'all') params.set('type', currentType);
-    if(currentPrice !== 'all') params.set('price', currentPrice);
-    if(currentSort !== 'newest') params.set('sort', currentSort);
-    if(searchTerm) params.set('q', searchTerm);
-    var qs = params.toString();
-    var newUrl = window.location.pathname + (qs ? '?' + qs : '');
-    history.replaceState(null, '', newUrl);
-  }
-
-  var EAGER_TILE_COUNT = 6;
-  var initialRenderDone = false;
-
   function applyAll(){
     var order = sortedEntries();
     var visible = 0;
     var cadVisible = false;
     order.forEach(function(entry){
-      var show = typeMatches(entry.p) && priceMatches(entry.p) && themeMatches(entry.p) && searchMatches(entry.p);
+      var show = tabMatches(entry) && baseMatches(entry);
       if(show){
         visible++;
-        if(entry.p.currency === 'CAD' && entry.p.retailer !== 'Amazon'){ cadVisible = true; }
+        if(entry.p.currency === 'CAD' && hasPrice(entry.p)){ cadVisible = true; }
         if(!initialRenderDone && visible <= EAGER_TILE_COUNT){
           var img = entry.el.querySelector('img.card-thumb');
           if(img){
@@ -823,22 +1055,26 @@
     initialRenderDone = true;
     countEl.textContent = visible + ' of ' + entries.length + ' products';
     noResults.classList.toggle('hidden', visible !== 0);
+    document.getElementById('no-results-text').textContent = searchTerm
+      ? 'No products match “' + searchInput.value.trim() + '” with these filters.'
+      : 'No products match these filters.';
     currencyNote.classList.toggle('hidden', !cadVisible);
 
     var n = activeFilterCount();
-    if(n > 0){
-      activeFiltersBar.classList.remove('hidden');
-      activeFiltersText.textContent = n + ' active filter' + (n === 1 ? '' : 's');
-    } else {
-      activeFiltersBar.classList.add('hidden');
-    }
+    activeFiltersBar.classList.toggle('hidden', n === 0);
+    activeFiltersText.textContent = n + ' active filter' + (n === 1 ? '' : 's');
 
-    updateURL();
+    renderChips();
+    scrollActiveIntoView(tabRow);
+    scrollActiveIntoView(subRow);
+    updateQuery();
   }
 
   function setActiveChip(chips, value){
     chips.forEach(function(c){
-      c.classList.toggle('active', c.getAttribute('data-value') === value);
+      var on = c.getAttribute('data-value') === value;
+      c.classList.toggle('active', on);
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
   }
 
@@ -853,80 +1089,104 @@
     });
   }
 
-  wireGroup(typeChips, function(v){ currentType = v; });
-  wireGroup(priceChips, function(v){ currentPrice = v; });
-  wireGroup(themeChips, function(v){ currentTheme = v; });
-
-  var searchDebounceTimer = null;
-  searchInput.addEventListener('input', function(){
-    var val = searchInput.value;
-    clearTimeout(searchDebounceTimer);
-    searchDebounceTimer = setTimeout(function(){
-      searchTerm = val.trim().toLowerCase();
-      applyAll();
-    }, 300);
-  });
-
-  sortSelect.addEventListener('change', function(){
-    var v = VALID_SORTS.indexOf(sortSelect.value) !== -1 ? sortSelect.value : 'newest';
-    currentSort = v;
-    applyAll();
-  });
-
-  clearAllBtn.addEventListener('click', function(){
-    currentType = 'all';
+  function clearAll(){
+    currentRetailer = 'all';
     currentPrice = 'all';
     currentTheme = 'all';
     searchTerm = '';
     searchInput.value = '';
-    setActiveChip(typeChips, 'all');
+    setActiveChip(retailerChips, 'all');
     setActiveChip(priceChips, 'all');
     setActiveChip(themeChips, 'all');
     themeDetails.open = false;
+    selectTab('all', 'all');
     applyAll();
-  });
+  }
 
-  function readInitialStateFromURL(){
+  function wireControls(){
+    wireGroup(retailerChips, function(v){ currentRetailer = v; });
+    wireGroup(priceChips, function(v){ currentPrice = v; });
+    wireGroup(themeChips, function(v){ currentTheme = v; });
+
+    tabRow.addEventListener('click', function(e){
+      var chip = e.target.closest('.chip');
+      if(!chip) return;
+      var v = chip.getAttribute('data-value');
+      selectTab(v || 'all', 'all');
+    });
+    subRow.addEventListener('click', function(e){
+      var chip = e.target.closest('.chip');
+      if(!chip) return;
+      var parts = chip.getAttribute('data-value').split('/');
+      selectTab(parts[0], parts[1] || 'all');
+    });
+
+    searchInput.addEventListener('input', function(){
+      searchTerm = searchInput.value.trim().toLowerCase();
+      applyAll();
+    });
+    sortSelect.addEventListener('change', function(){
+      currentSort = VALID_SORTS.indexOf(sortSelect.value) !== -1 ? sortSelect.value : 'newest';
+      applyAll();
+    });
+    document.getElementById('clear-all-btn').addEventListener('click', clearAll);
+    document.getElementById('no-results-clear').addEventListener('click', clearAll);
+
+    // Back/forward between tabs, and a hash edited by hand.
+    window.addEventListener('popstate', function(){ readHash(); applyAll(); });
+    window.addEventListener('hashchange', function(){ readHash(); applyAll(); });
+  }
+
+  function readInitialStateFromQuery(){
     var params;
-    try {
-      params = new URLSearchParams(window.location.search);
-    } catch(e){
-      return;
-    }
+    try { params = new URLSearchParams(window.location.search); } catch(e){ return; }
     var theme = params.get('theme');
     if(theme && VALID_THEMES.indexOf(theme) !== -1){ currentTheme = theme; }
-    var type = params.get('type');
-    if(type && VALID_TYPES.indexOf(type) !== -1){ currentType = type; }
+    var store = params.get('store');
+    if(store && VALID_RETAILERS.indexOf(store) !== -1){ currentRetailer = store; }
     var price = params.get('price');
     if(price && VALID_PRICES.indexOf(price) !== -1){ currentPrice = price; }
     var sort = params.get('sort');
     if(sort && VALID_SORTS.indexOf(sort) !== -1){ currentSort = sort; }
     var q = params.get('q');
-    if(q){ searchTerm = q.trim().toLowerCase(); }
+    if(q){ searchTerm = q.trim().toLowerCase(); searchInput.value = q.trim(); }
   }
 
-  readInitialStateFromURL();
-  setActiveChip(typeChips, currentType);
+  readInitialStateFromQuery();
+  setActiveChip(retailerChips, currentRetailer);
   setActiveChip(priceChips, currentPrice);
   setActiveChip(themeChips, currentTheme);
   if(currentTheme !== 'all'){ themeDetails.open = true; }
-  if(searchTerm){ searchInput.value = searchTerm; }
   sortSelect.value = currentSort;
 
-  fetch('../products.json')
-    .then(function(r){ return r.json(); })
-    .then(function(products){
+  function getJSON(url){
+    return fetch(url).then(function(r){
+      if(!r.ok) throw new Error(url + ' ' + r.status);
+      return r.json();
+    });
+  }
+
+  Promise.all([getJSON('../products.json'), getJSON('../categories.json')])
+    .then(function(results){
+      var products = results[0];
+      cats = results[1];
+      cats.tabs.forEach(function(t){ tabsBySlug[t.slug] = t; });
       products.forEach(function(p, i){
-        var el = buildTile(p);
-        entries.push({el: el, p: p, index: i});
+        var place = placeProduct(p);
+        if(!place) return; // hidden (or unmapped, which sync_catalog.py fails CI on)
+        entries.push({el: buildTile(p, place), p: p, index: i, tab: place.tab, sub: place.sub});
       });
-      if(taglineEl){ taglineEl.textContent = products.length + ' Shoppable Items'; }
+      if(taglineEl){ taglineEl.textContent = entries.length + ' Shoppable Items'; }
+      readHash();
+      wireControls();
       applyAll();
     })
     .catch(function(err){
-      noResults.textContent = 'Could not load products right now. Please refresh.';
+      countEl.textContent = '';
+      document.getElementById('no-results-text').textContent = 'Could not load products right now. Please refresh.';
+      document.getElementById('no-results-clear').hidden = true;
       noResults.classList.remove('hidden');
-      console.error('Failed to load products.json', err);
+      console.error('Failed to load the catalog', err);
     });
 })();
 </script>
