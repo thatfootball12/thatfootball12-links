@@ -7,7 +7,8 @@ Usage:
     python write_sitemap.py --check    (report only, change nothing)
 
 Included:
-  - The homepage, the shop grid (products/) and the privacy page
+  - The homepage, the shop grid (products/), the outfit generator, the
+    gift guide (gift-guide/) and the privacy page
   - The outfits/ and videos/ hubs and every category page under them
   - Every campaign page (outfits/<theme>/<campaign>/,
     videos/<category>/<campaign>/), legacy link-list pages included
@@ -92,6 +93,8 @@ def expected_urls():
         ("products/index.html", ["products/index.html", "products.json"]),
         ("generator/index.html", ["generator/index.html", "generator.json"]),
     ]
+    if os.path.isfile(_abs("gift-guide/index.html")):
+        entries.append(("gift-guide/index.html", ["gift-guide/index.html"]))
     if os.path.isfile(_abs("privacy/index.html")):
         entries.append(("privacy/index.html", ["privacy/index.html"]))
     for rel in ["outfits/index.html", "videos/index.html"] + \

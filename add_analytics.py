@@ -14,7 +14,7 @@ sync_catalog.py imports audit(), untracked_links() and ungated_tags()
 from here and reports any page whose blocks are missing, stale, or
 present where they shouldn't be.
 
-Pages: homepage, shop grid, outfit generator, the privacy page, the outfits/ and
+Pages: homepage, shop grid, outfit generator, gift guide, the privacy page, the outfits/ and
 videos/ hubs, every category page, every campaign page (legacy link-list
 pages and redirect pages like the retired this-or-that-aug-14 included),
 and every product detail page. Redirect pages (meta refresh) get the
@@ -75,6 +75,10 @@ affiliate_click tracking:
   - Homepage: .link-card and .affiliate-banner links, same as legacy
     (product_id "home/<slug>"). Social profile links (TikTok, Instagram,
     Pinterest) aren't affiliate links and are skipped.
+  - Gift guide (gift-guide/): every card's .gg-shop button, same as
+    legacy; product_name comes from the button's hidden .link-text
+    (product_id "gift-guide/<slug>"). No value/currency: the page shows
+    no prices.
 
 Every tracked link opens in a new tab (target="_blank"), so the page
 isn't unloading when the event is sent. The handler therefore never
@@ -318,6 +322,8 @@ def targets():
     if os.path.isfile(_abs(PRIVACY_PAGE)):
         out[PRIVACY_PAGE] = None
     out["index.html"] = (None, "home", "a.link-card, a.affiliate-banner")
+    if os.path.isfile(_abs("gift-guide/index.html")):
+        out["gift-guide/index.html"] = (None, "gift-guide", "a.gg-shop")
     for rel in _rel_glob("outfits/*/*/index.html") + _rel_glob("videos/*/*/index.html"):
         campaign_dir = os.path.dirname(_abs(rel))
         if glob.glob(os.path.join(campaign_dir, "*", "index.html")):

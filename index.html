@@ -254,6 +254,63 @@
   a.fit-cta:hover{filter:brightness(1.08);transform:translateY(-2px);}
   a.fit-cta:focus-visible{outline:3px solid var(--bone);outline-offset:3px;}
   a.fit-cta small{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.5px;font-weight:600;opacity:.8;}
+  .gift-banner{
+    position:relative;
+    overflow:hidden;
+    margin:0 0 26px;
+    padding:26px 20px 24px;
+    border:1px solid var(--gold);
+    border-radius:12px;
+    text-align:center;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(212,160,23,.55) 0 1.5px, transparent 2.5px),
+      radial-gradient(circle at 84% 26%, rgba(212,160,23,.45) 0 1.5px, transparent 2.5px),
+      radial-gradient(circle at 70% 82%, rgba(212,160,23,.4) 0 1px, transparent 2px),
+      radial-gradient(circle at 24% 74%, rgba(243,239,230,.35) 0 1px, transparent 2px),
+      radial-gradient(circle at 50% 0%, rgba(212,160,23,.18), transparent 65%),
+      var(--ink);
+    box-shadow:inset 0 0 0 5px var(--ink), inset 0 0 0 6px rgba(212,160,23,.35), 0 8px 22px rgba(212,160,23,.12);
+  }
+  .gift-banner::before{
+    content:'';
+    position:absolute;left:0;right:0;top:0;height:4px;
+    background:linear-gradient(90deg, var(--crimson), var(--gold) 50%, var(--crimson));
+  }
+  .gift-title{
+    font-family:'Anton',sans-serif;
+    font-size:26px;
+    line-height:1.1;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--bone);
+  }
+  .gift-sub{
+    margin-top:8px;
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  a.gift-btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:48px;
+    margin-top:18px;
+    padding:12px 24px;
+    border-radius:999px;
+    background:var(--gold);
+    color:var(--ink);
+    font-family:'Oswald',sans-serif;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    text-decoration:none;
+    transition:filter .15s ease, transform .15s ease;
+  }
+  a.gift-btn:hover{filter:brightness(1.08);transform:translateY(-2px);}
+  a.gift-btn:focus-visible{outline:3px solid var(--bone);outline-offset:3px;}
   a.link-card{
     display:flex;align-items:center;gap:12px;
     background:var(--panel);
@@ -369,6 +426,13 @@
   <!-- OUTFIT GENERATOR -->
   <a class="fit-cta" href="generator/">🎲 Build me a fit <small>→</small></a>
 
+  <!-- HOLIDAY GIFT GUIDE -->
+  <div class="gift-banner">
+    <div class="gift-title">🎁 Holiday Gift Guide for Men 2026</div>
+    <div class="gift-sub">60 gifts, from stocking stuffers to splurges</div>
+    <a class="gift-btn" href="gift-guide/">Shop the Gift Guide →</a>
+  </div>
+
   <!-- NEW USER SHEIN DEAL -->
   <div class="section" style="background:#1F1A13; border-color:var(--gold); text-align:center;">
     <img src="shein-new-user.jpg" style="width:100%; border-radius:12px; margin-bottom:16px;" alt="60% OFF SHEIN New User Deal">
@@ -381,23 +445,6 @@
     <p style="font-size:12px; color:var(--bone-dim); margin-top:12px;">
       Search code <strong>SJFA6M9</strong> in the SHEIN App or use the link above.
     </p>
-  </div>
-
-  <!-- MOOSEHILL AFFILIATE -->
-  <div class="section" style="background:#1F1A13; border-color:var(--gold); text-align:center;">
-    <h3 style="color:var(--gold); margin-bottom:16px;">Moosehill Outdoor Gear</h3>
-    
-    <!-- START ADVERTISER: Moosehill from awin.com -->
-    <a class="affiliate-banner" rel="sponsored" href="https://www.awin1.com/cread.php?s=4773121&v=96701&q=556664&r=2968527" target="_blank" rel="noopener">
-      <img src="https://www.awin1.com/cshow.php?s=4773121&v=96701&q=556664&r=2968527" alt="Moosehill Outdoor Gear" border="0">
-    </a>
-    <!-- END ADVERTISER: Moosehill from awin.com -->
-
-    <a class="link-card" href="https://www.awin1.com/cread.php?s=4773121&v=96701&q=556664&r=2968527" target="_blank" rel="noopener" style="border-color:var(--gold); margin-top:16px;">
-      <span class="tag moosehill">MOOSEHILL</span>
-      <span class="link-text">Shop Outdoor &amp; Everyday Gear</span>
-      <span class="arrow">↗</span>
-    </a>
   </div>
 
   <!-- SHOP SECTION
@@ -432,6 +479,10 @@
         <span class="tile-icon">🛍️</span>
         <span class="tile-label">Products</span>
       </a>
+      <a class="tile" href="gift-guide/">
+        <span class="tile-icon">🎁</span>
+        <span class="tile-label">Gift Guide</span>
+      </a>
     </div>
   </div>
 
@@ -464,7 +515,7 @@
       <a href="https://www.redbubble.com/people/ThatFootball12/shop" target="_blank" rel="noopener">Redbubble</a>
     </div>
     <div class="fine-print">
-      As an Amazon Associate, SHEIN affiliate, and Moosehill (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through the links above.<br>
+      As an Amazon Associate and SHEIN affiliate, ThatFootball12 earns from qualifying purchases made through the links above.<br>
       Prices and availability may have changed since this was published — check the retailer page for current details.
     </div>
   </footer>
