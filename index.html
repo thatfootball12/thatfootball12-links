@@ -276,6 +276,31 @@
     position:absolute;left:0;right:0;top:0;height:4px;
     background:linear-gradient(90deg, var(--crimson), var(--gold) 50%, var(--crimson));
   }
+  .gift-banner::before{z-index:1;}
+  a.gift-hero{
+    position:relative;
+    display:block;
+    margin:-26px -20px 20px;
+    border-radius:11px 11px 0 0;
+    overflow:hidden;
+  }
+  a.gift-hero img{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    border-radius:11px 11px 0 0;
+  }
+  a.gift-hero::after{
+    content:'';
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:45%;
+    background:linear-gradient(to bottom, rgba(13,13,13,0), var(--ink));
+    pointer-events:none;
+  }
+  a.gift-hero:focus-visible{outline:3px solid var(--bone);outline-offset:-3px;}
   .gift-title{
     font-family:'Anton',sans-serif;
     font-size:26px;
@@ -428,6 +453,12 @@
 
   <!-- HOLIDAY GIFT GUIDE -->
   <div class="gift-banner">
+    <a class="gift-hero" href="gift-guide/">
+      <picture>
+        <source srcset="holiday-2026/gift-guide-hero.webp" type="image/webp">
+        <img src="holiday-2026/gift-guide-hero.jpg" alt="Holiday gift flat-lay of men's boots, watch, cashmere scarf, leather wallet and cologne gift set" width="1360" height="765" loading="lazy" decoding="async">
+      </picture>
+    </a>
     <div class="gift-title">🎁 Holiday Gift Guide for Men 2026</div>
     <div class="gift-sub">60 gifts, from stocking stuffers to splurges</div>
     <a class="gift-btn" href="gift-guide/">Shop the Gift Guide →</a>
