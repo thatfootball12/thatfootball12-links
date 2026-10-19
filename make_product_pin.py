@@ -10,6 +10,7 @@ Usage:
     py -3 make_product_pin.py --pick 20 --batch oct-12   (the 20 best deals
                                                           in that batch)
     py -3 make_product_pin.py --pick 20 --batch oct-12 --dry-run   (list only)
+    py -3 make_product_pin.py --pick 20 --batch oct-26 --no-inflated --max-price 100
 
 Layout: the same two paths as make_outfit_pin.py --style fade.
     shrink   (most photos) a 1000x1500 (2:3) pin: the photo scaled so
@@ -36,7 +37,11 @@ skipped, as are image_pending products (no photo yet).
 --pick N --batch DATE: takes the batch's best N eligible SHEIN
 products: any with discount_percent >= 20 first (biggest discount
 first, ties cheaper first), then the rest cheapest first. Discounts
-under 20% count for nothing.
+under 20% count for nothing. --no-inflated leaves out every product
+whose record has inflated_original (listed original more than 70% above
+the sale price), --max-price X leaves out anything priced over X, and
+--skip ID (repeatable) leaves out one products.json id.
+Products flagged reserve in products.json never get a pin.
 
 Font: Anton (assets/fonts/, SIL Open Font License, see Anton-OFL.txt).
 """
@@ -80,10 +85,12 @@ def price_cap(price):
 
 def eligible(p):
     return (p.get("retailer") == "SHEIN" and p.get("price") is not None
-            and not p.get("image_pending") and p.get("image"))
+            and not p.get("image_pending") and p.get("image") and not p.get("reserve"))
 
 
 def why_ineligible(p):
+    if p.get("reserve"):
+        return "reserve"
     if p.get("retailer") != "SHEIN":
         return f"{p.get('retailer')} product"
     if p.get("price") is None:
@@ -303,6 +310,11 @@ def main():
     ap.add_argument("products", nargs="*", help="product folder(s)")
     ap.add_argument("--pick", type=int, metavar="N", help="the N best SHEIN deals in --batch")
     ap.add_argument("--batch", metavar="DATE", help="campaign date, e.g. oct-12 (with --pick)")
+    ap.add_argument("--no-inflated", action="store_true",
+                    help="with --pick: leave out products tagged inflated_original")
+    ap.add_argument("--max-price", type=float, metavar="X", help="with --pick: leave out products priced over X")
+    ap.add_argument("--skip", action="append", default=[], metavar="ID",
+                    help="with --pick: leave out this products.json id (repeatable)")
     ap.add_argument("--dry-run", action="store_true", help="list what would be made, write nothing")
     args = ap.parse_args()
     if bool(args.pick) != bool(args.batch):
@@ -326,8 +338,13 @@ def main():
     if args.pick:
         pool = batch_products(products, args.batch)
         ok = [p for p in pool if eligible(p)]
+        left_out = [p for p in ok if (args.no_inflated and p.get("inflated_original"))
+                    or (args.max_price is not None and p["price"] > args.max_price)
+                    or p["id"] in args.skip]
+        ok = [p for p in ok if p not in left_out]
         chosen = pick(ok, args.pick)
-        print(f"{args.batch}: {len(pool)} products, {len(ok)} eligible SHEIN, picked {len(chosen)}\n")
+        note = f" ({len(left_out)} left out by --no-inflated/--max-price/--skip)" if left_out else ""
+        print(f"{args.batch}: {len(pool)} products, {len(ok)} eligible SHEIN{note}, picked {len(chosen)}\n")
         print(f"  {'#':>2}  {'price':>7}  {'disc':>4}  {'tag':<9}  product")
         for i, p in enumerate(chosen, 1):
             disc = f"{p['discount_percent']}%" if p.get("discount_percent") else "-"

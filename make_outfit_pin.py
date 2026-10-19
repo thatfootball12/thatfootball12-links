@@ -14,7 +14,8 @@ Usage:
 Styles (default fade):
     fade     price text centred in a fade at the bottom, as large as fits
              (price line up to 70% of the width): a letter-spaced "SHOP THE
-             LOOK" (gold "ON SALE NOW" if any item has a discount_percent)
+             LOOK" (gold "ON SALE NOW" if any item has a discount_percent,
+             unless --no-sale-line)
              at half the height of "UNDER $X!" below it (price in gold).
              A photo taller than 3:4 with at least 18% empty floor at the
              bottom keeps its shape; the text goes in a fade over that floor.
@@ -427,6 +428,8 @@ def main():
     ap.add_argument("--batch", metavar="DATE", help="every campaign whose slug ends in DATE, e.g. oct-12")
     ap.add_argument("--all", action="store_true", help="every campaign in outfits/")
     ap.add_argument("--style", choices=STYLES, default="fade", help="overlay style (default fade)")
+    ap.add_argument("--no-sale-line", action="store_true",
+                    help='always "SHOP THE LOOK", never "ON SALE NOW" (e.g. a batch with inflated originals)')
     args = ap.parse_args()
 
     dirs = [os.path.abspath(c) for c in args.campaigns]
@@ -458,7 +461,7 @@ def main():
                 skipped += 1
             continue
         cap = price_cap(items)
-        on_sale = any((p.get("discount_percent") or 0) > 0 for p in items)
+        on_sale = not args.no_sale_line and any((p.get("discount_percent") or 0) > 0 for p in items)
         label = (f"UNDER ${cap}" if cap else "no total") + (", on sale" if on_sale else "")
         pin, path = render(preview, cap, on_sale, args.style)
         pin.save(os.path.join(d, PIN_NAME), quality=92, optimize=True)
