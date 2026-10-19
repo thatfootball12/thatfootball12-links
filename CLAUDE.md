@@ -140,7 +140,8 @@ image `outfit-pin.jpg` into each campaign folder from its
 `outfit-preview.*`, with the price overlay that used to be added by hand
 in Gemini: "UNDER $X!" from the outfit's total rounded up to the next
 $5, or "FULL FIT ↓" when any item has no stored price (Amazon, Awin),
-under "SHOP THE LOOK" ("ON SALE NOW" if any item has a discount). The
+under "SHOP THE LOOK" ("ON SALE NOW" if any item has a discount, unless
+you pass `--no-sale-line`, as the Oct 26 / Nov 2 batch did). The
 site keeps using the plain `outfit-preview`, which the script never
 modifies. It prints one line per pin naming the path it took:
 `overlay` (text in a fade over the photo's own floor) or `shrink` (photo
