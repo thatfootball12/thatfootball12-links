@@ -73,7 +73,7 @@
         {"slug": "watches", "label": "Watches", "keywords": ["watch", "watches", "wristwatch"]},
         {"slug": "belts", "label": "Belts", "keywords": ["belt", "belts"]},
         {"slug": "bags", "label": "Bags & Wallets", "keywords": ["bag", "duffel", "wallet"]},
-        {"slug": "jewelry", "label": "Jewelry", "keywords": ["necklace", "bracelet", "bangle", "wristband", "wristbands", "chain"]},
+        {"slug": "jewelry", "label": "Jewelry", "keywords": ["necklace", "bracelet", "bangle", "wristband", "wristbands", "chain", "ring", "rings"]},
         {"slug": "cold-weather", "label": "Cold Weather", "keywords": ["scarf", "gloves", "snood", "hand warmer"]},
         {"slug": "eyewear", "label": "Eyewear", "keywords": ["glasses", "sunglasses"]},
         {"slug": "ties", "label": "Ties", "keywords": ["tie", "necktie", "pocket square"]}
@@ -118,6 +118,14 @@
     "gameday/gameday-oct-5-2/tee",
     "gameday/gameday-oct-5-3/jersey",
     "gameday-fit-check/gameday-fit-check-aug-12/jersey",
-    "gift-guides/packers-gift-guide-sept-22/socks"
+    "gift-guides/packers-gift-guide-sept-22/socks",
+    "trending-products/reserve-nov-2/corduroy-pants",
+    "trending-products/reserve-nov-2/corduroy-shirt",
+    "trending-products/reserve-nov-2/cropped-zip-hoodie",
+    "trending-products/reserve-nov-2/embroidered-wide-leg-pants",
+    "trending-products/reserve-nov-2/leather-gloves",
+    "trending-products/reserve-nov-2/plaid-shirt",
+    "trending-products/reserve-nov-2/ribbed-sweater",
+    "trending-products/reserve-nov-2/watch"
   ]
 }

@@ -166,7 +166,13 @@ pin with the product photo above "SHOP NOW" / "UNDER $X!" (the price
 rounded up: to the next dollar under $10, else to the next $5). Amazon
 and Awin products, products with no price, and `image_pending` products
 are skipped. The product's own photo is never modified. Add `--dry-run`
-to see the list without writing anything. Commit the `product-pin.jpg`
+to see the list without writing anything. `--no-inflated` leaves out
+records with `inflated_original: true`, `--max-price X` anything over
+$X, and `--skip <id>` (repeatable) one record; records with
+`reserve: true` never get a pin. Since the Oct 26 batch, new records
+also carry `week` (the pin week, e.g. `oct-26`), `inflated_original`
+and `goods_id` (SHEIN's product id, one per colour). Check a new batch's
+goods ids against `products.json` to find repeats. Commit the `product-pin.jpg`
 files with the batch: their URLs on the live site are the public Media
 URLs for the Pinterest bulk upload.
 
