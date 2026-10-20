@@ -15,10 +15,14 @@ refuses them and make_pinterest_csv.py blocks any pin of one. Unchecked
 products still get pins, with a warning, until someone checks them.
 
 unchecked_sellers.txt (written by set_seller.py) lists every unchecked
-SHEIN product, newest batch first, with its SHEIN link to check.
+SHEIN product, newest batch first, with its goods id (to search on the
+SHEIN Affiliate site) and a plain ca.shein.com product URL. It never
+carries the affiliate (onelink) link: opening those would count as a
+self-click.
 """
 
 import os
+import re
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 UNCHECKED_TXT = os.path.join(REPO, "unchecked_sellers.txt")
@@ -76,18 +80,29 @@ def unchecked_list(products):
     return rows
 
 
+def plain_url(p):
+    """ca.shein.com product page with no affiliate parameters, in SHEIN's
+    own <name>-p-<goods_id>.html form (the id is what SHEIN routes on)."""
+    if not p.get("goods_id"):
+        return ""
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", p.get("name") or "").strip("-") or "product"
+    return f"https://ca.shein.com/{slug}-p-{p['goods_id']}.html"
+
+
 def write_unchecked(products):
     """Writes unchecked_sellers.txt; returns how many products it lists."""
     rows = unchecked_list(products)
     lines = [
         "# SHEIN products whose seller hasn't been checked, newest batch first.",
-        "# Open each SHEIN link and see who it's sold by. To record results, copy",
+        "# Search each goods id on the SHEIN Affiliate site (or open the plain URL)",
+        "# and see who it's sold by. These are deliberately NOT affiliate links:",
+        "# never open a product's onelink link to check it. To record results, copy",
         "# lines into a file, add shein or marketplace to the end of each, and run",
         "#     py -3 set_seller.py --from <file>",
         "# (or one at a time: py -3 set_seller.py <id> shein|marketplace).",
         "# This file is rewritten by set_seller.py; don't edit it by hand.",
         "#",
-        "# id<TAB>SHEIN link",
+        "# id<TAB>goods id<TAB>plain SHEIN URL",
     ]
     last = None
     for p in rows:
@@ -95,7 +110,7 @@ def write_unchecked(products):
             last = p.get("added")
             n = sum(1 for q in rows if q.get("added") == last)
             lines += ["", f"# added {last or 'unknown'} ({n})"]
-        lines.append(f"{p['id']}\t{p.get('outbound_url') or ''}")
+        lines.append(f"{p['id']}\t{p.get('goods_id') or '(no goods id)'}\t{plain_url(p)}")
     with open(UNCHECKED_TXT, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
     return len(rows)

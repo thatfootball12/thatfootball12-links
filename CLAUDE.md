@@ -87,7 +87,7 @@ marketplace / unchecked counts. Marketplace products never get a pin:
 `make_product_pin.py` refuses them (and warns on unchecked ones), and
 `make_pinterest_csv.py` blocks any product pin of one and lists
 unchecked ones in its report. `set_seller.py` rewrites
-`unchecked_sellers.txt` (unchecked ids and their SHEIN links, newest
+`unchecked_sellers.txt` (unchecked ids, goods ids and plain SHEIN product URLs, never affiliate links, newest
 batch first) on every run, so working down that file is the backlog;
 `py -3 set_seller.py --list` just refreshes it. The shared rules live
 in `sellers.py`, for any future pin script to import.
