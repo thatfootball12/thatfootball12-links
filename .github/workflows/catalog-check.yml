@@ -8,6 +8,8 @@ name: Catalog Check
 # Also fails when a product's item_type isn't in categories.json or it
 # has no "added" date (report item 10): the products/ page couldn't put
 # it in a tab or sort it.
+# And when a SHEIN product has no valid "seller" (shein, marketplace or
+# unchecked; report item 12). Fix with: py -3 set_seller.py <id> <value>
 
 on:
   push:

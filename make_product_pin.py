@@ -43,6 +43,11 @@ the sale price), --max-price X leaves out anything priced over X, and
 --skip ID (repeatable) leaves out one products.json id.
 Products flagged reserve in products.json never get a pin.
 
+Seller (see sellers.py): a product whose seller is "marketplace" (a
+third-party store, not SHEIN) never gets a pin: named by folder it's an
+error (exit 1), and --pick leaves it out and lists it. One whose seller
+is "unchecked" still gets its pin, with a warning to check it.
+
 Font: Anton (assets/fonts/, SIL Open Font License, see Anton-OFL.txt).
 """
 
@@ -54,6 +59,8 @@ import re
 import sys
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
+
+import sellers
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -333,17 +340,26 @@ def main():
             failed += 1
         elif not eligible(p):
             print(f"skip  {p['id']}: {why_ineligible(p)}")
+        elif sellers.refused(p):
+            print(f"ERROR {p['id']}: {sellers.REFUSED}")
+            failed += 1
         else:
             todo.append(p)
     if args.pick:
         pool = batch_products(products, args.batch)
         ok = [p for p in pool if eligible(p)]
+        refused = [p for p in ok if sellers.refused(p)]
+        for p in refused:
+            print(f"refuse {p['id']}: {sellers.REFUSED} (left out of --pick)")
+        ok = [p for p in ok if p not in refused]
         left_out = [p for p in ok if (args.no_inflated and p.get("inflated_original"))
                     or (args.max_price is not None and p["price"] > args.max_price)
                     or p["id"] in args.skip]
         ok = [p for p in ok if p not in left_out]
         chosen = pick(ok, args.pick)
         note = f" ({len(left_out)} left out by --no-inflated/--max-price/--skip)" if left_out else ""
+        if refused:
+            note += f" ({len(refused)} marketplace refused)"
         print(f"{args.batch}: {len(pool)} products, {len(ok)} eligible SHEIN{note}, picked {len(chosen)}\n")
         print(f"  {'#':>2}  {'price':>7}  {'disc':>4}  {'tag':<9}  product")
         for i, p in enumerate(chosen, 1):
@@ -351,6 +367,12 @@ def main():
             print(f"  {i:>2}  {p['price']:>7.2f}  {disc:>4}  UNDER ${price_cap(p['price']):<3}  {p['id']}")
         print()
         todo += [p for p in chosen if p not in todo]
+
+    for p in todo:
+        if sellers.unchecked(p):
+            print(f"warn  {p['id']}: {sellers.UNCHECKED_WARNING}")
+    if any(sellers.unchecked(p) for p in todo):
+        print()
 
     made = 0
     for p in todo:

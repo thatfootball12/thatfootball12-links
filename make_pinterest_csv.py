@@ -44,7 +44,9 @@ the live site (so push the pin images first), title <= 100 and full
 description <= 500 characters (Pinterest's limits), boards/sections in
 pin_settings.json, no duplicate pins/images/titles, no publish time in
 the past, no "$" in the copy of a pin with an Amazon item (Amazon
-prices can't be shown).
+prices can't be shown), no product pin of a SHEIN product whose seller
+is "marketplace" (a third-party store; see sellers.py). Product pins
+whose seller is still "unchecked" go through, listed in the report.
 
 Output: pinterest/pinterest_bulk_<batch>.csv in Pinterest's own
 template layout (pinterest_bulk_<batch>_1.csv, _2.csv, ... over 200
@@ -62,6 +64,8 @@ import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
+
+import sellers
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PIN_DIR = os.path.join(REPO, "pinterest")
@@ -145,6 +149,10 @@ def resolve(pin, products, by_id, settings, problems, warnings):
         if rec.get("image_pending"):
             problems.append(f"{label}: image_pending, no photo yet")
             return False
+        if sellers.refused(rec):
+            problems.append(f"{label}: {sellers.REFUSED}")
+            return False
+        pin["seller_unchecked"] = sellers.unchecked(rec)
         rel = os.path.dirname(rec["detail_page_url"])
         if os.path.isfile(os.path.join(REPO, rel, "product-pin.jpg")):
             pin["media"] = page_url(rel) + "product-pin.jpg"
@@ -375,6 +383,14 @@ def report(batch, days, pins, warnings, csv_paths):
           "The CSV has no column for it. Paste after upload:", ""]
     L += [f"- {p['title'].strip()}: {p['alt_text'].strip()}"
           for p in sorted(pins, key=lambda p: p["utc"])] + [""]
+    unchecked = [p for p in sorted(pins, key=lambda p: p["utc"]) if p.get("seller_unchecked")]
+    if unchecked:
+        L += ["### Unchecked SHEIN sellers",
+              "Nobody has confirmed these products are sold by SHEIN rather than a "
+              "third-party store. Check each before its publish time; for a marketplace "
+              "one, delete the pin and run py -3 set_seller.py <id> marketplace "
+              f"({len(unchecked)}):", ""]
+        L += [f"- {p['local']:%a %H:%M} — {p['id']}" for p in unchecked] + [""]
     if warnings:
         L += ["## Warnings", ""] + [f"- {w}" for w in warnings] + [""]
     return "\n".join(L)
