@@ -52,6 +52,8 @@ import json
 import os
 import re
 
+import gift_guide
+
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
 SITE = "https://thatfootball12.github.io/thatfootball12-links/"
@@ -153,6 +155,8 @@ def main():
     counts = {"ok": 0, "missing": 0, "stale": 0, "unwanted": 0}
     changed = []
     for p in load_products():
+        if gift_guide.listing_only(p):
+            continue  # no detail page (gift_guide.py)
         path = page_path(p)
         if not os.path.isfile(path):
             continue  # sync_catalog.py reports these

@@ -33,7 +33,10 @@ Scope:
 
 Report (always runs):
   1. Detail pages on disk with no products.json record.
-  2. products.json records whose detail page no longer exists on disk.
+  2. products.json records whose detail page no longer exists on disk,
+     plus gift guide listings (gift_guide.py: SHEIN products shown only
+     on gift-guide/index.html and a holiday pin) whose tile link is gone
+     from the gift guide, or whose holiday pin image is missing.
   3. products.json records whose thumbnail or thumbnail_webp file is
      missing on disk (or whose thumbnail_webp field isn't set).
   4. Product detail pages whose schema.org JSON-LD block is missing, stale,
@@ -156,6 +159,7 @@ import add_favicons
 import categories
 import outfit_generator
 import sellers
+import gift_guide
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -528,17 +532,19 @@ def main():
     if args.fill_webp:
         fill_webp(products)
 
-    by_detail_url = {p["detail_page_url"]: p for p in products}
+    # Gift guide listings have no detail page of their own (gift_guide.py).
+    by_detail_url = {p["detail_page_url"]: p for p in products if not gift_guide.listing_only(p)}
 
     fs_pages = set(find_detail_pages())
     catalog_pages = set(by_detail_url.keys())
 
     missing_from_catalog = sorted(fs_pages - catalog_pages)
     orphaned_records = sorted(catalog_pages - fs_pages)
+    listing_issues = gift_guide.audit(products)
 
     missing_thumbnails = []
     for p in products:
-        if p["image_pending"]:
+        if p["image_pending"] or gift_guide.listing_only(p):
             continue
         if not p.get("thumbnail"):
             missing_thumbnails.append((p["id"], "no thumbnail field set"))
@@ -561,6 +567,8 @@ def main():
 
     schema_issues = []
     for p in products:
+        if gift_guide.listing_only(p):
+            continue  # no detail page to carry a block
         page = os.path.join(REPO, p["detail_page_url"].replace("/", os.sep))
         if not os.path.isfile(page):
             continue  # already reported in (2)
@@ -617,10 +625,13 @@ def main():
         print(f"   {rel}")
     print()
 
-    print(f"2. products.json records whose detail page no longer exists on disk: {len(orphaned_records)}")
+    print(f"2. products.json records whose detail page no longer exists on disk, or gift guide "
+          f"listings whose tile or pin is gone: {len(orphaned_records) + len(listing_issues)}")
     for rel in orphaned_records:
         p = by_detail_url[rel]
         print(f"   {p['id']} -> {rel}")
+    for msg in listing_issues:
+        print(f"   {msg}")
     print()
 
     print(f"3. products.json records with a missing thumbnail or WebP thumbnail file: "
@@ -708,7 +719,8 @@ def main():
               "(Amazon/Awin records take no seller field).")
     print()
 
-    if (not missing_from_catalog and not orphaned_records and not missing_thumbnails
+    if (not missing_from_catalog and not orphaned_records and not listing_issues
+            and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
             and not webp_issues and not favicon_issues and not category_errors
             and not generator_errors and not seller_errors):
@@ -731,8 +743,8 @@ def main():
         # Items 1, 2, 10, 11 and 12 fail the run (and the catalog-check CI workflow):
         # a page missing from products.json is invisible in the shop grid,
         # and so is a product whose item_type has no tab in categories.json.
-        if (missing_from_catalog or orphaned_records or category_errors or generator_errors
-                or seller_errors):
+        if (missing_from_catalog or orphaned_records or listing_issues or category_errors
+                or generator_errors or seller_errors):
             sys.exit(1)
         return
 
