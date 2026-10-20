@@ -84,8 +84,12 @@ Report (always runs):
      tabs or subs, unknown exclude ids or borrow targets, outfit-link
      code collisions, and a theme that can't build any outfit; warnings
      (don't fail) for a theme/slot with fewer than 5 products.
+ 12. SHEIN sellers (sellers.py): errors for a SHEIN record with no
+     "seller" or one that isn't shein / marketplace / unchecked, and for
+     an Amazon/Awin record that has one; always prints how many SHEIN
+     products are shein, marketplace and unchecked.
 
-Exit status: 1 when item 1, 2, 10 or 11 has an error (report-only runs;
+Exit status: 1 when item 1, 2, 10, 11 or 12 has an error (report-only runs;
 --append fixes item 1 and exits 0), else 0. The catalog-check GitHub
 workflow runs the report on every push and pull request to main, so a
 batch can't land with a page missing from products.json, a record whose
@@ -119,10 +123,12 @@ Append (--append only):
     - added (the products/ page's Newest sort) from the campaign slug's
       date, e.g. gameday-oct-19 -> 2026-10-19 (the year nearest today), or
       today's date if the slug has none.
-  item_type and data_new have no source anywhere outside human judgment —
-  they are never inferred. Appended records get item_type: null and
+  item_type, data_new and (on SHEIN records) seller have no source
+  anywhere outside human judgment — they are never inferred. Appended records get item_type: null and
   data_new: null, and are listed in the report as needing manual review
   before they'll filter correctly or show a "New This Week" badge.
+  Appended SHEIN records get seller: null, which fails item 12 until
+  set_seller.py records who sells it.
 """
 
 import argparse
@@ -147,6 +153,7 @@ import add_analytics
 import add_favicons
 import categories
 import outfit_generator
+import sellers
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -323,6 +330,7 @@ def build_record(rel_path):
         "currency": currency,
         "currency_source": currency_source,
         "retailer": retailer,
+        **({"seller": None} if retailer == "SHEIN" else {}),
         "outbound_url": outbound_url,
         "image": image,
         "image_pending": image_pending,
@@ -341,6 +349,9 @@ def build_record(rel_path):
         flags.append("item_type has no source outside human judgment — needs manual classification")
     if record["data_new"] is None:
         flags.append("data_new needs a human decision (is this part of this week's batch?)")
+    if retailer == "SHEIN":
+        flags.append("seller needs checking (sold by SHEIN or a marketplace store?): "
+                     "py -3 set_seller.py <id> shein|marketplace")
 
     return record, flags
 
@@ -586,6 +597,7 @@ def main():
 
     category_errors, category_warnings = categories.audit(products, categories.load())
     generator_errors, generator_warnings = ([], []) if category_errors else outfit_generator.audit(products)
+    seller_errors, seller_counts = sellers.audit(products)
 
     photo_needed = []
     for rel in add_analytics.all_html():
@@ -684,16 +696,26 @@ def main():
         print("   New campaign? Add it to a theme's campaigns (or unthemed) in generator.json.")
     print()
 
+    print(f"12. SHEIN seller errors: {len(seller_errors)} "
+          f"(shein: {seller_counts['shein']}, marketplace: {seller_counts['marketplace']}, "
+          f"unchecked: {seller_counts['unchecked']})")
+    for e in seller_errors:
+        print(f"   ERROR {e}")
+    if seller_errors:
+        print("   Record who sells it: py -3 set_seller.py <id> shein|marketplace "
+              "(Amazon/Awin records take no seller field).")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
             and not webp_issues and not favicon_issues and not category_errors
-            and not generator_errors):
+            and not generator_errors and not seller_errors):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
               "analytics tracking and site footer, every <picture> WebP source loads, every "
-              "page has a current favicon block, every product has a products/ page tab, and "
-              "generator.json covers every campaign.")
+              "page has a current favicon block, every product has a products/ page tab, "
+              "generator.json covers every campaign, and every SHEIN product has a seller.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
@@ -704,10 +726,11 @@ def main():
         if missing_from_catalog:
             print("Run with --append to add the missing records (item_type and data_new will "
                   "still need manual review afterward — see per-record flags).")
-        # Items 1, 2, 10 and 11 fail the run (and the catalog-check CI workflow):
+        # Items 1, 2, 10, 11 and 12 fail the run (and the catalog-check CI workflow):
         # a page missing from products.json is invisible in the shop grid,
         # and so is a product whose item_type has no tab in categories.json.
-        if missing_from_catalog or orphaned_records or category_errors or generator_errors:
+        if (missing_from_catalog or orphaned_records or category_errors or generator_errors
+                or seller_errors):
             sys.exit(1)
         return
 
@@ -735,8 +758,8 @@ def main():
     save_products(products)
     print(f"\nAppended {appended} record(s). Total products.json entries: {len(products)}")
     print("Review the FLAG lines above before this batch is considered done — "
-          "item_type and data_new need a human decision on every new record, and a new "
-          "item_type needs adding to categories.json.")
+          "item_type and data_new need a human decision on every new record, seller on every "
+          "new SHEIN record, and a new item_type needs adding to categories.json.")
 
 
 if __name__ == "__main__":

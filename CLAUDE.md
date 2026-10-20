@@ -70,6 +70,28 @@ budget tiers can build an outfit (the page greys out the rest).
 Out-of-season categories go in `seasonal_off` (Shorts and Sandals &
 Slides are off for the winter): delete an entry to bring it back.
 
+**New SHEIN product? Set its seller during sourcing.** Every SHEIN
+record in `products.json` carries `seller`: `"shein"` (sold by SHEIN
+itself), `"marketplace"` (a third-party store on SHEIN's marketplace),
+or `"unchecked"` (nobody has looked yet; only the records that predate
+the field start out this way). Amazon and Awin records have no
+`seller`. When sourcing a batch, check who sells each SHEIN product on
+its SHEIN page and record it with `py -3 set_seller.py <id>
+shein|marketplace` (or many at once with `--from <file>`, one
+`<id> ... <value>` per line). Don't leave new products `unchecked`.
+`--append` gives new SHEIN records `seller: null`, and
+`sync_catalog.py` report item 12 fails (exit 1, so CI fails) on any
+SHEIN record whose `seller` is missing or not one of the three values,
+or any Amazon/Awin record that has one; it also prints the shein /
+marketplace / unchecked counts. Marketplace products never get a pin:
+`make_product_pin.py` refuses them (and warns on unchecked ones), and
+`make_pinterest_csv.py` blocks any product pin of one and lists
+unchecked ones in its report. `set_seller.py` rewrites
+`unchecked_sellers.txt` (unchecked ids and their SHEIN links, newest
+batch first) on every run, so working down that file is the backlog;
+`py -3 set_seller.py --list` just refreshes it. The shared rules live
+in `sellers.py`, for any future pin script to import.
+
 Then run `python add_product_schema.py` (after any `--append`, since it
 reads `products.json`). It writes the schema.org Product JSON-LD block
 into every SHEIN detail page's `<head>` between
@@ -124,7 +146,7 @@ report item 5 flags pages missing from `sitemap.xml`, entries whose
 page is gone, and out-of-date `<lastmod>` dates.
 
 So the order is: `sync_catalog.py` (plus `--append` if needed, then set
-`item_type`/`data_new`, check `added`, and add any new item_type to
+`item_type`/`data_new`, set each new SHEIN `seller`, check `added`, and add any new item_type to
 `categories.json` and any new campaign to `generator.json`), then
 `add_product_schema.py`, then `add_analytics.py`, then
 `add_favicons.py`, then `write_sitemap.py` last among the writers (the
