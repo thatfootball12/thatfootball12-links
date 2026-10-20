@@ -18,6 +18,7 @@ import os
 import sys
 
 import categories
+import check_affiliate_links
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 GENERATOR_JSON = os.path.join(REPO, "generator.json")
@@ -53,15 +54,18 @@ def priced(p):
     return p["retailer"] != "Amazon" and isinstance(p.get("price"), (int, float))
 
 
-def records(products, cat_cfg, gen):
+def records(products, cat_cfg, gen, dead=None):
     """Products the generator may use: placed by categories.json (so not
-    hidden), not excluded, not banned by a 'never' rule or seasonal_off.
+    hidden), not excluded, not confirmed dead in data/dead_links.json, not
+    banned by a 'never' rule or seasonal_off.
     Each is {"p": product, "cat": "tab/sub" or "tab", "index": n}."""
+    if dead is None:
+        dead = check_affiliate_links.confirmed_ids()
     never = [pat for r in gen["rules"] if "never" in r for pat in r["never"]]
     never += gen.get("seasonal_off", [])
     out = []
     for i, p in enumerate(products):
-        if p["id"] in gen["exclude"]:
+        if p["id"] in gen["exclude"] or p["id"] in dead:
             continue
         placed = categories.place(p, cat_cfg)
         if not placed:
@@ -210,6 +214,10 @@ def audit(products, cat_cfg=None, gen=None):
     for pid in gen["exclude"]:
         if pid not in ids:
             errors.append(f"generator.json exclude lists {pid}, which isn't in products.json")
+    for e in check_affiliate_links.load_dead_links():
+        if e["id"] not in ids:
+            warnings.append(f"data/dead_links.json lists {e['id']} ({e['status']}), which isn't in "
+                            "products.json (safe to delete that entry)")
 
     codes = {}
     for p in products:
