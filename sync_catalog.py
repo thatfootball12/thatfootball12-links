@@ -83,7 +83,9 @@ Report (always runs):
      is listed twice, slot / rule categories that aren't categories.json
      tabs or subs, unknown exclude ids or borrow targets, outfit-link
      code collisions, and a theme that can't build any outfit; warnings
-     (don't fail) for a theme/slot with fewer than 5 products.
+     (don't fail) for a theme/slot with fewer than 5 products and for a
+     data/dead_links.json entry whose id isn't in products.json. Pool
+     sizes leave out products confirmed dead in data/dead_links.json.
  12. SHEIN sellers (sellers.py): errors for a SHEIN record with no
      "seller" or one that isn't shein / marketplace / unchecked, and for
      an Amazon/Awin record that has one; always prints how many SHEIN

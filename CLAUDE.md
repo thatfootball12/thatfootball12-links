@@ -70,6 +70,18 @@ budget tiers can build an outfit (the page greys out the rest).
 Out-of-season categories go in `seasonal_off` (Shorts and Sandals &
 Slides are off for the winter): delete an entry to bring it back.
 
+**`data/dead_links.json` is machine-written: don't edit it in a batch.**
+The weekly `affiliate-link-check.yml` workflow runs
+`check_affiliate_links.py`, which checks each SHEIN product by its plain
+ca.shein.com page from `goods_id` (never the affiliate link: fetching
+one counts as a click), and commits the file to main ("Update dead
+links [skip ci]") when it changes. A product dead in 2 weekly runs is
+`confirmed`, and the generator (page and `outfit_generator.py`) leaves
+it out of every pool. SHEIN's bot check, 403/429 and timeouts are
+`unknown` and never count. `sync_catalog.py` item 11 warns, without
+failing, about an entry whose id is gone from `products.json` (deleting
+that entry by hand is safe).
+
 **New SHEIN product? Set its seller during sourcing.** Every SHEIN
 record in `products.json` carries `seller`: `"shein"` (sold by SHEIN
 itself), `"marketplace"` (a third-party store on SHEIN's marketplace),

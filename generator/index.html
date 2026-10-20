@@ -591,6 +591,10 @@
   //   #<theme or any>/<budget or any>/<top>.<bottom>.<shoes>.<extra>
   // where each piece is shortCode(product id). A code that no longer
   // matches a product in that slot's pool gets that slot reshuffled.
+  //
+  // Products confirmed dead in ../data/dead_links.json (written weekly by
+  // check_affiliate_links.py) are left out of every pool, so a shared link
+  // naming one reshuffles that slot too.
 
   var outfitEl = document.getElementById('outfit');
   var shuffleBtn = document.getElementById('shuffle-btn');
@@ -607,7 +611,7 @@
   var SLOT_ORDER = ['top', 'bottom', 'shoes', 'extra'];
   var NODE_LIMIT = 200000; // safety cap on one search
 
-  var cats, gen, records = [], byCode = {}, poolCache = {}, tierCache = {};
+  var cats, gen, records = [], byCode = {}, poolCache = {}, tierCache = {}, deadIds = {};
   var state = {
     theme: 'any',
     budget: null,                      // number or null for Any
@@ -696,7 +700,7 @@
     gen.rules.forEach(function(r){ if(r.never) never = never.concat(r.never); });
     never = never.concat(gen.seasonal_off || []); // out of season: left out of every slot
     products.forEach(function(p, i){
-      if(gen.exclude.indexOf(p.id) !== -1) return;
+      if(gen.exclude.indexOf(p.id) !== -1 || deadIds[p.id]) return;
       var placed = placeProduct(p);
       if(!placed) return;
       var cat = placed.tab + (placed.sub ? '/' + placed.sub : '');
@@ -1279,10 +1283,17 @@
     });
   }
 
-  Promise.all([getJSON('../products.json'), getJSON('../categories.json'), getJSON('../generator.json')])
+  // dead_links.json is optional: if it can't load, nothing is left out.
+  var deadLinks = getJSON('../data/dead_links.json').catch(function(err){
+    console.warn('No dead links list', err);
+    return [];
+  });
+
+  Promise.all([getJSON('../products.json'), getJSON('../categories.json'), getJSON('../generator.json'), deadLinks])
     .then(function(res){
       cats = res[1];
       gen = res[2];
+      res[3].forEach(function(e){ if(e.status === 'confirmed') deadIds[e.id] = true; });
       cats.tabs.forEach(function(t){ tabsBySlug[t.slug] = t; });
       buildRecords(res[0]);
       shuffleBtn.disabled = false;
