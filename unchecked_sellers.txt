@@ -9,43 +9,7 @@
 #
 # id<TAB>goods id<TAB>plain SHEIN URL
 
-# added 2026-11-02 (78)
-budget/budget-outfit-nov-2/pants	481360750	https://ca.shein.com/Men-s-Lightweight-Sports-Casual-Long-Pants-Comfortable-And-Durable-Outdoor-Pants-Suitable-For-Running-Fitness-Walking-Spring-And-Summer-p-481360750.html
-budget/budget-outfit-nov-2/sweatshirt	132633115	https://ca.shein.com/Men-s-Autumn-Winter-Minimalist-Crew-Neck-Sweatshirt-All-Match-Versatile-Casual-Top-Street-Style-Layering-Essential-p-132633115.html
-business-casual/business-casual-nov-2/loafers	77415319	https://ca.shein.com/Men-s-Loafers-Soft-PU-Leather-Slip-On-Non-Slip-Retro-Fashion-Casual-Shoes-Wedding-Shoes-Dress-Shoes-p-77415319.html
-business-casual/business-casual-nov-2/pants	520073924	https://ca.shein.com/Manfinity-Mode-Men-s-Solid-Color-Straight-Leg-Casual-Suit-Pants-With-Pockets-Formal-Old-Money-p-520073924.html
-casual/casual-outfit-nov-2/flannel	345210104	https://ca.shein.com/Manfinity-Homme-Men-s-Red-Plaid-Long-Sleeve-Flannel-Shirt-Autumn-Casual-City-Break-Single-Breasted-Pocket-Top-Streetwear-Grunge-Style-For-Daily-Leisure-Outdoor-Gift-p-345210104.html
-casual/casual-outfit-nov-2/jeans	503728428	https://ca.shein.com/Manfinity-Homme-Men-s-Simple-Casual-Jeans-p-503728428.html
-casual/casual-outfit-nov-2/tee	53930448	https://ca.shein.com/Manfinity-Homme-Men-s-Plain-Round-Neck-Short-Sleeve-Simple-Top-Casual-Everyday-Wear-Men-T-Shirts-Casual-Plain-T-Shirts-Casual-Tee-p-53930448.html
-casual/casual-outfit-nov-2-2/cap	14429794	https://ca.shein.com/Men-Solid-Baseball-Cap-Casual-p-14429794.html
-casual/casual-outfit-nov-2-2/pants	50999745	https://ca.shein.com/Manfinity-Homme-Men-s-Solid-Color-Pocketed-Casual-Straight-Leg-Pants-Fall-p-50999745.html
-casual/casual-outfit-nov-2-2/sneakers	3095834	https://ca.shein.com/Men-Minimalist-Lace-Up-Front-Skate-Shoes-Sporty-Outdoor-Sneakers-Men-Business-Shoes-Valentines-p-3095834.html
-date-night/date-night-nov-2/chelsea-boots	389699858	https://ca.shein.com/Men-s-Chelsea-Boots-Casual-Business-Commuter-Boots-Retro-Ankle-Boots-p-389699858.html
-date-night/date-night-nov-2/pants	41239105	https://ca.shein.com/Manfinity-Mode-Men-s-Casual-Solid-Color-Tapered-Formal-Pants-Ceremony-p-41239105.html
-date-night/date-night-nov-2/turtleneck	11637629	https://ca.shein.com/Manfinity-Homme-Men-s-Solid-Color-Minimalist-Turtleneck-Long-Sleeve-Sweater-Casual-Everyday-Wear-Valentine-s-Day-p-11637629.html
-date-night/date-night-nov-2/watch	86435569	https://ca.shein.com/1pc-Men-s-Classic-Brown-PU-Leather-Strap-Business-Elite-Style-Roman-Scale-Calendar-Function-Quartz-Watch-Birthday-Gift-Graduation-Wedding-Souvenir-p-86435569.html
-formal/formal-outfit-nov-2/oxfords	566605499	https://ca.shein.com/Men-s-Thick-Sole-Dress-Shoes-Fashion-Lace-Up-Oxford-Shoes-Business-And-Casual-Wear-Formal-Business-Occasions-And-Wedding-Accessories-p-566605499.html
-formal/formal-outfit-nov-2/shirt	38804141	https://ca.shein.com/Manfinity-Mode-Men-s-Fashion-All-White-Long-Sleeve-Shirt-Solid-Color-Button-Up-Summer-Casual-Business-Engagement-Formal-Shirt-Old-Money-Style-For-Wedding-Ceremony-p-38804141.html
-formal/formal-outfit-nov-2/suit	326006210	https://ca.shein.com/Men-s-Black-Suit-2-Pieces-Business-Formal-Outfit-Stylish-Minimalist-Design-p-326006210.html
-formal/formal-outfit-nov-2/tie	337450136	https://ca.shein.com/1pc-Unisex-Black-1-9-Inch-5cm-Skinny-Tie-Suitable-For-Weddings-Graduation-Formal-And-Casual-Occasions-p-337450136.html
-gameday/gameday-nov-2/beanie	186272840	https://ca.shein.com/1pc-Unisex-Outdoor-Warm-Solid-Color-Knit-Beanie-Hat-Suitable-For-Daily-Wear-Winter-Warm-Beach-Holiday-p-186272840.html
-gameday/gameday-nov-2/pants	32367715	https://ca.shein.com/Manfinity-Homme-Men-Casual-And-Simple-Straight-Leg-Pants-With-Diagonal-Pockets-For-Fall-p-32367715.html
-gameday/gameday-nov-2/sneakers	34597890	https://ca.shein.com/Men-s-Summer-Breathable-White-Sneakers-Skate-Shoes-Size-36-48-Plus-Size-New-Versatile-Sports-Casual-Shoes-Couple-Shoes-p-34597890.html
-gameday/gameday-nov-2/zip-hoodie	45977944	https://ca.shein.com/Sport-MetroGents-Manfinity-UrbanChill-Men-s-Teal-Blue-Winter-Athletic-Hiking-Jacket-Textured-Stand-Collar-Fleece-Zip-Up-Hoodie-Thick-Casual-Knit-Outdoor-Essentials-p-45977944.html
-gameday/gameday-nov-2-2/cargo-pants	30752021	https://ca.shein.com/Manfinity-Homme-Men-s-Drawstring-Waist-Cargo-Pants-With-Pockets-For-Fall-p-30752021.html
-gameday/gameday-nov-2-2/sneakers	75257662	https://ca.shein.com/Flipark-Men-s-Fashionable-Casual-Sports-Skate-Shoes-Round-Toe-Lace-Up-Design-Comfortable-Wear-For-All-Seasons-p-75257662.html
-gameday/gameday-nov-2-2/watch	77036431	https://ca.shein.com/RICECGO-Men-s-Quartz-Watch-Gold-Stainless-Steel-Strap-Classic-Business-Style-Round-Dial-Dual-Date-Display-Ideal-For-Business-Meetings-Gifts-And-Back-To-School-Season-p-77036431.html
-gift-guides/gift-guide-nov-2/beanie	546670550	https://ca.shein.com/1pc-Men-s-Solid-Color-Vertical-Striped-Knit-Beanie-Elastic-Warm-All-Match-Winter-Skull-Cap-Multi-Color-Versatile-Outdoor-Hat-Casual-Polyester-p-546670550.html
-gift-guides/gift-guide-nov-2/belt	570881934	https://ca.shein.com/1PC-Men-s-Belt-Vintage-Casual-Belt-PU-Leather-With-Alloy-Buckle-Father-s-Day-Gift-Men-s-Leather-Pin-Buckle-Casual-Vintage-Belt-Youth-Jeans-Belt-Father-s-Day-Gift-Valentine-s-Day-p-570881934.html
-gift-guides/gift-guide-nov-2/cycling-gloves	571922700	https://ca.shein.com/1pair-Men-s-Winter-Cycling-Gloves-Non-Slip-Waterproof-Windproof-Fleece-Lined-And-Warm-Suitable-For-Outdoor-Sports-E-Bike-Riding-And-Skiing-Features-Touchscreen-Compatibility-And-Cold-Protection-Essential-Winter-Gear-For-Warmth-And-Safety-p-571922700.html
-gift-guides/gift-guide-nov-2/dog-tag-necklace	575750996	https://ca.shein.com/Stainless-Steel-Dog-Tag-Necklace-Fashionable-Minimalist-Full-Of-Tough-Elegant-Suitable-For-Outdoor-Sports-Music-Festivals-Camping-And-Other-Activities-Gift-For-Your-Boyfriend-Girlfriend-Graduation-Season-Mother-s-Day-Back-To-School-Christmas-p-575750996.html
-gift-guides/gift-guide-nov-2/glasses	571348498	https://ca.shein.com/Men-s-Retro-Gold-Frame-Fashion-Glasses-p-571348498.html
-gift-guides/gift-guide-nov-2/stacked-necklace	575704908	https://ca.shein.com/1-Set-Vintage-Nautical-Ship-Wheel-Compass-Double-Layer-Stacked-Necklace-18K-Stainless-Steel-American-Vintage-Cuban-Chain-Men-s-Accessory-p-575704908.html
-gift-guides/gift-guide-nov-2/watch-set	423627001	https://ca.shein.com/4pcs-Set-Men-s-Popular-Arabic-Numeral-Black-Matte-Plastic-Quartz-Watches-p-423627001.html
-night-out/night-out-nov-2/jeans	538582093	https://ca.shein.com/Men-s-Y2K-Original-Black-Fashion-Barrel-Leg-Jeans-p-538582093.html
-night-out/night-out-nov-2/necklace	16207654	https://ca.shein.com/1pc-Men-s-Classic-Stainless-Steel-Chain-Necklace-p-16207654.html
-old-money/old-money-nov-2/loafers	539821832	https://ca.shein.com/Men-s-Suede-Loafers-Casual-Shoes-Classic-British-Style-Lightweight-Soft-Flat-Shoes-p-539821832.html
-old-money/old-money-nov-2/overcoat	44246641	https://ca.shein.com/Manfinity-Mode-Men-s-Solid-Color-Brown-Pocket-Button-Front-Long-Sleeve-Overcoat-Autumn-Fall-p-44246641.html
+# added 2026-11-02 (42)
 old-money/old-money-nov-2/pants	54217754	https://ca.shein.com/Manfinity-Mode-Men-s-Solid-Color-Pleated-Straight-Leg-Casual-Formal-Pants-With-Pockets-Fall-p-54217754.html
 trending-products/reserve-nov-2/corduroy-pants	66752852	https://ca.shein.com/Men-s-Lightweight-Corduroy-Long-Pants-With-Elastic-Waist-And-Drawstring-Fashionable-Vintage-Straight-Leg-Casual-Sports-Pants-For-Spring-And-Summer-Daily-Wear-p-66752852.html
 trending-products/reserve-nov-2/corduroy-shirt	39952598	https://ca.shein.com/DAZY-Men-s-Casual-Solid-Color-Corduroy-Shirt-Spring-Autumn-Long-Sleeve-Men-Shirt-p-39952598.html
