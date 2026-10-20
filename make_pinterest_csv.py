@@ -65,6 +65,7 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 
+import gift_guide
 import sellers
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -154,7 +155,15 @@ def resolve(pin, products, by_id, settings, problems, warnings):
             return False
         pin["seller_unchecked"] = sellers.unchecked(rec)
         rel = os.path.dirname(rec["detail_page_url"])
-        if os.path.isfile(os.path.join(REPO, rel, "product-pin.jpg")):
+        if gift_guide.listing_only(rec):
+            # No detail page: the pin links to the gift guide and uses
+            # its holiday pin image.
+            img = gift_guide.pin_image(rec)
+            if not img or not os.path.isfile(os.path.join(REPO, img)):
+                problems.append(f"{label}: gift guide listing with no holiday pin image ({img})")
+                return False
+            pin["media"] = SITE + img
+        elif os.path.isfile(os.path.join(REPO, rel, "product-pin.jpg")):
             pin["media"] = page_url(rel) + "product-pin.jpg"
         else:
             pin["media"] = SITE + rec["image"]

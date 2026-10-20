@@ -52,6 +52,8 @@ import re
 import subprocess
 from xml.sax.saxutils import escape
 
+import gift_guide
+
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
 SITEMAP = os.path.join(REPO, "sitemap.xml")
@@ -105,7 +107,7 @@ def expected_urls():
             entries.append((rel, [rel]))
     with open(PRODUCTS_JSON, encoding="utf-8") as f:
         products = json.load(f)
-    for rel in sorted(p["detail_page_url"] for p in products):
+    for rel in sorted(p["detail_page_url"] for p in products if not gift_guide.listing_only(p)):
         if os.path.isfile(_abs(rel)) and not is_redirect(rel):
             entries.append((rel, [rel]))
     return [(url_for(rel), srcs) for rel, srcs in entries]

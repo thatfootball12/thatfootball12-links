@@ -60,6 +60,7 @@ import sys
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
+import gift_guide
 import sellers
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -92,10 +93,13 @@ def price_cap(price):
 
 def eligible(p):
     return (p.get("retailer") == "SHEIN" and p.get("price") is not None
-            and not p.get("image_pending") and p.get("image") and not p.get("reserve"))
+            and not p.get("image_pending") and p.get("image") and not p.get("reserve")
+            and not gift_guide.listing_only(p))
 
 
 def why_ineligible(p):
+    if gift_guide.listing_only(p):
+        return f"gift guide listing; its pin is {gift_guide.pin_image(p)}"
     if p.get("reserve"):
         return "reserve"
     if p.get("retailer") != "SHEIN":

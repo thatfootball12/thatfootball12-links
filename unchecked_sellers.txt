@@ -128,15 +128,13 @@ trending-products/trending-products-oct-26-3/cross-ring	456802695	https://ca.she
 trending-products/trending-products-oct-26-3/ring-set	106717699	https://ca.shein.com/7pcs-Black-Silver-Stainless-Steel-Rings-Set-Vintage-Minimalist-Fashion-Jewelry-Suitable-For-Men-Women-Daily-Wear-Essential-For-New-Year-Valentine-s-Day-Gifts-For-Boyfriend-Friends-p-106717699.html
 trending-products/trending-products-oct-26-3/skull-print-tee	563807349	https://ca.shein.com/ROMWE-MEN-Men-s-Visual-Style-Skull-Abstract-Print-Streetwear-Long-Sleeve-T-Shirt-p-563807349.html
 
-# added 2026-10-19 (68)
+# added 2026-10-19 (63)
 budget/budget-outfit-oct-19/hoodie	3240765	https://ca.shein.com/INAWLY-Solid-Kangaroo-Pocket-Thermal-Lined-Hoodie-Long-Sleeve-Tops-p-3240765.html
 budget/budget-outfit-oct-19/sneakers	58578502	https://ca.shein.com/STARNOVO-Men-s-Thick-Sole-Versatile-Casual-Canvas-Shoes-Low-Top-Lace-Up-Breathable-Athletic-Sport-Running-Sneakers-p-58578502.html
 budget/budget-outfit-oct-19/sweatpants	58604144	https://ca.shein.com/1pc-Men-s-Loose-Fit-Sweatpants-Black-Sports-Pants-Pockets-Drawstring-Waist-This-Product-Is-Made-Of-100-Polyester-Material-Fall-p-58604144.html
 business-casual/business-casual-oct-19/cardigan	51244900	https://ca.shein.com/Manfinity-Homme-Men-s-Solid-Color-Button-Down-Cardigan-Casual-Long-Sleeve-Autumn-Winter-p-51244900.html
-business-casual/business-casual-oct-19/loafers	423705339	https://ca.shein.com/Salkin-Classic-Designer-Men-s-Moccasin-Solid-Color-Suede-Slip-On-Penny-Loafers-For-Men-Soft-Leather-Shoes-Gentleman-Business-Social-Shoes-Male-Daily-Office-Party-Casual-Shoes-Men-Couple-Date-Romantic-Dinner-Back-To-School-Season-Student-Shoes-Campus-Style-Please-Choose-One-Size-Up-p-423705339.html
 business-casual/business-casual-oct-19/shirt	82652424	https://ca.shein.com/Manfinity-Mode-Men-s-Business-Casual-Blue-Long-Sleeve-Striped-Shirt-Nice-Shirts-For-Men-For-Fall-Formal-Ceremony-p-82652424.html
 business-casual/business-casual-oct-19/trousers	429754174	https://ca.shein.com/Manfinity-Mode-Men-s-Solid-Color-Slant-Pocket-Buckle-Waist-Casual-Suit-Trousers-Formal-Ceremony-p-429754174.html
-business-casual/business-casual-oct-19-2/boots	16626545	https://ca.shein.com/Men-Minimalist-Slip-On-Chelsea-Boots-Minimalist-Brown-Faux-Suede-Boots-Valentines-p-16626545.html
 business-casual/business-casual-oct-19-2/quarter-zip	91546664	https://ca.shein.com/Men-s-Solid-Color-Long-Sleeve-Casual-Versatile-Loose-Comfortable-Zip-Up-Stand-Collar-Sweater-p-91546664.html
 business-casual/business-casual-oct-19-2/shirt	551387788	https://ca.shein.com/Calvornis-Men-s-Solid-Color-Button-Down-Long-Sleeve-Shirt-Autumn-Holiday-Vacation-Light-Blue-Casual-Streetwear-Formal-Old-Money-p-551387788.html
 casual/casual-outfit-oct-19/cardigan	40375751	https://ca.shein.com/DAZY-Men-s-Solid-Color-Loose-Casual-Cardigan-Long-Sleeve-Fall-Jacket-p-40375751.html
@@ -171,7 +169,6 @@ gift-guides/gift-guide-oct-19/ratchet-belt	34005289	https://ca.shein.com/Men-s-G
 gift-guides/gift-guide-oct-19/rectangular-watch	263343345	https://ca.shein.com/Pablo-Raez-1pc-Classic-Men-s-Luxury-Rectangular-Watch-Stainless-Steel-Vintage-Clock-Original-Charming-Rose-Gold-Non-Fading-Black-Brown-Ultra-Fine-Fiber-PU-Leather-Fashion-Design-Men-s-Accessory-50m-Waterproof-Roman-Numeral-Calendar-Display-With-Date-Men-s-Casual-Quartz-Watch-White-Dial-Men-s-Premium-Watch-Suitable-For-Teacher-Gift-For-Boyfriend-Or-Girlfriend-Popular-Style-Party-Decoration-Graduation-Gift-p-263343345.html
 gift-guides/gift-guide-oct-19/scarf	169576501	https://ca.shein.com/1pc-Classic-Herringbone-Pattern-Fringed-Solid-Color-Cashmere-Scarf-Unisex-Fashion-Casual-Windproof-Warm-Shawl-Comfortable-Blanket-Scarf-Suitable-For-Daily-Wear-Autumn-Winter-p-169576501.html
 gift-guides/gift-guide-oct-19/sling-bag	77450233	https://ca.shein.com/Anti-Theft-Crossbody-Sling-Bag-p-77450233.html
-gift-guides/gift-guide-oct-19/wallet	30806689	https://ca.shein.com/Men-s-Genuine-Leather-RFID-Blocking-Wallet-Vintage-Cowhide-Bifold-Wallet-Short-Multifunction-ID-Credit-Card-Holder-With-2-ID-Wallets-Gifts-For-Him-p-30806689.html
 night-out/night-out-oct-19/tee	74018724	https://ca.shein.com/DAZY-Black-Slim-Fit-Short-Sleeve-T-Shirt-For-Men-Summer-p-74018724.html
 old-money/old-money-oct-19/sweater	39148462	https://ca.shein.com/Claim-Dot-Men-s-Cable-Knit-Crew-Neck-Long-Sleeve-Casual-Versatile-Sweater-Long-Sleeve-Top-Autumn-Pull-p-39148462.html
 streetwear/streetwear-outfit-oct-19/jacket	440137059	https://ca.shein.com/1pc-Men-s-Solid-Color-Lightweight-Suede-Flight-Jacket-Full-Zip-Stand-Collar-Casual-Outerwear-Vintage-Faux-Leather-Jacket-Men-s-Spring-Autumn-Jacket-p-440137059.html
@@ -180,11 +177,9 @@ streetwear/streetwear-outfit-oct-19/sneakers	66267298	https://ca.shein.com/1-Pai
 trending-products/trending-products-oct-19/black-puffer	44639786	https://ca.shein.com/Manfinity-Homme-Men-s-Long-Sleeve-Casual-Solid-Color-Thickened-Hooded-Padded-Coat-For-Winter-Black-Bubble-Friends-Husband-Boyfriend-Gifts-Fall-Puffer-p-44639786.html
 trending-products/trending-products-oct-19/bomber	37438114	https://ca.shein.com/Manfinity-Homme-Men-Zip-Up-Bomber-Jacket-Without-Tee-Light-Jacket-Plain-Husband-Long-Sleeve-Work-For-Fall-p-37438114.html
 trending-products/trending-products-oct-19/brown-puffer	113707208	https://ca.shein.com/Manfinity-Homme-Men-s-Long-Sleeve-Casual-Simple-Solid-Color-Zip-Up-Drawstring-Hooded-Thermal-Lined-Winter-Coat-Men-Outerwear-Warm-Brown-Puffer-p-113707208.html
-trending-products/trending-products-oct-19/coat	40564577	https://ca.shein.com/Men-s-Autumn-Winter-Casual-Solid-Color-Wool-Blend-Coat-With-Lapel-Double-Pockets-Single-Breasted-Warm-Slightly-Small-Fit-Slightly-Thin-p-40564577.html
 trending-products/trending-products-oct-19/overcoat	40061189	https://ca.shein.com/Men-s-Long-Sleeve-Solid-Color-Woolen-Casual-Overcoat-For-Fall-p-40061189.html
 trending-products/trending-products-oct-19/overshirt	559221110	https://ca.shein.com/DREXORIN-Men-Corduroy-Flap-Pocket-Button-Up-Shirt-For-Fall-Winter-Long-Sleeve-Top-p-559221110.html
 trending-products/trending-products-oct-19/parka	21697925	https://ca.shein.com/Manfinity-Homme-Loose-Fit-Men-s-Long-Sleeve-Hooded-Thermal-Lined-Winter-Coat-With-Flap-Pockets-And-Drawstring-Waist-For-Fall-Puffer-p-21697925.html
-trending-products/trending-products-oct-19-2/cardigan	44293036	https://ca.shein.com/Manfinity-Homme-Men-s-Knitted-Cardigan-With-Thermal-Lined-V-Neck-Grey-Sweater-For-Fall-Winter-Long-Sleeve-Top-p-44293036.html
 trending-products/trending-products-oct-19-2/chunky-cardigan	21371833	https://ca.shein.com/Marcello-Vane-Men-Casual-Design-Cardigan-Plain-Casual-Chunky-Cardigan-Urban-Dark-Grey-Cardigan-For-Husband-Boyfriend-Gifts-For-Fall-Winter-Long-Sleeve-Top-p-21371833.html
 trending-products/trending-products-oct-19-2/ribbed-cardigan	22201545	https://ca.shein.com/DAZY-Men-Ribbed-Knit-Drop-Shoulder-Button-Up-Cardigan-Fall-p-22201545.html
 trending-products/trending-products-oct-19-2/shawl-cardigan	566455875	https://ca.shein.com/Manfinity-CityGents-Men-Shawl-Collar-Cable-Knit-Cardigan-Chunky-Plain-Navy-Blue-Autumn-Streetwear-Casual-Elegant-Windbreaker-Parka-Office-Business-p-566455875.html
@@ -198,7 +193,7 @@ trending-products/trending-products-oct-19-4/brown-blazer	560048656	https://ca.s
 trending-products/trending-products-oct-19-4/grey-blazer	242887313	https://ca.shein.com/Calvornis-Men-s-Dark-Grey-Autumn-Casual-Jacket-Long-Sleeve-Lapel-Neck-Business-Casual-Elegant-Blazer-Stylish-Evening-Party-Old-Money-Outdoor-Travel-Gift-p-242887313.html
 wedding/wedding-outfit-oct-19/suit	29104809	https://ca.shein.com/Calvornis-Men-s-Dark-Blue-Fashionable-Suit-Set-Formal-Ceremony-p-29104809.html
 
-# added 2026-10-12 (53)
+# added 2026-10-12 (52)
 business-casual/business-casual-oct-12/boots	210511793	https://ca.shein.com/STARNOVO-Men-s-Thermal-Lined-Winter-Boots-p-210511793.html
 business-casual/business-casual-oct-12/gloves	347231802	https://ca.shein.com/Men-s-Genuine-Leather-Touchscreen-Fleece-Gloves-p-347231802.html
 business-casual/business-casual-oct-12/jacket	225078441	https://ca.shein.com/Manfinity-Homme-Men-s-Contrast-Trim-Button-Front-Pocket-Fleece-Jacket-p-225078441.html
@@ -240,7 +235,6 @@ casual/casual-outfit-oct-12-5/sweatpants	556488470	https://ca.shein.com/PAVTROS-
 casual/casual-outfit-oct-12-6/jacket	170762636	https://ca.shein.com/Men-s-Thermal-Lined-Casual-Jacket-p-170762636.html
 casual/casual-outfit-oct-12-6/tee	30566750	https://ca.shein.com/Fenqiro-Men-s-Plain-Round-Neck-Short-Sleeve-Brown-T-Shirt-p-30566750.html
 casual/casual-outfit-oct-12-6/watch	17882903	https://ca.shein.com/Men-s-Stainless-Steel-Luminous-Sport-Wristwatch-p-17882903.html
-gameday/gameday-oct-12/sneakers	260597718	https://ca.shein.com/Men-s-Casual-High-Top-Skateboard-Shoes-p-260597718.html
 streetwear/streetwear-outfit-oct-12/beanie	6903927	https://ca.shein.com/Men-Knit-Cuff-Beanie-p-6903927.html
 streetwear/streetwear-outfit-oct-12/boots	159640877	https://ca.shein.com/Men-s-Winter-Plush-Lined-Snow-Boots-Non-Slip-Thick-Sole-p-159640877.html
 streetwear/streetwear-outfit-oct-12/shirt	11698977	https://ca.shein.com/Manfinity-Homme-Loose-Fit-Plaid-Print-Patch-Pocket-Long-Sleeve-Shirt-p-11698977.html

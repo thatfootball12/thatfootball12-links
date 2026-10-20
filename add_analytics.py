@@ -100,6 +100,8 @@ import json
 import os
 import re
 
+import gift_guide
+
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
 MEASUREMENT_ID = "G-E3HV1TFPEN"
@@ -333,6 +335,8 @@ def targets():
             out[rel] = (None, context, "a.link-card")
     for p in load_products():
         rel = p["detail_page_url"]
+        if gift_guide.listing_only(p):
+            continue  # the gift guide page keeps its own a.gg-shop tracking
         if os.path.isfile(_abs(rel)):
             out[rel] = (detail_params(p), None, "a.shop")
     return out
