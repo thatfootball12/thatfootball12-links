@@ -80,7 +80,11 @@ links [skip ci]") when it changes. A product dead in 2 weekly runs is
 it out of every pool. SHEIN's bot check, 403/429 and timeouts are
 `unknown` and never count. `sync_catalog.py` item 11 warns, without
 failing, about an entry whose id is gone from `products.json` (deleting
-that entry by hand is safe).
+that entry by hand is safe). The one hand edit: a product that's still
+listed but SOLD OUT reads as ok to the script, so to keep it out of the
+generator add a `confirmed` entry (`consecutive` 2) whose `note` starts
+with `manual:`. Runs never change or remove a `manual:` entry, so delete
+it by hand when the product is back in stock.
 
 **New SHEIN product? Set its seller during sourcing.** Every SHEIN
 record in `products.json` carries `seller`: `"shein"` (sold by SHEIN

@@ -9,59 +9,7 @@
 #
 # id<TAB>goods id<TAB>plain SHEIN URL
 
-# added 2026-11-02 (42)
-old-money/old-money-nov-2/pants	54217754	https://ca.shein.com/Manfinity-Mode-Men-s-Solid-Color-Pleated-Straight-Leg-Casual-Formal-Pants-With-Pockets-Fall-p-54217754.html
-trending-products/reserve-nov-2/corduroy-pants	66752852	https://ca.shein.com/Men-s-Lightweight-Corduroy-Long-Pants-With-Elastic-Waist-And-Drawstring-Fashionable-Vintage-Straight-Leg-Casual-Sports-Pants-For-Spring-And-Summer-Daily-Wear-p-66752852.html
-trending-products/reserve-nov-2/corduroy-shirt	39952598	https://ca.shein.com/DAZY-Men-s-Casual-Solid-Color-Corduroy-Shirt-Spring-Autumn-Long-Sleeve-Men-Shirt-p-39952598.html
-trending-products/reserve-nov-2/cropped-zip-hoodie	47574082	https://ca.shein.com/SUMWON-Aesthetic-Sleeve-Print-Cropped-Zip-Up-Hoodie-p-47574082.html
-trending-products/reserve-nov-2/embroidered-wide-leg-pants	568841199	https://ca.shein.com/mulinsen-Men-s-Sakura-Embroidered-Letter-Print-Wide-Leg-Pants-Drawstring-Elastic-Waist-Loose-Street-Style-With-Pockets-Long-Casual-Pants-p-568841199.html
-trending-products/reserve-nov-2/leather-gloves	555625170	https://ca.shein.com/1-Pair-Warm-100-Sheep-Leather-Gloves-Anti-Slip-Waterproof-Touchscreen-Compatible-Suitable-Outdoor-Snow-Winter-Skiing-Cycling-For-Men-p-555625170.html
-trending-products/reserve-nov-2/plaid-shirt	565741483	https://ca.shein.com/Manfinity-Mode-Men-s-Resort-Style-Plaid-Single-Breasted-Long-Sleeve-Shirt-Business-Casual-Formal-Old-Money-p-565741483.html
-trending-products/reserve-nov-2/ribbed-sweater	566409579	https://ca.shein.com/Vaulklash-Men-s-Casual-Everyday-Simple-Solid-Color-Ribbed-Knit-Sweater-Autumn-Winter-For-Christmas-Long-Sleeve-Top-p-566409579.html
-trending-products/reserve-nov-2/watch	503038299	https://ca.shein.com/1pc-Men-s-Silver-Business-Quartz-Watch-Blue-Dial-Arabic-Numerals-Steel-Band-Minimalist-And-Elegant-Conveys-Mature-And-Steady-Quality-Perfect-Gift-For-Boyfriend-Father-Son-On-Birthday-Valentine-s-Day-Or-Father-s-Day-Showcases-Men-s-Low-Key-Taste-p-503038299.html
-streetwear/streetwear-outfit-nov-2/cargo-pants	22945318	https://ca.shein.com/Manfinity-Roghcode-Men-Flap-Pocket-Side-Drawstring-Waist-Oversize-Cargo-Pants-Baggy-Long-Plain-Black-Going-Out-Fall-p-22945318.html
-streetwear/streetwear-outfit-nov-2/sneakers	574849341	https://ca.shein.com/Unisex-Thick-Sole-White-Sneakers-Street-Style-Lace-Up-Casual-Shoes-p-574849341.html
-streetwear/streetwear-outfit-nov-2/sweatshirt	571010075	https://ca.shein.com/Men-s-Autumn-Winter-Broken-Wing-Back-Print-High-Street-Vintage-Loose-Washed-Distressed-Sweatshirt-p-571010075.html
-trending-products/trending-products-nov-2/cable-knit-sweater	573946657	https://ca.shein.com/Claim-Dot-Men-s-Cable-Knit-Polo-Collar-Long-Sleeve-Casual-Sweater-p-573946657.html
-trending-products/trending-products-nov-2/cardigan	11049122	https://ca.shein.com/DAZY-Men-Drop-Shoulder-Cardigan-Fall-Winter-p-11049122.html
-trending-products/trending-products-nov-2/hoodie	21672138	https://ca.shein.com/In-My-Nature-Men-Solid-Outdoor-Hoodie-p-21672138.html
-trending-products/trending-products-nov-2/plaid-shirt	414743282	https://ca.shein.com/DAZY-Men-s-Plaid-Multi-Color-Loose-Fit-Shirt-Suitable-For-Spring-And-Autumn-Summer-p-414743282.html
-trending-products/trending-products-nov-2/sherpa-jacket	41387492	https://ca.shein.com/Manfinity-Hypemode-Men-s-Sherpa-Lined-Zip-Up-Jacket-p-41387492.html
-trending-products/trending-products-nov-2/striped-sweater	563759604	https://ca.shein.com/Men-s-Autumn-Winter-Fashion-Classic-12-Gauge-Vertical-Striped-Regular-Shoulder-Airplane-Collar-Long-Sleeve-Sweater-p-563759604.html
-trending-products/trending-products-nov-2/sweatshirt	189588677	https://ca.shein.com/ROMWE-MEN-Men-s-Casual-Solid-Color-Pullover-Sweatshirt-Autumn-Winter-p-189588677.html
-trending-products/trending-products-nov-2/v-neck-sweater	214190477	https://ca.shein.com/V-Neck-Sweater-Men-Ribbed-Knit-Pullover-Sweater-Long-Sleeve-Top-p-214190477.html
-trending-products/trending-products-nov-2/windbreaker-hoodie	46004154	https://ca.shein.com/In-My-Nature-Men-s-Zip-Front-Long-Sleeve-Pocket-Casual-Hoodie-Windbreaker-p-46004154.html
-trending-products/trending-products-nov-2/zip-jacket	397881301	https://ca.shein.com/ARLO-REED-Men-s-Casual-Solid-Color-Commuter-Zip-Up-Jacket-p-397881301.html
-trending-products/trending-products-nov-2-2/brown-pants	338385630	https://ca.shein.com/DAZY-Men-s-Solid-Brown-Elastic-Waist-Pants-Spring-Autumn-p-338385630.html
-trending-products/trending-products-nov-2-2/corduroy-pants	566551221	https://ca.shein.com/Vaulklash-Men-s-Solid-Color-Pleated-Pocket-Wide-Leg-Loose-Casual-Corduroy-Long-Pants-Fall-Winter-p-566551221.html
-trending-products/trending-products-nov-2-2/distressed-jeans	567949856	https://ca.shein.com/DAZY-Spring-Autumn-Navy-Blue-Original-Color-Denim-Washed-Distressed-Plus-Size-Men-s-Jeans-p-567949856.html
-trending-products/trending-products-nov-2-2/flare-jeans	558963163	https://ca.shein.com/Men-s-Black-Grey-Washed-Slim-Fit-Stretch-Flare-Jeans-White-Splatter-Side-Zipper-Hem-Split-Frayed-Raw-Edge-Pants-Y2K-Hip-Hop-Street-Style-p-558963163.html
-trending-products/trending-products-nov-2-2/khaki-pants	435752358	https://ca.shein.com/Manfinity-Homme-Men-s-Khaki-Woven-Twill-Pants-p-435752358.html
-trending-products/trending-products-nov-2-2/oversized-sweatpants	563800211	https://ca.shein.com/Driftmere-Men-s-Black-Oversized-Wide-Leg-Sweatpants-Loose-Fit-Streetwear-Joggers-Comfortable-Casual-Pants-Sports-Fall-p-563800211.html
-trending-products/trending-products-nov-2-2/striped-joggers	569385035	https://ca.shein.com/Men-s-Autumn-Winter-Loose-Soft-Comfortable-Breathable-Casual-Outdoor-Hiking-Running-Striped-Jogger-Sports-Pants-p-569385035.html
-trending-products/trending-products-nov-2-2/wide-leg-sweatpants	569901006	https://ca.shein.com/ROMWE-MEN-Men-s-Solid-Color-Drawstring-Waist-Pocket-Wide-Leg-Casual-Sweatpants-p-569901006.html
-trending-products/trending-products-nov-2-2/yellow-wash-jeans	557951702	https://ca.shein.com/Men-s-Yellow-Mud-Gradient-Washed-Slim-Fit-Stretch-Denim-Jeans-With-Multiple-Asymmetrical-Distressed-Ripped-Holes-Vintage-Vibe-Style-Jeans-p-557951702.html
-trending-products/trending-products-nov-2-3/black-polo	557818495	https://ca.shein.com/1pc-Men-s-Korean-Style-Black-Long-Sleeve-Polo-Shirt-Knitted-Fabric-Soft-And-Thick-Loose-Drop-Shoulder-Fit-Concealing-Body-Shape-Machine-Washable-Daily-Commute-Casual-Date-Versatile-Top-p-557818495.html
-trending-products/trending-products-nov-2-3/corduroy-shacket	548778829	https://ca.shein.com/1pc-Beige-Apricot-3D-Waffle-Check-Collar-Men-s-Shirt-Soft-Corduroy-Fabric-Loose-Fit-Long-Sleeve-Shirt-Machine-Washable-Minimalist-Vacation-Style-Men-s-Shacket-Early-Autumn-Short-Trip-Holiday-Outfit-p-548778829.html
-trending-products/trending-products-nov-2-3/half-zip-polo	568825967	https://ca.shein.com/Solid-Color-Waffle-Knit-Half-Zip-Polo-Shirt-Men-s-Textured-Casual-Long-Sleeve-Top-p-568825967.html
-trending-products/trending-products-nov-2-3/knit-shirt	562820473	https://ca.shein.com/Mainfolk-Men-s-Knit-Fashion-Casual-Loose-Long-Sleeve-Shirt-Youthful-Style-p-562820473.html
-trending-products/trending-products-nov-2-3/oxford-shirt	568893925	https://ca.shein.com/Men-s-Vintage-Oxford-Cotton-Long-Sleeve-Shirt-Fashionable-Casual-Versatile-Suitable-For-Commuting-And-Vacation-p-568893925.html
-trending-products/trending-products-nov-2-3/shacket	547480890	https://ca.shein.com/1pc-Beige-Grey-Men-s-Shirt-3D-Curved-Panel-Design-Loose-Drop-Shoulder-Fit-Long-Sleeve-Soft-Draping-Skin-Friendly-Woven-Fabric-Layering-Or-Single-Wear-Multi-Scenario-Suitable-Minimalist-Vacation-Style-Shacket-Men-s-Top-p-547480890.html
-trending-products/trending-products-nov-2-4/black-blazer	398047992	https://ca.shein.com/Officeau-Men-s-Black-Lightweight-Polyester-Blazer-Long-Sleeve-Casual-Sport-Coat-With-Pockets-Breathable-Cool-Suit-Jacket-For-Spring-Summer-Fall-Daily-Wear-p-398047992.html
-trending-products/trending-products-nov-2-4/suit-vest	491821134	https://ca.shein.com/Men-s-Slim-Fit-Suit-Vest-Waistcoat-Drape-Fabric-Design-Light-Business-Gentleman-Style-Commuter-Minimalist-Vest-Autumn-Winter-p-491821134.html
-wedding/wedding-outfit-nov-2/blazer	462314657	https://ca.shein.com/Manfinity-Bizformal-Men-s-Light-Khaki-Formal-Suit-Blazer-Daily-Commute-Style-With-Metal-Clip-Badge-Ceremony-p-462314657.html
-wedding/wedding-outfit-nov-2/dress-shoes	60999497	https://ca.shein.com/Men-s-Pointed-Toe-Lace-Up-Dress-Casual-Shoes-Smooth-Leather-Simple-Solid-Color-Formal-Oxfords-Suitable-For-All-Seasons-p-60999497.html
-wedding/wedding-outfit-nov-2/shirt	32964310	https://ca.shein.com/Calvornis-Men-Solid-Color-Simple-Basic-Long-Sleeve-Shirt-Spring-And-Autumn-Style-For-Fall-Ceremony-Formal-p-32964310.html
-
-# added 2026-10-26 (73)
-gameday-fit-check/gameday-fit-check-oct-26/graphic-hoodie	316182657	https://ca.shein.com/Manfinity-Roghcode-Manfinity-Hypemode-Men-s-City-Street-Casual-Hiking-Colorful-Large-Graphic-Print-Hoodie-Autumn-Winter-p-316182657.html
-gameday-fit-check/gameday-fit-check-oct-26/neon-hoodie	37286865	https://ca.shein.com/Gym-Rark-Men-Neon-Lime-Outdoor-Hoodie-p-37286865.html
-gameday-fit-check/gameday-fit-check-oct-26/orange-hoodie	191898320	https://ca.shein.com/Manfinity-Homme-Men-s-Casual-Contrast-Color-Patchwork-Hoodie-Autumn-Winter-Orange-Hoodie-Long-Sleeve-Top-p-191898320.html
-gameday-fit-check/gameday-fit-check-oct-26/plaid-hoodie	545875025	https://ca.shein.com/Men-s-Autumn-Winter-Fleece-Black-Yellow-Plaid-Casual-Outdoor-Sports-Streetwear-Hooded-Sweatshirt-p-545875025.html
-gameday-fit-check/gameday-fit-check-oct-26/reflective-jacket	538211360	https://ca.shein.com/Manfinity-Roghcode-Men-s-Long-Sleeve-Zipper-Placket-Casual-Reflective-Jacket-p-538211360.html
-gameday-fit-check/gameday-fit-check-oct-26/reflective-windbreaker	41959262	https://ca.shein.com/Manfinity-Homme-Men-s-Black-And-White-Reflective-Outdoor-Windbreaker-Autumn-Streetwear-Zip-Up-Hooded-Jacket-Casual-Athletic-Long-Sleeve-Trench-Coat-For-Vacation-p-41959262.html
-gameday-fit-check/gameday-fit-check-oct-26/striped-tee	573744287	https://ca.shein.com/American-Street-Style-Yellow-Black-Wide-Striped-2-In-1-Long-Sleeve-T-Shirt-For-Men-Loose-Fit-Drop-Shoulder-Layered-Look-Casual-Top-p-573744287.html
-gameday-fit-check/gameday-fit-check-oct-26/yellow-sneakers	35665059	https://ca.shein.com/Autumn-Winter-Men-s-Sneakers-Yellow-White-Fashion-Casual-Skateboard-Shoes-p-35665059.html
+# added 2026-10-26 (65)
 gameday-fit-check/gameday-fit-check-oct-26/yellow-windbreaker	464850649	https://ca.shein.com/1pc-Men-s-Mustard-Yellow-Hooded-Windbreaker-Men-s-Utility-Jacket-Men-s-Jacket-Men-s-Windbreaker-Anti-Lost-Zipper-Large-Pockets-Design-Sporty-Machine-Washable-Outdoor-Hiking-Functional-Jacket-Comfortable-Daily-Menswear-Top-p-464850649.html
 gameday/gameday-oct-26/jacket	262777638	https://ca.shein.com/Men-s-Hooded-Long-Sleeve-Jacket-With-Zipper-Featuring-Reflective-Stripes-For-Fashion-Refined-Zipper-Design-Suitable-For-Sports-Or-Casual-Wear-p-262777638.html
 gameday/gameday-oct-26/sneakers	62532716	https://ca.shein.com/All-Season-Men-s-Neon-Green-Pure-Leather-Personalized-Fashion-Height-Increasing-Thick-Sole-Sports-Shoes-Comfortable-Low-Heel-Casual-High-Street-Chunky-Sneakers-Suitable-For-Commuting-And-Gifts-Street-Retro-Athflow-Style-Wide-Feet-Recommended-To-Choose-One-Size-Larger-p-62532716.html
