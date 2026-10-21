@@ -84,7 +84,10 @@ that entry by hand is safe). The one hand edit: a product that's still
 listed but SOLD OUT reads as ok to the script, so to keep it out of the
 generator add a `confirmed` entry (`consecutive` 2) whose `note` starts
 with `manual:`. Runs never change or remove a `manual:` entry, so delete
-it by hand when the product is back in stock.
+it by hand when the product is back in stock. Hide it from the products
+page too (`categories.json` `hidden`), and take it out of both places
+together. Currently sold out (remove from both `data/dead_links.json` and
+`hidden` when it's back): `trending-products/trending-products-nov-2-2/yellow-wash-jeans`.
 
 **New SHEIN product? Set its seller during sourcing.** Every SHEIN
 record in `products.json` carries `seller`: `"shein"` (sold by SHEIN
