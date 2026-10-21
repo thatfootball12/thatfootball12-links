@@ -53,6 +53,10 @@ result was dead (machine-written; don't edit by hand):
   - ok: the entry is removed.
   - unknown, or not checked (Amazon, Awin, a product no longer in
     products.json): the entry is left as it is.
+  - an entry whose "note" starts with "manual:" was added by hand (e.g.
+    a product page that says SOLD OUT, which this script reads as ok)
+    and is never changed or removed by a run; delete it by hand when
+    the product is back.
   status is "confirmed" once consecutive reaches CONFIRM_RUNS (dead in
   2 weekly runs with no ok in between), else "suspected". Only confirmed
   ids are left out of the outfit generator (confirmed_ids() below, used
@@ -151,6 +155,8 @@ def update_dead_links(entries, results, retailers, today):
     by_id = {e["id"]: dict(e) for e in entries}
     for pid, result in results.items():
         cur = by_id.get(pid)
+        if cur is not None and str(cur.get("note", "")).startswith("manual:"):
+            continue  # added by hand; runs never change it
         if result == "ok":
             by_id.pop(pid, None)
         elif result == "dead":

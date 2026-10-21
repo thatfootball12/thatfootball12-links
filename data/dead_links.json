@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "trending-products/trending-products-nov-2-2/yellow-wash-jeans",
+    "retailer": "SHEIN",
+    "status": "confirmed",
+    "first_seen": "2026-10-21",
+    "last_seen": "2026-10-21",
+    "consecutive": 2,
+    "note": "manual: SOLD OUT on product page"
+  }
+]
