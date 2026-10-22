@@ -52,6 +52,9 @@ them in line, in place, without adding a marker block:
   - og:title (every product page, Amazon and Awin too) is the page's
     short <title> without " • ThatFootball12" (e.g. "LA Graphic Knit
     Tee"). The full product name stays in the page body and the block.
+    When the full name has a brand from KNOWN_BRANDS that the short
+    title leaves out, the brand goes in front ("New Era 9FORTY
+    Adjustable Hat"). Add a brand there to have it kept.
   - og:price:amount / og:price:currency (SHEIN only) copy the page's
     product:price:amount / product:price:currency tags, right after
     them, so both spellings Rich Pin parsers look for are there.
@@ -87,6 +90,59 @@ OG_TITLE_RE = re.compile(r'(<meta property="og:title" content=")[^"]*(")')
 OG_AVAILABILITY_RE = re.compile(r'(<meta property="og:availability" content=")[^"]*(")')
 PRODUCT_PRICE_LINE_RE = re.compile(r'^[ \t]*<meta property="product:price:(?:amount|currency)"[^>]*>\r?\n', re.M)
 OG_PRICE_LINE_RE = re.compile(r'^[ \t]*<meta property="og:price:(?:amount|currency)"[^>]*>\r?\n', re.M)
+
+# Brands kept at the front of the short og:title: (display name, pattern
+# matched case-insensitively against the full product name and the short
+# title). Well-known labels only, not Amazon house brands; no "Jordan"
+# (player names).
+KNOWN_BRANDS = [
+    ("New Era", r"new era"),
+    ("Fanatics", r"fanatics"),
+    ("'47", r"['’]47"),
+    ("Mitchell & Ness", r"mitchell (?:&|&amp;|and) ness"),
+    ("Nike", r"nike"),
+    ("Adidas", r"adidas"),
+    ("Asics", r"asics"),
+    ("Under Armour", r"under armour"),
+    ("Timberland", r"timberland"),
+    ("Champion", r"champion"),
+    ("Levi's", r"levi(?:['’]?s| strauss)"),
+    ("Lacoste", r"lacoste"),
+    ("Timex", r"timex"),
+    ("Hanes", r"hanes"),
+    ("Gildan", r"gildan"),
+    ("Fruit of the Loom", r"fruit of the loom"),
+    ("Puma", r"puma"),
+    ("Reebok", r"reebok"),
+    ("New Balance", r"new balance"),
+    ("Converse", r"converse"),
+    ("Vans", r"vans"),
+    ("Carhartt", r"carhartt"),
+    ("The North Face", r"(?:the )?north face"),
+    ("Columbia", r"columbia"),
+    ("Ralph Lauren", r"(?:polo )?ralph lauren"),
+    ("Tommy Hilfiger", r"tommy hilfiger"),
+    ("Calvin Klein", r"calvin klein"),
+    ("Dickies", r"dickies"),
+    ("Wrangler", r"wrangler"),
+    ("Skechers", r"skechers"),
+    ("Dr. Martens", r"dr\.? martens"),
+    ("Ray-Ban", r"ray-?ban"),
+    ("Oakley", r"oakley"),
+    ("Casio", r"casio"),
+    ("Fossil", r"fossil"),
+]
+BRAND_RES = [(name, re.compile(r"(?<!\w)(?:%s)(?!\w)" % pat, re.I)) for name, pat in KNOWN_BRANDS]
+
+
+def brand_prefixed(short, full_name):
+    """short with the brand (earliest in full_name) in front, unless it's
+    already in short or the product has no known brand."""
+    hits = [(m.start(), name, rx) for name, rx in BRAND_RES for m in [rx.search(full_name)] if m]
+    if not hits:
+        return short
+    _, name, rx = min(hits, key=lambda h: h[0])
+    return short if rx.search(short) else f"{name} {short}"
 
 
 @functools.lru_cache(maxsize=None)
@@ -176,6 +232,7 @@ def apply_meta(p, page_html):
         short = html.unescape(t.group(1).strip())
         if short.endswith(TITLE_SUFFIX):
             short = short[:-len(TITLE_SUFFIX)]
+        short = brand_prefixed(short, p["name"])
         page = OG_TITLE_RE.sub(lambda m: m.group(1) + html.escape(short) + m.group(2), page, count=1)
     if p["retailer"] != "SHEIN":
         return page
