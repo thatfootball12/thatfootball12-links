@@ -1,7 +1,5 @@
 # Pinterest bulk upload: oct-26
 
-> **NOT FINAL — seller checks pending.** 65 Oct 26 SHEIN products in this CSV still have seller "unchecked" (listed under "Unchecked SHEIN sellers" below; checklist in seller_check_batch3.txt). Don't upload pinterest_bulk_oct-26.csv until those are recorded with set_seller.py and the CSV is rebuilt with `py -3 make_pinterest_csv.py oct-26` (any marketplace product then blocks the build and has to be swapped out first).
-
 Files: pinterest/pinterest_bulk_oct-26.csv
 
 ## Pins per day (Atlantic time)
@@ -90,7 +88,7 @@ The CSV has no column for it. Paste after upload:
 - Blue Printed Skate Shoes That Steal the Show 👟: Men's blue printed low-top skate shoes with thick sole
 - A Neon Lime Hoodie for Under $13 💚: Men's neon lime outdoor hoodie for colour-out game days and the gym
 - A Mustard Windbreaker Under $35 for Outdoor Days 💛: Men's mustard yellow hooded windbreaker utility jacket with large pockets
-- Brown Lace-Up Boots With Metal Eyelets for Fall 🍂: Men's brown textured leather high-top lace-up boots with metal eyelets
+- Brown Suede Chelsea Boots Under $50 for Chinos or Jeans 🍂: Men's brown faux suede slip-on Chelsea boots with elastic side panels
 - A Stainless Cross Ring for Under $4 ✝️: Men's stainless steel wide band ring with black cross accent
 - A Burgundy Jacket at 20% Off That Owns Fall 🍷: Men's burgundy PU leather stand collar jacket
 - A Khaki Overcoat Under $45 With 20% Off 🧥: Men's khaki button-front long overcoat with pockets
@@ -117,75 +115,6 @@ The CSV has no column for it. Paste after upload:
 - The Skull Print Long Sleeve Tee for Dark Streetwear 💀: Men's black long sleeve tee with skull abstract print
 - Corduroy Jacket With a Fleece Collar Under $40 🧥: Men's black corduroy jacket with lamb fleece collar and thick lining
 - A Black Stand Collar Leather Jacket Under $45 🖤: Men's black stand collar leather jacket for autumn and winter
-
-### Unchecked SHEIN sellers
-Nobody has confirmed these products are sold by SHEIN rather than a third-party store. Check each before its publish time; for a marketplace one, delete the pin and run py -3 set_seller.py <id> marketplace (65):
-
-- Mon 08:30 — gameday/gameday-oct-26-3/puffer
-- Mon 10:45 — motor-streetwear/motor-streetwear-oct-26-2/hoodie
-- Mon 13:00 — streetwear/streetwear-outfit-oct-26/hoodie
-- Mon 15:00 — trending-products/trending-products-oct-26-2/asics-gel-kahana
-- Mon 16:00 — trending-products/trending-products-oct-26-2/under-armour-boots
-- Mon 17:15 — trending-products/trending-products-oct-26/aviator-jacket
-- Mon 19:30 — trending-products/trending-products-oct-26/distressed-leather-jacket
-- Mon 20:30 — trending-products/trending-products-oct-26/stynvo-leather-jacket
-- Tue 08:30 — gameday/gameday-oct-26-3/sneakers
-- Tue 09:30 — gameday/gameday-oct-26-5/sneakers
-- Tue 10:45 — motor-streetwear/motor-streetwear-oct-26-2/joggers
-- Tue 13:00 — streetwear/streetwear-outfit-oct-26/necklace
-- Tue 15:00 — trending-products/trending-products-oct-26-2/black-chelsea-boots
-- Tue 16:00 — trending-products/trending-products-oct-26-3/barbed-wire-necklace
-- Tue 17:15 — trending-products/trending-products-oct-26/biker-jacket
-- Tue 19:30 — trending-products/trending-products-oct-26/flight-jacket
-- Tue 20:30 — trending-products/trending-products-oct-26/suede-jacket
-- Wed 08:30 — gameday/gameday-oct-26-4/cargo-pants
-- Wed 09:30 — gameday/gameday-oct-26-5/sweatpants
-- Wed 10:45 — motor-streetwear/motor-streetwear-oct-26-2/sneakers
-- Wed 13:00 — streetwear/streetwear-outfit-oct-26/rings
-- Wed 15:00 — trending-products/trending-products-oct-26-2/brown-chelsea-boots
-- Wed 16:00 — trending-products/trending-products-oct-26-3/chain-necklace
-- Wed 17:15 — trending-products/trending-products-oct-26/black-moto-jacket
-- Wed 19:30 — trending-products/trending-products-oct-26/khaki-lapel-jacket
-- Wed 20:30 — trending-products/trending-products-oct-26/suede-zip-jacket
-- Thu 08:30 — gameday/gameday-oct-26-4/chelsea-boots
-- Thu 09:30 — gameday/gameday-oct-26-5/vest
-- Thu 10:45 — motor-streetwear/motor-streetwear-oct-26/hoodie
-- Thu 15:00 — trending-products/trending-products-oct-26-2/derby-boots
-- Thu 16:00 — trending-products/trending-products-oct-26-3/cross-print-tee
-- Thu 17:15 — trending-products/trending-products-oct-26/brown-leather-jacket
-- Thu 19:30 — trending-products/trending-products-oct-26/khaki-stand-collar-jacket
-- Thu 20:30 — trending-products/trending-products-oct-26/windbreaker
-- Fri 08:30 — gameday/gameday-oct-26-2/beanie
-- Fri 09:30 — gameday/gameday-oct-26-2/hoodie
-- Fri 10:45 — gameday/gameday-oct-26-4/hoodie
-- Fri 11:45 — gameday/gameday-oct-26/jacket
-- Fri 13:00 — motor-streetwear/motor-streetwear-oct-26/sneakers
-- Fri 15:00 — gameday-fit-check/gameday-fit-check-oct-26/yellow-windbreaker
-- Fri 16:00 — trending-products/trending-products-oct-26-2/lace-up-boots
-- Fri 17:15 — trending-products/trending-products-oct-26-3/cross-ring
-- Fri 18:15 — trending-products/trending-products-oct-26/burgundy-jacket
-- Fri 19:30 — trending-products/trending-products-oct-26/overcoat
-- Fri 20:30 — trending-products/trending-products-oct-26/wool-blend-jacket
-- Sat 08:30 — gameday/gameday-oct-26-2/boots
-- Sat 09:45 — gameday/gameday-oct-26-3/hoodie
-- Sat 11:00 — gameday/gameday-oct-26-4/necklace
-- Sat 12:15 — gameday/gameday-oct-26/sneakers
-- Sat 13:15 — streetwear/streetwear-outfit-oct-26/boots
-- Sat 15:45 — trending-products/trending-products-oct-26-2/air-cushion-sneakers
-- Sat 16:45 — trending-products/trending-products-oct-26-2/nike-shox-tl
-- Sat 18:00 — trending-products/trending-products-oct-26-3/ring-set
-- Sat 19:15 — trending-products/trending-products-oct-26/burgundy-moto-jacket
-- Sat 20:30 — trending-products/trending-products-oct-26/pilot-jacket
-- Sun 08:30 — gameday/gameday-oct-26-2/cargo-pants
-- Sun 09:45 — gameday/gameday-oct-26-3/pants
-- Sun 11:00 — gameday/gameday-oct-26-5/beanie
-- Sun 12:15 — gameday/gameday-oct-26/tee
-- Sun 13:15 — streetwear/streetwear-outfit-oct-26/flare-pants
-- Sun 15:45 — trending-products/trending-products-oct-26-2/ankle-boots
-- Sun 16:45 — trending-products/trending-products-oct-26-2/riding-boots
-- Sun 18:00 — trending-products/trending-products-oct-26-3/skull-print-tee
-- Sun 19:15 — trending-products/trending-products-oct-26/corduroy-jacket
-- Sun 20:30 — trending-products/trending-products-oct-26/stand-collar-leather-jacket
 
 ## Warnings
 
@@ -225,7 +154,7 @@ Nobody has confirmed these products are sold by SHEIN rather than a third-party 
 - product trending-products/trending-products-oct-26-2/ankle-boots: no product-pin.jpg, using the product photo
 - product trending-products/trending-products-oct-26-2/asics-gel-kahana: no product-pin.jpg, using the product photo
 - product trending-products/trending-products-oct-26-2/derby-boots: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-oct-26-2/lace-up-boots: no product-pin.jpg, using the product photo
+- product business-casual/business-casual-oct-19-2/boots: no product-pin.jpg, using the product photo
 - product trending-products/trending-products-oct-26-2/nike-shox-tl: no product-pin.jpg, using the product photo
 - product trending-products/trending-products-oct-26-2/riding-boots: no product-pin.jpg, using the product photo
 - product trending-products/trending-products-oct-26-2/under-armour-boots: no product-pin.jpg, using the product photo
