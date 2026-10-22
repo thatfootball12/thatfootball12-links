@@ -40,8 +40,9 @@ Report (always runs):
   3. products.json records whose thumbnail or thumbnail_webp file is
      missing on disk (or whose thumbnail_webp field isn't set).
   4. Product detail pages whose schema.org JSON-LD block is missing, stale,
-     or present where it shouldn't be (see add_product_schema.py; run it
-     to fix whatever this flags).
+     or present where it shouldn't be, or whose og:title / og:price:* /
+     og:availability tags are out of line ("meta") (see
+     add_product_schema.py; run it to fix whatever this flags).
   5. sitemap.xml drift: pages (from products.json and the outfits/ and
      videos/ walk) missing from sitemap.xml, sitemap.xml entries whose
      page no longer exists on disk, and entries that shouldn't be there
@@ -642,7 +643,7 @@ def main():
         print("   Run: python sync_catalog.py --fill-webp  (fixes WebP entries only)")
     print()
 
-    print(f"4. Detail pages with a missing/stale product schema block: {len(schema_issues)}")
+    print(f"4. Detail pages with a missing/stale product schema block or meta tags: {len(schema_issues)}")
     for pid, st in schema_issues:
         print(f"   {pid} ({st})")
     if schema_issues:

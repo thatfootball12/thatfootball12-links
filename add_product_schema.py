@@ -24,9 +24,12 @@ research behind each choice):
     review, or rating, a Product isn't eligible for a product snippet at
     all, so Amazon pages get no block. Same for the one Awin page, which
     shows "Shop Link" and has no price.
-  - No `availability`. The pages don't show stock status and nothing
-    here can verify it (check_affiliate_links.py can't detect sold-out
-    items), so claiming InStock would be unverified.
+  - `availability` is OutOfStock for any product confirmed dead in
+    data/dead_links.json (which includes the hand-added `manual:` SOLD
+    OUT entries, check_affiliate_links.py can't detect sold-out items),
+    else InStock. When the weekly link check confirms a new dead
+    product, item 4 of sync_catalog.py reports its page as stale until
+    this runs again.
   - `price` is the price the page displays (for discounted items, the
     discounted price — the page doesn't show an original price, so none
     is marked up).
@@ -41,17 +44,32 @@ research behind each choice):
 
 Pinterest doesn't document JSON-LD support for Rich Pins (only Open
 Graph and schema.org microdata), and its product pins require the
-product to be purchasable directly on the linked site — so this is for
-Google search. Pinterest keeps reading the existing og:/product: meta
-tags.
+product to be purchasable directly on the linked site — so the block is
+for Google search. Pinterest reads the og:/product: meta tags, which the
+pages carry from when they were written. This script keeps three of
+them in line, in place, without adding a marker block:
+
+  - og:title (every product page, Amazon and Awin too) is the page's
+    short <title> without " • ThatFootball12" (e.g. "LA Graphic Knit
+    Tee"). The full product name stays in the page body and the block.
+  - og:price:amount / og:price:currency (SHEIN only) copy the page's
+    product:price:amount / product:price:currency tags, right after
+    them, so both spellings Rich Pin parsers look for are there.
+    Amazon pages show no price and have no price tags; the Awin page's
+    product:price tags are left alone.
+  - og:availability (SHEIN only) is "out of stock" for a product
+    confirmed dead, the same rule as the block's availability, else
+    "instock".
 """
 
 import argparse
+import functools
 import html
 import json
 import os
 import re
 
+import check_affiliate_links
 import gift_guide
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -62,6 +80,19 @@ START = "<!-- product-schema:start -->"
 END = "<!-- product-schema:end -->"
 BLOCK_RE = re.compile(r"[ \t]*" + re.escape(START) + r".*?" + re.escape(END) + r"[ \t]*\r?\n?", re.DOTALL)
 OG_DESC_RE = re.compile(r'<meta property="og:description" content="([^"]*)"')
+
+TITLE_RE = re.compile(r"<title>(.*?)</title>", re.DOTALL)
+TITLE_SUFFIX = " • ThatFootball12"
+OG_TITLE_RE = re.compile(r'(<meta property="og:title" content=")[^"]*(")')
+OG_AVAILABILITY_RE = re.compile(r'(<meta property="og:availability" content=")[^"]*(")')
+PRODUCT_PRICE_LINE_RE = re.compile(r'^[ \t]*<meta property="product:price:(?:amount|currency)"[^>]*>\r?\n', re.M)
+OG_PRICE_LINE_RE = re.compile(r'^[ \t]*<meta property="og:price:(?:amount|currency)"[^>]*>\r?\n', re.M)
+
+
+@functools.lru_cache(maxsize=None)
+def sold_out_ids():
+    """Ids confirmed dead in data/dead_links.json (manual SOLD OUT entries included)."""
+    return frozenset(check_affiliate_links.confirmed_ids())
 
 
 def load_products():
@@ -107,6 +138,7 @@ def expected_block(p, page_html):
         "@type": "Offer",
         "price": f"{p['price']:.2f}",
         "priceCurrency": p["currency"],
+        "availability": "https://schema.org/" + ("OutOfStock" if p["id"] in sold_out_ids() else "InStock"),
         "url": p["outbound_url"],
     }
     body = json.dumps(data, indent=2, ensure_ascii=False).replace("</", "<\\/")
@@ -123,7 +155,9 @@ def current_block(page_html):
 
 
 def apply(page_html, block):
-    """Return page_html with its block replaced/inserted/removed."""
+    """Return page_html with its block replaced (in place), inserted or removed."""
+    if block is not None and BLOCK_RE.search(page_html):
+        return BLOCK_RE.sub(lambda m: block, page_html, count=1)
     stripped = BLOCK_RE.sub("", page_html)
     if block is None:
         return stripped
@@ -133,18 +167,44 @@ def apply(page_html, block):
     return stripped[:idx] + block + stripped[idx:]
 
 
+def apply_meta(p, page_html):
+    """Return page_html with its og:title, og:price:* and og:availability
+    tags brought in line (see the module docstring)."""
+    page = page_html
+    t = TITLE_RE.search(page)
+    if t:
+        short = html.unescape(t.group(1).strip())
+        if short.endswith(TITLE_SUFFIX):
+            short = short[:-len(TITLE_SUFFIX)]
+        page = OG_TITLE_RE.sub(lambda m: m.group(1) + html.escape(short) + m.group(2), page, count=1)
+    if p["retailer"] != "SHEIN":
+        return page
+    page = OG_PRICE_LINE_RE.sub("", page)
+    price_lines = list(PRODUCT_PRICE_LINE_RE.finditer(page))
+    if price_lines:
+        og = "".join(m.group(0).replace('"product:price:', '"og:price:', 1) for m in price_lines)
+        end = price_lines[-1].end()
+        page = page[:end] + og + page[end:]
+    availability = "out of stock" if p["id"] in sold_out_ids() else "instock"
+    page = OG_AVAILABILITY_RE.sub(lambda m: m.group(1) + availability + m.group(2), page, count=1)
+    return page
+
+
 def status(p, page_html):
-    """'ok', 'missing', 'stale', or 'unwanted' (block present but shouldn't be)."""
+    """'ok', 'missing', 'stale', 'unwanted' (block present but shouldn't
+    be), or 'meta' (block fine, og:title/og:price/og:availability not)."""
     want = expected_block(p, page_html)
     have = current_block(page_html)
     if want is None:
-        return "unwanted" if have is not None else "ok"
-    if have is None:
+        if have is not None:
+            return "unwanted"
+    elif have is None:
         return "missing"
     # Compare ignoring line endings: git's autocrlf converts them on
     # checkout/commit, which isn't a content change.
-    same = have.replace("\r\n", "\n") == want.replace("\r\n", "\n")
-    return "ok" if same else "stale"
+    elif have.replace("\r\n", "\n") != want.replace("\r\n", "\n"):
+        return "stale"
+    return "ok" if apply_meta(p, page_html) == page_html else "meta"
 
 
 def main():
@@ -152,7 +212,7 @@ def main():
     ap.add_argument("--check", action="store_true", help="report only, change nothing")
     args = ap.parse_args()
 
-    counts = {"ok": 0, "missing": 0, "stale": 0, "unwanted": 0}
+    counts = {"ok": 0, "missing": 0, "stale": 0, "unwanted": 0, "meta": 0}
     changed = []
     for p in load_products():
         if gift_guide.listing_only(p):
@@ -167,12 +227,13 @@ def main():
             continue
         changed.append((st, p["detail_page_url"]))
         if not args.check:
-            write_page(path, apply(page, expected_block(p, page)))
+            write_page(path, apply_meta(p, apply(page, expected_block(p, page))))
 
     verb = "would change" if args.check else "changed"
     print(f"Up to date: {counts['ok']}")
     print(f"Missing block: {counts['missing']}  Stale block: {counts['stale']}  "
-          f"Block on a page that shouldn't have one: {counts['unwanted']}")
+          f"Block on a page that shouldn't have one: {counts['unwanted']}  "
+          f"Meta tags only: {counts['meta']}")
     for st, rel in changed:
         print(f"  {verb} ({st}): {rel}")
 
