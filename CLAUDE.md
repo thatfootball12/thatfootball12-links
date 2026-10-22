@@ -87,7 +87,8 @@ with `manual:`. Runs never change or remove a `manual:` entry, so delete
 it by hand when the product is back in stock. Hide it from the products
 page too (`categories.json` `hidden`), and take it out of both places
 together. Currently sold out (remove from both `data/dead_links.json` and
-`hidden` when it's back): `trending-products/trending-products-nov-2-2/yellow-wash-jeans`.
+`hidden` when it's back): `trending-products/trending-products-nov-2-2/yellow-wash-jeans`,
+`trending-products/trending-products-oct-26-2/lace-up-boots`.
 
 **New SHEIN product? Set its seller during sourcing.** Every SHEIN
 record in `products.json` carries `seller`: `"shein"` (sold by SHEIN
