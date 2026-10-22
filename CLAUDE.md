@@ -134,9 +134,17 @@ whose price, description, or link has changed. Amazon and Awin pages
 deliberately get no block (no price is shown on them, so there's nothing
 to mark up), and neither do `image_pending` pages until their photo
 exists (Google treats a Product without `image` as an invalid merchant
-listing). `sync_catalog.py`'s report item 4 flags any page whose
-block is missing or stale, so a clean `sync_catalog.py` run means the
-schema is current too.
+listing). The offer's `availability` is OutOfStock for any product
+confirmed in `data/dead_links.json` (manual SOLD OUT entries
+included), else InStock. The same script keeps three Rich Pin meta
+tags in line on every product page: `og:title` is the short `<title>`
+(without " • ThatFootball12"), and on SHEIN pages `og:price:amount` /
+`og:price:currency` copy the `product:price:*` tags and
+`og:availability` follows the same sold-out rule. Don't hand-edit
+those. `sync_catalog.py`'s report item 4 flags any page whose
+block or those tags are missing or stale, so a clean `sync_catalog.py`
+run means the schema is current too. Rerun it after a dead-links
+change.
 
 Then run `python add_analytics.py`. It writes the Google Analytics 4 tag
 (`G-E3HV1TFPEN`) into every site page's `<head>`, right after
