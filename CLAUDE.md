@@ -138,7 +138,9 @@ listing). The offer's `availability` is OutOfStock for any product
 confirmed in `data/dead_links.json` (manual SOLD OUT entries
 included), else InStock. The same script keeps three Rich Pin meta
 tags in line on every product page: `og:title` is the short `<title>`
-(without " • ThatFootball12"), and on SHEIN pages `og:price:amount` /
+(without " • ThatFootball12", with a brand from `KNOWN_BRANDS` put
+in front when the full name has one, e.g. "New Era 9FORTY Adjustable
+Hat"), and on SHEIN pages `og:price:amount` /
 `og:price:currency` copy the `product:price:*` tags and
 `og:availability` follows the same sold-out rule. Don't hand-edit
 those. `sync_catalog.py`'s report item 4 flags any page whose
