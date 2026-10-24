@@ -137,7 +137,7 @@ gameday/gameday-pink-out-soft-oct-7/jeans	31954832	https://ca.shein.com/Pocket-S
 gameday/gameday-pink-out-soft-oct-7/sneakers	60078829	https://ca.shein.com/Lace-Up-Casual-Skate-Shoes-p-60078829.html
 gameday/gameday-pink-out-soft-oct-7/sweater	203632517	https://ca.shein.com/Manfinity-Hypemode-Drop-Shoulder-Crew-Neck-Sweater-Pink-p-203632517.html
 
-# added 2026-10-05 (69)
+# added 2026-10-05 (68)
 business-casual/business-casual-oct-5/belt	21729600	https://ca.shein.com/Men-s-Elegant-Versatile-PU-Belt-Business-Casual-p-21729600.html
 business-casual/business-casual-oct-5/jacket	183898088	https://ca.shein.com/Thin-Corduroy-Men-s-Casual-Shirt-Jacket-Dual-Pocket-Design-p-183898088.html
 business-casual/business-casual-oct-5/jeans	51975380	https://ca.shein.com/Manfinity-CityGents-Loose-Slant-Pocket-Straight-Leg-Jeans-Grey-p-51975380.html
@@ -206,7 +206,6 @@ streetwear/streetwear-outfit-oct-5-4/sneakers	13010935	https://ca.shein.com/Men-
 streetwear/streetwear-outfit-oct-5-4/sunglasses	37517113	https://ca.shein.com/Metal-Round-Frame-UV-Resistant-Sunglasses-p-37517113.html
 trending-products/trending-products-oct-5/boots	459004063	https://ca.shein.com/STARNOVO-Men-s-Tactical-Boots-Shock-Absorbing-Desert-Combat-Boots-p-459004063.html
 trending-products/trending-products-oct-5/plaid-shirt	557837714	https://ca.shein.com/PAVTROS-Men-s-Vintage-Black-Plaid-Long-Sleeve-Shirt-Dual-Chest-Pockets-Loose-Streetwear-Top-p-557837714.html
-trending-products/trending-products-oct-5/sweater	559552887	https://ca.shein.com/Manfinity-Homme-Old-Money-Men-s-Striped-Half-Zip-Knit-Sweater-Long-Sleeve-Pullover-p-559552887.html
 
 # added 2026-09-28 (40)
 budget/budget-outfit-sept-28/pants	43014419	https://ca.shein.com/Men-s-Lightweight-Drawstring-Waist-Slant-Pocket-Solid-Color-Casual-Pants-p-43014419.html
