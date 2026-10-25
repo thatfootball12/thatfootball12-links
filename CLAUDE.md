@@ -38,6 +38,7 @@ Items 1 and 2 (page with no record, record with no page) make the script
 exit 1, and the `catalog-check.yml` workflow runs it on every push and
 PR to main, so a batch that skips this step fails CI.
 Item 8 also fails CI (exit 1) when a `<picture>` WebP or its fallback JPEG is missing.
+Item 13 also fails CI: any remote image on `gift-guide/index.html` fails unless its card is on `GIFT_GUIDE_REMOTE_ALLOWLIST` in `sync_catalog.py`; empty that list once the last cards are self-hosted.
 
 **New item_type? Add it to `categories.json`.** The products page
 (`products/`) puts every product in a tab (Outerwear, Tops, Bottoms,
