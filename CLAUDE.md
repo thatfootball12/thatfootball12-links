@@ -37,6 +37,7 @@ New records get an `added` date from the campaign slug.
 Items 1 and 2 (page with no record, record with no page) make the script
 exit 1, and the `catalog-check.yml` workflow runs it on every push and
 PR to main, so a batch that skips this step fails CI.
+Item 8 also fails CI (exit 1) when a `<picture>` WebP or its fallback JPEG is missing.
 
 **New item_type? Add it to `categories.json`.** The products page
 (`products/`) puts every product in a tab (Outerwear, Tops, Bottoms,
