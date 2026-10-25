@@ -98,8 +98,14 @@ Report (always runs):
      "seller" or one that isn't shein / marketplace / unchecked, and for
      an Amazon/Awin record that has one; always prints how many SHEIN
      products are shein, marketplace and unchecked.
+ 13. Gift guide images loaded from another site: an <img>/<source> on
+     gift-guide/index.html whose src, srcset or data-full is a remote URL
+     is an error unless its card is in GIFT_GUIDE_REMOTE_ALLOWLIST (the
+     SHEIN cards not yet self-hosted). Warns about allowlisted cards that
+     are no longer remote, so the list only shrinks.
 
-Exit status: 1 when item 1, 2, 10, 11 or 12 has an error (report-only runs;
+Exit status: 1 when item 1, 2, 10, 11, 12 or 13 has an error, or item 8
+finds a missing <picture> file (report-only runs;
 --append fixes item 1 and exits 0), else 0. The catalog-check GitHub
 workflow runs the report on every push and pull request to main, so a
 batch can't land with a page missing from products.json, a record whose
@@ -182,6 +188,17 @@ H1_RE = re.compile(r'<h1>(.*?)</h1>', re.DOTALL)
 IMG_TAG_RE = re.compile(r'<img src="([^"]+)"')
 # (webp srcset, fallback <img> src) for each <picture>
 WEBP_PICTURE_RE = re.compile(r'<source type="image/webp" srcset="([^"]*)">\s*<img[^>]*?\ssrc="([^"]*)"')
+
+# Gift guide cards whose photo is still served from SHEIN's CDN (item 13).
+# Remove each id once its card is self-hosted in gift-guide/img/, and empty
+# the list when the last cards are migrated: from then on any remote image
+# on the gift guide fails CI.
+GIFT_GUIDE_REMOTE_ALLOWLIST = {
+    "S2", "S3", "S4", "S7", "S8", "S9", "S10", "S11", "S12", "S14", "S15", "S16",
+    "S18", "S20", "S21", "S22", "S23", "S24", "S25", "S26", "S27", "S28", "S29", "S30",
+}
+GG_CARD_RE = re.compile(r'<article class="card-tile" data-id="([^"]+)".*?</article>', re.DOTALL)
+GG_IMAGE_URL_RE = re.compile(r'<(?:img|source)\b[^>]*?\s(?:src|srcset|data-full)="(https?://[^"]+)"')
 
 
 def find_detail_pages():
@@ -457,6 +474,31 @@ def generate_webp(thumb_rel, width=THUMB_TARGET_WIDTH, original_rel=None):
     return webp_rel
 
 
+def gift_guide_remote_images():
+    """(errors, warnings) for item 13: an image on gift-guide/index.html
+    loaded from another site is an error unless its card is in
+    GIFT_GUIDE_REMOTE_ALLOWLIST. An allowlisted card that no longer has a
+    remote image (or no longer exists) is a warning: take it off the list."""
+    page = os.path.join(REPO, gift_guide.PAGE.replace("/", os.sep))
+    if not os.path.isfile(page):
+        return [], []
+    with open(page, encoding="utf-8") as f:
+        content = f.read()
+    errors, remote_cards = [], set()
+    for card in GG_CARD_RE.finditer(content):
+        urls = GG_IMAGE_URL_RE.findall(card.group(0))
+        if not urls:
+            continue
+        remote_cards.add(card.group(1))
+        if card.group(1) not in GIFT_GUIDE_REMOTE_ALLOWLIST:
+            errors += [f"{card.group(1)}: {u}" for u in urls]
+    outside = GG_IMAGE_URL_RE.findall(GG_CARD_RE.sub("", content))
+    errors += [f"(not in a card): {u}" for u in outside]
+    warnings = [f"{cid}: on the allowlist but its image is no longer remote; remove it"
+                for cid in sorted(GIFT_GUIDE_REMOTE_ALLOWLIST - remote_cards)]
+    return errors, warnings
+
+
 def webp_source_issues():
     """Every <source type="image/webp"> on a page must resolve to a file. A
     browser that supports WebP uses the <source> and never falls back to the
@@ -575,6 +617,7 @@ def main():
                 missing_thumbnails.append((p["id"], f"{p['thumbnail_webp']} {why}"))
 
     webp_issues = webp_source_issues()
+    remote_image_errors, remote_image_warnings = gift_guide_remote_images()
     favicon_issues = add_favicons.audit()
     favicon_issues += [(path, "icon file missing") for path in add_favicons.missing_icons()]
 
@@ -733,11 +776,22 @@ def main():
               "(Amazon/Awin records take no seller field).")
     print()
 
+    print(f"13. Gift guide images loaded from another site: {len(remote_image_errors)} "
+          f"(allowlisted cards still remote: {len(GIFT_GUIDE_REMOTE_ALLOWLIST) - len(remote_image_warnings)}, "
+          f"warnings: {len(remote_image_warnings)})")
+    for e in remote_image_errors:
+        print(f"   ERROR {e}")
+    for w in remote_image_warnings:
+        print(f"   warn  {w}")
+    if remote_image_errors:
+        print("   Self-host the photo in gift-guide/img/ (see GIFT_GUIDE_REMOTE_ALLOWLIST).")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not listing_issues
             and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
             and not webp_issues and not favicon_issues and not category_errors
-            and not generator_errors and not seller_errors):
+            and not generator_errors and not seller_errors and not remote_image_errors):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
@@ -762,8 +816,11 @@ def main():
         # every other one. (Mismatches and unencoded spaces only warn.)
         missing_picture_files = [i for i in webp_issues
                                  if i[2] in ("file missing", "fallback JPEG missing")]
+        # Item 13 fails it when a gift guide image comes from another site
+        # and its card isn't on GIFT_GUIDE_REMOTE_ALLOWLIST.
         if (missing_from_catalog or orphaned_records or listing_issues or category_errors
-                or generator_errors or seller_errors or missing_picture_files):
+                or generator_errors or seller_errors or missing_picture_files
+                or remote_image_errors):
             sys.exit(1)
         return
 
