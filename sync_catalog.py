@@ -66,7 +66,9 @@ Report (always runs):
   8. <picture> WebP sources on any page whose srcset doesn't resolve to a
      file (URL-decoded, relative to the page), contains an unencoded space,
      or shows a different picture than the <img> JPEG beside it (e.g. a
-     replaced photo whose WebP wasn't regenerated). Unlike a slow image, a
+     replaced photo whose WebP wasn't regenerated), and <img> JPEG
+     fallbacks inside a <picture> that don't resolve to a file (what
+     browsers without WebP show). Unlike a slow image, a
      missing WebP <source> is a broken image in every WebP-capable browser:
      it never falls back to the <img> JPEG. Item 3 applies the same
      missing/mismatch checks to products.json's thumbnail_webp.
@@ -363,27 +365,29 @@ def build_record(rel_path):
     return record, flags
 
 
-def generate_thumbnail(image_rel):
+def generate_thumbnail(image_rel, width=THUMB_TARGET_WIDTH, out_rel=None):
     """image_rel is repo-root-relative, e.g. outfits/x/y/z/z.jpg. Returns
     the thumbnail's repo-root-relative path, or None if the source image
-    doesn't exist."""
+    doesn't exist. The thumbnail is <image>-<width>.<ext> next to the source
+    unless out_rel names another path (the gift guide keeps its -500 page
+    images in gift-guide/img/, away from the pin originals)."""
     decoded = urllib.parse.unquote(image_rel)
     src_path = os.path.join(REPO, decoded.replace("/", os.sep))
     if not os.path.isfile(src_path):
         return None
     root, ext = os.path.splitext(image_rel)
-    thumb_rel = f"{root}-424{ext}"
+    thumb_rel = out_rel or f"{root}-{width}{ext}"
     decoded_thumb = urllib.parse.unquote(thumb_rel)
     thumb_path = os.path.join(REPO, decoded_thumb.replace("/", os.sep))
 
     with Image.open(src_path) as im:
         w, h = im.size
-        if w <= THUMB_TARGET_WIDTH:
+        if w <= width:
             shutil.copyfile(src_path, thumb_path)
         else:
             im = im.convert("RGB")
-            new_h = round(h * THUMB_TARGET_WIDTH / w)
-            im.resize((THUMB_TARGET_WIDTH, new_h), Image.LANCZOS).save(
+            new_h = round(h * width / w)
+            im.resize((width, new_h), Image.LANCZOS).save(
                 thumb_path, "JPEG", quality=THUMB_QUALITY
             )
     return thumb_rel
@@ -415,9 +419,12 @@ def webp_mismatch(webp_abs, jpeg_abs):
     return f"doesn't match its JPEG (pixel difference {d:.0f})" if d > WEBP_MATCH_THRESHOLD else None
 
 
-def generate_webp(thumb_rel):
+def generate_webp(thumb_rel, width=THUMB_TARGET_WIDTH, original_rel=None):
     """Writes the WebP sibling of a -424 thumbnail and returns its
     repo-root-relative path, or None if the -424 JPEG doesn't exist.
+    For another width (the gift guide's -500 images) pass width, and
+    original_rel when the original isn't the thumbnail's name without the
+    -<width> suffix.
 
     Encoded from the full-size original (x/y.jpg for x/y-424.jpg), resized to
     424 wide the same way generate_thumbnail() does and never upscaled, so it
@@ -431,15 +438,15 @@ def generate_webp(thumb_rel):
     if not os.path.isfile(thumb_abs):
         return None
     root, ext = os.path.splitext(thumb_rel)
-    original_abs = _abs(re.sub(r"-424$", "", root) + ext)
+    original_abs = _abs(original_rel or re.sub(rf"-{width}$", "", root) + ext)
     with Image.open(thumb_abs) as t:
         thumb = t.convert("RGB")
     im = thumb
     if os.path.isfile(original_abs):
         with Image.open(original_abs) as o:
             o = o.convert("RGB")
-            if o.width > THUMB_TARGET_WIDTH:
-                o = o.resize((THUMB_TARGET_WIDTH, round(o.height * THUMB_TARGET_WIDTH / o.width)),
+            if o.width > width:
+                o = o.resize((width, round(o.height * width / o.width)),
                              Image.LANCZOS)
         if o.size == thumb.size and _mean_diff(o, thumb) <= WEBP_MATCH_THRESHOLD:
             im = o
@@ -457,7 +464,8 @@ def webp_source_issues():
     separately: srcset splits candidates on whitespace, so the part after the
     space is read as a size descriptor and the URL is wrong. The WebP must
     also show the same picture as the <img> fallback beside it, or a photo
-    replaced without regenerating its WebP keeps showing the old one."""
+    replaced without regenerating its WebP keeps showing the old one. The
+    <img> fallback must exist too: browsers without WebP show only it."""
     issues = []
     for rel in add_analytics.all_html():
         page = os.path.join(REPO, rel.replace("/", os.sep))
@@ -472,10 +480,12 @@ def webp_source_issues():
                 issues.append((rel, src, "file missing"))
                 continue
             jpeg = os.path.join(os.path.dirname(page), urllib.parse.unquote(fallback).replace("/", os.sep))
-            if os.path.isfile(jpeg):
-                why = webp_mismatch(target, jpeg)
-                if why:
-                    issues.append((rel, src, why))
+            if not os.path.isfile(jpeg):
+                issues.append((rel, fallback, "fallback JPEG missing"))
+                continue
+            why = webp_mismatch(target, jpeg)
+            if why:
+                issues.append((rel, src, why))
     return issues
 
 
@@ -504,7 +514,7 @@ def fill_webp(products):
 
     pages = 0
     for rel, src, why in webp_source_issues():
-        if why.startswith("unencoded whitespace"):
+        if why.startswith("unencoded whitespace") or why == "fallback JPEG missing":
             continue
         page_dir = os.path.dirname(rel)
         stem = os.path.splitext(src)[0]
@@ -675,9 +685,10 @@ def main():
           f"(browsers don't fall back to the JPEG): {len(webp_issues)}")
     for rel, src, why in webp_issues:
         print(f"   {rel}: {src} ({why})")
-    if any(not why.startswith("unencoded whitespace") for _, _, why in webp_issues):
+    if any(not why.startswith("unencoded whitespace") and why != "fallback JPEG missing"
+           for _, _, why in webp_issues):
         print("   Run: python sync_catalog.py --fill-webp  (regenerates missing or mismatched "
-              "files; fix unencoded spaces by hand)")
+              "files; fix unencoded spaces and missing fallback JPEGs by hand)")
     print()
 
     print(f"9. Pages with a missing/stale favicon block, or missing icon files: {len(favicon_issues)}")
