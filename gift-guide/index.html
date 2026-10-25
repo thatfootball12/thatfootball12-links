@@ -272,6 +272,11 @@
     -webkit-overflow-scrolling:touch;
   }
   .chip-row::-webkit-scrollbar{display:none;}
+  /* Swipe hint: fades the right edge while a row has more to scroll to. */
+  .chip-row.fade-right{
+    -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 40px),transparent);
+    mask-image:linear-gradient(to right,#000 calc(100% - 40px),transparent);
+  }
   @media (min-width:768px){
     .chip-row{flex-wrap:wrap;justify-content:center;overflow-x:visible;}
   }
@@ -1323,9 +1328,10 @@
   <nav class="catnav" aria-label="Filter gifts">
     <div class="chip-row" role="group" aria-label="Shop for">
       <a class="chip active" href="#gifts" data-filter="" aria-current="true">All</a>
-      <a class="chip" href="#gameday" data-filter="gameday">Gameday Guy</a>
-      <a class="chip" href="#office" data-filter="office">Office Guy</a>
-      <a class="chip" href="#old-money" data-filter="old-money">Old-Money Guy</a>
+      <a class="chip" href="#gameday" data-filter="gameday">Gameday</a>
+      <a class="chip" href="#office" data-filter="office">Office</a>
+      <a class="chip" href="#old-money" data-filter="old-money">Old-Money</a>
+      <a class="chip" href="#homebody" data-filter="homebody">Homebody</a>
     </div>
     <div class="chip-row" aria-label="Jump to a price range">
       <span class="jump-label">Jump to</span>
@@ -1366,7 +1372,7 @@
     <section class="section tier" id="under-25" aria-labelledby="under-25-title">
       <h2 id="under-25-title"><span aria-hidden="true">🧦</span> Stocking Stuffers Under $25</h2>
       <div class="grid">
-        <article class="card-tile" data-id="S7" data-tags="">
+        <article class="card-tile" data-id="S7" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/v4/j/spmp/2025/04/21/fe/17452125603c578311d974bb137dad7d2255f0df89.jpg" alt="Stainless Cuban Link Chain" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">Under $25</span>
@@ -1379,7 +1385,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r51srhxsp?ismg_ol=DDz7iyR1LZ4_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Stainless Cuban Link Chain on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Stainless Cuban Link Chain</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S8" data-tags="">
+        <article class="card-tile" data-id="S8" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_spmp/2024/07/06/25/1720234563375ce46ec9c6f9776aef9c782492507f.jpg" alt="Tiger Eye Stone Ring" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">Under $25</span>
@@ -1392,7 +1398,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r59ovy5na?ismg_ol=EyU0TKojGil_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Tiger Eye Stone Ring on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Tiger Eye Stone Ring</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S9" data-tags="">
+        <article class="card-tile" data-id="S9" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_pi/2022/04/22/16506160533319f194c830e70a11b2cd77c2b77eb5.jpg" alt="Braided &amp; Beaded Bracelet" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">Under $25</span>
@@ -1444,7 +1450,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r8xvy4hmg?ismg_ol=8pHs6hgoQVP_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Plaid Flannel Shirt on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Plaid Flannel Shirt</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S19" data-tags="">
+        <article class="card-tile" data-id="S19" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_spmp/2024/02/23/7d/17086971133aae9755f1c0ee996994075fe505ce74.jpg" alt="Leather RFID Wallet" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">Under $25</span>
@@ -1496,7 +1502,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659ral2t08lk?ismg_ol=2IRVS0bymtU_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Thermal-Lined Knit Beanie on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Thermal-Lined Knit Beanie</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S24" data-tags="">
+        <article class="card-tile" data-id="S24" data-tags="office">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_spmp/2024/09/14/21/17262886900f936deb174c5c9aa4ade626991b5045.jpg" alt="Faux Leather Winter Gloves" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">Under $25</span>
@@ -1509,7 +1515,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659rasz0bp70?ismg_ol=3ECDY5UgiRM_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Faux Leather Winter Gloves on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Faux Leather Winter Gloves</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S26" data-tags="">
+        <article class="card-tile" data-id="S26" data-tags="homebody">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/v4/j/spmp/2025/10/01/e5/1759283481dcd61c7bc7a83b1298c5a7732a04f2e9.jpg" alt="Long-Sleeve Pajama Set" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">Under $25</span>
@@ -1696,7 +1702,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r38oqs4n5?ismg_ol=2L6ewURJPPW_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Minimalist Chelsea Boot on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Minimalist Chelsea Boot</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S2" data-tags="">
+        <article class="card-tile" data-id="S2" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_spmp/2024/09/19/d7/172671172390d848f09390ba764afb56bc268ef4b3_square.jpg" alt="British-Style Moto Boot" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">$25–60</span>
@@ -1709,7 +1715,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r3gkv8chu?ismg_ol=HkdwqvgfjiQ_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop British-Style Moto Boot on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>British-Style Moto Boot</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S4" data-tags="">
+        <article class="card-tile" data-id="S4" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_pi/2023/03/24/167964288499c4c9fbf165611fd3d689946ce44461.jpg" alt="Clean White Casual Sneaker" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">$25–60</span>
@@ -1748,7 +1754,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r4k1hi5an?ismg_ol=ITmqh9ZzrvN_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Suede Penny Loafer on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Suede Penny Loafer</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S12" data-tags="">
+        <article class="card-tile" data-id="S12" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_spmp/2023/06/08/16862309418156ba3da6b3fd3a164a142084e1e9aa.jpg" alt="Automatic Skeleton Watch" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">$25–60</span>
@@ -1800,7 +1806,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r888h5vlu?ismg_ol=8g1wINyEcEc_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Knit Cardigan on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Knit Cardigan</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S20" data-tags="">
+        <article class="card-tile" data-id="S20" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_spmp/2024/12/28/f6/173536492168804b13afb32a0bbfa56700eb0e35e8.jpg" alt="Vintage Travel Duffel" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">$25–60</span>
@@ -1813,7 +1819,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r9pie2lnf?ismg_ol=0nWgUqZakRQ_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Vintage Travel Duffel on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Vintage Travel Duffel</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S25" data-tags="">
+        <article class="card-tile" data-id="S25" data-tags="homebody">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_spmp/2024/05/24/19/17165367912d1eeb4b2493a9c59fae9ba06e7343a3.jpg" alt="Flannel Shawl-Neck Robe" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">$25–60</span>
@@ -1826,7 +1832,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659rbcpbgy6i?ismg_ol=3tC9HkkfT4U_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Flannel Shawl-Neck Robe on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Flannel Shawl-Neck Robe</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S27" data-tags="">
+        <article class="card-tile" data-id="S27" data-tags="homebody">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/v4/j/spmp/2025/11/05/9d/1762347023ddd700ba77326a47f7fda4500a606882.jpg" alt="Thermal-Lined Moccasin Slippers" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">$25–60</span>
@@ -1839,7 +1845,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659rbqigde1j?ismg_ol=L59lTRv70oM_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Thermal-Lined Moccasin Slippers on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Thermal-Lined Moccasin Slippers</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S28" data-tags="">
+        <article class="card-tile" data-id="S28" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/images3_spmp/2024/10/16/31/17290648851e39ee6dc8c8bf3f527016c8f2d0797e_square.jpg" alt="Leather Toiletry Bag" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">$25–60</span>
@@ -2013,7 +2019,7 @@
     <section class="section tier" id="60-100" aria-labelledby="60-100-title">
       <h2 id="60-100-title"><span aria-hidden="true">🎄</span> Gifts $60–100</h2>
       <div class="grid">
-        <article class="card-tile" data-id="S3" data-tags="">
+        <article class="card-tile" data-id="S3" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/v4/j/spmp/2026/09/24/6d/17902406308da857a2a21660b5a70fd7115c92ab3f.jpg" alt="Salkin Handmade Lace-Up Boot" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">$60–100</span>
@@ -2026,7 +2032,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r3mhyl7ri?ismg_ol=KmFR1LcwKYP_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Salkin Handmade Lace-Up Boot on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Salkin Handmade Lace-Up Boot</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A31" data-tags="">
+        <article class="card-tile" data-id="A31" data-tags="old-money">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A31_clarks-chukka-500.webp"><img class="card-thumb" src="img/A31_clarks-chukka-500.jpg" alt="Clarks Bushacre II Chukka (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$60–100</span>
@@ -2052,7 +2058,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r70tvkm9x?ismg_ol=36OsrRfMoNi_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Colour-Block Padded Winter Jacket on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Colour-Block Padded Winter Jacket</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A34" data-tags="">
+        <article class="card-tile" data-id="A34" data-tags="everyday">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A34_lacoste-sneaker-500.webp"><img class="card-thumb" src="img/A34_lacoste-sneaker-500.jpg" alt="Lacoste Court Base Sneaker (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$60–100</span>
@@ -2065,7 +2071,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B0DQ2JVBCT?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Lacoste Court Base Sneaker on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Lacoste Court Base Sneaker</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="S15" data-tags="">
+        <article class="card-tile" data-id="S15" data-tags="everyday">
           <div class="thumb-wrap">
             <img class="card-thumb" src="https://img.ltwebstatic.com/v4/j/pi/2026/07/13/76/178393362459ddead3b6b0d05272bccb33af68c0f6.jpg" alt="Brown Suede Jacket" width="800" height="1200" loading="lazy" decoding="async">
             <span class="tier-badge">$60–100</span>
@@ -2078,7 +2084,7 @@
             <a class="gg-shop" href="https://onelink.shein.com/57/659r78pzmsgm?ismg_ol=DkQoFPx6sxH_01_KOC-C" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Brown Suede Jacket on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Brown Suede Jacket</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A39" data-tags="">
+        <article class="card-tile" data-id="A39" data-tags="everyday">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A39_tungsten-ring-500.webp"><img class="card-thumb" src="img/A39_tungsten-ring-500.jpg" alt="Engraved Tungsten Ring (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$60–100</span>
@@ -2117,7 +2123,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B0BDMZZB95?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Merino.tech Merino Half-Zip on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Merino.tech Merino Half-Zip</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A49" data-tags="">
+        <article class="card-tile" data-id="A49" data-tags="everyday">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A49_fossil-derrick-wallet-500.webp"><img class="card-thumb" src="img/A49_fossil-derrick-wallet-500.jpg" alt="Fossil Derrick RFID Leather Bifold (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$60–100</span>
@@ -2143,7 +2149,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B0758KFFPM?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Hickey Freeman Cashmere Scarf on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Hickey Freeman Cashmere Scarf</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A53" data-tags="">
+        <article class="card-tile" data-id="A53" data-tags="office">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A53_cashmere-lined-gloves-500.webp"><img class="card-thumb" src="img/A53_cashmere-lined-gloves-500.jpg" alt="Cashmere-Lined Leather Gloves (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$60–100</span>
@@ -2169,7 +2175,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B07GDSPVBB?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Fishers Finery Cashmere Beanie on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Fishers Finery Cashmere Beanie</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A55" data-tags="">
+        <article class="card-tile" data-id="A55" data-tags="homebody">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A55_fleece-lounge-set-500.webp"><img class="card-thumb" src="img/A55_fleece-lounge-set-500.jpg" alt="Plush Fleece Lounge Set (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$60–100</span>
@@ -2182,7 +2188,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B08DCW7VJZ?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Plush Fleece Lounge Set on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Plush Fleece Lounge Set</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A58" data-tags="">
+        <article class="card-tile" data-id="A58" data-tags="everyday">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A58_safety-razor-kit-500.webp"><img class="card-thumb" src="img/A58_safety-razor-kit-500.jpg" alt="Viking Revolution Safety Razor Kit (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$60–100</span>
@@ -2382,7 +2388,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B0CDD5QNZY?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Johnston &amp; Murphy Jenkins Plain-Toe on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Johnston &amp; Murphy Jenkins Plain-Toe</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A37" data-tags="">
+        <article class="card-tile" data-id="A37" data-tags="everyday">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A37_miabella-chain-500.webp"><img class="card-thumb" src="img/A37_miabella-chain-500.jpg" alt="Miabella Sterling Silver Cuban Chain (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$100+</span>
@@ -2395,7 +2401,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B07RMZC5JX?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Miabella Sterling Silver Cuban Chain on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Miabella Sterling Silver Cuban Chain</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A38" data-tags="">
+        <article class="card-tile" data-id="A38" data-tags="everyday">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A38_miabella-bracelet-500.webp"><img class="card-thumb" src="img/A38_miabella-bracelet-500.jpg" alt="Miabella Sterling Silver Bracelet (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$100+</span>
@@ -2460,7 +2466,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B0CLR8R792?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Columbia Delta Ridge II Down Jacket on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Columbia Delta Ridge II Down Jacket</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A45" data-tags="">
+        <article class="card-tile" data-id="A45" data-tags="everyday">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A45_flavor-leather-jacket-500.webp"><img class="card-thumb" src="img/A45_flavor-leather-jacket-500.jpg" alt="FLAVOR Real Leather Jacket (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$100+</span>
@@ -2512,7 +2518,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B00O79IC5A?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Leather Briefcase on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Leather Briefcase</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A51" data-tags="">
+        <article class="card-tile" data-id="A51" data-tags="everyday">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A51_polare-duffle-500.webp"><img class="card-thumb" src="img/A51_polare-duffle-500.jpg" alt="Polare Full-Grain Leather Duffle (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$100+</span>
@@ -2525,7 +2531,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B083Z1J54M?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Polare Full-Grain Leather Duffle on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Polare Full-Grain Leather Duffle</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A56" data-tags="">
+        <article class="card-tile" data-id="A56" data-tags="homebody">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A56_eddie-bauer-robe-500.webp"><img class="card-thumb" src="img/A56_eddie-bauer-robe-500.jpg" alt="Eddie Bauer Plush Fleece Robe (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$100+</span>
@@ -2538,7 +2544,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B08N5GBLJF?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Eddie Bauer Plush Fleece Robe on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Eddie Bauer Plush Fleece Robe</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A57" data-tags="">
+        <article class="card-tile" data-id="A57" data-tags="homebody">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A57_ugg-ascot-500.webp"><img class="card-thumb" src="img/A57_ugg-ascot-500.jpg" alt="UGG Ascot Slipper (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$100+</span>
@@ -2564,7 +2570,7 @@
             <a class="gg-shop" href="https://www.amazon.ca/dp/B0FJ8BX3P5?tag=thatfootballg-ca-20" target="_blank" rel="sponsored nofollow noopener" aria-label="Shop Versace Pour Homme 3-Piece Gift Set on Amazon.ca (opens in a new tab)">Shop on Amazon.ca<span class="link-text" hidden>Versace Pour Homme 3-Piece Gift Set</span></a>
           </div>
         </article>
-        <article class="card-tile" data-id="A60" data-tags="">
+        <article class="card-tile" data-id="A60" data-tags="everyday">
           <div class="thumb-wrap">
             <picture><source type="image/webp" srcset="img/A60_paco-rabanne-set-500.webp"><img class="card-thumb" src="img/A60_paco-rabanne-set-500.jpg" alt="Paco Rabanne 1 Million 3-Piece Set (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture>
             <span class="tier-badge">$100+</span>
@@ -2726,11 +2732,11 @@
 </div>
 <script>
 (function () {
-  // #gameday / #office / #old-money load with that filter applied (Pinterest
+  // #gameday / #office / #old-money / #homebody load with that filter applied (Pinterest
   // pins link to them); #under-25 etc. are plain section anchors.
   // The search box ANDs with the chip. Its text stays in memory only: it is
   // never written to the URL or passed to gtag, so it can't reach analytics.
-  var FILTERS = { gameday: 1, office: 1, 'old-money': 1 };
+  var FILTERS = { gameday: 1, office: 1, 'old-money': 1, homebody: 1 };
   var chips = document.querySelectorAll('.chip[data-filter]');
   var sections = document.querySelectorAll('section.tier');
   var nav = document.querySelector('.catnav');
@@ -2793,10 +2799,23 @@
     noneEl.hidden = shown > 0;
     if (!shown) {
       noneEl.textContent = query
-        ? 'No gifts match “' + input.value.trim() + '”' + (f ? ' for the ' + chipLabel(f) : '') + '. Try another word or clear the search.'
+        ? 'No ' + (f ? chipLabel(f) + ' ' : '') + 'gifts match “' + input.value.trim() + '”. Try another word or clear the search.'
         : 'No gifts here yet.';
     }
     clearBtn.hidden = !input.value;
+    fades();
+  }
+
+  function fades() {
+    var rows = nav.querySelectorAll('.chip-row');
+    for (var r = 0; r < rows.length; r++) {
+      var row = rows[r];
+      row.classList.toggle('fade-right', row.scrollWidth - row.clientWidth - row.scrollLeft > 1);
+    }
+  }
+  var chipRows = nav.querySelectorAll('.chip-row');
+  for (var cr = 0; cr < chipRows.length; cr++) {
+    chipRows[cr].addEventListener('scroll', fades, { passive: true });
   }
 
   function apply(f) {
@@ -2845,6 +2864,8 @@
     document.documentElement.style.setProperty('--bar', nav.offsetHeight + 'px');
   }
   window.addEventListener('resize', measure);
+  window.addEventListener('resize', fades);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fades);
   measure();
 
   apply(fromHash() || '');
