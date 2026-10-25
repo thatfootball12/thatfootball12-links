@@ -68,7 +68,9 @@ Report (always runs):
      or shows a different picture than the <img> JPEG beside it (e.g. a
      replaced photo whose WebP wasn't regenerated), and <img> JPEG
      fallbacks inside a <picture> that don't resolve to a file (what
-     browsers without WebP show). Unlike a slow image, a
+     browsers without WebP show). A missing WebP or fallback JPEG makes
+     the script exit 1 (fails CI); a mismatch or space only warns. Unlike a
+     slow image, a
      missing WebP <source> is a broken image in every WebP-capable browser:
      it never falls back to the <img> JPEG. Item 3 applies the same
      missing/mismatch checks to products.json's thumbnail_webp.
@@ -755,8 +757,13 @@ def main():
         # Items 1, 2, 10, 11 and 12 fail the run (and the catalog-check CI workflow):
         # a page missing from products.json is invisible in the shop grid,
         # and so is a product whose item_type has no tab in categories.json.
+        # Item 8 fails it too when a <picture> file is missing: a missing WebP
+        # is a broken image in every WebP browser, a missing fallback JPEG in
+        # every other one. (Mismatches and unencoded spaces only warn.)
+        missing_picture_files = [i for i in webp_issues
+                                 if i[2] in ("file missing", "fallback JPEG missing")]
         if (missing_from_catalog or orphaned_records or listing_issues or category_errors
-                or generator_errors or seller_errors):
+                or generator_errors or seller_errors or missing_picture_files):
             sys.exit(1)
         return
 
