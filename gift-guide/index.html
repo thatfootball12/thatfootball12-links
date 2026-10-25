@@ -318,6 +318,45 @@
     text-decoration:none;
   }
   .jump:hover{background:#1F1A13;}
+  .jump[hidden]{display:none;}
+
+  /* Search: sits above the sticky bar (not in it), so the bar stays the
+     same height on phones. The term lives only in the input: it's never
+     written to the URL or sent to analytics. */
+  .gg-search{margin-bottom:12px;}
+  .gg-search-label{
+    display:block;margin-bottom:6px;
+    font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:1.5px;text-transform:uppercase;color:var(--bone-dim);
+  }
+  .gg-search-box{position:relative;}
+  #gg-q{
+    width:100%;height:40px;
+    padding:0 40px 0 14px;
+    border:1px solid var(--panel-line);border-radius:10px;
+    background:var(--panel);color:var(--bone);
+    font:16px/1.2 'Poppins',sans-serif;
+    -webkit-appearance:none;appearance:none;
+  }
+  #gg-q::placeholder{color:var(--bone-dim);opacity:.8;}
+  #gg-q::-webkit-search-cancel-button{display:none;}
+  #gg-q:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-color:var(--gold);}
+  .gg-clear{
+    position:absolute;top:2px;right:2px;
+    width:36px;height:36px;
+    border:0;border-radius:8px;background:transparent;
+    color:var(--bone-dim);font-size:22px;line-height:1;cursor:pointer;
+  }
+  .gg-clear[hidden]{display:none;}
+  .gg-clear:hover{color:var(--bone);}
+  .gg-clear:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+  .gg-count{margin-top:6px;font-size:12px;color:var(--bone-dim);min-height:18px;}
+  .gg-none{
+    text-align:center;font-size:14px;line-height:1.6;color:var(--bone-dim);
+    padding:22px 16px;margin-bottom:26px;
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+  }
+  .gg-none[hidden]{display:none;}
 
   .section{
     background:var(--panel);
@@ -514,7 +553,6 @@
     text-align:center;font-size:12px;line-height:1.6;color:var(--bone-dim);
     max-width:640px;margin:0 auto;
   }
-  .tier-empty{text-align:center;font-size:13px;color:var(--bone-dim);padding:10px;}
   footer{margin-top:40px;text-align:center;}
   .fine-print{
     margin-top:26px;font-size:10.5px;color:var(--bone-dim);
@@ -1273,6 +1311,15 @@
     </ol>
   </nav>
 
+  <div class="gg-search">
+    <label class="gg-search-label" for="gg-q">Search gifts</label>
+    <div class="gg-search-box">
+      <input id="gg-q" type="search" placeholder="Try wallet, boots, cashmere…" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" maxlength="60">
+      <button type="button" class="gg-clear" aria-label="Clear search" hidden>×</button>
+    </div>
+    <p class="gg-count" role="status" aria-live="polite">100 gifts</p>
+  </div>
+
   <nav class="catnav" aria-label="Filter gifts">
     <div class="chip-row" role="group" aria-label="Shop for">
       <a class="chip active" href="#gifts" data-filter="" aria-current="true">All</a>
@@ -1315,6 +1362,7 @@
         </div>
       </div>
     </section>
+    <p class="gg-none" hidden></p>
     <section class="section tier" id="under-25" aria-labelledby="under-25-title">
       <h2 id="under-25-title"><span aria-hidden="true">🧦</span> Stocking Stuffers Under $25</h2>
       <div class="grid">
@@ -1631,7 +1679,6 @@
           </div>
         </article>
       </div>
-      <p class="tier-empty" hidden>No picks for this guy in this price range.</p>
     </section>
     <section class="section tier" id="25-60" aria-labelledby="25-60-title">
       <h2 id="25-60-title"><span aria-hidden="true">🎁</span> Gifts $25–60</h2>
@@ -1962,7 +2009,6 @@
           </div>
         </article>
       </div>
-      <p class="tier-empty" hidden>No picks for this guy in this price range.</p>
     </section>
     <section class="section tier" id="60-100" aria-labelledby="60-100-title">
       <h2 id="60-100-title"><span aria-hidden="true">🎄</span> Gifts $60–100</h2>
@@ -2280,7 +2326,6 @@
           </div>
         </article>
       </div>
-      <p class="tier-empty" hidden>No picks for this guy in this price range.</p>
     </section>
     <section class="section tier" id="splurge" aria-labelledby="splurge-title">
       <h2 id="splurge-title"><span aria-hidden="true">✨</span> Splurge Gifts $100+</h2>
@@ -2637,7 +2682,6 @@
           </div>
         </article>
       </div>
-      <p class="tier-empty" hidden>No picks for this guy in this price range.</p>
     </section>
     <section class="section guide" id="how-we-picked" aria-labelledby="how-we-picked-title">
       <h2 id="how-we-picked-title">How we picked</h2>
@@ -2684,33 +2728,103 @@
 (function () {
   // #gameday / #office / #old-money load with that filter applied (Pinterest
   // pins link to them); #under-25 etc. are plain section anchors.
+  // The search box ANDs with the chip. Its text stays in memory only: it is
+  // never written to the URL or passed to gtag, so it can't reach analytics.
   var FILTERS = { gameday: 1, office: 1, 'old-money': 1 };
   var chips = document.querySelectorAll('.chip[data-filter]');
   var sections = document.querySelectorAll('section.tier');
   var nav = document.querySelector('.catnav');
-  var current = '';
+  var input = document.getElementById('gg-q');
+  var clearBtn = document.querySelector('.gg-clear');
+  var countEl = document.querySelector('.gg-count');
+  var noneEl = document.querySelector('.gg-none');
+  var current = '', query = '', timer = null;
 
-  function apply(f) {
-    current = f;
+  function norm(t) {
+    t = String(t || '');
+    if (t.normalize) t = t.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    return t.toLowerCase().replace(/[‘’ʼ]/g, "'").replace(/\s+/g, ' ').trim();
+  }
+
+  var cards = document.querySelectorAll('section.tier .card-tile');
+  var hay = [];
+  for (var h = 0; h < cards.length; h++) {
+    var parts = cards[h].querySelectorAll('.prod-name, .best-for, .blurb');
+    var text = '';
+    for (var p = 0; p < parts.length; p++) text += ' ' + parts[p].textContent;
+    hay.push(norm(text));
+  }
+
+  function chipLabel(f) {
+    for (var i = 0; i < chips.length; i++) {
+      if (chips[i].getAttribute('data-filter') === f) return chips[i].textContent.trim();
+    }
+    return '';
+  }
+
+  function render() {
+    var f = current, words = query ? query.split(' ') : [];
     for (var i = 0; i < chips.length; i++) {
       var on = chips[i].getAttribute('data-filter') === f;
       chips[i].classList.toggle('active', on);
       if (on) chips[i].setAttribute('aria-current', 'true'); else chips[i].removeAttribute('aria-current');
     }
+    var inChip = 0, shown = 0, k = 0;
     for (var s = 0; s < sections.length; s++) {
-      var cards = sections[s].querySelectorAll('.card-tile'), shown = 0;
-      for (var c = 0; c < cards.length; c++) {
-        var tags = (cards[c].getAttribute('data-tags') || '').split(' ');
+      var list = sections[s].querySelectorAll('.card-tile'), inSection = 0;
+      for (var c = 0; c < list.length; c++, k++) {
+        var tags = (list[c].getAttribute('data-tags') || '').split(' ');
         var show = !f || tags.indexOf(f) !== -1;
-        cards[c].hidden = !show;
-        if (show) shown++;
+        if (show) inChip++;
+        for (var w = 0; show && w < words.length; w++) {
+          if (hay[k].indexOf(words[w]) === -1) show = false;
+        }
+        list[c].hidden = !show;
+        if (show) inSection++;
       }
-      sections[s].querySelector('.tier-empty').hidden = shown > 0;
+      sections[s].hidden = inSection === 0;
+      var jump = nav.querySelector('.jump[href="#' + sections[s].id + '"]');
+      if (jump) jump.hidden = inSection === 0;
+      shown += inSection;
     }
+    var label = f ? chipLabel(f) + ' gifts' : 'gifts';
+    var count = (f || query) ? shown + ' of ' + inChip + ' ' + label : cards.length + ' gifts';
+    if (countEl.textContent !== count) countEl.textContent = count;
+    noneEl.hidden = shown > 0;
+    if (!shown) {
+      noneEl.textContent = query
+        ? 'No gifts match “' + input.value.trim() + '”' + (f ? ' for the ' + chipLabel(f) : '') + '. Try another word or clear the search.'
+        : 'No gifts here yet.';
+    }
+    clearBtn.hidden = !input.value;
   }
 
+  function apply(f) {
+    current = f;
+    render();
+  }
+
+  function setQuery(now) {
+    clearTimeout(timer);
+    var run = function () { query = norm(input.value.slice(0, 60)); render(); };
+    if (now) run(); else timer = setTimeout(run, 150);
+  }
+
+  input.value = '';  // memory only: never restore a term from a previous visit
+  input.addEventListener('input', function () { setQuery(false); });
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && input.value) { input.value = ''; setQuery(true); }
+    else if (e.key === 'Enter') { setQuery(true); input.blur(); }
+  });
+  clearBtn.addEventListener('click', function () {
+    input.value = '';
+    setQuery(true);
+    input.focus();
+  });
+
   function fromHash() {
-    var h = decodeURIComponent(location.hash.slice(1));
+    var h;
+    try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) { return null; }
     return FILTERS[h] ? h : null;
   }
 
