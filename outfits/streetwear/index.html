@@ -10,7 +10,7 @@
 <!-- Google tag (gtag.js): loaded only after the visitor accepts analytics cookies. See add_analytics.py. -->
 <script>
 (function () {
-  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 1, MAX_AGE = 365 * 864e5;
+  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 2, MAX_AGE = 365 * 864e5;
   var PRIVACY = '../../privacy/', LABELS = { granted: 'Accepted', denied: 'Declined' };
   var loaded = false, bar = null;
   function stored() {
@@ -45,6 +45,28 @@
       });
     });
   }
+  // Affiliate banners (the homepage's Moosehill/Awin one): an empty
+  // [data-tf12-awin] box gets its image and link only after Accept.
+  function banners(on) {
+    var els = document.querySelectorAll('[data-tf12-awin]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      el.innerHTML = '';
+      el.hidden = !on;
+      if (!on) continue;
+      var a = document.createElement('a'), img = document.createElement('img');
+      a.className = 'affiliate-banner';
+      a.href = el.getAttribute('data-tf12-awin-href');
+      a.target = '_blank';
+      a.rel = 'nofollow sponsored noopener';
+      img.alt = el.getAttribute('data-tf12-awin-alt') || '';
+      img.width = 300;
+      img.height = 250;
+      img.src = el.getAttribute('data-tf12-awin');
+      a.appendChild(img);
+      el.appendChild(a);
+    }
+  }
   function showStatus() {
     var choice = stored(), els = document.querySelectorAll('[data-tf12-consent-status]');
     for (var i = 0; i < els.length; i++) els[i].textContent = LABELS[choice] || 'Not chosen yet';
@@ -61,7 +83,7 @@
       bar.className = 'tf12-consent';
       bar.setAttribute('role', 'region');
       bar.setAttribute('aria-label', 'Cookie choice');
-      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out? Nothing is tracked unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
+      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out, and show a Moosehill banner from Awin on the homepage (Awin sets its own cookie)? Neither happens unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
         '<p class="tf12-consent-now">Current choice: <b data-tf12-consent-status></b></p>' +
         '<div class="tf12-consent-btns"><button type="button" data-tf12-choice="denied">Decline</button>' +
         '<button type="button" data-tf12-choice="granted">Accept</button></div>';
@@ -81,6 +103,7 @@
     store(choice);
     hide();
     showStatus();
+    banners(choice === 'granted');
     if (choice === 'granted') return load();
     if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
     clearCookies();
@@ -96,6 +119,7 @@
   if (initial === 'granted') load();
   function ready() {
     showStatus();
+    if (initial === 'granted') banners(true);
     if (!initial) show(false);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);

@@ -10,7 +10,7 @@
 <!-- Google tag (gtag.js): loaded only after the visitor accepts analytics cookies. See add_analytics.py. -->
 <script>
 (function () {
-  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 1, MAX_AGE = 365 * 864e5;
+  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 2, MAX_AGE = 365 * 864e5;
   var PRIVACY = '../privacy/', LABELS = { granted: 'Accepted', denied: 'Declined' };
   var loaded = false, bar = null;
   function stored() {
@@ -45,6 +45,28 @@
       });
     });
   }
+  // Affiliate banners (the homepage's Moosehill/Awin one): an empty
+  // [data-tf12-awin] box gets its image and link only after Accept.
+  function banners(on) {
+    var els = document.querySelectorAll('[data-tf12-awin]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      el.innerHTML = '';
+      el.hidden = !on;
+      if (!on) continue;
+      var a = document.createElement('a'), img = document.createElement('img');
+      a.className = 'affiliate-banner';
+      a.href = el.getAttribute('data-tf12-awin-href');
+      a.target = '_blank';
+      a.rel = 'nofollow sponsored noopener';
+      img.alt = el.getAttribute('data-tf12-awin-alt') || '';
+      img.width = 300;
+      img.height = 250;
+      img.src = el.getAttribute('data-tf12-awin');
+      a.appendChild(img);
+      el.appendChild(a);
+    }
+  }
   function showStatus() {
     var choice = stored(), els = document.querySelectorAll('[data-tf12-consent-status]');
     for (var i = 0; i < els.length; i++) els[i].textContent = LABELS[choice] || 'Not chosen yet';
@@ -61,7 +83,7 @@
       bar.className = 'tf12-consent';
       bar.setAttribute('role', 'region');
       bar.setAttribute('aria-label', 'Cookie choice');
-      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out? Nothing is tracked unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
+      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out, and show a Moosehill banner from Awin on the homepage (Awin sets its own cookie)? Neither happens unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
         '<p class="tf12-consent-now">Current choice: <b data-tf12-consent-status></b></p>' +
         '<div class="tf12-consent-btns"><button type="button" data-tf12-choice="denied">Decline</button>' +
         '<button type="button" data-tf12-choice="granted">Accept</button></div>';
@@ -81,6 +103,7 @@
     store(choice);
     hide();
     showStatus();
+    banners(choice === 'granted');
     if (choice === 'granted') return load();
     if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
     clearCookies();
@@ -96,6 +119,7 @@
   if (initial === 'granted') load();
   function ready() {
     showStatus();
+    if (initial === 'granted') banners(true);
     if (!initial) show(false);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
@@ -164,18 +188,25 @@
 <body>
 <div class="wrap">
   <h1>Privacy</h1>
-  <div class="updated">Last updated September 28, 2026</div>
+  <div class="updated">Last updated October 26, 2026</div>
 
   <div class="summary">
-    <p><strong>The short version:</strong> there are no accounts, sign-up forms, comments or newsletters here, so this site never asks for your name, email or anything else about you. The only thing that collects data is Google Analytics, and it only switches on if you click <strong>Accept</strong> on the cookie banner. Decline and it never loads.</p>
+    <p><strong>The short version:</strong> there are no accounts, sign-up forms, comments or newsletters here, so this site never asks for your name, email or anything else about you. A few things happen on every visit, because that's how a web page gets to your screen: the company that hosts the site and the one that serves its fonts see your IP address. Everything else (Google Analytics, and the Moosehill banner on the homepage) only switches on if you click <strong>Accept</strong> on the cookie banner. Decline and none of it loads.</p>
   </div>
 
   <h2>Your choice</h2>
   <div class="choice">
-    <p>Analytics cookies: <strong data-tf12-consent-status>Not chosen yet</strong></p>
+    <p>Analytics and the Awin banner: <strong data-tf12-consent-status>Not chosen yet</strong></p>
     <button type="button" data-tf12-consent-open>Change cookie settings</button>
   </div>
-  <p>You can change your mind any time with <strong>Cookie settings</strong> at the bottom of every page. Switching to Decline stops Google Analytics straight away and deletes its cookies from your browser. Your choice is saved in your own browser (local storage, under <code>tf12_consent</code>), not sent anywhere, and we ask again after 12 months or if this page changes in a way that matters.</p>
+  <p>You can change your mind any time with <strong>Cookie settings</strong> at the bottom of every page. Switching to Decline stops Google Analytics straight away, deletes its cookies from your browser, and hides the Awin banner. Your choice is saved in your own browser (local storage, under <code>tf12_consent</code>), not sent anywhere, and we ask again after 12 months or if this page changes in a way that matters.</p>
+
+  <h2>What happens on every visit</h2>
+  <p>These happen before you choose anything, since the page can't load without them. None of them set cookies.</p>
+  <ul>
+    <li><strong>Hosting.</strong> The site is hosted on GitHub Pages. GitHub logs every visitor's IP address for security, whether or not you have a GitHub account. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a>.</li>
+    <li><strong>Fonts.</strong> The site's fonts (Anton, Oswald and Poppins) are downloaded from Google Fonts, so your browser sends Google your IP address and basic browser details to get them. Google Fonts doesn't set cookies. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's privacy policy</a>.</li>
+  </ul>
 
   <h2>What Google Analytics collects</h2>
   <p>Only if you accept:</p>
@@ -191,13 +222,22 @@
 
   <h2>Who it's shared with</h2>
   <p>Google, which runs Google Analytics for us. It's processed on Google's servers, which may be outside Canada (mostly the United States). Google explains how it handles it here: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">How Google uses information from sites that use its services</a>.</p>
-  <p>There are no ads on this site. The tag tells Google that advertising storage and ad personalization are switched off. We don't sell or share the data with anyone else.</p>
+  <p>Apart from the Moosehill banner below, there are no ads on this site. The tag tells Google that advertising storage and ad personalization are switched off. We don't sell or share Analytics data with anyone else.</p>
 
   <h2>How long it's kept</h2>
   <p>Google Analytics keeps visit-level data for <strong>14 months</strong>, then deletes it automatically. Totals built from it (like "page views in September") stay in the reports after that, but they don't point back to any one visitor.</p>
 
+  <h2>The Moosehill banner (homepage, only if you accept)</h2>
+  <p>The homepage has a Moosehill banner from the Awin affiliate network. If you accept, your browser loads the banner image from Awin (<code>awin1.com</code>), which counts it as an ad view and sets a session cookie, <code>AWSESS</code>, on Awin's own domain. That cookie ends when you close your browser; since it belongs to Awin, switching to Decline hides the banner but can't delete it. If you decline, you get a plain Moosehill link instead, and nothing loads from Awin until you click it.</p>
+
   <h2>When you click a product link</h2>
-  <p>Product links go to stores like Amazon, SHEIN and Moosehill (through the Awin network). Once you're on their site, their privacy policies apply, and they may set their own cookies to credit the sale. Some of these links earn us a commission; see the affiliate note at the bottom of every page.</p>
+  <p>Product links go to SHEIN, Amazon, or Moosehill through the Awin network. These are affiliate links, so clicking one tells that store, or Awin, that you came from this site, so the sale can be credited to us:</p>
+  <ul>
+    <li><strong>SHEIN</strong> links go through SHEIN's own tracking link (<code>onelink.shein.com</code>) to the product page.</li>
+    <li><strong>Amazon</strong> links go through Amazon's short links (<code>amzn.to</code>, <code>link.amazon</code>) or straight to <code>amazon.ca</code>, carrying our Associates tag.</li>
+    <li><strong>Moosehill</strong> links go through Awin (<code>awin1.com</code>, sometimes via the <code>tidd.ly</code> short link), which sets its own tracking cookie before sending you on to Moosehill's site.</li>
+  </ul>
+  <p>This only happens when you click, whether or not you accepted cookies here. The same goes for links to our TikTok, Instagram, Pinterest and merch stores. Once you're on another site, its own privacy policy applies. We get a commission on qualifying purchases (see the affiliate note at the bottom of every page), and the stores' reports show what was ordered, never who ordered it.</p>
 
   <h2>Your rights</h2>
   <p>You can ask what data we hold about you, ask us to delete it, or withdraw your consent (the button above does that instantly). Since the site never learns who you are, we usually can't match analytics data to a person, but email us and we'll help however we can. If you're not happy with how we handled it, you can complain to the <a href="https://www.priv.gc.ca/en/report-a-concern/" target="_blank" rel="noopener">Office of the Privacy Commissioner of Canada</a>, Quebec's <a href="https://www.cai.gouv.qc.ca/" target="_blank" rel="noopener">Commission d'accès à l'information</a>, or, in the EU or UK, your local data protection authority.</p>
