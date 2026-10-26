@@ -100,9 +100,10 @@ Report (always runs):
      products are shein, marketplace and unchecked.
  13. Gift guide images loaded from another site: an <img>/<source> on
      gift-guide/index.html whose src, srcset or data-full is a remote URL
-     is an error unless its card is in GIFT_GUIDE_REMOTE_ALLOWLIST (the
-     SHEIN cards not yet self-hosted). Warns about allowlisted cards that
-     are no longer remote, so the list only shrinks.
+     is an error unless its card is in GIFT_GUIDE_REMOTE_ALLOWLIST, which
+     is empty now that every gift guide photo is self-hosted, so any
+     remote image fails. Warns about allowlisted cards that are no longer
+     remote, so a temporary entry gets removed.
 
 Exit status: 1 when item 1, 2, 10, 11, 12 or 13 has an error, or item 8
 finds a missing <picture> file (report-only runs;
@@ -189,14 +190,11 @@ IMG_TAG_RE = re.compile(r'<img src="([^"]+)"')
 # (webp srcset, fallback <img> src) for each <picture>
 WEBP_PICTURE_RE = re.compile(r'<source type="image/webp" srcset="([^"]*)">\s*<img[^>]*?\ssrc="([^"]*)"')
 
-# Gift guide cards whose photo is still served from SHEIN's CDN (item 13).
-# Remove each id once its card is self-hosted in gift-guide/img/, and empty
-# the list when the last cards are migrated: from then on any remote image
-# on the gift guide fails CI.
-GIFT_GUIDE_REMOTE_ALLOWLIST = {
-    "S2", "S3", "S4", "S7", "S8", "S9", "S10", "S11", "S12", "S14", "S15", "S16",
-    "S18", "S20", "S21", "S22", "S23", "S24", "S25", "S26", "S27", "S28", "S29", "S30",
-}
+# Gift guide cards allowed to load their photo from another site (item 13).
+# Empty on purpose: every gift guide photo is self-hosted in gift-guide/img/,
+# so any remote image on the page fails CI. Kept so a card can be listed
+# here temporarily if it ever has to point at a remote image again.
+GIFT_GUIDE_REMOTE_ALLOWLIST = set()
 GG_CARD_RE = re.compile(r'<article class="card-tile" data-id="([^"]+)".*?</article>', re.DOTALL)
 GG_IMAGE_URL_RE = re.compile(r'<(?:img|source)\b[^>]*?\s(?:src|srcset|data-full)="(https?://[^"]+)"')
 
