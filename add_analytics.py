@@ -46,6 +46,15 @@ Consent (see privacy/index.html for the visitor-facing explanation):
   - Decline (from the banner or later via "Cookie settings"): stores the
     choice, deletes the _ga / _ga_<id> cookies, and reloads the page if
     gtag.js was already running, since it can't be unloaded.
+  - Accept also covers the homepage's Moosehill banner from Awin: its
+    image (awin1.com/cshow.php, which counts an ad view and sets Awin's
+    AWSESS session cookie) is never in the HTML. index.html has an empty
+    hidden [data-tf12-awin] box that banners() fills on Accept and
+    empties on Decline. The always-visible .link-card below it carries
+    the same affiliate link, so a Decline costs no commission. Awin's
+    publisher script (dwin2.com) was removed in v2: it set no cookies,
+    and its one feature (Bounceless Tracking) doesn't apply to these
+    cread.php links.
   - "Cookie settings" is a button in the footer on every page (and on
     the privacy page) that reopens the banner, showing the current
     choice. Withdrawing consent is as easy as giving it.
@@ -119,7 +128,7 @@ REFRESH_RE = re.compile(r'http-equiv="refresh"', re.I)
 GTM_RE = re.compile(r"googletagmanager\.com", re.I)
 
 PRIVACY_PAGE = "privacy/index.html"
-CONSENT_VERSION = 1
+CONSENT_VERSION = 2
 # Pages whose own markup already says this don't get the footer's copy.
 DISCLOSURE_MARK = "earns from qualifying purchases"
 DISCLOSURE = ("As an Amazon Associate, SHEIN affiliate, and Moosehill (Awin) affiliate, "
@@ -169,6 +178,28 @@ GTAG = """<script>
       });
     });
   }
+  // Affiliate banners (the homepage's Moosehill/Awin one): an empty
+  // [data-tf12-awin] box gets its image and link only after Accept.
+  function banners(on) {
+    var els = document.querySelectorAll('[data-tf12-awin]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      el.innerHTML = '';
+      el.hidden = !on;
+      if (!on) continue;
+      var a = document.createElement('a'), img = document.createElement('img');
+      a.className = 'affiliate-banner';
+      a.href = el.getAttribute('data-tf12-awin-href');
+      a.target = '_blank';
+      a.rel = 'nofollow sponsored noopener';
+      img.alt = el.getAttribute('data-tf12-awin-alt') || '';
+      img.width = 300;
+      img.height = 250;
+      img.src = el.getAttribute('data-tf12-awin');
+      a.appendChild(img);
+      el.appendChild(a);
+    }
+  }
   function showStatus() {
     var choice = stored(), els = document.querySelectorAll('[data-tf12-consent-status]');
     for (var i = 0; i < els.length; i++) els[i].textContent = LABELS[choice] || 'Not chosen yet';
@@ -185,7 +216,7 @@ GTAG = """<script>
       bar.className = 'tf12-consent';
       bar.setAttribute('role', 'region');
       bar.setAttribute('aria-label', 'Cookie choice');
-      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out? Nothing is tracked unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
+      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out, and show a Moosehill banner from Awin on the homepage (Awin sets its own cookie)? Neither happens unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
         '<p class="tf12-consent-now">Current choice: <b data-tf12-consent-status></b></p>' +
         '<div class="tf12-consent-btns"><button type="button" data-tf12-choice="denied">Decline</button>' +
         '<button type="button" data-tf12-choice="granted">Accept</button></div>';
@@ -205,6 +236,7 @@ GTAG = """<script>
     store(choice);
     hide();
     showStatus();
+    banners(choice === 'granted');
     if (choice === 'granted') return load();
     if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
     clearCookies();
@@ -220,6 +252,7 @@ GTAG = """<script>
   if (initial === 'granted') load();
   function ready() {
     showStatus();
+    if (initial === 'granted') banners(true);
     if (!initial) show(false);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);

@@ -10,7 +10,7 @@
 <!-- Google tag (gtag.js): loaded only after the visitor accepts analytics cookies. See add_analytics.py. -->
 <script>
 (function () {
-  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 1, MAX_AGE = 365 * 864e5;
+  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 2, MAX_AGE = 365 * 864e5;
   var PRIVACY = 'privacy/', LABELS = { granted: 'Accepted', denied: 'Declined' };
   var loaded = false, bar = null;
   function stored() {
@@ -45,6 +45,28 @@
       });
     });
   }
+  // Affiliate banners (the homepage's Moosehill/Awin one): an empty
+  // [data-tf12-awin] box gets its image and link only after Accept.
+  function banners(on) {
+    var els = document.querySelectorAll('[data-tf12-awin]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      el.innerHTML = '';
+      el.hidden = !on;
+      if (!on) continue;
+      var a = document.createElement('a'), img = document.createElement('img');
+      a.className = 'affiliate-banner';
+      a.href = el.getAttribute('data-tf12-awin-href');
+      a.target = '_blank';
+      a.rel = 'nofollow sponsored noopener';
+      img.alt = el.getAttribute('data-tf12-awin-alt') || '';
+      img.width = 300;
+      img.height = 250;
+      img.src = el.getAttribute('data-tf12-awin');
+      a.appendChild(img);
+      el.appendChild(a);
+    }
+  }
   function showStatus() {
     var choice = stored(), els = document.querySelectorAll('[data-tf12-consent-status]');
     for (var i = 0; i < els.length; i++) els[i].textContent = LABELS[choice] || 'Not chosen yet';
@@ -61,7 +83,7 @@
       bar.className = 'tf12-consent';
       bar.setAttribute('role', 'region');
       bar.setAttribute('aria-label', 'Cookie choice');
-      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out? Nothing is tracked unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
+      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out, and show a Moosehill banner from Awin on the homepage (Awin sets its own cookie)? Neither happens unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
         '<p class="tf12-consent-now">Current choice: <b data-tf12-consent-status></b></p>' +
         '<div class="tf12-consent-btns"><button type="button" data-tf12-choice="denied">Decline</button>' +
         '<button type="button" data-tf12-choice="granted">Accept</button></div>';
@@ -81,6 +103,7 @@
     store(choice);
     hide();
     showStatus();
+    banners(choice === 'granted');
     if (choice === 'granted') return load();
     if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
     clearCookies();
@@ -96,6 +119,7 @@
   if (initial === 'granted') load();
   function ready() {
     showStatus();
+    if (initial === 'granted') banners(true);
     if (!initial) show(false);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
@@ -389,8 +413,10 @@
     margin-top:26px;font-size:10.5px;color:var(--bone-dim);
     font-family:'Poppins',sans-serif;line-height:1.6;
   }
+  .awin-banner{margin-bottom:16px;}
   .affiliate-banner img{
     width:100%;
+    height:auto;
     border-radius:12px;
     display:block;
   }
@@ -482,13 +508,10 @@
   <div class="section" style="background:#1F1A13; border-color:var(--gold); text-align:center;">
     <h3 style="color:var(--gold); margin-bottom:16px;">Moosehill Outdoor Gear</h3>
     
-    <!-- START ADVERTISER: Moosehill from awin.com -->
-    <a class="affiliate-banner" rel="nofollow sponsored noopener" href="https://www.awin1.com/cread.php?s=4773121&v=96701&q=556664&r=2968527" target="_blank">
-      <img src="https://www.awin1.com/cshow.php?s=4773121&v=96701&q=556664&r=2968527" alt="Moosehill Outdoor Gear" border="0">
-    </a>
-    <!-- END ADVERTISER: Moosehill from awin.com -->
+    <!-- Awin banner image: the consent script (add_analytics.py) puts it here only after the visitor clicks Accept, and removes it on Decline. Nothing loads from Awin before that. -->
+    <div class="awin-banner" data-tf12-awin="https://www.awin1.com/cshow.php?s=4773121&v=96701&q=556664&r=2968527" data-tf12-awin-href="https://www.awin1.com/cread.php?s=4773121&v=96701&q=556664&r=2968527" data-tf12-awin-alt="Moosehill Outdoor Gear" hidden></div>
 
-    <a class="link-card" href="https://www.awin1.com/cread.php?s=4773121&v=96701&q=556664&r=2968527" target="_blank" rel="noopener" style="border-color:var(--gold); margin-top:16px;">
+    <a class="link-card" href="https://www.awin1.com/cread.php?s=4773121&v=96701&q=556664&r=2968527" target="_blank" rel="nofollow sponsored noopener" style="border-color:var(--gold);">
       <span class="tag moosehill">MOOSEHILL</span>
       <span class="link-text">Shop Outdoor &amp; Everyday Gear</span>
       <span class="arrow">↗</span>
@@ -570,7 +593,6 @@
 
 </div>
 
-<script src="https://www.dwin2.com/pub.2968527.min.js"></script>
 <!-- site-footer:start -->
 <div class="tf12-foot">
   <p class="tf12-foot-links"><a href="privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
