@@ -14,7 +14,8 @@ sync_catalog.py imports audit(), untracked_links() and ungated_tags()
 from here and reports any page whose blocks are missing, stale, or
 present where they shouldn't be.
 
-Pages: homepage, shop grid, outfit generator, gift guide, the privacy page, the outfits/ and
+Pages: homepage, shop grid, outfit generator, gift guide, the privacy page, the blog
+(listing, posts and drafts), the outfits/ and
 videos/ hubs, every category page, every campaign page (legacy link-list
 pages and redirect pages like the retired this-or-that-aug-14 included),
 and every product detail page. Redirect pages (meta refresh) get the
@@ -92,6 +93,11 @@ affiliate_click tracking:
     legacy; product_name comes from the button's hidden .link-text
     (product_id "gift-guide/<slug>"). No value/currency: the page shows
     no prices.
+  - Blog posts (blog/<slug>/ and blog/drafts/<slug>/, built by
+    build_blog.py): each product card's .bp-shop button and any
+    affiliate link in the text (.bp-aff), same as the gift guide
+    (product_id "blog/<slug>/<slug of name>"). The listing (blog/) gets
+    the tag only.
 
 Every tracked link opens in a new tab (target="_blank"), so the page
 isn't unloading when the event is sent. The handler therefore never
@@ -375,6 +381,9 @@ def targets():
         else:  # legacy link-list page (or a retired redirect page)
             context = "/".join(rel.split("/")[1:3])
             out[rel] = (None, context, "a.link-card")
+    for rel in (_rel_glob("blog/index.html") + _rel_glob("blog/*/index.html")
+                + _rel_glob("blog/drafts/*/index.html")):
+        out[rel] = blog_config(rel)
     for p in load_products():
         rel = p["detail_page_url"]
         if gift_guide.listing_only(p):
@@ -387,6 +396,15 @@ def targets():
 def gift_guide_href(rel):
     """Relative link from page rel to the gift guide."""
     return "../" * rel.count("/") + "gift-guide/"
+
+
+def blog_config(rel):
+    """Tracking for a blog page (build_blog.py writes these): the listing
+    has no affiliate links; a post tracks its product cards' shop buttons
+    and affiliate links in the text, same as the gift guide."""
+    if rel == "blog/index.html":
+        return None
+    return (None, rel[:-len("/index.html")], "a.bp-shop, a.bp-aff")
 
 
 def privacy_href(rel):

@@ -10,6 +10,8 @@ name: Catalog Check
 # it in a tab or sort it.
 # And when a SHEIN product has no valid "seller" (shein, marketplace or
 # unchecked; report item 12). Fix with: py -3 set_seller.py <id> <value>
+# And when a blog post has an error or blog/ is out of date with
+# blog-src/ (report item 15). Fix with: py -3 build_blog.py
 
 on:
   push:

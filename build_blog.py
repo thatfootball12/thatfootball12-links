@@ -1,0 +1,1307 @@
+#!/usr/bin/env python3
+"""
+Builds the blog (blog/) from its sources in blog-src/.
+
+Usage:
+    py -3 build_blog.py            (build every post and the listing)
+    py -3 build_blog.py --check    (report only, change nothing; exit 1 if
+                                    any post has an error or any output
+                                    is stale)
+
+sync_catalog.py imports audit() from here (report item 15, which fails
+CI).
+
+Sources: one folder per post, blog-src/<slug>/, holding post.md and the
+post's photos (JPEG originals). The slug is the folder name (lowercase
+letters, digits and hyphens; "drafts" is reserved). blog-src/ is left
+out of the live site by _config.yml: GitHub Pages runs Jekyll, which
+would otherwise publish every .md file as an unstyled .html copy.
+
+post.md starts with front matter between two "---" lines (a small YAML
+subset: "key: value" lines, and "- item" lines under "related:"):
+    title          the post's <h1> and <title> (required)
+    description    the meta description (required)
+    date           YYYY-MM-DD, first published (required)
+    updated        YYYY-MM-DD, last real change (defaults to date)
+    category       label shown on the post and the listing
+    search_phrase  the one search phrase the post targets (a warning if
+                   it isn't in the title or description)
+    hero           photo filename in the post folder (required)
+    hero_alt       the hero's alt text (defaults to the title)
+    draft          true or false
+    related        list of site paths for "Explore more", e.g.
+                   outfits/gameday/ or outfits/gameday/<campaign>/
+
+The body is a Markdown subset: "## " and "### " headings (the title is
+the only <h1>), paragraphs, "- " and "1. " lists (one level), **bold**,
+*italic*, [text](url) links, and, each on a line of its own:
+    ![alt](photo.jpg "Caption")   a photo from the post folder, with an
+                                  optional caption
+    {{product <id>}}              a product card for a products.json id;
+                                  consecutive lines make one grid
+Inline, {{price <id>}} prints a SHEIN product's price from products.json.
+A "## FAQ" (or "## Frequently asked questions") section whose questions
+are "### " headings becomes FAQ cards plus FAQPage JSON-LD.
+
+Text before the first heading is the intro. Four or more "## " headings
+add a table of contents.
+
+Links: write site pages as root paths (/outfits/gameday/), which become
+relative links (the site is served under /thatfootball12-links/) and
+must exist. Amazon, SHEIN and Awin links get rel="nofollow sponsored
+noopener", like the product cards' shop buttons.
+
+Prices: product cards show a SHEIN product's price from products.json,
+never an Amazon or Awin price (Amazon's rules; products.json Amazon
+prices are stale anyway). A price typed into the text block before or
+after an Amazon card is an error, and {{price}} on anything but a
+priced SHEIN record is an error. A typed price next to a SHEIN card is
+a warning: use {{price <id>}} so it stays in line with the catalog.
+
+Output:
+  - published posts: blog/<slug>/index.html, in the listing and the
+    sitemap, never noindex;
+  - drafts (draft: true): blog/drafts/<slug>/index.html with
+    <meta name="robots" content="noindex">, linked from nowhere and left
+    out of the sitemap (write_sitemap.py);
+  - blog/index.html, the listing: the three newest published posts as
+    large cards, then the rest, newest first, each with its category.
+Photos become <name>-500.jpg plus a .webp beside it in the post's img/
+folder (sync_catalog's generate_thumbnail / generate_webp, never
+upscaled), served in a <picture> with width/height. The hero loads
+eagerly and is og:image / twitter:image; every other photo is lazy.
+Product cards use the record's own -424 thumbnail and WebP.
+
+Each page is written complete: the analytics/consent block, site footer,
+fonts and favicons come from add_analytics.py, add_fonts.py and
+add_favicons.py, which also keep them current afterwards. "Stale" means
+the page differs from a fresh build once those managed blocks are
+stripped, so a change to them alone shows up in their own report items,
+not here. A post whose folder in blog-src/ is gone (or that moved
+between draft and published) has its generated output removed.
+
+The disclosure near the top of every post is add_analytics.DISCLOSURE,
+so the footer doesn't repeat it.
+"""
+
+import argparse
+import datetime
+import html
+import json
+import os
+import posixpath
+import re
+import sys
+import urllib.parse
+
+from PIL import Image
+
+import add_analytics
+import add_favicons
+import add_fonts
+from add_analytics import REPO, _abs, read_page, write_page
+from write_sitemap import SITE, sitemap_urls
+
+SRC_DIR = "blog-src"
+OUT_DIR = "blog"
+DRAFTS = "drafts"
+LISTING = "blog/index.html"
+IMG_WIDTH = 500
+FEATURED = 3
+AUTHOR = "Jesse"
+GENERATED = "<!-- generated by build_blog.py from {src}: edit the source, not this file -->"
+GENERATED_RE = re.compile(r"<!-- generated by build_blog\.py from (\S+):")
+
+FIELDS = ["title", "description", "date", "updated", "category", "search_phrase",
+          "hero", "hero_alt", "draft", "related"]
+REQUIRED = ["title", "description", "date", "hero"]
+SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+PRODUCT_LINE_RE = re.compile(r"^\{\{product\s+([^\s}]+)\s*\}\}$")
+PRICE_TOKEN_RE = re.compile(r"\{\{price\s+([^\s}]+)\s*\}\}")
+ANY_TOKEN_RE = re.compile(r"\{\{(\w+)[^}]*\}\}")
+IMAGE_LINE_RE = re.compile(r'^!\[([^\]]*)\]\(\s*([^)\s"]+)(?:\s+"([^"]*)")?\s*\)$')
+HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*#*$")
+UL_RE = re.compile(r"^[-*]\s+(.*)$")
+OL_RE = re.compile(r"^\d+[.)]\s+(.*)$")
+LINK_RE = re.compile(r"\[([^\]]+)\]\(\s*([^)\s]+)\s*\)")
+FAQ_HEADING_RE = re.compile(r"^(faq|faqs|frequently asked questions)\b", re.I)
+# A price typed by hand: $25, C$25, 25.99 CAD, 25 dollars, ...
+PRICE_RE = re.compile(r"(?:\b(?:C|CA|CAD|US|USD)\s?)?\$\s?\d[\d,]*(?:\.\d+)?"
+                      r"|\b\d+(?:[.,]\d{1,2})?\s?(?:\$|CAD\b|USD\b|dollars?\b|bucks\b)", re.I)
+NOINDEX_RE = re.compile(r'<meta name="robots" content="[^"]*noindex', re.I)
+AFFILIATE_RETAILERS = ("Amazon", "SHEIN", "Awin")
+SHOP_SELECTOR = "a.bp-shop, a.bp-aff"
+
+MONTHS = ["January", "February", "March", "April", "May", "June", "July",
+          "August", "September", "October", "November", "December"]
+
+
+# ---------------------------------------------------------------- sources
+
+class Post:
+    def __init__(self, slug):
+        self.slug = slug
+        self.src = f"{SRC_DIR}/{slug}/post.md"
+        self.meta = {}
+        self.body_lines = []
+        self.body_start = 1
+        self.errors = []
+        self.warnings = []
+
+    @property
+    def draft(self):
+        return self.meta.get("draft") is True
+
+    @property
+    def out(self):
+        return f"{OUT_DIR}/{DRAFTS}/{self.slug}/index.html" if self.draft else f"{OUT_DIR}/{self.slug}/index.html"
+
+    @property
+    def out_dir(self):
+        return os.path.dirname(self.out)
+
+    @property
+    def url(self):
+        return SITE + self.out_dir + "/"
+
+    @property
+    def updated(self):
+        return self.meta.get("updated") or self.meta.get("date")
+
+    def err(self, msg):
+        self.errors.append(msg)
+
+    def warn(self, msg):
+        self.warnings.append(msg)
+
+
+def _scalar(value):
+    value = value.strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+        return value[1:-1]
+    if value.lower() in ("true", "yes"):
+        return True
+    if value.lower() in ("false", "no"):
+        return False
+    if value.startswith("[") and value.endswith("]"):
+        return [_scalar(v) for v in value[1:-1].split(",") if v.strip()]
+    return value
+
+
+def parse_post(slug):
+    post = Post(slug)
+    path = _abs(post.src)
+    with open(path, encoding="utf-8-sig") as f:
+        lines = f.read().replace("\r\n", "\n").split("\n")
+    if not lines or lines[0].strip() != "---":
+        post.err("post.md doesn't start with front matter (a '---' line)")
+        post.body_lines = lines
+        return post
+    try:
+        end = next(i for i in range(1, len(lines)) if lines[i].strip() == "---")
+    except StopIteration:
+        post.err("front matter has no closing '---' line")
+        return post
+    key = None
+    for n, line in enumerate(lines[1:end], 2):
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        m = re.match(r"^\s+-\s+(.*)$", line) or re.match(r"^-\s+(.*)$", line)
+        if m and key and isinstance(post.meta.get(key), list):
+            post.meta[key].append(_scalar(m.group(1)))
+            continue
+        m = re.match(r"^([A-Za-z_]+)\s*:\s*(.*)$", line)
+        if not m:
+            post.err(f"post.md:{n}: can't read front matter line {line.strip()!r}")
+            continue
+        key, value = m.group(1), m.group(2)
+        if key not in FIELDS:
+            post.warn(f"post.md:{n}: unknown front matter field {key!r} (ignored)")
+        post.meta[key] = _scalar(value) if value.strip() else []
+    post.body_lines = lines[end + 1:]
+    post.body_start = end + 2
+    return post
+
+
+def find_posts():
+    root = _abs(SRC_DIR)
+    if not os.path.isdir(root):
+        return []
+    return sorted(d for d in os.listdir(root)
+                  if os.path.isfile(os.path.join(root, d, "post.md")))
+
+
+def load_products():
+    with open(_abs("products.json"), encoding="utf-8") as f:
+        return {p["id"]: p for p in json.load(f)}
+
+
+def load_dead():
+    path = _abs("data/dead_links.json")
+    if not os.path.isfile(path):
+        return set()
+    with open(path, encoding="utf-8") as f:
+        return {e["id"] for e in json.load(f) if e.get("status") == "confirmed"}
+
+
+# ---------------------------------------------------------------- body parsing
+
+def parse_blocks(post):
+    """[(kind, data, line)] for the body: heading (level, text),
+    para text, ul/ol [items], image (alt, file, caption), products [ids]."""
+    blocks, para, items, kind = [], [], [], None
+
+    def flush():
+        nonlocal para, items, kind
+        if para:
+            blocks.append(("para", " ".join(para), start))
+        if items:
+            blocks.append((kind, items, start))
+        para, items, kind = [], [], None
+
+    start = post.body_start
+    for n, raw in enumerate(post.body_lines, post.body_start):
+        line = raw.strip()
+        if not line:
+            flush()
+            continue
+        m = HEADING_RE.match(line)
+        if m:
+            flush()
+            level = len(m.group(1))
+            if level not in (2, 3):
+                post.err(f"post.md:{n}: only '## ' and '### ' headings are allowed "
+                         "(the title is the page's only <h1>)")
+            blocks.append(("heading", (level, m.group(2)), n))
+            continue
+        m = PRODUCT_LINE_RE.match(line)
+        if m:
+            flush()
+            if blocks and blocks[-1][0] == "products" and blocks[-1][2] == n - len(blocks[-1][1]):
+                blocks[-1][1].append(m.group(1))
+            else:
+                blocks.append(("products", [m.group(1)], n))
+            continue
+        m = IMAGE_LINE_RE.match(line)
+        if m:
+            flush()
+            blocks.append(("image", (m.group(1), m.group(2), m.group(3) or ""), n))
+            continue
+        for list_kind, regex in (("ul", UL_RE), ("ol", OL_RE)):
+            m = regex.match(line)
+            if m:
+                if para or (items and kind != list_kind):
+                    flush()
+                if not items:
+                    start = n
+                kind = list_kind
+                items.append(m.group(1))
+                break
+        else:
+            if items and raw[:1] in (" ", "\t"):
+                items[-1] += " " + line  # wrapped list item
+                continue
+            if items:
+                flush()
+            if not para:
+                start = n
+            para.append(line)
+    flush()
+    return blocks
+
+
+def block_text(block):
+    kind, data, _ = block
+    if kind == "para":
+        return data
+    if kind in ("ul", "ol"):
+        return " ".join(data)
+    if kind == "heading":
+        return data[1]
+    if kind == "image":
+        return data[2]
+    return ""
+
+
+# ---------------------------------------------------------------- validation
+
+def validate(post, blocks, products, dead):
+    meta = post.meta
+    strict = post.err if not post.draft else post.warn
+    if not SLUG_RE.match(post.slug) or post.slug == DRAFTS:
+        post.err(f"folder name {post.slug!r} isn't a usable slug (lowercase letters, digits, "
+                 f"hyphens; {DRAFTS!r} is reserved)")
+    if "draft" in meta and not isinstance(meta["draft"], bool):
+        post.err(f"draft must be true or false, not {meta['draft']!r}")
+    for field in REQUIRED:
+        if not meta.get(field) or not isinstance(meta.get(field), str):
+            strict(f"front matter is missing {field!r}")
+    for field in ("date", "updated"):
+        v = meta.get(field)
+        if v and not (isinstance(v, str) and DATE_RE.match(v) and _date(v)):
+            post.err(f"{field} must be a YYYY-MM-DD date, not {v!r}")
+    if _date(meta.get("updated")) and _date(meta.get("date")) and meta["updated"] < meta["date"]:
+        post.err("updated is earlier than date")
+    hero = meta.get("hero")
+    if isinstance(hero, str) and hero:
+        check_photo(post, hero, "hero")
+        if not meta.get("hero_alt"):
+            post.warn("no hero_alt: the hero's alt text falls back to the title")
+    phrase = meta.get("search_phrase")
+    if not phrase:
+        post.warn("no search_phrase")
+    elif not any(phrase.lower() in str(meta.get(f, "")).lower() for f in ("title", "description")):
+        post.warn(f"search_phrase {phrase!r} isn't in the title or description")
+    related = meta.get("related") or []
+    if not isinstance(related, list):
+        post.err("related must be a list of site paths")
+        related = []
+    for path in related:
+        if not os.path.isfile(_abs(_site_path(path) + "index.html")):
+            post.err(f"related page {path!r} doesn't exist")
+    if not blocks:
+        strict("the post has no body")
+    if not any(b[0] == "para" for b in blocks[:1]):
+        post.warn("the body doesn't start with an intro paragraph")
+
+    for i, (kind, data, n) in enumerate(blocks):
+        if kind == "image":
+            alt, name, _ = data
+            if not alt.strip():
+                post.err(f"post.md:{n}: image {name!r} has no alt text")
+            check_photo(post, name, f"post.md:{n}: image", line=n)
+        if kind == "products":
+            for pid in data:
+                p = products.get(pid)
+                if p is None:
+                    post.err(f"post.md:{n}: {{{{product {pid}}}}} isn't in products.json")
+                    continue
+                if p.get("image_pending") or not p.get("thumbnail"):
+                    post.warn(f"post.md:{n}: {pid} has no photo yet; its card shows none")
+                if pid in dead:
+                    post.warn(f"post.md:{n}: {pid} is confirmed dead or sold out in data/dead_links.json")
+                if p.get("seller") == "marketplace":
+                    post.warn(f"post.md:{n}: {pid} is sold by a marketplace store, not SHEIN")
+            # Typed prices in the text right before or after the card(s).
+            known = [products[pid] for pid in data if pid in products]
+            for j in (i - 1, i + 1):
+                if not 0 <= j < len(blocks):
+                    continue
+                text = PRICE_TOKEN_RE.sub("", block_text(blocks[j]))
+                found = PRICE_RE.search(text)
+                if not found:
+                    continue
+                where = f"post.md:{blocks[j][2]}"
+                amazon = [p["id"] for p in known if p["retailer"] != "SHEIN"]
+                if amazon:
+                    post.err(f"{where}: price {found.group(0)!r} next to the {', '.join(amazon)} "
+                             f"card (no prices for Amazon or Awin products)")
+                elif known:
+                    post.warn(f"{where}: price {found.group(0)!r} typed next to a SHEIN card; "
+                              f"use {{{{price <id>}}}} so it comes from products.json")
+        for token in ANY_TOKEN_RE.finditer(block_text((kind, data, n)) if kind != "products" else ""):
+            if token.group(1) != "price":
+                post.err(f"post.md:{n}: unknown {{{{{token.group(1)} ...}}}} (only {{{{product}}}} "
+                         "on its own line and {{price}} inline)")
+        text = block_text((kind, data, n)) if kind != "products" else ""
+        for m in PRICE_TOKEN_RE.finditer(text):
+            p = products.get(m.group(1))
+            if p is None:
+                post.err(f"post.md:{n}: {{{{price {m.group(1)}}}}} isn't in products.json")
+            elif p["retailer"] != "SHEIN" or p.get("price") is None:
+                post.err(f"post.md:{n}: {{{{price {m.group(1)}}}}} is a {p['retailer']} product "
+                         "with no price to show (prices are SHEIN only)")
+        for m in LINK_RE.finditer(text):
+            url = m.group(2)
+            if url.startswith("/") and not url.startswith("//"):
+                target = _site_path(url)
+                if not (os.path.isfile(_abs(target + "index.html")) or os.path.isfile(_abs(target.rstrip("/")))):
+                    post.err(f"post.md:{n}: link to {url!r}, which doesn't exist on the site")
+            elif not re.match(r"^(https?:|mailto:|#)", url):
+                post.err(f"post.md:{n}: link {url!r} must be a full URL, a #anchor or a site path "
+                         "starting with /")
+    headings = [d for k, d, _ in blocks if k == "heading"]
+    if any(d[0] == 2 and FAQ_HEADING_RE.match(d[1]) for d in headings):
+        faq = faq_items(blocks)
+        if not faq:
+            post.err("the FAQ section has no '### ' questions")
+
+
+def check_photo(post, name, what, line=None):
+    path = _abs(f"{SRC_DIR}/{post.slug}/{name}")
+    if "/" in name or "\\" in name:
+        post.err(f"{what} {name!r}: put photos in the post's own folder and use the bare filename")
+    elif not os.path.isfile(path):
+        post.err(f"{what} {name!r} isn't in {SRC_DIR}/{post.slug}/")
+    elif os.path.splitext(name)[1].lower() not in (".jpg", ".jpeg"):
+        post.err(f"{what} {name!r} must be a JPEG (.jpg / .jpeg)")
+
+
+def _date(value):
+    try:
+        return datetime.date.fromisoformat(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _site_path(path):
+    """'/outfits/gameday/' or 'outfits/gameday' -> 'outfits/gameday/'."""
+    path = path.split("#")[0].strip("/")
+    return path + "/" if path else ""
+
+
+# ---------------------------------------------------------------- rendering helpers
+
+def esc(text):
+    return html.escape(str(text), quote=True)
+
+
+def nice_date(value):
+    d = _date(value)
+    return f"{MONTHS[d.month - 1]} {d.day}, {d.year}" if d else value
+
+
+def slugify(text):
+    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-") or "section"
+
+
+def prefix_for(rel):
+    return "../" * rel.count("/")
+
+
+def money(p):
+    return f"${p['price']:.2f} {p['currency'] or ''}".strip()
+
+
+def is_affiliate(url):
+    import sync_catalog  # lazy: sync_catalog imports this module
+    return sync_catalog.classify_retailer(url) in AFFILIATE_RETAILERS
+
+
+def inline(text, rel, products):
+    """Markdown inline -> HTML for a page at rel."""
+    out, pos = [], 0
+    pre = prefix_for(rel)
+    for m in LINK_RE.finditer(text):
+        out.append(_inline_text(text[pos:m.start()], products))
+        label, url = _inline_text(m.group(1), products), m.group(2)
+        if url.startswith("/") and not url.startswith("//"):
+            path, _, frag = url.partition("#")
+            href = pre + _site_path(path) + (f"#{frag}" if frag else "")
+            out.append(f'<a href="{esc(href)}">{label}</a>')
+        elif url.startswith("#"):
+            out.append(f'<a href="{esc(url)}">{label}</a>')
+        elif is_affiliate(url):
+            out.append(f'<a class="bp-aff" href="{esc(url)}" target="_blank" '
+                       f'rel="nofollow sponsored noopener">{label}</a>')
+        else:
+            out.append(f'<a href="{esc(url)}" target="_blank" rel="noopener">{label}</a>')
+        pos = m.end()
+    out.append(_inline_text(text[pos:], products))
+    return "".join(out)
+
+
+def _inline_text(text, products):
+    parts, pos = [], 0
+    for m in PRICE_TOKEN_RE.finditer(text):
+        parts.append(_emphasis(esc(text[pos:m.start()])))
+        p = products.get(m.group(1))
+        parts.append(f'<span class="bp-price">{esc(money(p))}</span>' if p else "")
+        pos = m.end()
+    parts.append(_emphasis(esc(text[pos:])))
+    return "".join(parts)
+
+
+def _emphasis(s):
+    s = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
+    return re.sub(r"(?<![*\w])\*(?!\s)(.+?)(?<!\s)\*(?!\*)", r"<em>\1</em>", s)
+
+
+def plain(text, products):
+    """Inline Markdown -> plain text (JSON-LD, TOC labels)."""
+    text = PRICE_TOKEN_RE.sub(lambda m: money(products[m.group(1)]) if m.group(1) in products else "", text)
+    text = LINK_RE.sub(r"\1", text)
+    return re.sub(r"\*\*?(.+?)\*\*?", r"\1", text)
+
+
+def image_size(rel):
+    with Image.open(_abs(urllib.parse.unquote(rel))) as im:
+        return im.size
+
+
+def photo_outputs(post, name):
+    """(jpeg rel, webp rel) for a source photo, in the post's img/ folder."""
+    stem = os.path.splitext(name)[0]
+    jpg = f"{post.out_dir}/img/{stem}-{IMG_WIDTH}.jpg"
+    return jpg, jpg[:-4] + ".webp"
+
+
+def picture(src_jpg, src_webp, page_rel, alt, cls, lazy=True, size_from=None):
+    """<picture> markup; srcs are repo-relative, made relative to page_rel."""
+    here = posixpath.dirname(page_rel)
+    w, h = image_size(size_from or src_jpg)
+    load = ' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high" decoding="async"'
+    return (f'<picture><source type="image/webp" srcset="{esc(posixpath.relpath(src_webp, here))}">'
+            f'<img class="{cls}" src="{esc(posixpath.relpath(src_jpg, here))}" alt="{esc(alt)}" '
+            f'width="{w}" height="{h}"{load}></picture>')
+
+
+# ---------------------------------------------------------------- post rendering
+
+def faq_items(blocks):
+    """[(question, [answer blocks])] for the FAQ section."""
+    items, in_faq, current = [], False, None
+    for block in blocks:
+        kind, data, _ = block
+        if kind == "heading" and data[0] == 2:
+            in_faq = bool(FAQ_HEADING_RE.match(data[1]))
+            current = None
+            continue
+        if not in_faq:
+            continue
+        if kind == "heading" and data[0] == 3:
+            current = (data[1], [])
+            items.append(current)
+        elif current is not None:
+            current[1].append(block)
+    return items
+
+
+def render_blocks(post, blocks, products, ids):
+    rel = post.out
+    out, in_faq, faq_open = [], False, False
+    for i, (kind, data, _) in enumerate(blocks):
+        if kind == "heading":
+            level, text = data
+            if faq_open and (level == 2 or level == 3):
+                out.append("</div>")
+                faq_open = False
+            if level == 2:
+                if in_faq:
+                    out.append("</section>")
+                in_faq = bool(FAQ_HEADING_RE.match(text))
+                if in_faq:
+                    out.append('<section class="bp-faq">')
+            if in_faq and level == 3:
+                out.append('<div class="faq-item">')
+                faq_open = True
+            out.append(f'<h{level} id="{ids[i]}">{inline(text, rel, products)}</h{level}>')
+        elif kind == "para":
+            out.append(f"<p>{inline(data, rel, products)}</p>")
+        elif kind in ("ul", "ol"):
+            lis = "".join(f"<li>{inline(item, rel, products)}</li>" for item in data)
+            out.append(f"<{kind}>{lis}</{kind}>")
+        elif kind == "image":
+            alt, name, caption = data
+            jpg, webp = photo_outputs(post, name)
+            fig = picture(jpg, webp, rel, alt, "bp-photo", lazy=True)
+            cap = f"<figcaption>{inline(caption, rel, products)}</figcaption>" if caption else ""
+            out.append(f'<figure class="bp-figure">{fig}{cap}</figure>')
+        elif kind == "products":
+            cards = "".join(product_card(products[pid], rel) for pid in data)
+            out.append(f'<div class="bp-products">{cards}</div>')
+    if faq_open:
+        out.append("</div>")
+    if in_faq:
+        out.append("</section>")
+    return "\n".join(out)
+
+
+def product_card(p, rel):
+    pre = prefix_for(rel)
+    thumb = ""
+    if p.get("thumbnail") and p.get("thumbnail_webp") and not p.get("image_pending"):
+        thumb = picture(p["thumbnail"], p["thumbnail_webp"], rel, p["name"], "bp-thumb")
+    price = (f'<p class="bp-card-price">{esc(money(p))}</p>'
+             if p["retailer"] == "SHEIN" and p.get("price") is not None else "")
+    details = ""
+    if p["detail_page_url"].startswith(("outfits/", "videos/")):
+        details = (f'<a class="bp-details" href="{esc(pre + p["detail_page_url"][:-len("index.html")])}">'
+                   "Details</a>")
+    retailer = p["retailer"]
+    return (f'<article class="bp-card">{thumb}<div class="bp-card-body">'
+            f'<div class="card-meta"><span class="retailer">{esc(retailer)}</span></div>'
+            f'<h3 class="prod-name">{esc(p["name"])}</h3>{price}'
+            f'<a class="bp-shop" href="{esc(p["outbound_url"])}" target="_blank" '
+            f'rel="nofollow sponsored noopener" aria-label="Shop {esc(p["name"])} on {esc(retailer)} '
+            f'(opens in a new tab)">Shop on {esc(retailer)}<span class="link-text" hidden>{esc(p["name"])}</span></a>'
+            f"{details}</div></article>")
+
+
+def heading_ids(blocks):
+    ids, seen = {}, set()
+    for i, (kind, data, _) in enumerate(blocks):
+        if kind == "heading":
+            base = slugify(re.sub(r"\{\{.*?\}\}", "", data[1]))
+            hid, n = base, 2
+            while hid in seen:
+                hid, n = f"{base}-{n}", n + 1
+            seen.add(hid)
+            ids[i] = hid
+    return ids
+
+
+def related_links(post, rel):
+    out = []
+    for path in post.meta.get("related") or []:
+        site = _site_path(path)
+        page = read_page(_abs(site + "index.html"))
+        m = re.search(r"<title>(.*?)</title>", page, re.S)
+        label = html.unescape(m.group(1)).split(" • ")[0].split(" | ")[0].strip() if m else site
+        out.append(f'<li><a class="explore-link" href="{esc(prefix_for(rel) + site)}">{esc(label)}'
+                   '<span aria-hidden="true">→</span></a></li>')
+    return out
+
+
+def head(rel, title, description, canonical, og_image, og_type, extra="", robots=None):
+    lines = ['<!DOCTYPE html>', '<html lang="en">', '<head>', '<meta charset="UTF-8">',
+             '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+             f"<title>{esc(title)} • ThatFootball12</title>",
+             f'<meta name="description" content="{esc(description)}">']
+    if robots:
+        lines.append(f'<meta name="robots" content="{robots}">')
+    if canonical:
+        lines.append(f'<link rel="canonical" href="{esc(canonical)}">')
+    lines += [f'<meta property="og:title" content="{esc(title)}">',
+              f'<meta property="og:description" content="{esc(description)}">']
+    if og_image:
+        lines.append(f'<meta property="og:image" content="{esc(og_image)}">')
+    if canonical:
+        lines.append(f'<meta property="og:url" content="{esc(canonical)}">')
+    lines += [f'<meta property="og:type" content="{og_type}">',
+              '<meta property="og:site_name" content="ThatFootball12">',
+              '<meta name="twitter:card" content="summary_large_image">',
+              f'<meta name="twitter:title" content="{esc(title)}">',
+              f'<meta name="twitter:description" content="{esc(description)}">']
+    if og_image:
+        lines.append(f'<meta name="twitter:image" content="{esc(og_image)}">')
+    if extra:
+        lines.append(extra)
+    lines += ["<style>", CSS, "</style>"]
+    return "\n".join(lines)
+
+
+def ld_json(graph):
+    data = json.dumps({"@context": "https://schema.org", "@graph": graph}, indent=1, ensure_ascii=False)
+    return '<script type="application/ld+json">\n' + data.replace("</", "<\\/") + "\n</script>"
+
+
+def breadcrumb_ld(items):
+    return {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i, "name": name, **({"item": url} if url else {})}
+        for i, (name, url) in enumerate(items, 1)]}
+
+
+def render_post(post, blocks, products):
+    meta, rel = post.meta, post.out
+    pre = prefix_for(rel)
+    ids = heading_ids(blocks)
+    title, description = meta.get("title", post.slug), meta.get("description", "")
+    hero_jpg = hero_webp = og_image = None
+    if meta.get("hero"):
+        hero_jpg, hero_webp = photo_outputs(post, meta["hero"])
+        og_image = SITE + hero_jpg
+
+    # Intro: everything before the first heading.
+    first = next((i for i, b in enumerate(blocks) if b[0] == "heading"), len(blocks))
+    intro_blocks, body_blocks = blocks[:first], blocks[first:]
+    body_ids = {i - first: hid for i, hid in ids.items()}
+
+    h2s = [(body_ids[i], plain(d[1], products)) for i, (k, d, _) in enumerate(body_blocks)
+           if k == "heading" and d[0] == 2]
+    toc = ""
+    if len(h2s) >= 4:
+        toc = ('<nav class="toc" aria-labelledby="toc-title">\n'
+               '  <p class="toc-title" id="toc-title">In this post</p>\n  <ol>\n'
+               + "".join(f'    <li><a href="#{hid}">{esc(label)}</a></li>\n' for hid, label in h2s)
+               + "  </ol>\n</nav>")
+
+    graph = [{
+        "@type": "BlogPosting",
+        "@id": post.url + "#article",
+        "headline": title,
+        "description": description,
+        "author": {"@type": "Person", "name": AUTHOR, "url": SITE},
+        "publisher": {"@type": "Organization", "name": "ThatFootball12", "url": SITE,
+                      "logo": {"@type": "ImageObject", "url": SITE + "assets/icons/icon-192.png"}},
+        "datePublished": meta.get("date"),
+        "dateModified": post.updated,
+        **({"image": og_image} if og_image else {}),
+        **({"articleSection": meta["category"]} if meta.get("category") else {}),
+        "mainEntityOfPage": post.url,
+    }, breadcrumb_ld([("Home", SITE), ("Blog", SITE + "blog/"), (title, None)])]
+    faq = faq_items(blocks)
+    if faq:
+        graph.append({"@type": "FAQPage", "@id": post.url + "#faq", "mainEntity": [
+            {"@type": "Question", "name": plain(q, products),
+             "acceptedAnswer": {"@type": "Answer", "text": " ".join(
+                 plain(block_text(b), products) for b in answer if block_text(b))}}
+            for q, answer in faq]})
+
+    extra = [f'<meta property="article:published_time" content="{esc(meta.get("date", ""))}">',
+             f'<meta property="article:modified_time" content="{esc(post.updated or "")}">',
+             ld_json(graph)]
+    parts = [head(rel, title, description, None if post.draft else post.url, og_image, "article",
+                  "\n".join(extra), robots="noindex" if post.draft else None),
+             "</head>", "<body>", GENERATED.format(src=post.src), '<div class="wrap post-wrap">']
+    if post.draft:
+        parts.append('<p class="bp-draft">Draft: not published, not in the sitemap, not indexed.</p>')
+    parts.append(f'<nav class="crumbs" aria-label="Breadcrumb"><ol>'
+                 f'<li><a href="{pre}">Home</a></li>'
+                 f'<li><a href="{pre}blog/">Blog</a></li>'
+                 f'<li><span aria-current="page">{esc(title)}</span></li></ol></nav>')
+    parts.append("<article class=\"post\">")
+    parts.append("<header>")
+    if meta.get("category"):
+        parts.append(f'  <div class="badge">{esc(meta["category"])}</div>')
+    parts.append(f"  <h1>{esc(title)}</h1>")
+    byline = f'By {AUTHOR}, ThatFootball12 · <time datetime="{esc(meta.get("date", ""))}">{esc(nice_date(meta.get("date", "")))}</time>'
+    if post.updated and post.updated != meta.get("date"):
+        byline += f' · Updated <time datetime="{esc(post.updated)}">{esc(nice_date(post.updated))}</time>'
+    parts.append(f'  <p class="byline">{byline}</p>')
+    parts.append("</header>")
+    disclosure = add_analytics.DISCLOSURE
+    if any(products[pid]["retailer"] == "SHEIN" for k, d, _ in blocks if k == "products" for pid in d) \
+            or any(PRICE_TOKEN_RE.search(block_text(b)) for b in blocks):
+        disclosure += " Prices and availability may have changed since this was published."
+    parts.append(f'<p class="bp-disclosure">{esc(disclosure)}</p>')
+    if hero_jpg:
+        alt = meta.get("hero_alt") or title
+        parts.append(f'<figure class="bp-hero">{picture(hero_jpg, hero_webp, rel, alt, "bp-photo", lazy=False)}</figure>')
+    if intro_blocks:
+        parts.append('<div class="intro">\n' + render_blocks(post, intro_blocks, products, {}) + "\n</div>")
+    if toc:
+        parts.append(toc)
+    parts.append('<div class="post-body">\n' + render_blocks(post, body_blocks, products, body_ids) + "\n</div>")
+    links = related_links(post, rel)
+    if links:
+        parts.append('<aside class="explore" aria-labelledby="explore-title">\n'
+                     '  <h2 id="explore-title">Explore more</h2>\n  <ul>\n    '
+                     + "\n    ".join(links) + "\n  </ul>\n</aside>")
+    parts += ["</article>", f'<a class="back" href="{pre}blog/">← All blog posts</a>', "</div>",
+              "</body>", "</html>"]
+    return "\n".join(parts) + "\n"
+
+
+def render_listing(posts):
+    rel = LISTING
+    pre = prefix_for(rel)
+    published = sorted((p for p in posts if not p.draft and not p.errors),
+                       key=lambda p: (p.meta["date"], p.slug), reverse=True)
+    title = "ThatFootball12 Blog"
+    description = ("Men's style guides from ThatFootball12: gameday outfits, what to wear and "
+                   "how to put a look together, with links to shop every piece.")
+
+    def card(post, big):
+        hero_jpg, hero_webp = photo_outputs(post, post.meta["hero"])
+        href = posixpath.relpath(post.out_dir, posixpath.dirname(rel)) + "/"
+        cat = f'<span class="bl-cat">{esc(post.meta["category"])}</span>' if post.meta.get("category") else ""
+        return (f'<article class="bl-card{" bl-big" if big else ""}">'
+                f'<a class="bl-link" href="{esc(href)}">'
+                f'{picture(hero_jpg, hero_webp, rel, post.meta.get("hero_alt") or post.meta["title"], "bl-thumb")}'
+                f'<div class="bl-body">{cat}<h2 class="bl-title">{esc(post.meta["title"])}</h2>'
+                f'<p class="bl-date"><time datetime="{esc(post.meta["date"])}">{esc(nice_date(post.meta["date"]))}</time></p>'
+                f'<p class="bl-desc">{esc(post.meta["description"])}</p></div></a></article>')
+
+    body = []
+    if not published:
+        body.append('<p class="bl-empty">First posts coming soon.</p>')
+    else:
+        body.append('<section aria-labelledby="latest-title"><h2 class="bl-section" id="latest-title">Latest</h2>'
+                    '<div class="bl-grid">' + "".join(card(p, True) for p in published[:FEATURED]) + "</div></section>")
+        if published[FEATURED:]:
+            body.append('<section aria-labelledby="all-title"><h2 class="bl-section" id="all-title">All posts</h2>'
+                        '<div class="bl-grid">' + "".join(card(p, False) for p in published[FEATURED:])
+                        + "</div></section>")
+    og_image = SITE + photo_outputs(published[0], published[0].meta["hero"])[0] if published else SITE + "cover.jpg"
+    graph = [{"@type": "Blog", "@id": SITE + "blog/#blog", "name": title, "description": description,
+              "url": SITE + "blog/", "publisher": {"@type": "Organization", "name": "ThatFootball12", "url": SITE},
+              "blogPost": [{"@type": "BlogPosting", "headline": p.meta["title"], "url": p.url,
+                            "datePublished": p.meta["date"]} for p in published]},
+             breadcrumb_ld([("Home", SITE), ("Blog", None)])]
+    parts = [head(rel, title, description, SITE + "blog/", og_image, "website", ld_json(graph)),
+             "</head>", "<body>", GENERATED.format(src=SRC_DIR + "/"), '<div class="wrap">',
+             f'<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="{pre}">Home</a></li>'
+             '<li><span aria-current="page">Blog</span></li></ol></nav>',
+             '<header>\n  <div class="badge">ThatFootball12 Blog</div>\n  <h1>The <span>Blog</span></h1>\n'
+             '  <p class="tagline">Style guides, gameday fits and how to wear it</p>\n</header>',
+             "<main>\n" + "\n".join(body) + "\n</main>",
+             f'<a class="back" href="{pre}">← Back to Home</a>', "</div>", "</body>", "</html>"]
+    return "\n".join(parts) + "\n"
+
+
+# ---------------------------------------------------------------- managed blocks
+
+def with_managed_blocks(rel, page):
+    """The page with the analytics/consent block, site footer, fonts and
+    favicons written in, exactly as the add_* scripts would."""
+    page = add_analytics.apply(page, add_analytics.expected_block(rel, add_analytics.blog_config(rel), page))
+    page = add_analytics.apply_footer(page, add_analytics.expected_footer(rel, page))
+    page = add_fonts.apply(rel, page)
+    return add_favicons.apply(page, add_favicons.expected_block(rel, page))
+
+
+def strip_managed(page):
+    for regex in (add_analytics.BLOCK_RE, add_analytics.FOOT_RE, add_fonts.BLOCK_RE, add_favicons.BLOCK_RE):
+        page = regex.sub("", page)
+    return page.replace("\r\n", "\n")
+
+
+# ---------------------------------------------------------------- images
+
+def image_jobs(post, blocks):
+    """[(source rel, jpeg rel, webp rel)] for the post's own photos."""
+    names = []
+    if isinstance(post.meta.get("hero"), str) and post.meta["hero"]:
+        names.append(post.meta["hero"])
+    names += [d[1] for k, d, _ in blocks if k == "image"]
+    jobs, seen = [], set()
+    for name in names:
+        if name in seen:
+            continue
+        seen.add(name)
+        jpg, webp = photo_outputs(post, name)
+        jobs.append((f"{SRC_DIR}/{post.slug}/{name}", jpg, webp))
+    return jobs
+
+
+def image_issue(src, jpg, webp):
+    """None if the -500 JPEG and WebP exist and match the source photo."""
+    import sync_catalog
+    if not os.path.isfile(_abs(jpg)):
+        return f"{jpg} missing"
+    if not os.path.isfile(_abs(webp)):
+        return f"{webp} missing"
+    with Image.open(_abs(src)) as o, Image.open(_abs(jpg)) as j:
+        o = o.convert("RGB")
+        if o.width > IMG_WIDTH:
+            o = o.resize((IMG_WIDTH, round(o.height * IMG_WIDTH / o.width)), Image.LANCZOS)
+        if o.size != j.size or sync_catalog._mean_diff(o, j.convert("RGB")) > sync_catalog.WEBP_MATCH_THRESHOLD:
+            return f"{jpg} doesn't match {src}"
+    why = sync_catalog.webp_mismatch(_abs(webp), _abs(jpg))
+    return f"{webp} {why}" if why else None
+
+
+def make_images(jobs):
+    import sync_catalog
+    for src, jpg, webp in jobs:
+        if image_issue(src, jpg, webp) is None:
+            continue
+        os.makedirs(os.path.dirname(_abs(jpg)), exist_ok=True)
+        sync_catalog.generate_thumbnail(src, width=IMG_WIDTH, out_rel=jpg)
+        sync_catalog.generate_webp(jpg, width=IMG_WIDTH, original_rel=src)
+
+
+# ---------------------------------------------------------------- outputs on disk
+
+def generated_pages():
+    """{repo-relative page: source} for every page this script wrote."""
+    out = {}
+    for pattern in (f"{OUT_DIR}/index.html", f"{OUT_DIR}/*/index.html", f"{OUT_DIR}/{DRAFTS}/*/index.html"):
+        for rel in add_analytics._rel_glob(pattern):
+            m = GENERATED_RE.search(read_page(_abs(rel)))
+            if m:
+                out[rel] = m.group(1)
+    return out
+
+
+def output_dir_files(out_dir):
+    """Every file under a post's output folder (repo-relative)."""
+    files = []
+    for root, _, names in os.walk(_abs(out_dir)):
+        files += [os.path.relpath(os.path.join(root, n), REPO).replace(os.sep, "/") for n in names]
+    return sorted(files)
+
+
+# ---------------------------------------------------------------- build / audit
+
+def collect():
+    """Parse and validate every post without writing.
+    Returns (posts, products by id, {post page: image jobs})."""
+    products, dead = load_products(), load_dead()
+    posts, jobs = [], {}
+    for slug in find_posts():
+        post = parse_post(slug)
+        blocks = parse_blocks(post)
+        validate(post, blocks, products, dead)
+        posts.append(post)
+        if post.errors:
+            continue
+        jobs[post.out] = image_jobs(post, blocks)
+        post._blocks = blocks
+    return posts, products, jobs
+
+
+def render_all(posts, products):
+    """{rel: full page} for every post without errors, plus the listing,
+    which is left out while any post has an error: rebuilding it then
+    would drop that post from the listing, live or not."""
+    pages = {}
+    for post in posts:
+        if not post.errors:
+            pages[post.out] = with_managed_blocks(post.out, render_post(post, post._blocks, products))
+    if not any(post.errors for post in posts):
+        pages[LISTING] = with_managed_blocks(LISTING, render_listing(posts))
+    return pages
+
+
+def audit():
+    """[(where, what)] for item 15: post errors, stale or missing output,
+    missing hero files, noindex on a published post, a draft in the
+    sitemap, a post without the disclosure. Warnings are left out."""
+    issues = []
+    posts, products, jobs = collect()
+    for post in posts:
+        issues += [(post.src, e) for e in post.errors]
+    for out, job in jobs.items():
+        for src, jpg, webp in job:
+            why = image_issue(src, jpg, webp)
+            if why:
+                issues.append((out, f"photo out of date: {why} (run build_blog.py)"))
+    pages = render_all(posts, products) if all(os.path.isfile(_abs(j[1])) for js in jobs.values() for j in js) else None
+    by_out = {p.out: p for p in posts}
+    on_disk = generated_pages()
+    expected = set(jobs) | {LISTING}
+    for rel in sorted(expected):
+        if not os.path.isfile(_abs(rel)):
+            issues.append((rel, "not built yet (run build_blog.py)"))
+            continue
+        have = read_page(_abs(rel))
+        if pages is not None and rel in pages and strip_managed(have) != strip_managed(pages[rel]):
+            issues.append((rel, "out of date with its source (run build_blog.py)"))
+        post = by_out.get(rel)
+        if post is None:
+            continue
+        if not post.draft and NOINDEX_RE.search(have):
+            issues.append((rel, "published post carries noindex"))
+        if post.draft and not NOINDEX_RE.search(have):
+            issues.append((rel, "draft is missing noindex"))
+        if add_analytics.DISCLOSURE not in have:
+            issues.append((rel, "affiliate disclosure missing"))
+    for rel in sorted(set(on_disk) - expected - protected(posts)):
+        issues.append((rel, "generated page with no source in blog-src/ (run build_blog.py to remove it)"))
+    for f in leftover_images(posts, jobs):
+        issues.append((f, "leftover photo in the post's img/ folder (run build_blog.py to remove it)"))
+    urls = sitemap_urls() or []
+    for url in urls:
+        if url.startswith(SITE + f"{OUT_DIR}/{DRAFTS}/"):
+            issues.append(("sitemap.xml", f"draft in the sitemap: {url}"))
+    drafts = {p.slug for p in posts if p.draft}
+    for url in urls:
+        m = re.match(re.escape(SITE + OUT_DIR + "/") + r"([^/]+)/$", url)
+        if m and m.group(1) in drafts:
+            issues.append(("sitemap.xml", f"draft post in the sitemap: {url}"))
+    return issues
+
+
+def remove_output(rel_page):
+    """Delete a generated page and the photos beside it, then empty folders."""
+    out_dir = os.path.dirname(rel_page)
+    for f in output_dir_files(out_dir):
+        if f == rel_page or f.startswith(out_dir + "/img/"):
+            os.remove(_abs(f))
+    for d in (out_dir + "/img", out_dir, f"{OUT_DIR}/{DRAFTS}"):
+        try:
+            os.rmdir(_abs(d))
+        except OSError:
+            pass
+
+
+def build():
+    posts, products, jobs = collect()
+    for post in posts:
+        for w in post.warnings:
+            print(f"  warn  {post.src}: {w}")
+        for e in post.errors:
+            print(f"  ERROR {post.src}: {e}")
+    for job in jobs.values():
+        make_images(job)
+    pages = render_all(posts, products)
+    written = 0
+    for rel, page in pages.items():
+        path = _abs(rel)
+        if os.path.isfile(path) and read_page(path).replace("\r\n", "\n") == page.replace("\r\n", "\n"):
+            continue
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        write_page(path, page)
+        written += 1
+        print(f"  wrote {rel}")
+    for rel in sorted(set(generated_pages()) - set(pages) - protected(posts) - {LISTING}):
+        # A post whose source is gone, or that moved between draft and
+        # published, keeps no stale copy.
+        remove_output(rel)
+        print(f"  removed {rel}")
+    for f in leftover_images(posts, jobs):
+        os.remove(_abs(f))
+        print(f"  removed {f}")
+    return posts, written
+
+
+def protected(posts):
+    """Output pages of posts with errors: left alone (an error in the source
+    must never take a live post down), whichever of draft/published they are."""
+    return {rel for p in posts if p.errors
+            for rel in (f"{OUT_DIR}/{p.slug}/index.html", f"{OUT_DIR}/{DRAFTS}/{p.slug}/index.html")}
+
+
+def leftover_images(posts, jobs):
+    """Files in a built post's img/ folder that no longer match one of its photos."""
+    out = []
+    for post in posts:
+        if post.errors:
+            continue
+        wanted = {f for _, j, w in jobs[post.out] for f in (j, w)}
+        out += [f for f in output_dir_files(post.out_dir + "/img") if f not in wanted]
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true", help="report only, change nothing")
+    args = ap.parse_args()
+
+    if args.check:
+        posts, _, _ = collect()
+        for post in posts:
+            for w in post.warnings:
+                print(f"  warn  {post.src}: {w}")
+        issues = audit()
+        drafts = sum(p.draft for p in posts)
+        print(f"Posts: {len(posts)} ({len(posts) - drafts} published, {drafts} draft)")
+        print(f"Errors or stale output: {len(issues)}")
+        for where, what in issues:
+            print(f"  ERROR {where}: {what}")
+        sys.exit(1 if issues else 0)
+
+    posts, written = build()
+    drafts = sum(p.draft for p in posts)
+    print(f"Posts: {len(posts)} ({len(posts) - drafts} published, {drafts} draft); "
+          f"{written} page(s) written")
+    if any(p.errors for p in posts):
+        print("Posts with errors were not built. Fix them and run again.")
+        sys.exit(1)
+
+
+CSS = """  :root{
+    --ink:#0D0D0D;
+    --panel:#18140F;
+    --panel-line:#2A2620;
+    --gold:#D4A017;
+    --crimson:#C8102E;
+    --bone:#F3EFE6;
+    --bone-dim:#B8B2A4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(212,160,23,0.08), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
+  }
+  .wrap{width:100%;max-width:480px;min-width:0;}
+  @media (min-width:768px){
+    .wrap{max-width:1080px;}
+    .post-wrap{max-width:720px;}
+  }
+  .crumbs{margin-bottom:20px;font-size:13px;}
+  .crumbs ol{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:4px;color:var(--bone-dim);}
+  .crumbs li{min-width:0;overflow-wrap:anywhere;}
+  .crumbs li + li::before{content:'›';margin-right:4px;color:var(--bone-dim);}
+  .crumbs a{color:var(--gold);text-decoration:none;}
+  .crumbs a:hover{text-decoration:underline;}
+  header{text-align:center;margin-bottom:20px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--panel-line);
+    padding:5px 14px;border-radius:999px;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--crimson);display:inline-block;}
+  h1{
+    font-family:'Anton',sans-serif;
+    font-size:34px;
+    letter-spacing:1px;
+    line-height:1.05;
+    color:var(--bone);
+    text-transform:uppercase;
+    overflow-wrap:anywhere;
+  }
+  h1 span{color:var(--gold);}
+  @media (min-width:768px){
+    h1{font-size:46px;}
+  }
+  .tagline{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-top:10px;
+  }
+  .byline{font-size:12px;color:var(--bone-dim);margin-top:12px;}
+  .back{
+    display:block;
+    text-align:center;
+    margin-top:28px;
+    color:var(--gold);
+    font-size:13px;
+    text-decoration:none;
+  }
+  .bp-draft{
+    margin-bottom:16px;padding:8px 12px;border-radius:8px;
+    background:var(--crimson);color:#FFFFFF;text-align:center;
+    font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  }
+  .bp-disclosure{
+    text-align:center;font-size:12px;line-height:1.6;color:var(--bone-dim);
+    max-width:640px;margin:0 auto 20px;
+  }
+  .bp-hero,.bp-figure{margin:0 auto 22px;max-width:500px;}
+  .bp-hero picture,.bp-figure picture{display:block;}
+  .bp-photo{
+    display:block;width:100%;height:auto;
+    border-radius:12px;border:1px solid var(--panel-line);background:var(--panel);
+  }
+  .bp-figure figcaption{margin-top:8px;text-align:center;font-size:12px;line-height:1.5;color:var(--bone-dim);}
+  .intro p,.post-body p,.post-body li{font-size:16px;line-height:1.7;color:var(--bone);}
+  .intro p{margin-bottom:14px;}
+  .post-body p,.post-body ul,.post-body ol{margin-bottom:16px;}
+  .post-body ul,.post-body ol{padding-left:22px;}
+  .post-body li + li{margin-top:6px;}
+  .post-body h2{
+    font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;letter-spacing:1px;
+    text-transform:uppercase;color:var(--gold);margin:32px 0 12px;line-height:1.25;
+    scroll-margin-top:16px;
+  }
+  .post-body h3{
+    font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;letter-spacing:.5px;
+    color:var(--bone);margin:22px 0 8px;line-height:1.3;scroll-margin-top:16px;
+  }
+  .intro a,.post-body a:not(.bp-shop):not(.bp-details){color:var(--gold);text-underline-offset:2px;}
+  .bp-price{font-weight:600;color:var(--gold);white-space:nowrap;}
+  .toc{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+    padding:14px 16px;margin-bottom:18px;
+  }
+  .toc-title{
+    font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:1.5px;text-transform:uppercase;color:var(--bone-dim);margin-bottom:8px;
+  }
+  .toc ol{list-style:none;display:flex;flex-direction:column;gap:2px;}
+  .toc a{display:inline-block;padding:4px 0;color:var(--gold);font-size:14px;text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .bp-products{
+    display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:12px;margin:0 0 20px;
+  }
+  @media (min-width:768px){
+    .bp-products{grid-template-columns:repeat(3, minmax(0,1fr));gap:16px;}
+  }
+  .bp-card{
+    display:flex;flex-direction:column;background:var(--panel);
+    border:1px solid var(--panel-line);border-radius:12px;overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .bp-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .bp-card picture{display:block;}
+  .bp-thumb{
+    width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;display:block;
+    background:var(--ink);border-bottom:1px solid var(--panel-line);
+  }
+  .bp-card-body{padding:10px 12px 12px;flex:1 1 auto;display:flex;flex-direction:column;}
+  .card-meta{
+    margin-bottom:4px;font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;
+    letter-spacing:1px;text-transform:uppercase;
+  }
+  .retailer{color:var(--bone-dim);}
+  .post-body .prod-name{
+    font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;line-height:1.35;
+    letter-spacing:0;color:var(--bone);margin:0 0 8px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .post-body .bp-card-price{font-size:14px;font-weight:600;color:var(--gold);margin:0 0 10px;}
+  a.bp-shop{
+    margin-top:auto;padding:6px 8px;display:flex;align-items:center;justify-content:center;
+    min-height:38px;border-radius:8px;background:var(--gold);color:var(--ink);
+    font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.5px;
+    text-transform:uppercase;text-decoration:none;text-align:center;
+  }
+  a.bp-shop:hover{filter:brightness(1.08);}
+  a.bp-shop:focus-visible{outline:2px solid var(--bone);outline-offset:2px;}
+  a.bp-details{
+    display:block;margin-top:6px;padding:4px 0;text-align:center;font-size:12px;
+    color:var(--bone-dim);text-decoration:underline;text-underline-offset:2px;
+  }
+  .bp-faq .faq-item{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;padding:14px 16px;
+  }
+  .bp-faq .faq-item + .faq-item{margin-top:12px;}
+  .bp-faq .faq-item h3{margin:0 0 6px;}
+  .bp-faq .faq-item p{font-size:15px;margin-bottom:8px;}
+  .bp-faq .faq-item p:last-child{margin-bottom:0;}
+  .explore{
+    margin-top:32px;background:var(--panel);border:1px solid var(--panel-line);
+    border-radius:12px;padding:16px;
+  }
+  .explore h2{
+    font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--gold);margin-bottom:12px;text-align:center;
+  }
+  .explore ul{list-style:none;display:grid;gap:10px;}
+  .explore-link{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    min-height:48px;padding:12px 14px;border:1px solid var(--panel-line);border-radius:10px;
+    background:var(--ink);color:var(--bone);text-decoration:none;
+    font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;letter-spacing:.5px;
+  }
+  .explore-link span{color:var(--gold);}
+  .explore-link:hover{border-color:var(--gold);}
+  .bl-section{
+    font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--gold);margin:8px 0 14px;text-align:center;
+  }
+  .bl-grid{display:grid;gap:16px;margin-bottom:28px;}
+  @media (min-width:768px){
+    .bl-grid{grid-template-columns:repeat(3, minmax(0,1fr));}
+  }
+  .bl-card{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .bl-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .bl-link{display:block;color:inherit;text-decoration:none;}
+  .bl-link picture{display:block;}
+  .bl-thumb{
+    width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;
+    background:var(--ink);border-bottom:1px solid var(--panel-line);
+  }
+  .bl-body{padding:12px 14px 16px;}
+  .bl-cat{
+    display:inline-block;margin-bottom:6px;font-family:'Oswald',sans-serif;font-size:11px;
+    font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);
+  }
+  .bl-title{font-family:'Oswald',sans-serif;font-size:19px;font-weight:600;line-height:1.25;color:var(--bone);}
+  .bl-date{margin-top:6px;font-size:12px;color:var(--bone-dim);}
+  .bl-desc{margin-top:8px;font-size:14px;line-height:1.55;color:var(--bone-dim);}
+  .bl-empty{
+    text-align:center;font-size:15px;color:var(--bone-dim);padding:28px 16px;
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .bp-card,.bp-card:hover,.bl-card,.bl-card:hover{transition:none;transform:none;}
+  }"""
+
+
+if __name__ == "__main__":
+    main()

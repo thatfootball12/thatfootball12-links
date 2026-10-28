@@ -9,6 +9,8 @@ Usage:
 Included:
   - The homepage, the shop grid (products/), the outfit generator, the
     gift guide (gift-guide/) and the privacy page
+  - The blog listing (blog/) and every published post (blog/<slug>/,
+    built by build_blog.py). Drafts (blog/drafts/<slug>/, noindex) never.
   - The outfits/ and videos/ hubs and every category page under them
   - Every campaign page (outfits/<theme>/<campaign>/,
     videos/<category>/<campaign>/), legacy link-list pages included
@@ -60,6 +62,7 @@ SITEMAP = os.path.join(REPO, "sitemap.xml")
 SITE = "https://thatfootball12.github.io/thatfootball12-links/"
 
 REFRESH_RE = re.compile(r'http-equiv="refresh"', re.I)
+NOINDEX_RE = re.compile(r'<meta name="robots" content="[^"]*noindex', re.I)
 LOC_RE = re.compile(r"<loc>([^<]+)</loc>")
 
 
@@ -75,6 +78,11 @@ def _rel_glob(pattern):
 def is_redirect(rel):
     with open(_abs(rel), encoding="utf-8", errors="replace") as f:
         return bool(REFRESH_RE.search(f.read()))
+
+
+def is_noindex(rel):
+    with open(_abs(rel), encoding="utf-8", errors="replace") as f:
+        return bool(NOINDEX_RE.search(f.read()))
 
 
 def url_for(rel):
@@ -99,6 +107,11 @@ def expected_urls():
         entries.append(("gift-guide/index.html", ["gift-guide/index.html"]))
     if os.path.isfile(_abs("privacy/index.html")):
         entries.append(("privacy/index.html", ["privacy/index.html"]))
+    for rel in _rel_glob("blog/index.html") + _rel_glob("blog/*/index.html"):
+        # blog/drafts/<slug>/ is two levels down, so the glob never sees a
+        # draft; the noindex check is a second guard.
+        if not is_redirect(rel) and not is_noindex(rel):
+            entries.append((rel, [rel]))
     for rel in ["outfits/index.html", "videos/index.html"] + \
             _rel_glob("outfits/*/index.html") + _rel_glob("videos/*/index.html"):
         entries.append((rel, [rel]))
