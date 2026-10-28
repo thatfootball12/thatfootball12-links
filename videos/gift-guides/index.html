@@ -238,6 +238,28 @@
     font-size:13px;
     text-decoration:none;
   }
+  /* Holiday gift guide link (seasonal; same look as the shop grid's generator banner) */
+  a.gg-banner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:26px;
+    padding:12px 16px;
+    border:1px solid var(--gold);
+    border-radius:12px;
+    background:#1F1A13;
+    color:var(--bone);
+    font-family:'Oswald',sans-serif;
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:.3px;
+    text-decoration:none;
+  }
+  a.gg-banner b{color:var(--gold);font-weight:600;text-align:right;}
+  a.gg-banner:hover{background:#2a210f;}
+  a.gg-banner:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  @media (max-width:480px){a.gg-banner{flex-direction:column;gap:2px;text-align:center;}a.gg-banner b{text-align:center;}}
   .section{
     background:var(--panel);
     border:1px solid var(--panel-line);
@@ -345,6 +367,7 @@
     <h1>GIFT <span>GUIDES</span></h1>
     <div class="tagline">13 Shoppable Drops</div>
   </header>
+  <a class="gg-banner" href="../../gift-guide/"><span>🎁 100 picks in one place</span><b>Browse the 2026 Holiday Gift Guide →</b></a>
 
   <div class="section">
     <h3>🎁 All Gift Guide Drops</h3>
@@ -453,7 +476,7 @@
 </div>
 <!-- site-footer:start -->
 <div class="tf12-foot">
-  <p class="tf12-foot-links"><a href="../../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
+  <p class="tf12-foot-links"><a href="../../gift-guide/">Holiday Gift Guide</a> · <a href="../../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
 </div>
 <!-- site-footer:end -->
 </body>
