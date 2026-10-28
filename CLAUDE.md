@@ -180,6 +180,20 @@ script corrects its relative path if the new page sits at a different
 depth. `sync_catalog.py`'s report item 9 flags any page whose block is
 missing or stale.
 
+Then run `python add_fonts.py`. The site's fonts (Anton, Oswald,
+Poppins) are self-hosted in `assets/fonts/web/` (latin WOFF2 files,
+OFL licences in `assets/fonts/`), so no page contacts Google before a
+cookie choice. The script writes a `<!-- fonts:start/end -->` block
+(preloads plus inline `@font-face` rules, relative paths) into every
+page except the redirect pages, and removes any Google Fonts `<link>`
+or preconnect tag. A new page copied from an existing one already
+carries the block, and the script corrects its relative paths. Never
+paste a Google Fonts link into a page: `sync_catalog.py`'s report item
+14 fails (exit 1, so CI fails) on any `googleapis.com` or `gstatic.com`
+reference on a non-stub page, any page missing the block or with a
+stale one, and any missing font file. `--check` reports without
+changing anything.
+
 Then run `python write_sitemap.py` and commit the regenerated
 `sitemap.xml` with the batch. It lists the homepage, the shop grid,
 every category and campaign page, and every product detail page in
@@ -195,8 +209,8 @@ So the order is: `sync_catalog.py` (plus `--append` if needed, then set
 `item_type`/`data_new`, set each new SHEIN `seller`, check `added`, and add any new item_type to
 `categories.json` and any new campaign to `generator.json`), then
 `add_product_schema.py`, then `add_analytics.py`, then
-`add_favicons.py`, then `write_sitemap.py` last among the writers (the
-scripts before it edit
+`add_favicons.py`, then `add_fonts.py`, then `write_sitemap.py` last
+among the writers (the scripts before it, `add_fonts.py` included, edit
 pages, and each edit moves that page's `<lastmod>`), then
 `sync_catalog.py` once more to confirm it's clean.
 

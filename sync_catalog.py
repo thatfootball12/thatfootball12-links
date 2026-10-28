@@ -104,8 +104,13 @@ Report (always runs):
      is empty now that every gift guide photo is self-hosted, so any
      remote image fails. Warns about allowlisted cards that are no longer
      remote, so a temporary entry gets removed.
+ 14. Fonts (add_fonts.py): errors for a page whose self-hosted fonts
+     block is missing or stale, any non-stub page that still references
+     googleapis.com or gstatic.com (loading from Google sends the
+     visitor's IP address there before any cookie choice), and any font
+     file missing from assets/fonts/web/. Run add_fonts.py to fix pages.
 
-Exit status: 1 when item 1, 2, 10, 11, 12 or 13 has an error, or item 8
+Exit status: 1 when item 1, 2, 10, 11, 12, 13 or 14 has an error, or item 8
 finds a missing <picture> file (report-only runs;
 --append fixes item 1 and exits 0), else 0. The catalog-check GitHub
 workflow runs the report on every push and pull request to main, so a
@@ -168,6 +173,7 @@ import add_product_schema
 import write_sitemap
 import add_analytics
 import add_favicons
+import add_fonts
 import categories
 import outfit_generator
 import sellers
@@ -618,6 +624,8 @@ def main():
     remote_image_errors, remote_image_warnings = gift_guide_remote_images()
     favicon_issues = add_favicons.audit()
     favicon_issues += [(path, "icon file missing") for path in add_favicons.missing_icons()]
+    font_issues = add_fonts.audit()
+    font_issues += [(path, "font file missing") for path in add_fonts.missing_fonts()]
 
     schema_issues = []
     for p in products:
@@ -785,16 +793,26 @@ def main():
         print("   Self-host the photo in gift-guide/img/ (see GIFT_GUIDE_REMOTE_ALLOWLIST).")
     print()
 
+    print(f"14. Pages with a missing/stale fonts block or a Google Fonts reference, "
+          f"or missing font files: {len(font_issues)}")
+    for rel, why in font_issues:
+        print(f"   ERROR {rel} ({why})")
+    if any(why not in ("font file missing", "google reference on redirect page") for _, why in font_issues):
+        print("   Run: python add_fonts.py")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not listing_issues
             and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
             and not webp_issues and not favicon_issues and not category_errors
-            and not generator_errors and not seller_errors and not remote_image_errors):
+            and not generator_errors and not seller_errors and not remote_image_errors
+            and not font_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
               "analytics tracking and site footer, every <picture> WebP source loads, every "
-              "page has a current favicon block, every product has a products/ page tab, "
+              "page has a current favicon block and self-hosted fonts, every product has a "
+              "products/ page tab, "
               "generator.json covers every campaign, and every SHEIN product has a seller.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
@@ -815,10 +833,11 @@ def main():
         missing_picture_files = [i for i in webp_issues
                                  if i[2] in ("file missing", "fallback JPEG missing")]
         # Item 13 fails it when a gift guide image comes from another site
-        # and its card isn't on GIFT_GUIDE_REMOTE_ALLOWLIST.
+        # and its card isn't on GIFT_GUIDE_REMOTE_ALLOWLIST. Item 14 fails it
+        # when a page loads fonts from Google or a font file is missing.
         if (missing_from_catalog or orphaned_records or listing_issues or category_errors
                 or generator_errors or seller_errors or missing_picture_files
-                or remote_image_errors):
+                or remote_image_errors or font_issues):
             sys.exit(1)
         return
 

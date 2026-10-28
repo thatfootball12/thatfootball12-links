@@ -153,8 +153,17 @@
 <meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/privacy/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ThatFootball12" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- fonts:start -->
+<link rel="preload" href="../assets/fonts/web/anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/web/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/web/anton-400-latin.woff2) format('woff2');}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:400 700;font-display:swap;src:url(../assets/fonts/web/oswald-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/web/poppins-400-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(../assets/fonts/web/poppins-500-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(../assets/fonts/web/poppins-600-latin.woff2) format('woff2');}
+</style>
+<!-- fonts:end -->
 <style>
   :root{--ink:#0D0D0D;--panel:#18140F;--panel-line:#2A2620;--gold:#D4A017;--crimson:#C8102E;--bone:#F3EFE6;--bone-dim:#B8B2A4;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -188,10 +197,10 @@
 <body>
 <div class="wrap">
   <h1>Privacy</h1>
-  <div class="updated">Last updated October 26, 2026</div>
+  <div class="updated">Last updated October 27, 2026</div>
 
   <div class="summary">
-    <p><strong>The short version:</strong> there are no accounts, sign-up forms, comments or newsletters here, so this site never asks for your name, email or anything else about you. A few things happen on every visit, because that's how a web page gets to your screen: the company that hosts the site and the one that serves its fonts see your IP address. Everything else (Google Analytics, and the Moosehill banner on the homepage) only switches on if you click <strong>Accept</strong> on the cookie banner. Decline and none of it loads.</p>
+    <p><strong>The short version:</strong> there are no accounts, sign-up forms, comments or newsletters here, so this site never asks for your name, email or anything else about you. One thing happens on every visit, because that's how a web page gets to your screen: the company that hosts the site sees your IP address. Everything else (Google Analytics, and the Moosehill banner on the homepage) only switches on if you click <strong>Accept</strong> on the cookie banner. Decline and none of it loads.</p>
   </div>
 
   <h2>Your choice</h2>
@@ -202,10 +211,9 @@
   <p>You can change your mind any time with <strong>Cookie settings</strong> at the bottom of every page. Switching to Decline stops Google Analytics straight away, deletes its cookies from your browser, and hides the Awin banner. Your choice is saved in your own browser (local storage, under <code>tf12_consent</code>), not sent anywhere, and we ask again after 12 months or if this page changes in a way that matters.</p>
 
   <h2>What happens on every visit</h2>
-  <p>These happen before you choose anything, since the page can't load without them. None of them set cookies.</p>
+  <p>This happens before you choose anything, since the page can't load without it. It doesn't set cookies.</p>
   <ul>
     <li><strong>Hosting.</strong> The site is hosted on GitHub Pages. GitHub logs every visitor's IP address for security, whether or not you have a GitHub account. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a>.</li>
-    <li><strong>Fonts.</strong> The site's fonts (Anton, Oswald and Poppins) are downloaded from Google Fonts, so your browser sends Google your IP address and basic browser details to get them. Google Fonts doesn't set cookies. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's privacy policy</a>.</li>
   </ul>
 
   <h2>What Google Analytics collects</h2>
