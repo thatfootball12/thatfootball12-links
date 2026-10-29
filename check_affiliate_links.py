@@ -38,6 +38,20 @@ its outbound_url, or with that card as its holiday_pin) is checked too:
 Card results go in the report's "Gift guide cards" section only, never in
 data/dead_links.json or the exit code.
 
+The report opens with two counts for each group, so a run SHEIN blocked
+can't read as a clean one:
+  - catalog products: how many there are, how many were requested, and
+    how many were verified (got an ok or dead answer);
+  - gift guide cards: how many there are, how many are checkable (a
+    catalog record or a goods id), and how many were verified this week.
+A run is blocked when SHEIN answered any request with its bot check or
+HTTP 403/429, or the script stopped requesting after BOT_CHECK_LIMIT
+bot checks. A blocked run puts a plain-words warning at the very top of
+the report (the issue body), however few requests were blocked, and
+its title (run_title(), written to $GITHUB_OUTPUT for the workflow's
+issue step) says "inconclusive". Timeouts and other errors still count
+as unknown but don't make a run blocked.
+
 Results:
   - dead: HTTP 404/410, or SHEIN redirected the product URL somewhere
     that isn't that product's page (a delisted product goes to the
@@ -100,6 +114,9 @@ UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like 
 TIMEOUT = 12
 THROTTLE = 1.5
 BOT_CHECK_LIMIT = 10   # stop requesting after this many bot checks in a row
+NOT_REQUESTED = "not requested"
+TITLE = "Weekly affiliate link check"
+TITLE_BLOCKED = "Weekly affiliate link check (inconclusive: SHEIN bot check)"
 CONFIRM_RUNS = 2       # dead in this many weekly runs = confirmed dead
 MIN_RUN_GAP_DAYS = 6   # a rerun sooner than this doesn't count as another week
 
@@ -200,7 +217,7 @@ def check_shein(products):
     out, bot_checks_in_row = {}, 0
     for i, (gid, p) in enumerate(by_goods.items(), 1):
         if bot_checks_in_row >= BOT_CHECK_LIMIT:
-            out[gid] = ("unknown", f"not requested (SHEIN bot check on the previous {BOT_CHECK_LIMIT} requests)")
+            out[gid] = ("unknown", f"{NOT_REQUESTED} (SHEIN bot check on the previous {BOT_CHECK_LIMIT} requests)")
             continue
         status, final_url, err = get(plain_url(p))
         result, reason = shein_verdict(status, final_url, err, gid)
@@ -208,6 +225,40 @@ def check_shein(products):
         out[gid] = (result, reason)
         print(f"[{i}/{len(by_goods)}] {result:8} {gid:>12} {reason[:80]}")
         time.sleep(THROTTLE)
+    return out
+
+
+def is_blocked(reason):
+    """SHEIN refused to answer: its bot check, or HTTP 403/429."""
+    return reason == "SHEIN bot check" or "bot-blocked" in reason
+
+
+def run_status(results):
+    """How a run went, from its (result, reason) pairs, one per goods id
+    (catalog products and gift guide cards together): {requested,
+    blocked, verified, stopped}. A goods id the script stopped short of
+    isn't requested."""
+    sent = [(res, why) for res, why in results if not why.startswith(NOT_REQUESTED)]
+    return {"requested": len(sent),
+            "blocked": sum(is_blocked(why) for _, why in sent),
+            "verified": sum(res in ("ok", "dead") for res, _ in sent),
+            "stopped": len(sent) < len(results)}
+
+
+def run_title(status):
+    return TITLE_BLOCKED if status["blocked"] or status["stopped"] else TITLE
+
+
+def covering_products(shein):
+    """{card: catalog product id} for gift guide cards a catalog record
+    covers (by holiday_pin, or by the card's link as its outbound_url)."""
+    by_link = {p.get("outbound_url"): p["id"] for p in shein}
+    by_pin = {gift_guide.card_key(p["holiday_pin"]): p["id"] for p in shein if p.get("holiday_pin")}
+    out = {}
+    for c in gift_guide.shein_cards():
+        pid = by_pin.get(c["card"]) or (by_link.get(c["link"]) if c["link"] else None)
+        if pid:
+            out[c["card"]] = pid
     return out
 
 
@@ -226,22 +277,56 @@ def gift_guide_cards(shein):
     return out, len(cards)
 
 
-def write_report(rows, entries, skipped, path, cards=(), total_cards=0):
+def warning(status, rows, checkable, cards_verified):
+    """The plain-words warning a blocked run opens with, or None."""
+    if not (status["blocked"] or status["stopped"]):
+        return None
+    verified = sum(r["result"] in ("ok", "dead") for r in rows)
+    how = (f"SHEIN blocked {status['blocked']} of the {status['requested']} page requests "
+           f"(its bot check, or HTTP 403/429)")
+    if status["stopped"]:
+        how += f", and the check stopped after {BOT_CHECK_LIMIT} in a row"
+    if status["verified"] == 0:
+        return (f"> ⚠️ **This week's check didn't work.** {how}. 0 of {len(rows)} catalog "
+                f"products and 0 of {checkable} checkable gift guide cards were verified. "
+                f"Nothing below means the links are fine: they weren't checked.\n")
+    return (f"> ⚠️ **This week's check is incomplete.** {how}. Only {verified} of {len(rows)} "
+            f"catalog products and {cards_verified} of {checkable} checkable gift guide cards "
+            f"were verified. Anything not listed below as OK or dead wasn't checked.\n")
+
+
+def write_report(rows, entries, skipped, path, cards=(), total_cards=0, status=None,
+                 covered_verified=0):
+    """The report (the tracking issue's body). status is run_status() for
+    the run; covered_verified is how many catalog-covered gift guide cards
+    got an ok or dead answer."""
     by_result = {"dead": [], "ok": [], "unknown": []}
     for r in rows:
         by_result[r["result"]].append(r)
     names = {r["id"]: r["name"] for r in rows}
     confirmed = [e for e in entries if e["status"] == "confirmed"]
     suspected = [e for e in entries if e["status"] == "suspected"]
+    if status is None:
+        status = run_status([(r["result"], r["reason"]) for r in rows])
 
     by_id = [c for c in cards if c["how"] == "product page"]
     in_catalog = total_cards - len(cards)
-    lines = [f"**Gift guide SHEIN cards checked: {in_catalog + len(by_id)} of {total_cards}** "
-             f"({in_catalog} as catalog products, {len(by_id)} by goods id from "
-             f"`gift-guide-shein-ids.json`; {len(cards) - len(by_id)} not covered).\n",
-             f"_Checked {len(rows)} SHEIN products by their plain ca.shein.com product page "
-             f"(never the affiliate link)._\n",
-             f"- OK: {len(by_result['ok'])}",
+    checkable = in_catalog + len(by_id)
+    cards_verified = covered_verified + sum(c.get("result") in ("ok", "dead") for c in by_id)
+    sent = [r for r in rows if not r["reason"].startswith(NOT_REQUESTED)]
+    requested_goods = len({r.get("goods_id") for r in sent})
+    verified = len(by_result["ok"]) + len(by_result["dead"])
+    lines = [w for w in [warning(status, rows, checkable, cards_verified)] if w]
+    lines += [f"**Catalog SHEIN products:** {len(rows)} · requested {len(sent)} "
+              f"({requested_goods} goods ids) · "
+              f"**verified {verified}** (got an OK or dead answer)  ",
+              f"**Gift guide SHEIN cards:** {total_cards} · checkable {checkable} "
+              f"({in_catalog} as catalog products, {len(by_id)} by goods id from "
+              f"`gift-guide-shein-ids.json`; {len(cards) - len(by_id)} not covered) · "
+              f"**verified this week {cards_verified}**\n",
+              "_Each product is requested by its plain ca.shein.com product page, never the "
+              "affiliate link._\n",
+              f"- OK: {len(by_result['ok'])}",
              f"- Dead this run: {len(by_result['dead'])}",
              f"- Unknown (bot check, blocked or timed out; never counted): {len(by_result['unknown'])}",
              f"- Not checked: {', '.join(f'{n} {k}' for k, n in skipped.items()) or 'none'}\n",
@@ -347,23 +432,32 @@ def main():
     rows = []
     for p in shein:
         result, reason = by_goods[str(p["goods_id"])]
-        rows.append({"id": p["id"], "name": p["name"], "result": result, "reason": reason})
+        rows.append({"id": p["id"], "name": p["name"], "goods_id": str(p["goods_id"]),
+                     "result": result, "reason": reason})
 
     entries = update_dead_links(load_dead_links(), {r["id"]: r["result"] for r in rows},
                                 {p["id"]: p["retailer"] for p in shein},
                                 datetime.datetime.now(datetime.timezone.utc).date())
+    status = run_status(list(by_goods.values()) + list(by_card_goods.values()))
+    results = {r["id"]: r["result"] for r in rows}
+    covered_verified = sum(results.get(pid) in ("ok", "dead") for pid in covering_products(shein).values())
     report = write_report(rows, entries, skipped, None if args.dry_run else REPORT_PATH,
-                          cards, total_cards)
+                          cards, total_cards, status, covered_verified)
+    title = run_title(status)
 
     if args.dry_run:
-        print("\n" + report)
+        print(f"\nIssue title: {title}\n\n" + report)
         return
+    if os.environ.get("GITHUB_OUTPUT"):
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+            f.write(f"title={title}\n")
     os.makedirs(os.path.dirname(DEAD_LINKS_JSON), exist_ok=True)
     with open(DEAD_LINKS_JSON, "w", encoding="utf-8", newline="\n") as f:
         json.dump(entries, f, indent=2)
         f.write("\n")
     counts = {k: sum(r["result"] == k for r in rows) for k in ("ok", "dead", "unknown")}
-    print(f"\nOK: {counts['ok']}  DEAD: {counts['dead']}  UNKNOWN: {counts['unknown']}")
+    print(f"\nIssue title: {title}")
+    print(f"OK: {counts['ok']}  DEAD: {counts['dead']}  UNKNOWN: {counts['unknown']}")
     print(f"Confirmed dead: {len(confirmed_ids(entries))}")
     print(f"Report written to {REPORT_PATH}; dead links to {DEAD_LINKS_JSON}")
     sys.exit(1 if counts["dead"] else 0)
