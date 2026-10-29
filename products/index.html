@@ -278,6 +278,8 @@
   a.fit-banner b{color:var(--gold);font-weight:600;white-space:nowrap;}
   a.fit-banner:hover{background:#2a210f;}
   a.fit-banner:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  /* Holiday gift guide link (seasonal): stacks on phones so neither half wraps awkwardly */
+  @media (max-width:480px){a.gg-banner{flex-direction:column;gap:2px;text-align:center;}a.gg-banner b{white-space:normal;}}
   .catnav{
     background:var(--panel);
     border:1px solid var(--panel-line);
@@ -629,6 +631,7 @@
   </header>
 
   <a class="fit-banner" href="../generator/"><span>🎲 Can't decide?</span><b>Let us build your fit →</b></a>
+  <a class="fit-banner gg-banner" href="../gift-guide/"><span>🎁 Gift ideas for him</span><b>Browse the 2026 Holiday Gift Guide →</b></a>
 
   <nav class="catnav" aria-label="Product categories">
     <div class="chip-row tabs" id="tab-chips"></div>
@@ -1247,7 +1250,7 @@
 </script>
 <!-- site-footer:start -->
 <div class="tf12-foot">
-  <p class="tf12-foot-links"><a href="../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
+  <p class="tf12-foot-links"><a href="../gift-guide/">Holiday Gift Guide</a> · <a href="../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
 </div>
 <!-- site-footer:end -->
 </body>

@@ -63,12 +63,16 @@ Consent (see privacy/index.html for the visitor-facing explanation):
     never covers the end of the page. Accept and Decline are identical
     buttons.
 
-Footer: "Privacy · Cookie settings", plus the affiliate disclosure line
+Footer: "Holiday Gift Guide · Privacy · Cookie settings", plus the
+affiliate disclosure line
 unless the page already carries one (the homepage and legacy pages have
 their own <footer> fine-print; repeating it would stack two copies).
 The privacy link is relative, since this is a GitHub Pages project site
 served under /thatfootball12-links/, where a root-relative /privacy/
-would point at the wrong site. Every page's body is a flex row holding
+would point at the wrong site. The gift guide link is seasonal: it's
+on while FOOTER_GIFT_GUIDE (top of this script) is True, never on the
+gift guide itself, and relative for the same reason. Set it to False
+in January and rerun the script to take it off every page. Every page's body is a flex row holding
 one .wrap column, so the footer's CSS (in the head block) sets
 flex-wrap on body to put it on its own line under the column.
 
@@ -110,6 +114,11 @@ import os
 import re
 
 import gift_guide
+
+# Seasonal "Holiday Gift Guide" link in the site footer. Set to False
+# (and rerun) to take it off every page after the holidays.
+FOOTER_GIFT_GUIDE = True
+GIFT_GUIDE_PAGE = "gift-guide/index.html"
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -375,6 +384,11 @@ def targets():
     return out
 
 
+def gift_guide_href(rel):
+    """Relative link from page rel to the gift guide."""
+    return "../" * rel.count("/") + "gift-guide/"
+
+
 def privacy_href(rel):
     """Relative link from page rel to the privacy page."""
     return "../" * rel.count("/") + "privacy/"
@@ -406,7 +420,10 @@ def expected_footer(rel, page_html):
     lines = [FOOT_START, '<div class="tf12-foot">']
     if DISCLOSURE_MARK not in own:
         lines.append("  <p>" + DISCLOSURE + "</p>")
-    lines += ['  <p class="tf12-foot-links"><a href="' + privacy_href(rel) + '">Privacy</a> · '
+    gift = ""
+    if FOOTER_GIFT_GUIDE and rel != GIFT_GUIDE_PAGE:
+        gift = '<a href="' + gift_guide_href(rel) + '">Holiday Gift Guide</a> · '
+    lines += ['  <p class="tf12-foot-links">' + gift + '<a href="' + privacy_href(rel) + '">Privacy</a> · '
               '<button type="button" data-tf12-consent-open>Cookie settings</button></p>',
               "</div>", FOOT_END]
     return _nl(page_html, "\n".join(lines))
