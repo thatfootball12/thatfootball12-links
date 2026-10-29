@@ -63,7 +63,9 @@ Output:
     sitemap, never noindex;
   - drafts (draft: true): blog/drafts/<slug>/index.html with
     <meta name="robots" content="noindex">, linked from nowhere and left
-    out of the sitemap (write_sitemap.py);
+    out of the sitemap (write_sitemap.py). _config.yml also excludes
+    blog/drafts/ from the Jekyll build, so drafts 404 on the live site
+    and are only for previewing on the local server;
   - blog/index.html, the listing: the three newest published posts as
     large cards, then the rest, newest first, each with its category.
 Photos become <name>-500.jpg plus a .webp beside it in the post's img/

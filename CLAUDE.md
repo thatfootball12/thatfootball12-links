@@ -353,7 +353,9 @@ card fails the build. Affiliate links in the text get
 `rel="nofollow sponsored noopener"` automatically.
 
 **Drafts** build to `blog/drafts/<slug>/` with `noindex`, are linked from
-nowhere, and stay out of the sitemap. `blog-src/sample-post/` is a
+nowhere, and stay out of the sitemap. `_config.yml` also excludes
+`blog/drafts/` from the Jekyll build, so drafts 404 on the live site:
+preview them on the local server. `blog-src/sample-post/` is a
 permanent draft that uses every feature: it's the template's test page,
 so keep it a draft.
 
