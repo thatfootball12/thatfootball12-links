@@ -22,6 +22,7 @@ A gift guide product that already has a catalog record (same goods_id)
 keeps that record and just gets holiday_pin added.
 """
 
+import html as htmllib
 import os
 import re
 
@@ -47,6 +48,32 @@ def page_links():
         return set()
     with open(path, encoding="utf-8") as f:
         return set(re.findall(r'<a class="gg-shop" href="([^"]+)"', f.read()))
+
+
+def card_key(card_id):
+    """"S1", "S01" and "s01" all name the same card; returns "S1"."""
+    m = re.fullmatch(r"([A-Za-z]+)0*(\d+)", (card_id or "").strip())
+    return f"{m.group(1).upper()}{m.group(2)}" if m else (card_id or "")
+
+
+def shein_cards():
+    """Every SHEIN tile on the gift guide, in page order: a list of
+    {card, name, link}. link is None when the tile's shop link can't be
+    read, so a broken tile shows up instead of being skipped."""
+    path = os.path.join(REPO, PAGE.replace("/", os.sep))
+    if not os.path.isfile(path):
+        return []
+    with open(path, encoding="utf-8") as f:
+        html = f.read()
+    out = []
+    for card, body in re.findall(r'<article class="card-tile" data-id="([^"]+)"(.*?)</article>', html, re.S):
+        if 'class="retailer shein"' not in body:
+            continue
+        link = re.search(r'<a class="gg-shop" href="([^"]+)"', body)
+        name = re.search(r'<h3 class="prod-name">([^<]+)</h3>', body)
+        out.append({"card": card_key(card), "name": htmllib.unescape(name.group(1).strip()) if name else card,
+                    "link": link.group(1) if link else None})
+    return out
 
 
 def audit(products):

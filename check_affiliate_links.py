@@ -24,6 +24,20 @@ page it pointed to). Instead:
   - Awin, Amazon: not checked. Their outbound URLs are tracking links
     and products.json has no plain product URL for them.
 
+Gift guide cards (report only): every SHEIN tile on gift-guide/index.html
+that no catalog record covers (no SHEIN record with that tile's link as
+its outbound_url, or with that card as its holiday_pin) is checked too:
+  - a card with a goods_id in gift-guide-shein-ids.json gets the same
+    plain product-page check as a catalog product.
+  - a card whose goods_id is null is "not covered, not requested": its
+    only link is the affiliate link, which this script never requests.
+    (A one-time capture on 2026-10-27 followed each card's onelink once
+    to find its goods id, but every one stopped on onelink.shein.com, so
+    the ids have to be looked up by hand on the SHEIN Affiliate site.)
+  - a card whose shop link can't be read from the page is "not covered".
+Card results go in the report's "Gift guide cards" section only, never in
+data/dead_links.json or the exit code.
+
 Results:
   - dead: HTTP 404/410, or SHEIN redirected the product URL somewhere
     that isn't that product's page (a delisted product goes to the
@@ -73,12 +87,14 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+import gift_guide
 from sellers import plain_url
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
 DEAD_LINKS_JSON = os.path.join(REPO, "data", "dead_links.json")
 REPORT_PATH = os.path.join(REPO, "link_check_report.md")
+GIFT_GUIDE_IDS_JSON = os.path.join(REPO, "gift-guide-shein-ids.json")
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 TIMEOUT = 12
@@ -195,7 +211,22 @@ def check_shein(products):
     return out
 
 
-def write_report(rows, entries, skipped, path):
+def gift_guide_cards(shein):
+    """The gift guide's SHEIN cards that no catalog record covers, each
+    {card, name, link, goods_id}; and how many SHEIN cards there are."""
+    links = {p.get("outbound_url") for p in shein}
+    pins = {gift_guide.card_key(p["holiday_pin"]) for p in shein if p.get("holiday_pin")}
+    ids = {}
+    if os.path.isfile(GIFT_GUIDE_IDS_JSON):
+        with open(GIFT_GUIDE_IDS_JSON, encoding="utf-8") as f:
+            ids = {gift_guide.card_key(c["card"]): c.get("goods_id") for c in json.load(f)}
+    cards = gift_guide.shein_cards()
+    out = [dict(c, goods_id=ids.get(c["card"])) for c in cards
+           if c["card"] not in pins and (c["link"] is None or c["link"] not in links)]
+    return out, len(cards)
+
+
+def write_report(rows, entries, skipped, path, cards=(), total_cards=0):
     by_result = {"dead": [], "ok": [], "unknown": []}
     for r in rows:
         by_result[r["result"]].append(r)
@@ -203,7 +234,12 @@ def write_report(rows, entries, skipped, path):
     confirmed = [e for e in entries if e["status"] == "confirmed"]
     suspected = [e for e in entries if e["status"] == "suspected"]
 
-    lines = [f"_Checked {len(rows)} SHEIN products by their plain ca.shein.com product page "
+    by_id = [c for c in cards if c["how"] == "product page"]
+    in_catalog = total_cards - len(cards)
+    lines = [f"**Gift guide SHEIN cards checked: {in_catalog + len(by_id)} of {total_cards}** "
+             f"({in_catalog} as catalog products, {len(by_id)} by goods id from "
+             f"`gift-guide-shein-ids.json`; {len(cards) - len(by_id)} not covered).\n",
+             f"_Checked {len(rows)} SHEIN products by their plain ca.shein.com product page "
              f"(never the affiliate link)._\n",
              f"- OK: {len(by_result['ok'])}",
              f"- Dead this run: {len(by_result['dead'])}",
@@ -248,6 +284,23 @@ def write_report(rows, entries, skipped, path):
         lines.append("None.")
     lines.append("")
 
+    lines.append("## Gift guide cards\n")
+    lines.append("SHEIN cards on `gift-guide/index.html` with no `products.json` record. "
+                 "Report only: they never go in `data/dead_links.json`.\n")
+    if cards:
+        label = {"ok": "OK", "dead": "**dead**", "unknown": "inconclusive"}
+        lines.append("| Card | Product | Checked by | Result | Reason |")
+        lines.append("|---|---|---|---|---|")
+        for c in cards:
+            if c["how"] == "not covered":
+                lines.append(f"| {c['card']} | {c['name']} | — | **{c['label']}** | {c['reason']} |")
+                continue
+            lines.append(f"| {c['card']} | {c['name']} | goods id `{c['goods_id']}` | "
+                         f"{label[c['result']]} | {c['reason']} |")
+    else:
+        lines.append("None.")
+    lines.append("")
+
     text = "\n".join(lines)
     if path:
         with open(path, "w", encoding="utf-8") as f:
@@ -275,6 +328,22 @@ def main():
           f"({len({str(p['goods_id']) for p in shein})} unique goods ids)\n")
     by_goods = check_shein(shein)
 
+    cards, total_cards = gift_guide_cards(shein)
+    with_id = [c for c in cards if c["link"] and c["goods_id"]]
+    print(f"\nGift guide SHEIN cards with no catalog record: {len(cards)} of {total_cards} "
+          f"({len(with_id)} with a goods id)\n")
+    by_card_goods = check_shein([{"goods_id": c["goods_id"], "name": c["name"]} for c in with_id])
+    for c in cards:
+        if not c["link"]:
+            c.update(how="not covered", label="not covered",
+                     reason="shop link can't be read from the page")
+        elif c["goods_id"]:
+            result, reason = by_card_goods[str(c["goods_id"])]
+            c.update(how="product page", result=result, reason=reason)
+        else:
+            c.update(how="not covered", label="not covered, not requested",
+                     reason="no goods id in `gift-guide-shein-ids.json` (the affiliate link is never requested)")
+
     rows = []
     for p in shein:
         result, reason = by_goods[str(p["goods_id"])]
@@ -283,7 +352,8 @@ def main():
     entries = update_dead_links(load_dead_links(), {r["id"]: r["result"] for r in rows},
                                 {p["id"]: p["retailer"] for p in shein},
                                 datetime.datetime.now(datetime.timezone.utc).date())
-    report = write_report(rows, entries, skipped, None if args.dry_run else REPORT_PATH)
+    report = write_report(rows, entries, skipped, None if args.dry_run else REPORT_PATH,
+                          cards, total_cards)
 
     if args.dry_run:
         print("\n" + report)
