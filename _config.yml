@@ -1,0 +1,9 @@
+# GitHub Pages builds this site with Jekyll, which publishes every .md
+# file as an .html page. blog-src/ holds the blog's Markdown sources
+# (drafts included) and full-size photos; build_blog.py turns them into
+# blog/, so the sources themselves stay off the live site.
+# blog/drafts/ holds the built draft posts: they're for previewing on the
+# local server only, so they 404 on the live site.
+exclude:
+  - blog-src
+  - blog/drafts

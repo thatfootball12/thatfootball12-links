@@ -109,8 +109,16 @@ Report (always runs):
      googleapis.com or gstatic.com (loading from Google sends the
      visitor's IP address there before any cookie choice), and any font
      file missing from assets/fonts/web/. Run add_fonts.py to fix pages.
+ 15. Blog (build_blog.py): errors for a published post missing its
+     title, description, date or hero; a {{product <id>}} that isn't in
+     products.json; a price typed next to an Amazon product card; a hero
+     or photo whose -500 JPEG or WebP is missing or stale; a page that's
+     out of date with its source in blog-src/ (or has no source left); a
+     published post with noindex, or a draft in sitemap.xml; and a post
+     without the affiliate disclosure. Run build_blog.py to fix whatever
+     isn't a source error.
 
-Exit status: 1 when item 1, 2, 10, 11, 12, 13 or 14 has an error, or item 8
+Exit status: 1 when item 1, 2, 10, 11, 12, 13, 14 or 15 has an error, or item 8
 finds a missing <picture> file (report-only runs;
 --append fixes item 1 and exits 0), else 0. The catalog-check GitHub
 workflow runs the report on every push and pull request to main, so a
@@ -174,6 +182,7 @@ import write_sitemap
 import add_analytics
 import add_favicons
 import add_fonts
+import build_blog
 import categories
 import outfit_generator
 import sellers
@@ -626,6 +635,7 @@ def main():
     favicon_issues += [(path, "icon file missing") for path in add_favicons.missing_icons()]
     font_issues = add_fonts.audit()
     font_issues += [(path, "font file missing") for path in add_fonts.missing_fonts()]
+    blog_issues = build_blog.audit()
 
     schema_issues = []
     for p in products:
@@ -801,19 +811,27 @@ def main():
         print("   Run: python add_fonts.py")
     print()
 
+    print(f"15. Blog posts with errors or out-of-date pages: {len(blog_issues)}")
+    for where, why in blog_issues:
+        print(f"   ERROR {where}: {why}")
+    if blog_issues:
+        print("   Fix the post's source in blog-src/, then run: py -3 build_blog.py")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not listing_issues
             and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
             and not webp_issues and not favicon_issues and not category_errors
             and not generator_errors and not seller_errors and not remote_image_errors
-            and not font_issues):
+            and not font_issues and not blog_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
               "analytics tracking and site footer, every <picture> WebP source loads, every "
               "page has a current favicon block and self-hosted fonts, every product has a "
               "products/ page tab, "
-              "generator.json covers every campaign, and every SHEIN product has a seller.")
+              "generator.json covers every campaign, every SHEIN product has a seller, "
+              "and every blog page is current with its source.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
@@ -835,9 +853,10 @@ def main():
         # Item 13 fails it when a gift guide image comes from another site
         # and its card isn't on GIFT_GUIDE_REMOTE_ALLOWLIST. Item 14 fails it
         # when a page loads fonts from Google or a font file is missing.
+        # Item 15 fails it on any blog error or stale blog page.
         if (missing_from_catalog or orphaned_records or listing_issues or category_errors
                 or generator_errors or seller_errors or missing_picture_files
-                or remote_image_errors or font_issues):
+                or remote_image_errors or font_issues or blog_issues):
             sys.exit(1)
         return
 
