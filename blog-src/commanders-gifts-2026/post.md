@@ -1,6 +1,6 @@
 ---
 title: 5 Best Gifts for Washington Commanders Fans (2026)
-description: Gifts for Commanders fans: a Jayden Daniels jersey, Funko Pop, coffee mug, desk pad and coasters, with who each one suits.
+description: Gifts for Commanders fans: a Jayden Daniels jersey, Funko Pop, tumbler, desk pad and coasters, with who each one suits.
 date: 2026-10-29
 updated: 2026-10-29
 category: Gift guides
