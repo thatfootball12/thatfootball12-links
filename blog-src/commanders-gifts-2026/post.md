@@ -7,7 +7,7 @@ category: Gift guides
 search_phrase: gifts for Washington Commanders fans
 hero: jersey.jpg
 hero_alt: Burgundy Jayden Daniels Washington Commanders Pro Line jersey
-draft: true
+draft: false
 related:
   - /gift-guide/
   - /outfits/gameday/
