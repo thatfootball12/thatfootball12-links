@@ -38,8 +38,11 @@ Per pin:
 
 Schedule: across week_start's Mon-Sun, outfit pins 2 a day (gameday
 first, then file order), product pins each onto the day with the fewest
-pins so far, every day's pins spread evenly between 08:00 and 21:00
-Atlantic time, written in UTC (Pinterest reads Publish date as UTC).
+pins so far, every day's pins spread evenly between 10:00 and 23:00
+Atlantic time (9 am-10 pm Eastern), written in UTC (Pinterest reads
+Publish date as UTC). DAY_END_H stays below 24 so no slot lands on the
+next day's 00:00. Pins scheduled by hand or by any other script
+(gift guide, holiday) use the same window.
 
 Validation runs before anything is written; on any problem the script
 lists them all and writes no CSV: Link and Media URL must return 200 on
@@ -84,7 +87,7 @@ MAX_ROWS = 200
 MAX_TITLE = 100
 MAX_DESC = 500
 OUTFITS_PER_DAY = 2
-DAY_START_H, DAY_END_H = 8, 21      # Atlantic time
+DAY_START_H, DAY_END_H = 10, 23     # Atlantic time; end < 24 (no next-day 00:00)
 SLOT_MIN = 15                        # publish times rounded to this
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; TF12-PinCSV/1.0)"}
 
