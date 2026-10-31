@@ -27,7 +27,10 @@ Inputs (all in pinterest/):
 Per pin:
     Link        the outfit or product page on the live site.
     Media URL   outfit-pin.jpg / product-pin.jpg (falls back to
-                outfit-preview.jpg / the product photo, with a warning).
+                outfit-preview.jpg with a warning, or the product photo
+                for products make_product_pin.py --pick didn't choose).
+                A batch where no SHEIN product pin has a product-pin.jpg
+                is an error: make_product_pin.py wasn't run.
     Description copy + disclosure [+ AI line] + hashtags.
     Board       "Board/Section". A section whose own name contains "/"
                 can't be expressed that way, so those pins get the board
@@ -165,10 +168,12 @@ def resolve(pin, products, by_id, settings, problems, warnings):
             pin["media"] = SITE + img
         elif os.path.isfile(os.path.join(REPO, rel, "product-pin.jpg")):
             pin["media"] = page_url(rel) + "product-pin.jpg"
+            pin["price_pin"] = True
         else:
+            # Only make_product_pin.py --pick's choices get a price pin;
+            # main() fails the batch if none of its pins has one.
             pin["media"] = SITE + rec["image"]
-            if rec.get("retailer") == "SHEIN":
-                warnings.append(f"{label}: no product-pin.jpg, using the product photo")
+        pin["shein_page"] = rec.get("retailer") == "SHEIN" and not gift_guide.listing_only(rec)
         pin["link"] = page_url(rel)
         pin["ai"] = rec.get("retailer") in settings.get("ai_image_retailers", [])
         pin["retailers"] = {rec.get("retailer")}
@@ -433,6 +438,11 @@ def main():
             continue
         if resolve(p, products, by_id, settings, problems, warnings):
             pins.append(p)
+    shein = [p for p in pins if p["type"] == "product" and p["shein_page"]]
+    if shein and not any(p.get("price_pin") for p in shein):
+        problems.append(f"none of the {len(shein)} SHEIN product pins has a product-pin.jpg: "
+                        f"run py -3 make_product_pin.py --pick 20 --batch {args.batch} "
+                        f"(and push the images) first")
     if not pins:
         problems.append("no usable pins")
     else:
