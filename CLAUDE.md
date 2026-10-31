@@ -281,8 +281,13 @@ SHEIN-only wording when every item in the pin is SHEIN, else the
 SHEIN + Amazon one) (+ "Image created with AI." on every outfit pin and
 Amazon product pin) + the hashtags. Pins are scheduled across the batch week (Mon–Sun), 2 outfit
 pins a day with gameday first, product pins filling the days evenly,
-08:00–21:00 Atlantic, written as UTC (Pinterest reads Publish date as
-UTC). It validates everything first and writes no CSV if anything
+10:00–23:00 Atlantic (9 am–10 pm Eastern; `DAY_START_H, DAY_END_H` in
+`make_pinterest_csv.py`, with the end hour kept below 24 so nothing
+lands on the next day's 00:00), written as UTC (Pinterest reads Publish
+date as UTC). **Every pin follows that window**, including gift guide
+and holiday pins scheduled by hand or by any other script: nothing
+before 10:00 or after 23:00 Atlantic (the overnight Oct 20 gift pins
+were hand-scheduled). It validates everything first and writes no CSV if anything
 fails: every Link and Media URL must return 200 on the live site (so
 the pin images must be pushed first), titles ≤ 100 and full
 descriptions ≤ 500 characters, no duplicates, no past publish times,
