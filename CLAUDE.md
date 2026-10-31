@@ -239,10 +239,16 @@ the `shrink` path.
 Commit the `outfit-pin.jpg` files with the batch: their URLs on the
 live site are the public Media URLs for the Pinterest bulk upload.
 
-Once the batch is wired up (product photos in place and `products.json`
-records written, since the price comes from there), run
+**Required for every batch:** once the batch is wired up (product
+photos in place and `products.json` records written, since the price
+comes from there), run
 `py -3 make_product_pin.py --pick 20 --batch <date>` (e.g.
-`--batch oct-12`, which also covers `-oct-12-2`, `-oct-12-3`, ...). It
+`--batch oct-12`, which also covers `-oct-12-2`, `-oct-12-3`, ...), and
+commit the images with the batch, before any pin CSV is built. Skipping
+it means every product pin goes out as the plain photo with no price
+tag (the Nov 2 batch did, and had to be fixed after the fact), so
+`make_pinterest_csv.py` refuses a batch where none of the SHEIN
+product pins has a `product-pin.jpg`. It
 picks the batch's 20 best SHEIN deals (any with `discount_percent` of
 20 or more first, biggest discount first, then the rest cheapest first;
 smaller discounts don't count), prints the list, and writes the
@@ -254,15 +260,17 @@ are skipped. The product's own photo is never modified. Add `--dry-run`
 to see the list without writing anything. `--no-inflated` leaves out
 records with `inflated_original: true`, `--max-price X` anything over
 $X, and `--skip <id>` (repeatable) one record; records with
-`reserve: true` never get a pin. Since the Oct 26 batch, new records
+`reserve: true` never get a pin, and `--pick` leaves out anything
+confirmed dead or sold out in `data/dead_links.json`. Oct 26 and
+Nov 2 used `--no-inflated`. Since the Oct 26 batch, new records
 also carry `week` (the pin week, e.g. `oct-26`), `inflated_original`
 and `goods_id` (SHEIN's product id, one per colour). Check a new batch's
 goods ids against `products.json` to find repeats. Commit the `product-pin.jpg`
 files with the batch: their URLs on the live site are the public Media
 URLs for the Pinterest bulk upload.
 
-Once the batch (with its `outfit-pin.jpg` and `product-pin.jpg` files)
-is merged and live, write the pin copy into
+Once the batch (with its `outfit-pin.jpg` and `product-pin.jpg` files,
+both required) is merged and live, write the pin copy into
 `pinterest/pins_<date>.json` and run
 `py -3 make_pinterest_csv.py <date>` (e.g. `oct-19`). It builds
 `pinterest/pinterest_bulk_<date>.csv` in Pinterest's bulk-upload
