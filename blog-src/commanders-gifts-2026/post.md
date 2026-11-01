@@ -17,7 +17,7 @@ related:
 
 *Updated October 29, 2026*
 
-Shopping for a Commanders fan is harder than it looks. He probably owns a jersey or a hat already, and a lot of gift lists are just more team gear in different colours. These five picks mix the obvious (a jersey) with things he’ll use every day (a tumbler, a desk pad, coasters) and one for the shelf. Each comes with a note on who it suits and the details worth knowing before you order. We checked every listing on amazon.ca on October 29, 2026, so the sizes and specs below match what was there then.
+Shopping for a Commanders fan isn’t always easy, especially when he has all the apparel and novelties. What I set out to do today was to provide you with five picks, that mix the obvious (a jersey) with things he’ll use every day. Each comes with a description for who it’s best suited for and the details worth knowing before you order. We checked listings on Amazon, so the sizes and specs below match what was there then.
 
 **At a glance:**
 
