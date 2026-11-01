@@ -92,6 +92,18 @@ together. Currently sold out (remove from both `data/dead_links.json` and
 `hidden` when it's back): `trending-products/trending-products-nov-2-2/yellow-wash-jeans`,
 `trending-products/trending-products-oct-26-2/lace-up-boots`.
 
+**Amazon links must carry one of Jesse's tags.** amazon.ca:
+`thatfootballg-ca-20` (use this one for new links), `thatfootballg-us-20`
+or `thatfootballg-20`; amazon.com: `thatfootbal01-20`. Any other tag
+(41 links had `thatfootbal05-20` until Nov 2026), or none, earns
+nothing. Write new links as `https://www.amazon.ca/dp/<ASIN>?tag=thatfootballg-ca-20`.
+`sync_catalog.py` report item 16 fails (exit 1, so CI fails) on any
+Amazon link in a tracked page or data file with another tag or none
+(`VALID_AMAZON_TAGS`). It reads amzn.to links through
+`data/amazon_short_links.json`, resolving and adding any new one (one
+redirect hop, Amazon itself is never fetched), so commit that file when
+it changes.
+
 **New SHEIN product? Set its seller during sourcing.** Every SHEIN
 record in `products.json` carries `seller`: `"shein"` (sold by SHEIN
 itself), `"marketplace"` (a third-party store on SHEIN's marketplace),
