@@ -117,8 +117,13 @@ Report (always runs):
      published post with noindex, or a draft in sitemap.xml; and a post
      without the affiliate disclosure. Run build_blog.py to fix whatever
      isn't a source error.
+ 16. Amazon tags: an error for every Amazon link in a tracked page or
+     data file whose tag isn't in VALID_AMAZON_TAGS for its store (or
+     that has no tag). amzn.to links are read through
+     data/amazon_short_links.json; a short link not in it is resolved one
+     hop (amzn.to only) and added, and one that won't resolve is an error.
 
-Exit status: 1 when item 1, 2, 10, 11, 12, 13, 14 or 15 has an error, or item 8
+Exit status: 1 when item 1, 2, 10, 11, 12, 13, 14, 15 or 16 has an error, or item 8
 finds a missing <picture> file (report-only runs;
 --append fixes item 1 and exits 0), else 0. The catalog-check GitHub
 workflow runs the report on every push and pull request to main, so a
@@ -169,6 +174,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 import time
 import urllib.error
@@ -212,6 +218,21 @@ WEBP_PICTURE_RE = re.compile(r'<source type="image/webp" srcset="([^"]*)">\s*<im
 GIFT_GUIDE_REMOTE_ALLOWLIST = set()
 GG_CARD_RE = re.compile(r'<article class="card-tile" data-id="([^"]+)".*?</article>', re.DOTALL)
 GG_IMAGE_URL_RE = re.compile(r'<(?:img|source)\b[^>]*?\s(?:src|srcset|data-full)="(https?://[^"]+)"')
+
+# Amazon tracking IDs that pay Jesse, per store (item 16). Any other tag
+# (thatfootbal05-20 was on 41 links until Nov 2026), or none, earns nothing.
+VALID_AMAZON_TAGS = {
+    "amazon.ca": {"thatfootballg-ca-20", "thatfootballg-us-20", "thatfootballg-20"},
+    "amazon.com": {"thatfootbal01-20"},
+}
+# amzn.to short link -> the amazon URL it redirects to, so item 16 can read
+# a short link's tag without the network. New short links are resolved one
+# hop (amzn.to only, Amazon itself is never fetched) and added here.
+AMAZON_SHORT_LINKS = os.path.join(REPO, "data", "amazon_short_links.json")
+AMAZON_URL_RE = re.compile(r'''https?://(?:www\.)?(?:amzn\.to|amazon\.(?:ca|com))/[^\s"'<>)\],\\]*''', re.I)
+AMAZON_SCAN_EXTS = (".html", ".json", ".md", ".csv", ".xml")
+# A documented template such as amazon.ca/dp/<ASIN>?tag=... (CLAUDE.md) isn't a link.
+AMAZON_TEMPLATE_RE = re.compile(r"<[A-Z][A-Z_]*>")
 
 
 def find_detail_pages():
@@ -512,6 +533,83 @@ def gift_guide_remote_images():
     return errors, warnings
 
 
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, *args, **kwargs):
+        return None
+
+
+def resolve_short_link(url):
+    """The Location an amzn.to link redirects to (one hop), or None."""
+    opener = urllib.request.build_opener(_NoRedirect)
+    req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "Mozilla/5.0"})
+    for _ in range(3):
+        try:
+            opener.open(req, timeout=15)
+            return None
+        except urllib.error.HTTPError as e:
+            if e.code in (301, 302, 303, 307, 308):
+                return e.headers.get("Location")
+            return None
+        except Exception:
+            time.sleep(2)
+    return None
+
+
+def amazon_tag_issues():
+    """Errors for item 16: every Amazon link in a tracked page or data file
+    (direct, or amzn.to resolved through AMAZON_SHORT_LINKS) must carry a
+    tag from VALID_AMAZON_TAGS for its store. Short links missing from the
+    cache are resolved and written to it."""
+    try:
+        files = subprocess.run(["git", "ls-files"], cwd=REPO, capture_output=True,
+                               text=True, check=True).stdout.splitlines()
+    except (OSError, subprocess.CalledProcessError):
+        files = [os.path.relpath(os.path.join(d, f), REPO).replace(os.sep, "/")
+                 for d, _, fs in os.walk(REPO) if ".git" not in d for f in fs]
+    cache_rel = os.path.relpath(AMAZON_SHORT_LINKS, REPO).replace(os.sep, "/")
+    try:
+        with open(AMAZON_SHORT_LINKS, encoding="utf-8") as f:
+            cache = json.load(f)
+    except (OSError, ValueError):
+        cache = {}
+    errors, resolved_new = [], False
+    for rel in sorted(files):
+        if not rel.endswith(AMAZON_SCAN_EXTS) or rel == cache_rel:
+            continue
+        try:
+            with open(os.path.join(REPO, rel), encoding="utf-8") as f:
+                content = f.read()
+        except (OSError, UnicodeDecodeError):
+            continue
+        urls = {m.group(0) for m in AMAZON_URL_RE.finditer(content)
+                if not AMAZON_TEMPLATE_RE.match(content, m.end())}
+        for url in sorted(urls):
+            url = html.unescape(url).rstrip(".;")
+            final = url
+            if "amzn.to" in url.lower():
+                final = cache.get(url)
+                if final is None:
+                    final = resolve_short_link(url)
+                    if final is None:
+                        errors.append(f"{rel}: {url} (couldn't resolve; check it by hand)")
+                        continue
+                    cache[url] = final
+                    resolved_new = True
+            parsed = urllib.parse.urlparse(final)
+            store = parsed.netloc.lower().removeprefix("www.")
+            tag = urllib.parse.parse_qs(parsed.query).get("tag", [None])[0]
+            if store not in VALID_AMAZON_TAGS:
+                errors.append(f"{rel}: {url} -> {store} (not amazon.ca or amazon.com)")
+            elif tag not in VALID_AMAZON_TAGS[store]:
+                shown = f" -> {final}" if final != url else ""
+                errors.append(f"{rel}: {url}{shown} (tag {tag or 'missing'})")
+    if resolved_new:
+        with open(AMAZON_SHORT_LINKS, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(dict(sorted(cache.items())), f, indent=1)
+            f.write("\n")
+    return errors
+
+
 def webp_source_issues():
     """Every <source type="image/webp"> on a page must resolve to a file. A
     browser that supports WebP uses the <source> and never falls back to the
@@ -636,6 +734,7 @@ def main():
     font_issues = add_fonts.audit()
     font_issues += [(path, "font file missing") for path in add_fonts.missing_fonts()]
     blog_issues = build_blog.audit()
+    amazon_tag_errors = amazon_tag_issues()
 
     schema_issues = []
     for p in products:
@@ -818,12 +917,20 @@ def main():
         print("   Fix the post's source in blog-src/, then run: py -3 build_blog.py")
     print()
 
+    print(f"16. Amazon links with a tag that doesn't pay ThatFootball12: {len(amazon_tag_errors)}")
+    for e in amazon_tag_errors:
+        print(f"   ERROR {e}")
+    if amazon_tag_errors:
+        print("   Replace it with https://www.amazon.ca/dp/<ASIN>?tag=thatfootballg-ca-20 "
+              "(valid tags: VALID_AMAZON_TAGS).")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not listing_issues
             and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
             and not webp_issues and not favicon_issues and not category_errors
             and not generator_errors and not seller_errors and not remote_image_errors
-            and not font_issues and not blog_issues):
+            and not font_issues and not blog_issues and not amazon_tag_errors):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
@@ -831,7 +938,8 @@ def main():
               "page has a current favicon block and self-hosted fonts, every product has a "
               "products/ page tab, "
               "generator.json covers every campaign, every SHEIN product has a seller, "
-              "and every blog page is current with its source.")
+              "every blog page is current with its source, "
+              "and every Amazon link carries a valid tag.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
@@ -853,10 +961,11 @@ def main():
         # Item 13 fails it when a gift guide image comes from another site
         # and its card isn't on GIFT_GUIDE_REMOTE_ALLOWLIST. Item 14 fails it
         # when a page loads fonts from Google or a font file is missing.
-        # Item 15 fails it on any blog error or stale blog page.
+        # Item 15 fails it on any blog error or stale blog page, item 16 on
+        # any Amazon link whose tag isn't in VALID_AMAZON_TAGS.
         if (missing_from_catalog or orphaned_records or listing_issues or category_errors
                 or generator_errors or seller_errors or missing_picture_files
-                or remote_image_errors or font_issues or blog_issues):
+                or remote_image_errors or font_issues or blog_issues or amazon_tag_errors):
             sys.exit(1)
         return
 
