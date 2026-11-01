@@ -6,13 +6,13 @@ Files: pinterest/pinterest_bulk_nov-2.csv
 
 | Day | Outfit | Product | Total | Times |
 |---|---|---|---|---|
-| Mon Nov 2 | 2 | 10 | 12 | 08:30 P, 09:30 P, 10:45 P, 11:45 O, 13:00 P, 14:00 P, 15:00 P, 16:00 P, 17:15 P, 18:15 O, 19:30 P, 20:30 P |
-| Tue Nov 3 | 2 | 10 | 12 | 08:30 P, 09:30 P, 10:45 P, 11:45 O, 13:00 P, 14:00 P, 15:00 P, 16:00 P, 17:15 P, 18:15 O, 19:30 P, 20:30 P |
-| Wed Nov 4 | 2 | 10 | 12 | 08:30 P, 09:30 P, 10:45 P, 11:45 O, 13:00 P, 14:00 P, 15:00 P, 16:00 P, 17:15 P, 18:15 O, 19:30 P, 20:30 P |
-| Thu Nov 5 | 2 | 10 | 12 | 08:30 P, 09:30 P, 10:45 P, 11:45 O, 13:00 P, 14:00 P, 15:00 P, 16:00 P, 17:15 P, 18:15 O, 19:30 P, 20:30 P |
-| Fri Nov 6 | 2 | 10 | 12 | 08:30 P, 09:30 P, 10:45 P, 11:45 O, 13:00 P, 14:00 P, 15:00 P, 16:00 P, 17:15 P, 18:15 O, 19:30 P, 20:30 P |
-| Sat Nov 7 | 2 | 9 | 11 | 08:30 P, 09:45 P, 11:00 O, 12:15 P, 13:15 P, 14:30 P, 15:45 P, 16:45 P, 18:00 O, 19:15 P, 20:30 P |
-| Sun Nov 8 | 0 | 11 | 11 | 08:30 P, 09:45 P, 11:00 P, 12:15 P, 13:15 P, 14:30 P, 15:45 P, 16:45 P, 18:00 P, 19:15 P, 20:30 P |
+| Mon Nov 2 | 2 | 10 | 12 | 10:30 P, 11:30 P, 12:45 P, 13:45 O, 15:00 P, 16:00 P, 17:00 P, 18:00 P, 19:15 P, 20:15 O, 21:30 P, 22:30 P |
+| Tue Nov 3 | 2 | 10 | 12 | 10:30 P, 11:30 P, 12:45 P, 13:45 O, 15:00 P, 16:00 P, 17:00 P, 18:00 P, 19:15 P, 20:15 O, 21:30 P, 22:30 P |
+| Wed Nov 4 | 2 | 10 | 12 | 10:30 P, 11:30 P, 12:45 P, 13:45 O, 15:00 P, 16:00 P, 17:00 P, 18:00 P, 19:15 P, 20:15 O, 21:30 P, 22:30 P |
+| Thu Nov 5 | 2 | 10 | 12 | 10:30 P, 11:30 P, 12:45 P, 13:45 O, 15:00 P, 16:00 P, 17:00 P, 18:00 P, 19:15 P, 20:15 O, 21:30 P, 22:30 P |
+| Fri Nov 6 | 2 | 10 | 12 | 10:30 P, 11:30 P, 12:45 P, 13:45 O, 15:00 P, 16:00 P, 17:00 P, 18:00 P, 19:15 P, 20:15 O, 21:30 P, 22:30 P |
+| Sat Nov 7 | 2 | 9 | 11 | 10:30 P, 11:45 P, 13:00 O, 14:15 P, 15:15 P, 16:30 P, 17:45 P, 18:45 P, 20:00 O, 21:15 P, 22:30 P |
+| Sun Nov 8 | 0 | 11 | 11 | 10:30 P, 11:45 P, 13:00 P, 14:15 P, 15:15 P, 16:30 P, 17:45 P, 18:45 P, 20:00 P, 21:15 P, 22:30 P |
 | **Total** | 12 | 70 | 82 | |
 
 ## Manual follow-ups
@@ -20,18 +20,18 @@ Files: pinterest/pinterest_bulk_nov-2.csv
 ### AI-modified label
 The CSV has no column for it. Add the label to each of these pins after upload (12):
 
-- Mon 11:45 — Teal, Black and Orange Hockey Night Fit 🏒
-- Mon 18:15 — Black, White and Gold Game Day Fit 🏈
-- Tue 11:45 — The Red Flannel Fall Fit Every Guy Should Own 🍂
-- Tue 18:15 — Relaxed Weekend Fit in Warm Fall Neutrals ☕
-- Wed 11:45 — Baggy Streetwear Fit With a Statement Back Print 🖤
-- Wed 18:15 — Clean Business Casual Fit for Monday Morning 💼
-- Thu 11:45 — Quiet Old Money Fit for Fall, No Logos Needed 🍂
-- Thu 18:15 — The Navy Turtleneck Date Night Fit That Always Works 🍷
-- Fri 11:45 — All-Black Night Out Fit With One Silver Detail 🌙
-- Fri 18:15 — The Navy Everyday Fit That Goes With Everything 🧢
-- Sat 11:00 — Fall Wedding Guest Fit That Isn't Another Navy Suit 🤵
-- Sat 18:00 — The Black Suit Gala Fit With a Skinny Tie 🖤
+- Mon 13:45 — Teal, Black and Orange Hockey Night Fit 🏒
+- Mon 20:15 — Black, White and Gold Game Day Fit 🏈
+- Tue 13:45 — The Red Flannel Fall Fit Every Guy Should Own 🍂
+- Tue 20:15 — Relaxed Weekend Fit in Warm Fall Neutrals ☕
+- Wed 13:45 — Baggy Streetwear Fit With a Statement Back Print 🖤
+- Wed 20:15 — Clean Business Casual Fit for Monday Morning 💼
+- Thu 13:45 — Quiet Old Money Fit for Fall, No Logos Needed 🍂
+- Thu 20:15 — The Navy Turtleneck Date Night Fit That Always Works 🍷
+- Fri 13:45 — All-Black Night Out Fit With One Silver Detail 🌙
+- Fri 20:15 — The Navy Everyday Fit That Goes With Everything 🧢
+- Sat 13:00 — Fall Wedding Guest Fit That Isn't Another Navy Suit 🤵
+- Sat 20:00 — The Black Suit Gala Fit With a Skinny Tie 🖤
 
 ### Alt text
 The CSV has no column for it. Paste after upload:
@@ -118,77 +118,4 @@ The CSV has no column for it. Paste after upload:
 - ROMWE Wide Leg Sweatpants at 20% Off 🖤: Men's black wide leg drawstring sweatpants with pockets
 - A Drop Shoulder Shacket Under $19, 25% Off 🍂: Men's beige grey loose drop shoulder shirt with curved panel design
 - A Sherpa-Lined Zip Jacket for Under $15 💜: Men's purple sherpa-lined zip-up jacket
-
-## Warnings
-
-- product budget/budget-outfit-nov-2/pants: no product-pin.jpg, using the product photo
-- product budget/budget-outfit-nov-2/sweatshirt: no product-pin.jpg, using the product photo
-- product business-casual/business-casual-nov-2/loafers: no product-pin.jpg, using the product photo
-- product business-casual/business-casual-nov-2/pants: no product-pin.jpg, using the product photo
-- product casual/casual-outfit-nov-2-2/cap: no product-pin.jpg, using the product photo
-- product casual/casual-outfit-nov-2-2/pants: no product-pin.jpg, using the product photo
-- product casual/casual-outfit-nov-2-2/sneakers: no product-pin.jpg, using the product photo
-- product casual/casual-outfit-nov-2/flannel: no product-pin.jpg, using the product photo
-- product casual/casual-outfit-nov-2/jeans: no product-pin.jpg, using the product photo
-- product casual/casual-outfit-nov-2/tee: no product-pin.jpg, using the product photo
-- product date-night/date-night-nov-2/chelsea-boots: no product-pin.jpg, using the product photo
-- product date-night/date-night-nov-2/pants: no product-pin.jpg, using the product photo
-- product date-night/date-night-nov-2/turtleneck: no product-pin.jpg, using the product photo
-- product date-night/date-night-nov-2/watch: no product-pin.jpg, using the product photo
-- product formal/formal-outfit-nov-2/oxfords: no product-pin.jpg, using the product photo
-- product formal/formal-outfit-nov-2/shirt: no product-pin.jpg, using the product photo
-- product formal/formal-outfit-nov-2/suit: no product-pin.jpg, using the product photo
-- product formal/formal-outfit-nov-2/tie: no product-pin.jpg, using the product photo
-- product gameday/gameday-nov-2-2/cargo-pants: no product-pin.jpg, using the product photo
-- product gameday/gameday-nov-2-2/sneakers: no product-pin.jpg, using the product photo
-- product gameday/gameday-nov-2-2/watch: no product-pin.jpg, using the product photo
-- product gameday/gameday-nov-2/beanie: no product-pin.jpg, using the product photo
-- product gameday/gameday-nov-2/pants: no product-pin.jpg, using the product photo
-- product gameday/gameday-nov-2/sneakers: no product-pin.jpg, using the product photo
-- product gameday/gameday-nov-2/zip-hoodie: no product-pin.jpg, using the product photo
-- product night-out/night-out-nov-2/jeans: no product-pin.jpg, using the product photo
-- product night-out/night-out-nov-2/necklace: no product-pin.jpg, using the product photo
-- product old-money/old-money-nov-2/loafers: no product-pin.jpg, using the product photo
-- product old-money/old-money-nov-2/overcoat: no product-pin.jpg, using the product photo
-- product old-money/old-money-nov-2/pants: no product-pin.jpg, using the product photo
-- product streetwear/streetwear-outfit-nov-2/cargo-pants: no product-pin.jpg, using the product photo
-- product streetwear/streetwear-outfit-nov-2/sneakers: no product-pin.jpg, using the product photo
-- product streetwear/streetwear-outfit-nov-2/sweatshirt: no product-pin.jpg, using the product photo
-- product wedding/wedding-outfit-nov-2/blazer: no product-pin.jpg, using the product photo
-- product wedding/wedding-outfit-nov-2/dress-shoes: no product-pin.jpg, using the product photo
-- product wedding/wedding-outfit-nov-2/shirt: no product-pin.jpg, using the product photo
-- product gift-guides/gift-guide-nov-2/beanie: no product-pin.jpg, using the product photo
-- product gift-guides/gift-guide-nov-2/belt: no product-pin.jpg, using the product photo
-- product gift-guides/gift-guide-nov-2/cycling-gloves: no product-pin.jpg, using the product photo
-- product gift-guides/gift-guide-nov-2/dog-tag-necklace: no product-pin.jpg, using the product photo
-- product gift-guides/gift-guide-nov-2/glasses: no product-pin.jpg, using the product photo
-- product gift-guides/gift-guide-nov-2/stacked-necklace: no product-pin.jpg, using the product photo
-- product gift-guides/gift-guide-nov-2/watch-set: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-2/brown-pants: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-2/corduroy-pants: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-2/distressed-jeans: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-2/flare-jeans: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-2/khaki-pants: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-2/oversized-sweatpants: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-2/striped-joggers: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-2/wide-leg-sweatpants: no product-pin.jpg, using the product photo
-- product trending-products/reserve-nov-2/corduroy-pants: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-3/black-polo: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-3/corduroy-shacket: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-3/half-zip-polo: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-3/knit-shirt: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-3/oxford-shirt: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-3/shacket: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-4/black-blazer: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2-4/suit-vest: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/cable-knit-sweater: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/cardigan: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/hoodie: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/plaid-shirt: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/sherpa-jacket: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/striped-sweater: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/sweatshirt: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/v-neck-sweater: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/windbreaker-hoodie: no product-pin.jpg, using the product photo
-- product trending-products/trending-products-nov-2/zip-jacket: no product-pin.jpg, using the product photo
 

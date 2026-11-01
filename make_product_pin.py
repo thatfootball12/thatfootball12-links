@@ -41,7 +41,9 @@ under 20% count for nothing. --no-inflated leaves out every product
 whose record has inflated_original (listed original more than 70% above
 the sale price), --max-price X leaves out anything priced over X, and
 --skip ID (repeatable) leaves out one products.json id.
-Products flagged reserve in products.json never get a pin.
+Products flagged reserve in products.json never get a pin, and --pick
+leaves out any product confirmed dead in data/dead_links.json (manual
+SOLD OUT entries included) and lists it.
 
 Seller (see sellers.py): a product whose seller is "marketplace" (a
 third-party store, not SHEIN) never gets a pin: named by folder it's an
@@ -60,6 +62,7 @@ import sys
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
+import check_affiliate_links
 import gift_guide
 import sellers
 
@@ -356,6 +359,11 @@ def main():
         for p in refused:
             print(f"refuse {p['id']}: {sellers.REFUSED} (left out of --pick)")
         ok = [p for p in ok if p not in refused]
+        dead_ids = check_affiliate_links.confirmed_ids()
+        dead = [p for p in ok if p["id"] in dead_ids]
+        for p in dead:
+            print(f"dead   {p['id']}: confirmed dead or sold out in data/dead_links.json (left out of --pick)")
+        ok = [p for p in ok if p not in dead]
         left_out = [p for p in ok if (args.no_inflated and p.get("inflated_original"))
                     or (args.max_price is not None and p["price"] > args.max_price)
                     or p["id"] in args.skip]
@@ -364,6 +372,8 @@ def main():
         note = f" ({len(left_out)} left out by --no-inflated/--max-price/--skip)" if left_out else ""
         if refused:
             note += f" ({len(refused)} marketplace refused)"
+        if dead:
+            note += f" ({len(dead)} dead or sold out)"
         print(f"{args.batch}: {len(pool)} products, {len(ok)} eligible SHEIN{note}, picked {len(chosen)}\n")
         print(f"  {'#':>2}  {'price':>7}  {'disc':>4}  {'tag':<9}  product")
         for i, p in enumerate(chosen, 1):
