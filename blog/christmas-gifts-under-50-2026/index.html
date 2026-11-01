@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- analytics:start -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+</script>
+<!-- Google tag (gtag.js): loaded only after the visitor accepts analytics cookies. See add_analytics.py. -->
+<script>
+(function () {
+  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 2, MAX_AGE = 365 * 864e5;
+  var PRIVACY = '../../privacy/', LABELS = { granted: 'Accepted', denied: 'Declined' };
+  var loaded = false, bar = null;
+  function stored() {
+    try {
+      var c = JSON.parse(localStorage.getItem(KEY));
+      if (c && c.v === VERSION && Date.now() - c.ts < MAX_AGE && LABELS[c.choice]) return c.choice;
+    } catch (e) {}
+    return null;
+  }
+  function store(choice) {
+    try { localStorage.setItem(KEY, JSON.stringify({ v: VERSION, choice: choice, ts: Date.now() })); } catch (e) {}
+  }
+  function load() {
+    if (loaded) return;
+    loaded = true;
+    dataLayer.length = 0;
+    gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', ID);
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+    document.head.appendChild(s);
+  }
+  function clearCookies() {
+    var host = location.hostname;
+    document.cookie.split(';').forEach(function (c) {
+      var name = c.split('=')[0].trim();
+      if (!/^_ga(_|$)/.test(name)) return;
+      ['', host, '.' + host].forEach(function (d) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : '');
+      });
+    });
+  }
+  // Affiliate banners (the homepage's Moosehill/Awin one): an empty
+  // [data-tf12-awin] box gets its image and link only after Accept.
+  function banners(on) {
+    var els = document.querySelectorAll('[data-tf12-awin]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      el.innerHTML = '';
+      el.hidden = !on;
+      if (!on) continue;
+      var a = document.createElement('a'), img = document.createElement('img');
+      a.className = 'affiliate-banner';
+      a.href = el.getAttribute('data-tf12-awin-href');
+      a.target = '_blank';
+      a.rel = 'nofollow sponsored noopener';
+      img.alt = el.getAttribute('data-tf12-awin-alt') || '';
+      img.width = 300;
+      img.height = 250;
+      img.src = el.getAttribute('data-tf12-awin');
+      a.appendChild(img);
+      el.appendChild(a);
+    }
+  }
+  function showStatus() {
+    var choice = stored(), els = document.querySelectorAll('[data-tf12-consent-status]');
+    for (var i = 0; i < els.length; i++) els[i].textContent = LABELS[choice] || 'Not chosen yet';
+    if (bar) bar.querySelector('.tf12-consent-now').hidden = !choice;
+  }
+  function hide() {
+    if (!bar) return;
+    bar.hidden = true;
+    document.body.style.paddingBottom = '';
+  }
+  function show(focus) {
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'tf12-consent';
+      bar.setAttribute('role', 'region');
+      bar.setAttribute('aria-label', 'Cookie choice');
+      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out, and show a Moosehill banner from Awin on the homepage (Awin sets its own cookie)? Neither happens unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
+        '<p class="tf12-consent-now">Current choice: <b data-tf12-consent-status></b></p>' +
+        '<div class="tf12-consent-btns"><button type="button" data-tf12-choice="denied">Decline</button>' +
+        '<button type="button" data-tf12-choice="granted">Accept</button></div>';
+      document.body.appendChild(bar);
+    }
+    bar.hidden = false;
+    showStatus();
+    pad();
+    if (focus) bar.querySelector('button').focus();
+  }
+  function pad() {
+    if (bar && !bar.hidden) document.body.style.paddingBottom = (bar.offsetHeight + 24) + 'px';
+  }
+  window.addEventListener('resize', pad);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(pad);
+  function choose(choice) {
+    store(choice);
+    hide();
+    showStatus();
+    banners(choice === 'granted');
+    if (choice === 'granted') return load();
+    if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
+    clearCookies();
+    if (loaded) location.reload();
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-tf12-choice], [data-tf12-consent-open]') : null;
+    if (!t) return;
+    if (t.hasAttribute('data-tf12-consent-open')) show(true);
+    else choose(t.getAttribute('data-tf12-choice'));
+  });
+  var initial = stored();
+  if (initial === 'granted') load();
+  function ready() {
+    showStatus();
+    if (initial === 'granted') banners(true);
+    if (!initial) show(false);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
+  else ready();
+})();
+</script>
+<style>
+  .tf12-consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:2147483000;max-width:560px;margin:0 auto;padding:14px 16px;background:#18140F;color:#F3EFE6;border:1px solid #2A2620;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.55);font:13px/1.5 'Poppins',system-ui,sans-serif;text-align:left;}
+  .tf12-consent[hidden],.tf12-consent [hidden]{display:none;}
+  .tf12-consent p{margin:0 0 12px;font-size:13px;line-height:1.5;color:#F3EFE6;}
+  .tf12-consent a{color:#D4A017;}
+  .tf12-consent .tf12-consent-now{color:#B8B2A4;}
+  .tf12-consent-btns{display:flex;gap:10px;}
+  .tf12-consent-btns button{flex:1 1 0;min-height:44px;padding:10px 12px;border:1px solid #F3EFE6;border-radius:8px;background:transparent;color:#F3EFE6;font:600 14px/1 'Oswald',system-ui,sans-serif;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+  .tf12-consent-btns button:hover,.tf12-consent-btns button:focus-visible{background:#F3EFE6;color:#0D0D0D;}
+  body{flex-wrap:wrap;align-content:flex-start;}
+  .tf12-foot{flex:0 0 100%;margin-top:32px;text-align:center;font:11px/1.6 'Poppins',system-ui,sans-serif;color:#B8B2A4;}
+  .tf12-foot p{max-width:520px;margin:0 auto 4px;font-size:11px;line-height:1.6;color:#B8B2A4;}
+  .tf12-foot .tf12-foot-links{font-size:13px;}
+  .tf12-foot a,.tf12-foot button{display:inline-block;padding:6px 4px;color:#B8B2A4;text-decoration:underline;text-underline-offset:2px;}
+  .tf12-foot button{background:none;border:0;font:inherit;cursor:pointer;}
+  .tf12-foot a:hover,.tf12-foot button:hover{color:#D4A017;}
+</style>
+<script>
+(function () {
+  var P = null, C = "blog/christmas-gifts-under-50-2026", SEL = "a.bp-shop, a.bp-aff";
+  var SKIP = /(^|\.)(tiktok\.com|instagram\.com|pin\.it|pinterest\.[a-z.]+)$/;
+  function retailer(host) {
+    if (/(^|\.)amazon\.|(^|\.)amzn\.to$/.test(host)) return 'Amazon';
+    if (/(^|\.)shein\.com$/.test(host)) return 'SHEIN';
+    if (/(^|\.)awin1\.com$|(^|\.)tidd\.ly$/.test(host)) return 'Awin';
+    if (/(^|\.)tee\.pub$|(^|\.)teepublic\.com$/.test(host)) return 'TeePublic';
+    if (/(^|\.)redbubble\.com$/.test(host)) return 'Redbubble';
+    return host;
+  }
+  function linkParams(a) {
+    var host = a.hostname.replace(/^www\./, '');
+    if (SKIP.test(host)) return null;
+    var t = a.querySelector('.link-text'), img = a.querySelector('img[alt]');
+    var name = (t ? t.textContent : img ? img.alt : a.textContent).replace(/\s+/g, ' ').trim();
+    var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return { retailer: retailer(host), product_id: C + '/' + slug, product_name: name };
+  }
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest(SEL) : null;
+    if (!a || !/^https?:$/.test(a.protocol)) return;
+    var params = P || linkParams(a);
+    if (!params) return;
+    try { gtag('event', 'affiliate_click', params); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>
+<!-- analytics:end -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christmas Gifts for Men Under $50 (2026) • ThatFootball12</title>
+<meta name="description" content="Christmas gifts for men under $50: merino socks, hand warmers, touchscreen gloves, slippers, an overcoat, cologne, a Carhartt cap and a wallet.">
+<link rel="canonical" href="https://thatfootball12.github.io/thatfootball12-links/blog/christmas-gifts-under-50-2026/">
+<meta property="og:title" content="Christmas Gifts for Men Under $50 (2026)">
+<meta property="og:description" content="Christmas gifts for men under $50: merino socks, hand warmers, touchscreen gloves, slippers, an overcoat, cologne, a Carhartt cap and a wallet.">
+<meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/blog/christmas-gifts-under-50-2026/img/socks-500.jpg">
+<meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/blog/christmas-gifts-under-50-2026/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ThatFootball12">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Christmas Gifts for Men Under $50 (2026)">
+<meta name="twitter:description" content="Christmas gifts for men under $50: merino socks, hand warmers, touchscreen gloves, slippers, an overcoat, cologne, a Carhartt cap and a wallet.">
+<meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/blog/christmas-gifts-under-50-2026/img/socks-500.jpg">
+<meta property="article:published_time" content="2026-11-01">
+<meta property="article:modified_time" content="2026-11-01">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "@id": "https://thatfootball12.github.io/thatfootball12-links/blog/christmas-gifts-under-50-2026/#article",
+   "headline": "Christmas Gifts for Men Under $50 (2026)",
+   "description": "Christmas gifts for men under $50: merino socks, hand warmers, touchscreen gloves, slippers, an overcoat, cologne, a Carhartt cap and a wallet.",
+   "author": {
+    "@type": "Person",
+    "name": "Jesse",
+    "url": "https://thatfootball12.github.io/thatfootball12-links/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ThatFootball12",
+    "url": "https://thatfootball12.github.io/thatfootball12-links/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://thatfootball12.github.io/thatfootball12-links/assets/icons/icon-192.png"
+    }
+   },
+   "datePublished": "2026-11-01",
+   "dateModified": "2026-11-01",
+   "image": "https://thatfootball12.github.io/thatfootball12-links/blog/christmas-gifts-under-50-2026/img/socks-500.jpg",
+   "articleSection": "Gift guides",
+   "mainEntityOfPage": "https://thatfootball12.github.io/thatfootball12-links/blog/christmas-gifts-under-50-2026/"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://thatfootball12.github.io/thatfootball12-links/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Blog",
+     "item": "https://thatfootball12.github.io/thatfootball12-links/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Christmas Gifts for Men Under $50 (2026)"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://thatfootball12.github.io/thatfootball12-links/blog/christmas-gifts-under-50-2026/#faq",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Will these arrive before Christmas?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Check the delivery date on each listing before you order, since it depends on the item, the seller and where you live. SHEIN shipping times vary, so order SHEIN items earlier than you would from Amazon."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can I order these in Canada or the US?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The links go to Amazon.ca and SHEIN Canada, so they’re set up for shoppers in Canada. If you’re in the US, look up the same product on Amazon.com or SHEIN’s US site, where prices and availability may differ."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Who sells these?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The cologne, cap and gloves were sold and shipped by Amazon.ca when we checked. The socks and hand warmers were sold by third-party sellers on Amazon. The SHEIN items are sold through SHEIN. The seller is shown on each listing."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What if I don’t know his size?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Stick to the picks that need no size: the hand warmers, the cologne, the cap or the wallet. If you go for the gloves, slippers or overcoat, check the size chart on the listing and compare it with something he already wears."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<style>
+  :root{
+    --ink:#0D0D0D;
+    --panel:#18140F;
+    --panel-line:#2A2620;
+    --gold:#D4A017;
+    --crimson:#C8102E;
+    --bone:#F3EFE6;
+    --bone-dim:#B8B2A4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(212,160,23,0.08), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
+  }
+  .wrap{width:100%;max-width:480px;min-width:0;}
+  @media (min-width:768px){
+    .wrap{max-width:1080px;}
+    .post-wrap{max-width:720px;}
+  }
+  .crumbs{margin-bottom:20px;font-size:13px;}
+  .crumbs ol{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:4px;color:var(--bone-dim);}
+  .crumbs li{min-width:0;overflow-wrap:anywhere;}
+  .crumbs li + li::before{content:'›';margin-right:4px;color:var(--bone-dim);}
+  .crumbs a{color:var(--gold);text-decoration:none;}
+  .crumbs a:hover{text-decoration:underline;}
+  header{text-align:center;margin-bottom:20px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--panel-line);
+    padding:5px 14px;border-radius:999px;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--crimson);display:inline-block;}
+  h1{
+    font-family:'Anton',sans-serif;
+    font-size:34px;
+    letter-spacing:1px;
+    line-height:1.05;
+    color:var(--bone);
+    text-transform:uppercase;
+    overflow-wrap:anywhere;
+  }
+  h1 span{color:var(--gold);}
+  @media (min-width:768px){
+    h1{font-size:46px;}
+  }
+  .tagline{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-top:10px;
+  }
+  .byline{font-size:12px;color:var(--bone-dim);margin-top:12px;}
+  .back{
+    display:block;
+    text-align:center;
+    margin-top:28px;
+    color:var(--gold);
+    font-size:13px;
+    text-decoration:none;
+  }
+  .bp-draft{
+    margin-bottom:16px;padding:8px 12px;border-radius:8px;
+    background:var(--crimson);color:#FFFFFF;text-align:center;
+    font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  }
+  .bp-disclosure{
+    text-align:center;font-size:12px;line-height:1.6;color:var(--bone-dim);
+    max-width:640px;margin:0 auto 20px;
+  }
+  .bp-hero,.bp-figure{margin:0 auto 22px;max-width:500px;}
+  .bp-hero picture,.bp-figure picture{display:block;}
+  .bp-photo{
+    display:block;width:100%;height:auto;
+    border-radius:12px;border:1px solid var(--panel-line);background:var(--panel);
+  }
+  .bp-figure figcaption{margin-top:8px;text-align:center;font-size:12px;line-height:1.5;color:var(--bone-dim);}
+  .intro p,.post-body p,.post-body li{font-size:16px;line-height:1.7;color:var(--bone);}
+  .intro p{margin-bottom:14px;}
+  .post-body p,.post-body ul,.post-body ol{margin-bottom:16px;}
+  .post-body ul,.post-body ol{padding-left:22px;}
+  .post-body li + li{margin-top:6px;}
+  .post-body h2{
+    font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;letter-spacing:1px;
+    text-transform:uppercase;color:var(--gold);margin:32px 0 12px;line-height:1.25;
+    scroll-margin-top:16px;
+  }
+  .post-body h3{
+    font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;letter-spacing:.5px;
+    color:var(--bone);margin:22px 0 8px;line-height:1.3;scroll-margin-top:16px;
+  }
+  .intro a,.post-body a:not(.bp-shop):not(.bp-details){color:var(--gold);text-underline-offset:2px;}
+  .bp-price{font-weight:600;color:var(--gold);white-space:nowrap;}
+  .toc{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+    padding:14px 16px;margin-bottom:18px;
+  }
+  .toc-title{
+    font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:1.5px;text-transform:uppercase;color:var(--bone-dim);margin-bottom:8px;
+  }
+  .toc ol{list-style:none;display:flex;flex-direction:column;gap:2px;}
+  .toc a{display:inline-block;padding:4px 0;color:var(--gold);font-size:14px;text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .bp-products{
+    display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:12px;margin:0 0 20px;
+  }
+  @media (min-width:768px){
+    .bp-products{grid-template-columns:repeat(3, minmax(0,1fr));gap:16px;}
+  }
+  .bp-card{
+    display:flex;flex-direction:column;background:var(--panel);
+    border:1px solid var(--panel-line);border-radius:12px;overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .bp-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .bp-card picture{display:block;}
+  .bp-thumb{
+    width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;display:block;
+    background:var(--ink);border-bottom:1px solid var(--panel-line);
+  }
+  .bp-card-body{padding:10px 12px 12px;flex:1 1 auto;display:flex;flex-direction:column;}
+  .card-meta{
+    margin-bottom:4px;font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;
+    letter-spacing:1px;text-transform:uppercase;
+  }
+  .retailer{color:var(--bone-dim);}
+  .post-body .prod-name{
+    font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;line-height:1.35;
+    letter-spacing:0;color:var(--bone);margin:0 0 8px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .post-body .bp-card-price{font-size:14px;font-weight:600;color:var(--gold);margin:0 0 10px;}
+  a.bp-shop{
+    margin-top:auto;padding:6px 8px;display:flex;align-items:center;justify-content:center;
+    min-height:38px;border-radius:8px;background:var(--gold);color:var(--ink);
+    font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.5px;
+    text-transform:uppercase;text-decoration:none;text-align:center;
+  }
+  a.bp-shop:hover{filter:brightness(1.08);}
+  a.bp-shop:focus-visible{outline:2px solid var(--bone);outline-offset:2px;}
+  a.bp-details{
+    display:block;margin-top:6px;padding:4px 0;text-align:center;font-size:12px;
+    color:var(--bone-dim);text-decoration:underline;text-underline-offset:2px;
+  }
+  .bp-faq .faq-item{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;padding:14px 16px;
+  }
+  .bp-faq .faq-item + .faq-item{margin-top:12px;}
+  .bp-faq .faq-item h3{margin:0 0 6px;}
+  .bp-faq .faq-item p{font-size:15px;margin-bottom:8px;}
+  .bp-faq .faq-item p:last-child{margin-bottom:0;}
+  .explore{
+    margin-top:32px;background:var(--panel);border:1px solid var(--panel-line);
+    border-radius:12px;padding:16px;
+  }
+  .explore h2{
+    font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--gold);margin-bottom:12px;text-align:center;
+  }
+  .explore ul{list-style:none;display:grid;gap:10px;}
+  .explore-link{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    min-height:48px;padding:12px 14px;border:1px solid var(--panel-line);border-radius:10px;
+    background:var(--ink);color:var(--bone);text-decoration:none;
+    font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;letter-spacing:.5px;
+  }
+  .explore-link span{color:var(--gold);}
+  .explore-link:hover{border-color:var(--gold);}
+  .bl-section{
+    font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--gold);margin:8px 0 14px;text-align:center;
+  }
+  .bl-grid{display:grid;gap:16px;margin-bottom:28px;}
+  @media (min-width:768px){
+    .bl-grid{grid-template-columns:repeat(3, minmax(0,1fr));}
+  }
+  .bl-card{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .bl-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .bl-link{display:block;color:inherit;text-decoration:none;}
+  .bl-link picture{display:block;}
+  .bl-thumb{
+    width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;
+    background:var(--ink);border-bottom:1px solid var(--panel-line);
+  }
+  .bl-body{padding:12px 14px 16px;}
+  .bl-cat{
+    display:inline-block;margin-bottom:6px;font-family:'Oswald',sans-serif;font-size:11px;
+    font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);
+  }
+  .bl-title{font-family:'Oswald',sans-serif;font-size:19px;font-weight:600;line-height:1.25;color:var(--bone);}
+  .bl-date{margin-top:6px;font-size:12px;color:var(--bone-dim);}
+  .bl-desc{margin-top:8px;font-size:14px;line-height:1.55;color:var(--bone-dim);}
+  .bl-empty{
+    text-align:center;font-size:15px;color:var(--bone-dim);padding:28px 16px;
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .bp-card,.bp-card:hover,.bl-card,.bl-card:hover{transition:none;transform:none;}
+  }
+</style>
+<!-- fonts:start -->
+<link rel="preload" href="../../assets/fonts/web/anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/web/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url(../../assets/fonts/web/anton-400-latin.woff2) format('woff2');}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:500 600;font-display:swap;src:url(../../assets/fonts/web/oswald-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(../../assets/fonts/web/poppins-400-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(../../assets/fonts/web/poppins-500-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(../../assets/fonts/web/poppins-600-latin.woff2) format('woff2');}
+</style>
+<!-- fonts:end -->
+<!-- favicons:start -->
+<link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/icons/apple-touch-icon.png">
+<!-- favicons:end -->
+</head>
+<body>
+<!-- generated by build_blog.py from blog-src/christmas-gifts-under-50-2026/post.md: edit the source, not this file -->
+<div class="wrap post-wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><span aria-current="page">Christmas Gifts for Men Under $50 (2026)</span></li></ol></nav>
+<article class="post">
+<header>
+  <div class="badge">Gift guides</div>
+  <h1>Christmas Gifts for Men Under $50 (2026)</h1>
+  <p class="byline">By Jesse, ThatFootball12 · <time datetime="2026-11-01">November 1, 2026</time></p>
+</header>
+<p class="bp-disclosure">As an Amazon Associate, SHEIN affiliate, and Moosehill (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through links on this site. Prices and availability may have changed since this was published.</p>
+<figure class="bp-hero"><picture><source type="image/webp" srcset="img/socks-500.webp"><img class="bp-photo" src="img/socks-500.jpg" alt="Merino wool thermal socks multi-pack in brown, grey and black (AI-generated illustration)" width="500" height="745" fetchpriority="high" decoding="async"></picture></figure>
+<div class="intro">
+<p><em>Updated November 2026</em></p>
+<p>A good gift under $50 is something he’ll actually reach for once the weather turns, not another novelty for the drawer. These eight picks lean on warmth first, then a little grooming, then everyday things he’ll use all year. Each one comes with who it suits and the details worth knowing before you order.</p>
+<p>[JESSE: add a line or two in your voice here]</p>
+<p>We checked these listings on Amazon.ca on November 1, 2026, so the specs and price ranges below match what was there then.</p>
+<p><strong>At a glance:</strong></p>
+<ul><li>Merino wool thermal socks (under $25): for the cold-stadium guy</li><li>Rechargeable hand warmers ($25–$50): for the cold-hands guy</li><li>The North Face Etip gloves ($25–$50): for the winter commuter</li><li>Thermal-lined moccasin slippers (TBD): for the homebody</li><li>Wool-blend overcoat (TBD): for the office guy</li><li>Nautica Voyage cologne (under $25): for the guy who wants a signature scent</li><li>Carhartt canvas cap ($25–$50): for the everyday cap guy</li><li>Leather RFID wallet (TBD): for the guy who’s impossible to shop for</li></ul>
+</div>
+<nav class="toc" aria-labelledby="toc-title">
+  <p class="toc-title" id="toc-title">In this post</p>
+  <ol>
+    <li><a href="#warmth">Warmth</a></li>
+    <li><a href="#grooming">Grooming</a></li>
+    <li><a href="#everyday">Everyday</a></li>
+    <li><a href="#how-to-choose">How to choose</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ol>
+</nav>
+<div class="post-body">
+<h2 id="warmth">Warmth</h2>
+<h3 id="1-ebmore-merino-wool-thermal-socks">1. EBMORE Merino Wool Thermal Socks</h3>
+<p>A multi-pack of thick merino wool crew socks in assorted brown, grey and black. Merino stays warm, breathes, and resists odour, so they work for a cold stadium or a winter commute. They’re sold by a third-party seller rather than Amazon itself, and the price shown was a limited-time sale when we checked, though the regular price was still under $25.</p>
+<p><strong>Price range:</strong> under $25</p>
+<p><strong>Best for:</strong> the cold-stadium guy.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../videos/gift-guides/gifts-under-50-nov-1/socks/socks-424.webp"><img class="bp-thumb" src="../../videos/gift-guides/gifts-under-50-nov-1/socks/socks-424.jpg" alt="EBMORE Merino Wool Thermal Socks (multi-pack)" width="424" height="632" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">Amazon</span></div><h3 class="prod-name">EBMORE Merino Wool Thermal Socks (multi-pack)</h3><a class="bp-shop" href="https://www.amazon.ca/dp/B0CW2TQFPS?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop EBMORE Merino Wool Thermal Socks (multi-pack) on Amazon (opens in a new tab)">Shop on Amazon<span class="link-text" hidden>EBMORE Merino Wool Thermal Socks (multi-pack)</span></a><a class="bp-details" href="../../videos/gift-guides/gifts-under-50-nov-1/socks/">Details</a></div></article></div>
+<h3 id="2-ropelux-rechargeable-hand-warmers-2-pack">2. ropelux Rechargeable Hand Warmers (2-pack)</h3>
+<p>Two rechargeable pocket hand warmers with 6400mAh batteries and three heat settings. The listing claims up to 13 hours per charge, which will depend on the heat setting. They’re sold by a third-party seller.</p>
+<p><strong>Price range:</strong> $25–$50</p>
+<p><strong>Best for:</strong> the cold-hands guy.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../videos/gift-guides/gifts-under-50-nov-1/hand-warmers/hand-warmers-424.webp"><img class="bp-thumb" src="../../videos/gift-guides/gifts-under-50-nov-1/hand-warmers/hand-warmers-424.jpg" alt="ropelux Rechargeable Hand Warmers (2-pack, 6400mAh)" width="424" height="632" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">Amazon</span></div><h3 class="prod-name">ropelux Rechargeable Hand Warmers (2-pack, 6400mAh)</h3><a class="bp-shop" href="https://www.amazon.ca/dp/B0FSKK9G5F?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop ropelux Rechargeable Hand Warmers (2-pack, 6400mAh) on Amazon (opens in a new tab)">Shop on Amazon<span class="link-text" hidden>ropelux Rechargeable Hand Warmers (2-pack, 6400mAh)</span></a><a class="bp-details" href="../../videos/gift-guides/gifts-under-50-nov-1/hand-warmers/">Details</a></div></article></div>
+<h3 id="3-the-north-face-etip-recycled-touchscreen-gloves">3. The North Face Etip Recycled Touchscreen Gloves</h3>
+<p>Lightweight gloves made with recycled materials and touchscreen-compatible fingertips, so he can use his phone without taking them off. They’re a lighter glove, better for commutes and walks than for deep cold. The price varies by size and colour, and it was only under $50 because of a limited-time sale when we checked; the regular price was over $50.</p>
+<p><strong>Price range:</strong> $25–$50</p>
+<p><strong>Best for:</strong> the winter commuter.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../videos/gift-guides/gifts-under-50-nov-1/gloves/gloves-424.webp"><img class="bp-thumb" src="../../videos/gift-guides/gifts-under-50-nov-1/gloves/gloves-424.jpg" alt="The North Face Etip Recycled Touchscreen Gloves" width="424" height="632" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">Amazon</span></div><h3 class="prod-name">The North Face Etip Recycled Touchscreen Gloves</h3><a class="bp-shop" href="https://www.amazon.ca/dp/B08BDPDNH7?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop The North Face Etip Recycled Touchscreen Gloves on Amazon (opens in a new tab)">Shop on Amazon<span class="link-text" hidden>The North Face Etip Recycled Touchscreen Gloves</span></a><a class="bp-details" href="../../videos/gift-guides/gifts-under-50-nov-1/gloves/">Details</a></div></article></div>
+<h3 id="4-thermal-lined-moccasin-slippers">4. Thermal-Lined Moccasin Slippers</h3>
+<p>Moccasin-style slippers with a loafer look outside and a warm thermal lining inside. They’re a budget alternative to sheepskin slippers. Check the size chart on the listing before you order.</p>
+<p><strong>Price range:</strong> TBD</p>
+<p><strong>Best for:</strong> the homebody.</p>
+<p>[S27 product card: add once the SHEIN price and seller are checked]</p>
+<h3 id="5-wool-blend-overcoat">5. Wool-Blend Overcoat</h3>
+<p>A single-breasted wool-blend overcoat with a lapel and two pockets that sharpens a sweater or a suit. The listing says it runs slightly small and is slightly thin, so size up if he’ll wear it over layers.</p>
+<p><strong>Price range:</strong> TBD</p>
+<p><strong>Best for:</strong> the office guy.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../videos/trending-products/trending-products-oct-19/coat/coat-424.webp"><img class="bp-thumb" src="../../videos/trending-products/trending-products-oct-19/coat/coat-424.jpg" alt="Men&#x27;s Autumn/Winter Casual Solid Color Wool Blend Coat With Lapel, Double Pockets, Single-Breasted, Warm, Slightly Small Fit, Slightly Thin" width="424" height="565" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">SHEIN</span></div><h3 class="prod-name">Men&#x27;s Autumn/Winter Casual Solid Color Wool Blend Coat With Lapel, Double Pockets, Single-Breasted, Warm, Slightly Small Fit, Slightly Thin</h3><p class="bp-card-price">$48.86 CAD</p><a class="bp-shop" href="https://onelink.shein.com/56/64osu92vx8gk?ismg_ol=C4q0mFj7NAe_01_KOC-C" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop Men&#x27;s Autumn/Winter Casual Solid Color Wool Blend Coat With Lapel, Double Pockets, Single-Breasted, Warm, Slightly Small Fit, Slightly Thin on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Men&#x27;s Autumn/Winter Casual Solid Color Wool Blend Coat With Lapel, Double Pockets, Single-Breasted, Warm, Slightly Small Fit, Slightly Thin</span></a><a class="bp-details" href="../../videos/trending-products/trending-products-oct-19/coat/">Details</a></div></article></div>
+<h2 id="grooming">Grooming</h2>
+<h3 id="6-nautica-voyage-eau-de-toilette-100-ml">6. Nautica Voyage Eau de Toilette (100 ml)</h3>
+<p>A fresh, light everyday cologne in a 100 ml bottle, with notes of green apple, cedarwood and mimosa. It’s been a best-seller for years and works for the office or weekends. Sold and shipped by Amazon.ca when we checked.</p>
+<p><strong>Price range:</strong> under $25</p>
+<p><strong>Best for:</strong> the guy who wants a signature scent.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../videos/gift-guides/gifts-under-50-nov-1/cologne/cologne-424.webp"><img class="bp-thumb" src="../../videos/gift-guides/gifts-under-50-nov-1/cologne/cologne-424.jpg" alt="Nautica Voyage Eau de Toilette" width="424" height="632" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">Amazon</span></div><h3 class="prod-name">Nautica Voyage Eau de Toilette</h3><a class="bp-shop" href="https://www.amazon.ca/dp/B000P22TIY?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop Nautica Voyage Eau de Toilette on Amazon (opens in a new tab)">Shop on Amazon<span class="link-text" hidden>Nautica Voyage Eau de Toilette</span></a><a class="bp-details" href="../../videos/gift-guides/gifts-under-50-nov-1/cologne/">Details</a></div></article></div>
+<h2 id="everyday">Everyday</h2>
+<h3 id="7-carhartt-canvas-cap">7. Carhartt Canvas Cap</h3>
+<p>Carhartt’s workwear classic in Carhartt Brown, one size with an adjustable back. It goes with a hoodie, a chore coat or a gameday fit, and it looks better as it wears in. Sold and shipped by Amazon.ca when we checked.</p>
+<p><strong>Price range:</strong> $25–$50</p>
+<p><strong>Best for:</strong> the everyday cap guy.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../videos/gift-guides/gifts-under-50-nov-1/cap/cap-424.webp"><img class="bp-thumb" src="../../videos/gift-guides/gifts-under-50-nov-1/cap/cap-424.jpg" alt="Carhartt Canvas Cap" width="424" height="632" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">Amazon</span></div><h3 class="prod-name">Carhartt Canvas Cap</h3><a class="bp-shop" href="https://www.amazon.ca/dp/B00B354UUC?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop Carhartt Canvas Cap on Amazon (opens in a new tab)">Shop on Amazon<span class="link-text" hidden>Carhartt Canvas Cap</span></a><a class="bp-details" href="../../videos/gift-guides/gifts-under-50-nov-1/cap/">Details</a></div></article></div>
+<h3 id="8-leather-rfid-wallet">8. Leather RFID Wallet</h3>
+<p>A genuine leather bifold with RFID blocking, card slots and an ID window, in a vintage tan finish. It’s slim enough for a front pocket and an easy pick when you’re out of ideas.</p>
+<p><strong>Price range:</strong> TBD</p>
+<p><strong>Best for:</strong> the guy who’s impossible to shop for.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../videos/gift-guides/gift-guide-oct-19/wallet/wallet-424.webp"><img class="bp-thumb" src="../../videos/gift-guides/gift-guide-oct-19/wallet/wallet-424.jpg" alt="Men&#x27;s Genuine Leather RFID Blocking Wallet Vintage Cowhide Bifold Wallet Short Multifunction ID Credit Card Holder With 2 ID Wallets Gifts For Him" width="424" height="565" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">SHEIN</span></div><h3 class="prod-name">Men&#x27;s Genuine Leather RFID Blocking Wallet Vintage Cowhide Bifold Wallet Short Multifunction ID Credit Card Holder With 2 ID Wallets Gifts For Him</h3><p class="bp-card-price">$17.60 CAD</p><a class="bp-shop" href="https://onelink.shein.com/56/64qttcrbvayn?ismg_ol=2pafXgCwVSQ_01_KOC-C" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop Men&#x27;s Genuine Leather RFID Blocking Wallet Vintage Cowhide Bifold Wallet Short Multifunction ID Credit Card Holder With 2 ID Wallets Gifts For Him on SHEIN (opens in a new tab)">Shop on SHEIN<span class="link-text" hidden>Men&#x27;s Genuine Leather RFID Blocking Wallet Vintage Cowhide Bifold Wallet Short Multifunction ID Credit Card Holder With 2 ID Wallets Gifts For Him</span></a><a class="bp-details" href="../../videos/gift-guides/gift-guide-oct-19/wallet/">Details</a></div></article></div>
+<h2 id="how-to-choose">How to choose</h2>
+<p>Start with the kind of guy he is. If he’s always cold at games or on his commute, go for the socks, hand warmers or gloves. If he spends his evenings at home, the slippers. If he dresses up for work, the overcoat or the cologne. If he’s hard to read, the cap or the wallet are safe bets.</p>
+<p>If you’re unsure of his size, pick something that needs no sizing: the hand warmers, the cologne, the cap (one size, adjustable) or the wallet. The socks come in a general men’s size, while the gloves, slippers and overcoat all need a size, so check each listing’s size chart.</p>
+<section class="bp-faq">
+<h2 id="faq">FAQ</h2>
+<div class="faq-item">
+<h3 id="will-these-arrive-before-christmas">Will these arrive before Christmas?</h3>
+<p>Check the delivery date on each listing before you order, since it depends on the item, the seller and where you live. SHEIN shipping times vary, so order SHEIN items earlier than you would from Amazon.</p>
+</div>
+<div class="faq-item">
+<h3 id="can-i-order-these-in-canada-or-the-us">Can I order these in Canada or the US?</h3>
+<p>The links go to Amazon.ca and SHEIN Canada, so they’re set up for shoppers in Canada. If you’re in the US, look up the same product on Amazon.com or SHEIN’s US site, where prices and availability may differ.</p>
+</div>
+<div class="faq-item">
+<h3 id="who-sells-these">Who sells these?</h3>
+<p>The cologne, cap and gloves were sold and shipped by Amazon.ca when we checked. The socks and hand warmers were sold by third-party sellers on Amazon. The SHEIN items are sold through SHEIN. The seller is shown on each listing.</p>
+</div>
+<div class="faq-item">
+<h3 id="what-if-i-don-t-know-his-size">What if I don’t know his size?</h3>
+<p>Stick to the picks that need no size: the hand warmers, the cologne, the cap or the wallet. If you go for the gloves, slippers or overcoat, check the size chart on the listing and compare it with something he already wears.</p>
+</div>
+</section>
+</div>
+<aside class="explore" aria-labelledby="explore-title">
+  <h2 id="explore-title">Explore more</h2>
+  <ul>
+    <li><a class="explore-link" href="../../gift-guide/">100 Christmas Gifts for Men 2026 (Canada)<span aria-hidden="true">→</span></a></li>
+    <li><a class="explore-link" href="../../blog/commanders-gifts-2026/">5 Best Gifts for Washington Commanders Fans (2026)<span aria-hidden="true">→</span></a></li>
+    <li><a class="explore-link" href="../../outfits/">Outfit Categories<span aria-hidden="true">→</span></a></li>
+  </ul>
+</aside>
+</article>
+<a class="back" href="../../blog/">← All blog posts</a>
+</div>
+<!-- site-footer:start -->
+<div class="tf12-foot">
+  <p class="tf12-foot-links"><a href="../../gift-guide/">Holiday Gift Guide</a> · <a href="../../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
+</div>
+<!-- site-footer:end -->
+</body>
+</html>
