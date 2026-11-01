@@ -17233,28 +17233,6 @@
     "thumbnail_webp": "videos/gift-guides/gifts-under-50-nov-1/cologne/cologne-424.webp"
   },
   {
-    "id": "gift-guides/gifts-under-50-nov-1/gloves",
-    "slug": "gloves",
-    "name": "The North Face Etip Recycled Touchscreen Gloves",
-    "item_type": "Gifts & Extras",
-    "price": null,
-    "currency": null,
-    "currency_source": null,
-    "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B08BDPDNH7?tag=thatfootballg-ca-20",
-    "image": "videos/gift-guides/gifts-under-50-nov-1/gloves/gloves.jpg",
-    "image_pending": false,
-    "detail_page_url": "videos/gift-guides/gifts-under-50-nov-1/gloves/index.html",
-    "campaign": "gifts-under-50-nov-1",
-    "theme": "gift-guides",
-    "source": "videos",
-    "data_new": "no",
-    "added": "2026-11-01",
-    "discount_percent": null,
-    "thumbnail": "videos/gift-guides/gifts-under-50-nov-1/gloves/gloves-424.jpg",
-    "thumbnail_webp": "videos/gift-guides/gifts-under-50-nov-1/gloves/gloves-424.webp"
-  },
-  {
     "id": "gift-guides/gifts-under-50-nov-1/hand-warmers",
     "slug": "hand-warmers",
     "name": "ropelux Rechargeable Hand Warmers (2-pack, 6400mAh)",
@@ -17322,5 +17300,27 @@
     "thumbnail_webp": "videos/gift-guides/gifts-under-50-nov-1/slippers/slippers-424.webp",
     "goods_id": "278817960",
     "inflated_original": false
+  },
+  {
+    "id": "gift-guides/gifts-under-50-nov-1/skincare",
+    "slug": "skincare",
+    "name": "Bulldog Everyday Skincare Duo Set (Moisturizer + Face Wash)",
+    "item_type": "Gifts & Extras",
+    "price": null,
+    "currency": null,
+    "currency_source": null,
+    "retailer": "Amazon",
+    "outbound_url": "https://www.amazon.ca/dp/B07WN5ZH8R?tag=thatfootballg-ca-20",
+    "image": "videos/gift-guides/gifts-under-50-nov-1/skincare/skincare.jpg",
+    "image_pending": false,
+    "detail_page_url": "videos/gift-guides/gifts-under-50-nov-1/skincare/index.html",
+    "campaign": "gifts-under-50-nov-1",
+    "theme": "gift-guides",
+    "source": "videos",
+    "data_new": "no",
+    "added": "2026-11-01",
+    "discount_percent": null,
+    "thumbnail": "videos/gift-guides/gifts-under-50-nov-1/skincare/skincare-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gifts-under-50-nov-1/skincare/skincare-424.webp"
   }
 ]

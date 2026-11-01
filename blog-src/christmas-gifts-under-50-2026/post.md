@@ -1,6 +1,6 @@
 ---
 title: Christmas Gifts for Men Under $50 (2026)
-description: Christmas gifts for men under $50: merino socks, hand warmers, touchscreen gloves, slippers, an overcoat, cologne, a Carhartt cap and a wallet.
+description: Christmas gifts for men under $50: merino socks, hand warmers, slippers, an overcoat, cologne, a skincare set, a Carhartt cap and a wallet.
 date: 2026-11-01
 updated: 2026-11-01
 category: Gift guides
@@ -26,10 +26,10 @@ We checked these listings on Amazon.ca and SHEIN Canada on November 1, 2026, so 
 
 - Merino wool thermal socks (under $25): for the cold-stadium guy
 - Rechargeable hand warmers ($25–$50): for the cold-hands guy
-- The North Face Etip gloves ($25–$50): for the winter commuter
 - Thermal-lined moccasin slippers ($25–$50): for the homebody
 - Wool-blend overcoat ($25–$50): for the office guy
 - Nautica Voyage cologne (under $25): for the guy who wants a signature scent
+- Bulldog skincare duo (under $25): for the guy with no skincare routine
 - Carhartt canvas cap ($25–$50): for the everyday cap guy
 - Leather RFID wallet (under $25): for the guy who’s impossible to shop for
 
@@ -55,17 +55,7 @@ Two rechargeable pocket hand warmers with 6400mAh batteries and three heat setti
 
 {{product gift-guides/gifts-under-50-nov-1/hand-warmers}}
 
-### 3. The North Face Etip Recycled Touchscreen Gloves
-
-Lightweight gloves made with recycled materials and touchscreen-compatible fingertips, so he can use his phone without taking them off. They’re a lighter glove, better for commutes and walks than for deep cold. The price varies by size and colour, and it was only under $50 because of a limited-time sale when we checked; the regular price was over $50.
-
-**Price range:** $25–$50
-
-**Best for:** the winter commuter.
-
-{{product gift-guides/gifts-under-50-nov-1/gloves}}
-
-### 4. Thermal-Lined Moccasin Slippers
+### 3. Thermal-Lined Moccasin Slippers
 
 Moccasin-style slippers with a loafer look outside and a warm thermal lining inside. They’re a budget alternative to sheepskin slippers, sold and shipped by SHEIN. Check the size chart on the listing before you order.
 
@@ -75,7 +65,7 @@ Moccasin-style slippers with a loafer look outside and a warm thermal lining ins
 
 {{product gift-guides/gifts-under-50-nov-1/slippers}}
 
-### 5. Wool-Blend Overcoat
+### 4. Wool-Blend Overcoat
 
 A single-breasted wool-blend overcoat with a lapel and two pockets that sharpens a sweater or a suit. The listing says it runs slightly small and is slightly thin, so size up if he’ll wear it over layers. It sits just under $50 before any coupons, so check the price on the listing.
 
@@ -87,7 +77,7 @@ A single-breasted wool-blend overcoat with a lapel and two pockets that sharpens
 
 ## Grooming
 
-### 6. Nautica Voyage Eau de Toilette (100 ml)
+### 5. Nautica Voyage Eau de Toilette (100 ml)
 
 A fresh, light everyday cologne in a 100 ml bottle, with notes of green apple, cedarwood and mimosa. It’s been a best-seller for years and works for the office or weekends. Sold and shipped by Amazon.ca when we checked.
 
@@ -96,6 +86,16 @@ A fresh, light everyday cologne in a 100 ml bottle, with notes of green apple, c
 **Best for:** the guy who wants a signature scent.
 
 {{product gift-guides/gifts-under-50-nov-1/cologne}}
+
+### 6. Bulldog Everyday Skincare Duo Set
+
+A two-piece set with Bulldog’s Original Face Wash and Original Moisturizer, made for men and aimed at normal to dry skin. The listing says the range has no artificial colours, synthetic fragrances or animal-derived ingredients. Sold and shipped by Amazon.ca when we checked.
+
+**Price range:** under $25
+
+**Best for:** the guy with no skincare routine.
+
+{{product gift-guides/gifts-under-50-nov-1/skincare}}
 
 ## Everyday
 
@@ -121,11 +121,15 @@ A genuine leather bifold with RFID blocking, card slots and an ID window, in a v
 
 ## How to choose
 
-Start with the kind of guy he is. If he’s always cold at games or on his commute, go for the socks, hand warmers or gloves. If he spends his evenings at home, the slippers. If he dresses up for work, the overcoat or the cologne. If he’s hard to read, the cap or the wallet are safe bets.
+Start with the kind of guy he is. If he’s always cold at games or on his commute, go for the socks or hand warmers. If he spends his evenings at home, the slippers. If he dresses up for work, the overcoat or the cologne. If he never thinks about skincare, the Bulldog set. If he’s hard to read, the cap or the wallet are safe bets.
 
-If you’re unsure of his size, pick something that needs no sizing: the hand warmers, the cologne, the cap (one size, adjustable) or the wallet. The socks come in a general men’s size, while the gloves, slippers and overcoat all need a size, so check each listing’s size chart.
+If you’re unsure of his size, pick something that needs no sizing: the hand warmers, the cologne, the skincare set, the cap (one size, adjustable) or the wallet. The socks come in a general men’s size, while the slippers and overcoat need a size, so check each listing’s size chart.
 
 ## FAQ
+
+### What are good Christmas gifts for men under 50 dollars?
+
+Warm, useful things he’ll reach for all winter make the best picks under $50, like merino wool socks, rechargeable hand warmers, thermal slippers, a wool-blend overcoat, Nautica Voyage cologne, a Bulldog skincare set, a Carhartt cap or a leather RFID wallet.
 
 ### Will these arrive before Christmas?
 
@@ -137,8 +141,8 @@ The links go to Amazon.ca and SHEIN Canada, so they’re set up for shoppers in 
 
 ### Who sells these?
 
-The cologne, cap and gloves were sold and shipped by Amazon.ca when we checked. The socks and hand warmers were sold by third-party sellers on Amazon. The slippers, overcoat and wallet were sold by SHEIN itself. The seller is shown on each listing.
+The cologne, skincare set and cap were sold and shipped by Amazon.ca when we checked. The socks and hand warmers were sold by third-party sellers on Amazon. The slippers, overcoat and wallet were sold by SHEIN itself. The seller is shown on each listing.
 
 ### What if I don’t know his size?
 
-Stick to the picks that need no size: the hand warmers, the cologne, the cap or the wallet. If you go for the gloves, slippers or overcoat, check the size chart on the listing and compare it with something he already wears.
+Stick to the picks that need no size: the hand warmers, the cologne, the skincare set, the cap or the wallet. If you go for the slippers or overcoat, check the size chart on the listing and compare it with something he already wears.
