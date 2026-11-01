@@ -74,7 +74,7 @@
         {"slug": "belts", "label": "Belts", "keywords": ["belt", "belts"]},
         {"slug": "bags", "label": "Bags & Wallets", "keywords": ["bag", "duffel", "wallet"]},
         {"slug": "jewelry", "label": "Jewelry", "keywords": ["necklace", "bracelet", "bangle", "wristband", "wristbands", "chain", "ring", "rings"]},
-        {"slug": "cold-weather", "label": "Cold Weather", "keywords": ["scarf", "gloves", "snood", "hand warmer"]},
+        {"slug": "cold-weather", "label": "Cold Weather", "keywords": ["scarf", "gloves", "snood", "hand warmer", "hand warmers", "thermal socks"]},
         {"slug": "eyewear", "label": "Eyewear", "keywords": ["glasses", "sunglasses"]},
         {"slug": "ties", "label": "Ties", "keywords": ["tie", "necktie", "pocket square"]}
       ]
@@ -107,7 +107,9 @@
     "flash-deals/flash-deals-sept-17/trunks": "bottoms/underwear",
     "flash-deals/flash-deals-aug-24/briefs": "bottoms/underwear",
     "flash-deals/flash-deals-aug-28/briefs": "bottoms/underwear",
-    "gift-guides/packers-gift-guide-sept-22/rug": "accessories"
+    "gift-guides/packers-gift-guide-sept-22/rug": "accessories",
+    "gift-guides/gifts-under-50-nov-1/cologne": "accessories",
+    "gift-guides/gifts-under-50-nov-1/skincare": "accessories"
   },
   "hidden": [
     "gameday/casual-gameday-aug-13/shirt",
