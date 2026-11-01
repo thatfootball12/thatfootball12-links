@@ -20,18 +20,18 @@ A good gift under $50 is something he’ll actually reach for once the weather t
 
 [JESSE: add a line or two in your voice here]
 
-We checked these listings on Amazon.ca on November 1, 2026, so the specs and price ranges below match what was there then.
+We checked these listings on Amazon.ca and SHEIN Canada on November 1, 2026, so the specs and price ranges below match what was there then.
 
 **At a glance:**
 
 - Merino wool thermal socks (under $25): for the cold-stadium guy
 - Rechargeable hand warmers ($25–$50): for the cold-hands guy
 - The North Face Etip gloves ($25–$50): for the winter commuter
-- Thermal-lined moccasin slippers (TBD): for the homebody
-- Wool-blend overcoat (TBD): for the office guy
+- Thermal-lined moccasin slippers ($25–$50): for the homebody
+- Wool-blend overcoat ($25–$50): for the office guy
 - Nautica Voyage cologne (under $25): for the guy who wants a signature scent
 - Carhartt canvas cap ($25–$50): for the everyday cap guy
-- Leather RFID wallet (TBD): for the guy who’s impossible to shop for
+- Leather RFID wallet (under $25): for the guy who’s impossible to shop for
 
 ## Warmth
 
@@ -67,19 +67,19 @@ Lightweight gloves made with recycled materials and touchscreen-compatible finge
 
 ### 4. Thermal-Lined Moccasin Slippers
 
-Moccasin-style slippers with a loafer look outside and a warm thermal lining inside. They’re a budget alternative to sheepskin slippers. Check the size chart on the listing before you order.
+Moccasin-style slippers with a loafer look outside and a warm thermal lining inside. They’re a budget alternative to sheepskin slippers, sold and shipped by SHEIN. Check the size chart on the listing before you order.
 
-**Price range:** TBD
+**Price range:** $25–$50
 
 **Best for:** the homebody.
 
-[S27 product card: add once the SHEIN price and seller are checked]
+{{product gift-guides/gifts-under-50-nov-1/slippers}}
 
 ### 5. Wool-Blend Overcoat
 
-A single-breasted wool-blend overcoat with a lapel and two pockets that sharpens a sweater or a suit. The listing says it runs slightly small and is slightly thin, so size up if he’ll wear it over layers.
+A single-breasted wool-blend overcoat with a lapel and two pockets that sharpens a sweater or a suit. The listing says it runs slightly small and is slightly thin, so size up if he’ll wear it over layers. It sits just under $50 before any coupons, so check the price on the listing.
 
-**Price range:** TBD
+**Price range:** $25–$50
 
 **Best for:** the office guy.
 
@@ -113,7 +113,7 @@ Carhartt’s workwear classic in Carhartt Brown, one size with an adjustable bac
 
 A genuine leather bifold with RFID blocking, card slots and an ID window, in a vintage tan finish. It’s slim enough for a front pocket and an easy pick when you’re out of ideas.
 
-**Price range:** TBD
+**Price range:** under $25
 
 **Best for:** the guy who’s impossible to shop for.
 
@@ -137,7 +137,7 @@ The links go to Amazon.ca and SHEIN Canada, so they’re set up for shoppers in 
 
 ### Who sells these?
 
-The cologne, cap and gloves were sold and shipped by Amazon.ca when we checked. The socks and hand warmers were sold by third-party sellers on Amazon. The SHEIN items are sold through SHEIN. The seller is shown on each listing.
+The cologne, cap and gloves were sold and shipped by Amazon.ca when we checked. The socks and hand warmers were sold by third-party sellers on Amazon. The slippers, overcoat and wallet were sold by SHEIN itself. The seller is shown on each listing.
 
 ### What if I don’t know his size?
 
