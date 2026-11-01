@@ -231,6 +231,8 @@ VALID_AMAZON_TAGS = {
 AMAZON_SHORT_LINKS = os.path.join(REPO, "data", "amazon_short_links.json")
 AMAZON_URL_RE = re.compile(r'''https?://(?:www\.)?(?:amzn\.to|amazon\.(?:ca|com))/[^\s"'<>)\],\\]*''', re.I)
 AMAZON_SCAN_EXTS = (".html", ".json", ".md", ".csv", ".xml")
+# A documented template such as amazon.ca/dp/<ASIN>?tag=... (CLAUDE.md) isn't a link.
+AMAZON_TEMPLATE_RE = re.compile(r"<[A-Z][A-Z_]*>")
 
 
 def find_detail_pages():
@@ -579,7 +581,9 @@ def amazon_tag_issues():
                 content = f.read()
         except (OSError, UnicodeDecodeError):
             continue
-        for url in sorted(set(AMAZON_URL_RE.findall(content))):
+        urls = {m.group(0) for m in AMAZON_URL_RE.finditer(content)
+                if not AMAZON_TEMPLATE_RE.match(content, m.end())}
+        for url in sorted(urls):
             url = html.unescape(url).rstrip(".;")
             final = url
             if "amzn.to" in url.lower():
