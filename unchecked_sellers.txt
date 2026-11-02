@@ -9,6 +9,9 @@
 #
 # id<TAB>goods id<TAB>plain SHEIN URL
 
+# added 2026-11-09 (1)
+trending-products/trending-products-nov-9/pajama-set	169391213	https://ca.shein.com/Crew-Neck-Top-Plaid-Pants-Fluffy-Pajama-Set-p-169391213.html
+
 # added 2026-10-19 (62)
 budget/budget-outfit-oct-19/hoodie	3240765	https://ca.shein.com/INAWLY-Solid-Kangaroo-Pocket-Thermal-Lined-Hoodie-Long-Sleeve-Tops-p-3240765.html
 budget/budget-outfit-oct-19/sneakers	58578502	https://ca.shein.com/STARNOVO-Men-s-Thick-Sole-Versatile-Casual-Canvas-Shoes-Low-Top-Lace-Up-Breathable-Athletic-Sport-Running-Sneakers-p-58578502.html
@@ -485,8 +488,7 @@ old-money/old-money-aug-11/loafers	452289059	https://ca.shein.com/Salkin-Luxury-
 old-money/old-money-aug-11/pants	47984121	https://ca.shein.com/Manfinity-Homme-Minimalist-Casual-Suit-Pants-p-47984121.html
 old-money/old-money-aug-11/shirt	143327354	https://ca.shein.com/Men-s-Casual-Button-Down-Long-Sleeve-Striped-Shirt-p-143327354.html
 
-# added 2026-08-10 (6)
-business-casual/business-casual-aug-10/pants	101636185	https://ca.shein.com/Manfinity-Mode-Men-s-Solid-Color-Pleated-Pocket-Straight-Leg-Casual-Formal-Pants-p-101636185.html
+# added 2026-08-10 (5)
 business-casual/business-casual-aug-10/shirt	325103867	https://ca.shein.com/Men-s-Ribbed-Airplane-Collar-Polo-Knit-Shirt-p-325103867.html
 business-casual/business-casual-aug-10/shoes	63813841	https://ca.shein.com/4-Season-Retro-German-Style-Casual-Shoes-For-Men-p-63813841.html
 business-casual/business-casual-aug-10/watch	41695053	https://ca.shein.com/Pablo-Raez-Men-s-Vintage-Stainless-Steel-Watch-p-41695053.html
