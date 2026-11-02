@@ -9,7 +9,7 @@
 #
 # id<TAB>goods id<TAB>plain SHEIN URL
 
-# added 2026-10-19 (63)
+# added 2026-10-19 (62)
 budget/budget-outfit-oct-19/hoodie	3240765	https://ca.shein.com/INAWLY-Solid-Kangaroo-Pocket-Thermal-Lined-Hoodie-Long-Sleeve-Tops-p-3240765.html
 budget/budget-outfit-oct-19/sneakers	58578502	https://ca.shein.com/STARNOVO-Men-s-Thick-Sole-Versatile-Casual-Canvas-Shoes-Low-Top-Lace-Up-Breathable-Athletic-Sport-Running-Sneakers-p-58578502.html
 budget/budget-outfit-oct-19/sweatpants	58604144	https://ca.shein.com/1pc-Men-s-Loose-Fit-Sweatpants-Black-Sports-Pants-Pockets-Drawstring-Waist-This-Product-Is-Made-Of-100-Polyester-Material-Fall-p-58604144.html
@@ -48,7 +48,6 @@ gift-guides/gift-guide-oct-19/hat-scarf-gloves	122891523	https://ca.shein.com/1-
 gift-guides/gift-guide-oct-19/messenger-bag	89282967	https://ca.shein.com/Men-s-Vintage-Messenger-Bag-Crossbody-Shoulder-Bag-Travelling-Commuting-Sling-Bag-Fashion-Student-Satchel-University-Tote-Father-s-Day-Gifts-p-89282967.html
 gift-guides/gift-guide-oct-19/ratchet-belt	34005289	https://ca.shein.com/Men-s-Genuine-Leather-Dress-Belt-Adjustable-Length-Ratchet-Buckle-p-34005289.html
 gift-guides/gift-guide-oct-19/rectangular-watch	263343345	https://ca.shein.com/Pablo-Raez-1pc-Classic-Men-s-Luxury-Rectangular-Watch-Stainless-Steel-Vintage-Clock-Original-Charming-Rose-Gold-Non-Fading-Black-Brown-Ultra-Fine-Fiber-PU-Leather-Fashion-Design-Men-s-Accessory-50m-Waterproof-Roman-Numeral-Calendar-Display-With-Date-Men-s-Casual-Quartz-Watch-White-Dial-Men-s-Premium-Watch-Suitable-For-Teacher-Gift-For-Boyfriend-Or-Girlfriend-Popular-Style-Party-Decoration-Graduation-Gift-p-263343345.html
-gift-guides/gift-guide-oct-19/scarf	169576501	https://ca.shein.com/1pc-Classic-Herringbone-Pattern-Fringed-Solid-Color-Cashmere-Scarf-Unisex-Fashion-Casual-Windproof-Warm-Shawl-Comfortable-Blanket-Scarf-Suitable-For-Daily-Wear-Autumn-Winter-p-169576501.html
 gift-guides/gift-guide-oct-19/sling-bag	77450233	https://ca.shein.com/Anti-Theft-Crossbody-Sling-Bag-p-77450233.html
 night-out/night-out-oct-19/tee	74018724	https://ca.shein.com/DAZY-Black-Slim-Fit-Short-Sleeve-T-Shirt-For-Men-Summer-p-74018724.html
 old-money/old-money-oct-19/sweater	39148462	https://ca.shein.com/Claim-Dot-Men-s-Cable-Knit-Crew-Neck-Long-Sleeve-Casual-Versatile-Sweater-Long-Sleeve-Top-Autumn-Pull-p-39148462.html
@@ -137,7 +136,7 @@ gameday/gameday-pink-out-soft-oct-7/jeans	31954832	https://ca.shein.com/Pocket-S
 gameday/gameday-pink-out-soft-oct-7/sneakers	60078829	https://ca.shein.com/Lace-Up-Casual-Skate-Shoes-p-60078829.html
 gameday/gameday-pink-out-soft-oct-7/sweater	203632517	https://ca.shein.com/Manfinity-Hypemode-Drop-Shoulder-Crew-Neck-Sweater-Pink-p-203632517.html
 
-# added 2026-10-05 (68)
+# added 2026-10-05 (66)
 business-casual/business-casual-oct-5/belt	21729600	https://ca.shein.com/Men-s-Elegant-Versatile-PU-Belt-Business-Casual-p-21729600.html
 business-casual/business-casual-oct-5/jacket	183898088	https://ca.shein.com/Thin-Corduroy-Men-s-Casual-Shirt-Jacket-Dual-Pocket-Design-p-183898088.html
 business-casual/business-casual-oct-5/jeans	51975380	https://ca.shein.com/Manfinity-CityGents-Loose-Slant-Pocket-Straight-Leg-Jeans-Grey-p-51975380.html
@@ -196,10 +195,8 @@ streetwear/streetwear-outfit-oct-5-2/jeans	57411378	https://ca.shein.com/Men-s-R
 streetwear/streetwear-outfit-oct-5-2/tee	523417675	https://ca.shein.com/Men-s-Vintage-David-Statue-Back-Print-Short-Sleeve-T-Shirt-p-523417675.html
 streetwear/streetwear-outfit-oct-5-3/blazer	515663748	https://ca.shein.com/Manfinity-Mode-Men-s-Casual-Versatile-Blazer-p-515663748.html
 streetwear/streetwear-outfit-oct-5-3/cargo-pants	112078748	https://ca.shein.com/Manfinity-Roughcore-Men-s-Multi-Pocket-Straight-Leg-Cargo-Pants-p-112078748.html
-streetwear/streetwear-outfit-oct-5-3/gloves	42985662	https://ca.shein.com/Men-s-Faux-Leather-Touchscreen-Thermal-Lined-Gloves-p-42985662.html
 streetwear/streetwear-outfit-oct-5-3/loafers	271180359	https://ca.shein.com/Salkin-Men-s-Penny-Loafers-Dress-Shoes-p-271180359.html
 streetwear/streetwear-outfit-oct-5-3/top	58638480	https://ca.shein.com/Musero-Men-s-Waffle-Knit-Front-Popper-Long-Sleeve-Top-p-58638480.html
-streetwear/streetwear-outfit-oct-5-4/coat	48777330	https://ca.shein.com/Men-s-Stand-Collar-Padded-Coat-Lightweight-p-48777330.html
 streetwear/streetwear-outfit-oct-5-4/joggers	30750580	https://ca.shein.com/Manfinity-Homme-Men-s-Jogger-Pants-With-Drawstring-Waist-p-30750580.html
 streetwear/streetwear-outfit-oct-5-4/shirt	557837714	https://ca.shein.com/PAVTROS-Men-s-Vintage-Black-Plaid-Long-Sleeve-Shirt-p-557837714.html
 streetwear/streetwear-outfit-oct-5-4/sneakers	13010935	https://ca.shein.com/Men-s-Comfortable-Slip-On-Sneakers-Non-Slip-p-13010935.html
@@ -403,8 +400,7 @@ gameday/game-day-aug-28/jeans	47889673	https://ca.shein.com/Manfinity-Homme-Men-
 date-night/date-night-aug-27/button-up	413967532	https://ca.shein.com/WAIT-HIM-Men-s-Vintage-Vertical-Striped-Short-Sleeve-Shirt-p-413967532.html
 date-night/date-night-aug-27/pants	108962030	https://ca.shein.com/Men-s-Spring-Summer-Thin-Breathable-Hip-Hop-Linen-Casual-Pants-p-108962030.html
 
-# added 2026-08-26 (4)
-streetwear/streetwear-aug-26/hoodie	44652761	https://ca.shein.com/Men-s-Solid-Color-Dropped-Shoulder-Long-Sleeve-Drawstring-Pocket-Casual-Hoodie-p-44652761.html
+# added 2026-08-26 (3)
 trending-products/trending-products-aug-26/jacket	482128692	https://ca.shein.com/DAZY-Men-s-Solid-Brown-Suede-Jacket-And-Coat-p-482128692.html
 trending-products/trending-products-aug-26/tee	475336009	https://ca.shein.com/EGENSIO-Men-s-Casual-Colorblock-Patchwork-T-Shirt-p-475336009.html
 trending-products/trending-products-aug-26/zip-up	443395347	https://ca.shein.com/Manfinity-VCAY-Men-s-Woven-Casual-Everyday-Loose-Fit-Long-Sleeve-Zip-Up-Shirt-p-443395347.html
