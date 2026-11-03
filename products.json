@@ -18473,8 +18473,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B0FK15WJ3W?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-9/leafs-hoodie/leafs-hoodie.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-9/leafs-hoodie/index.html",
     "campaign": "gameday-nov-9",
     "theme": "gameday",
@@ -18483,8 +18483,8 @@
     "added": "2026-11-09",
     "discount_percent": null,
     "week": "nov-9",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-9/leafs-hoodie/leafs-hoodie-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-9/leafs-hoodie/leafs-hoodie-424.webp"
   },
   {
     "id": "gameday/gameday-nov-9-2/oilers-hoodie",
@@ -18496,8 +18496,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B0G8V8624X?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-9-2/oilers-hoodie/oilers-hoodie.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-9-2/oilers-hoodie/index.html",
     "campaign": "gameday-nov-9-2",
     "theme": "gameday",
@@ -18506,8 +18506,8 @@
     "added": "2026-11-09",
     "discount_percent": null,
     "week": "nov-9",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-9-2/oilers-hoodie/oilers-hoodie-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-9-2/oilers-hoodie/oilers-hoodie-424.webp"
   },
   {
     "id": "gameday/gameday-nov-9-8/raptors-tee",
@@ -18519,8 +18519,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B0G69QT3SH?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-9-8/raptors-tee/raptors-tee.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-9-8/raptors-tee/index.html",
     "campaign": "gameday-nov-9-8",
     "theme": "gameday",
@@ -18529,8 +18529,8 @@
     "added": "2026-11-09",
     "discount_percent": null,
     "week": "nov-9",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-9-8/raptors-tee/raptors-tee-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-9-8/raptors-tee/raptors-tee-424.webp"
   },
   {
     "id": "formal/formal-outfit-nov-9/turtleneck",
@@ -18620,8 +18620,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B08TVKZXXN?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/date-night/date-night-nov-9/turtleneck/turtleneck.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/date-night/date-night-nov-9/turtleneck/index.html",
     "campaign": "date-night-nov-9",
     "theme": "date-night",
@@ -18630,8 +18630,8 @@
     "added": "2026-11-09",
     "discount_percent": null,
     "week": "nov-9",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/date-night/date-night-nov-9/turtleneck/turtleneck-424.jpg",
+    "thumbnail_webp": "outfits/date-night/date-night-nov-9/turtleneck/turtleneck-424.webp"
   },
   {
     "id": "trending-products/trending-products-nov-9/henley",
@@ -18643,8 +18643,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B07BJKR3BY?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/trending-products/trending-products-nov-9/henley/henley.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/trending-products/trending-products-nov-9/henley/index.html",
     "campaign": "trending-products-nov-9",
     "theme": "trending-products",
@@ -18653,8 +18653,8 @@
     "added": "2026-11-09",
     "discount_percent": null,
     "week": "nov-9",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/trending-products/trending-products-nov-9/henley/henley-424.jpg",
+    "thumbnail_webp": "videos/trending-products/trending-products-nov-9/henley/henley-424.webp"
   },
   {
     "id": "trending-products/trending-products-nov-9/long-sleeve-tee",
