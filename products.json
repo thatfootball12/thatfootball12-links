@@ -18685,7 +18685,7 @@
     "currency": "CAD",
     "currency_source": "meta tag",
     "retailer": "SHEIN",
-    "seller": "unchecked",
+    "seller": "shein",
     "outbound_url": "https://onelink.shein.com/59/66zckfz2dvuy?ismg_ol=8omAqOQ8rTS_01_KOC-C",
     "image": null,
     "image_pending": true,
@@ -18699,7 +18699,6 @@
     "week": "nov-9",
     "inflated_original": false,
     "goods_id": "169391213",
-    "reserve": true,
     "thumbnail": null,
     "thumbnail_webp": null
   },

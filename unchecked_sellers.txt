@@ -9,9 +9,6 @@
 #
 # id<TAB>goods id<TAB>plain SHEIN URL
 
-# added 2026-11-09 (1)
-trending-products/trending-products-nov-9/pajama-set	169391213	https://ca.shein.com/Crew-Neck-Top-Plaid-Pants-Fluffy-Pajama-Set-p-169391213.html
-
 # added 2026-10-19 (62)
 budget/budget-outfit-oct-19/hoodie	3240765	https://ca.shein.com/INAWLY-Solid-Kangaroo-Pocket-Thermal-Lined-Hoodie-Long-Sleeve-Tops-p-3240765.html
 budget/budget-outfit-oct-19/sneakers	58578502	https://ca.shein.com/STARNOVO-Men-s-Thick-Sole-Versatile-Casual-Canvas-Shoes-Low-Top-Lace-Up-Breathable-Athletic-Sport-Running-Sneakers-p-58578502.html

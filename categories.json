@@ -104,6 +104,7 @@
   "overrides": {
     "gameday/fantasy-football-sept-5/tee": "tops/tees",
     "gift-guides/gift-guide-oct-19/sling-bag": "accessories/bags",
+    "trending-products/trending-products-nov-9/pajama-set": "bottoms/underwear",
     "flash-deals/flash-deals-sept-17/trunks": "bottoms/underwear",
     "flash-deals/flash-deals-aug-24/briefs": "bottoms/underwear",
     "flash-deals/flash-deals-aug-28/briefs": "bottoms/underwear",
@@ -142,7 +143,6 @@
     "gift-guides/holiday-2026/hooded-sweatshirt",
     "gift-guides/holiday-2026/teddy-fleece-jacket",
     "trending-products/trending-products-nov-2-2/yellow-wash-jeans",
-    "trending-products/trending-products-oct-26-2/lace-up-boots",
-    "trending-products/trending-products-nov-9/pajama-set"
+    "trending-products/trending-products-oct-26-2/lace-up-boots"
   ]
 }
