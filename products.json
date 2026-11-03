@@ -18687,8 +18687,8 @@
     "retailer": "SHEIN",
     "seller": "shein",
     "outbound_url": "https://onelink.shein.com/59/66zckfz2dvuy?ismg_ol=8omAqOQ8rTS_01_KOC-C",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/trending-products/trending-products-nov-9/pajama-set/pajama-set.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/trending-products/trending-products-nov-9/pajama-set/index.html",
     "campaign": "trending-products-nov-9",
     "theme": "trending-products",
@@ -18699,8 +18699,8 @@
     "week": "nov-9",
     "inflated_original": false,
     "goods_id": "169391213",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/trending-products/trending-products-nov-9/pajama-set/pajama-set-424.jpg",
+    "thumbnail_webp": "videos/trending-products/trending-products-nov-9/pajama-set/pajama-set-424.webp"
   },
   {
     "id": "business-casual/business-casual-nov-9/blazer",

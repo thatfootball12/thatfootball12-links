@@ -50,9 +50,10 @@
         {"slug": "joggers", "label": "Joggers & Sweats", "keywords": ["jogger", "joggers", "sweatpants", "jogging pants"]},
         {"slug": "cargo", "label": "Cargo", "keywords": ["cargo", "tactical"]},
         {"slug": "shorts", "label": "Shorts", "keywords": ["shorts"]},
-        {"slug": "underwear", "label": "Underwear", "keywords": ["underwear", "boxer brief", "boxer briefs", "trunk", "trunks"]}
+        {"slug": "underwear", "label": "Underwear", "keywords": ["underwear", "boxer brief", "boxer briefs", "trunk", "trunks"]},
+        {"slug": "loungewear", "label": "Loungewear", "keywords": ["pajama", "pajamas", "pyjama", "pyjamas", "lounge set"]}
       ],
-      "match_order": ["shorts", "jeans", "joggers", "cargo", "underwear", "pants"]
+      "match_order": ["loungewear", "shorts", "jeans", "joggers", "cargo", "underwear", "pants"]
     },
     {
       "slug": "footwear",
@@ -104,7 +105,7 @@
   "overrides": {
     "gameday/fantasy-football-sept-5/tee": "tops/tees",
     "gift-guides/gift-guide-oct-19/sling-bag": "accessories/bags",
-    "trending-products/trending-products-nov-9/pajama-set": "bottoms/underwear",
+    "trending-products/trending-products-nov-9/pajama-set": "bottoms/loungewear",
     "flash-deals/flash-deals-sept-17/trunks": "bottoms/underwear",
     "flash-deals/flash-deals-aug-24/briefs": "bottoms/underwear",
     "flash-deals/flash-deals-aug-28/briefs": "bottoms/underwear",
