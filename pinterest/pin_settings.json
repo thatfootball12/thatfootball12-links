@@ -1,9 +1,11 @@
 {
   "disclosure": "As a SHEIN Affiliate and Amazon Associate, I earn from qualifying purchases. Prices may change.",
   "disclosure_shein_only": "As a SHEIN Affiliate, I earn from qualifying purchases. Prices may change.",
+  "disclosure_awin": "As a SHEIN Affiliate, Amazon Associate and House of Blanks affiliate, I earn from qualifying purchases. Prices may change.",
   "disclosure_retailers": [
     "SHEIN",
-    "Amazon"
+    "Amazon",
+    "Awin"
   ],
   "ai_line": "Image created with AI.",
   "ai_image_retailers": [

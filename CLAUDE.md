@@ -295,8 +295,8 @@ both required) is merged and live, write the pin copy into
 template layout (split into `_1`, `_2`, ... over Pinterest's 200-row
 limit) plus `pinterest_bulk_<date>_report.md`. The description is the
 copy + the disclosure from `pinterest/pin_settings.json` (the
-SHEIN-only wording when every item in the pin is SHEIN, else the
-SHEIN + Amazon one) (+ "Image created with AI." on every outfit pin and
+SHEIN-only wording when every item in the pin is SHEIN, the House of
+Blanks one when any item is Awin, else the SHEIN + Amazon one) (+ "Image created with AI." on every outfit pin and
 Amazon product pin) + the hashtags. Pins are scheduled across the batch week (Mon–Sun), 2 outfit
 pins a day with gameday first, product pins filling the days evenly,
 10:00–23:00 Atlantic (9 am–10 pm Eastern; `DAY_START_H, DAY_END_H` in
@@ -310,7 +310,8 @@ fails: every Link and Media URL must return 200 on the live site (so
 the pin images must be pushed first), titles ≤ 100 and full
 descriptions ≤ 500 characters, no duplicates, no past publish times,
 no "$" in the copy of a pin with an Amazon item, no retailer the
-disclosures don't cover (Awin needs its own wording first), and every board and
+disclosures don't cover (the Awin wording names House of Blanks, so another
+Awin merchant needs its own first), and every board and
 section must be listed in `pin_settings.json`. Keep that list identical
 to the Pinterest account, emojis included: Pinterest silently creates
 any board or section it doesn't recognise. The CSV has no column for
