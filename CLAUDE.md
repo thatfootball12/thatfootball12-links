@@ -104,6 +104,12 @@ Amazon link in a tracked page or data file with another tag or none
 redirect hop, Amazon itself is never fetched), so commit that file when
 it changes.
 
+**SHEIN "From CA$X" prices.** When a SHEIN listing shows a "From CA$X" price
+(the price varies by size or colour), store and display the price of size M
+(size L if M isn't offered), default colour, before any coupon or "Estimated"
+discount. That is the `price` in `products.json`, on the page and on the pin.
+Never use the "From" figure or a coupon price.
+
 **New SHEIN product? Set its seller during sourcing.** Every SHEIN
 record in `products.json` carries `seller`: `"shein"` (sold by SHEIN
 itself), `"marketplace"` (a third-party store on SHEIN's marketplace),
