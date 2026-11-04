@@ -1,0 +1,1506 @@
+{
+ "batch": "nov-9",
+ "week_start": "2026-11-09",
+ "pins": [
+  {
+   "type": "outfit",
+   "id": "gameday/gameday-nov-9",
+   "title": "The Leafs Night Fit That Still Looks Like an Outfit 🏒",
+   "description": "A Toronto Maple Leafs hoodie under a black hooded jacket, with Levi's 505 jeans, snow boots and a Carhartt beanie. It's fan gear that still looks like an outfit, not a costume. The hoodie is officially licensed NHL; the photo is a colour match. Hockey season is here, so layer up.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#MensOutfits",
+    "#FootballFanStyle",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's hockey night outfit with blue hoodie, black jacket, jeans and snow boots",
+   "board": "Game Day Outfits for Men",
+   "section": "Hockey Night",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "gameday/gameday-nov-9-2",
+   "title": "Oilers Fans, This Is the Cold-Weather Fit 🧡💙",
+   "description": "An Edmonton Oilers hoodie under a black thermal lined coat, with black trousers, Tommy Hilfiger boots and leather touchscreen gloves. Warm, simple, and you still look like you tried. The hoodie is officially licensed NHL; the photo is a colour match. Made for the coldest nights of the season.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#MensStyle",
+    "#TeamColorOutfit",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's winter street outfit with royal blue hoodie, black padded coat and black boots",
+   "board": "Game Day Outfits for Men",
+   "section": "Hockey Night",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "gameday/gameday-nov-9-3",
+   "title": "Red Goal Light Energy, No Jersey Needed 🚨",
+   "description": "A red and white sweatshirt under a black moto jacket, with thermal lined jeans, Chelsea boots and a striped red scarf. It says game night without looking like a costume. Already own the boots? Just add the jacket. Red is the colour to wear to the rink this winter.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#MensFashion",
+    "#StreetStyleMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's hockey night outfit with red sweatshirt, black moto jacket, jeans and red scarf",
+   "board": "Game Day Outfits for Men",
+   "section": "Hockey Night",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "gameday/gameday-nov-9-4",
+   "title": "The All-Black Fit for a Late Puck Drop 🖤",
+   "description": "A colour block zip sweatshirt under a hooded padded coat, with House of Blanks black sweatpants, Columbia boots and a red plaid beanie and scarf set. All black keeps it easy, and the plaid does the talking. A warm, low-effort look for the cold months ahead.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#MensOutfits",
+    "#StreetStyleMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's all-black hockey night outfit with padded coat and red plaid beanie and scarf",
+   "board": "Game Day Outfits for Men",
+   "section": "Hockey Night",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "gameday/gameday-nov-9-5",
+   "title": "Navy Night at the Rink, Done Right 💙",
+   "description": "A House of Blanks navy crewneck under a Levi's corduroy sherpa trucker, with dark khaki chinos, brown Chelsea boots and a silver watch. Team colours without a logo in sight. Already own the chinos? Just add the jacket. Sherpa collars are everywhere this winter for a reason.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#MensStyle",
+    "#TeamColorOutfit",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's navy outfit with sherpa trucker jacket, khaki chinos and brown Chelsea boots",
+   "board": "Game Day Outfits for Men",
+   "section": "Hockey Night",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "gameday/gameday-nov-9-6",
+   "title": "The Cold Tailgate Fit That Actually Keeps You Warm 🏈",
+   "description": "A brown plaid flannel under a faux leather sherpa-lined jacket, with Levi's 505 jeans, snow boots and a black beanie. Layers that hold up in a cold parking lot and still look good in photos. Fan-ready without looking like a costume. Late-season football calls for exactly this.",
+   "hashtags": [
+    "#TailgateOutfitMen",
+    "#GameDayOutfitMen",
+    "#MensFallFashion",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's cold tailgate outfit with plaid flannel, brown sherpa jacket, jeans and boots",
+   "board": "Game Day Outfits for Men",
+   "section": "Cold Weather Game Day",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "gameday/gameday-nov-9-7",
+   "title": "Winter Sideline Fit, Built for the Late Season 🥶",
+   "description": "A black hoodie under a Calvin Klein grey down puffer, with black trousers, Columbia boots and leather touchscreen gloves. Simple colours, serious warmth, and you can still use your phone. A clean way to dress for the coldest games of the year.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#MensOutfits",
+    "#StadiumStreetwear",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's cold game day outfit with grey puffer jacket, black hoodie, gloves and boots",
+   "board": "Game Day Outfits for Men",
+   "section": "Cold Weather Game Day",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "gameday/gameday-nov-9-8",
+   "title": "Raptors Night, Layered and Easy 🏀",
+   "description": "A Toronto Raptors vintage tee under a black full-zip sweater, with black trousers, Reebok Club C sneakers and a silver watch. It's fan gear that still looks like an outfit, not a costume. The tee is officially licensed NBA; the photo is a colour match. Basketball season is the perfect excuse.",
+   "hashtags": [
+    "#FootballFanStyle",
+    "#MensOutfits",
+    "#StreetStyleMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's basketball night outfit with black tee, black zip sweater and white sneakers",
+   "board": "Game Day Outfits for Men",
+   "section": "Basketball",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "casual/casual-outfit-nov-9",
+   "title": "Friendsgiving Fit in Warm Browns 🍂",
+   "description": "A beige quarter-zip sweater under a brown faux suede shacket, with black pleated pants, dark brown Timberland boots and a Timex watch. Dressed up enough for dinner, relaxed enough for the couch after. Already own the pants? Just add the shacket. Warm browns are the colour of the season.",
+   "hashtags": [
+    "#ChocolateBrownOutfitsMen",
+    "#MensFallFashion",
+    "#ShacketOutfitsMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's Friendsgiving outfit with beige quarter-zip, brown shacket and black pants",
+   "board": "Life Events & Special Occasions Outfits for Men",
+   "section": "Holiday Party Style",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "formal/formal-outfit-nov-9",
+   "title": "The Holiday Party Suit, Minus the Tie 🎄",
+   "description": "A black turtleneck under a navy suit, topped with a short black wool overcoat, Chelsea boots and a silver watch. Skipping the shirt and tie makes a suit feel like a night out. It's sharp without trying too hard. Holiday party invites are about to start landing.",
+   "hashtags": [
+    "#DapperMensOutfits",
+    "#MensStyle",
+    "#MensFashion",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's holiday party outfit with navy suit, black turtleneck and short black overcoat",
+   "board": "Life Events & Special Occasions Outfits for Men",
+   "section": "Holiday Party Style",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "streetwear/streetwear-outfit-nov-9",
+   "title": "Speckle and Ash: Quiet Winter Streetwear 🌨️",
+   "description": "A House of Blanks speckle hoodie under a light grey padded coat, with heather ash sweatpants, Reebok Club C sneakers and a black beanie. Greys on greys, no logos, nothing shouting. Already own the sneakers? Just add the coat. Tonal fits are the easiest way to look put together this winter.",
+   "hashtags": [
+    "#StreetStyleMen",
+    "#MensOutfits",
+    "#WinterStreetwear",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's winter streetwear outfit with light grey padded coat and grey sweatpants",
+   "board": "Men's Casual Streetwear 2026",
+   "section": "Winter Streetwear",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "streetwear/streetwear-outfit-nov-9-2",
+   "title": "Black Hoodie, Chore Coat, Done 🧥",
+   "description": "A black hoodie under a khaki wool blend chore-style jacket, with black trousers, white and navy sneakers and a red plaid beanie and scarf set. Workwear meets streetwear, and it takes about two minutes to put on. A chore-style jacket over a hoodie is the layer to try this winter.",
+   "hashtags": [
+    "#ChoreCoatOutfitsMen",
+    "#StreetStyleMen",
+    "#MensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's streetwear outfit with black hoodie, khaki chore jacket and red plaid scarf",
+   "board": "Men's Casual Streetwear 2026",
+   "section": "Winter Streetwear",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "date-night/date-night-nov-9",
+   "title": "The Winter Date Night Trench Fit 🌙",
+   "description": "A black turtleneck under a khaki button-front trench coat, with black trousers, Tommy Hilfiger boots and a Timex watch. Classic, a little cinematic, and warm enough for the walk to dinner. Already own the trousers? Just add the trench. A timeless look for the first snowy date of the year.",
+   "hashtags": [
+    "#DapperMensOutfits",
+    "#MensStyle",
+    "#MensFashion",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's winter date night outfit with khaki trench coat and black turtleneck",
+   "board": "Business Casual Outfits for Men",
+   "section": "Date Night & Night Out",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "business-casual/business-casual-nov-9",
+   "title": "The Navy Blazer Office Fit That Works All Winter 💼",
+   "description": "A light blue shirt and black cardigan under a navy blazer, with black trousers, brown Chelsea boots and a silver watch. Three easy layers that handle a cold office and a client meeting. Already own the trousers? Just add the blazer. A cardigan under a blazer is the quiet upgrade for this season.",
+   "hashtags": [
+    "#BusinessCasualMen",
+    "#DapperMensOutfits",
+    "#MensStyle",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's business casual outfit with navy blazer, black cardigan and light blue shirt",
+   "board": "Business Casual Outfits for Men",
+   "section": "Business Casual Outfits",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "outfit",
+   "id": "budget/budget-outfit-nov-9",
+   "title": "The Cozy Layered Fit for Staying In 🛋️",
+   "description": "A burgundy henley under a dark grey crew neck sweater, with black cuffed sweatpants. Soft layers for the days you're not going far, and it still looks like you made an effort. Bring your own shoes; this one is the top, layer and bottom. It's prime season for staying in.",
+   "hashtags": [
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#WinterStreetwear",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's cozy outfit with dark grey sweater, burgundy henley and black sweatpants",
+   "board": "Men's Casual Streetwear 2026",
+   "section": "Winter Streetwear",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-4/padded-coat",
+   "title": "A Hooded Padded Coat for Winter Nights 🖤",
+   "description": "$65.44 for a black hooded padded coat with a zip front. It's a warm, simple winter layer that goes over everything you own. Everyday-ready, and a good one for walks to the rink. The cold is coming, so this is a good week to sort your coat.",
+   "hashtags": [
+    "#MensFallJackets",
+    "#DealAlert",
+    "#MensOutfits",
+    "#WinterStyle"
+   ],
+   "alt_text": "Men's black hooded padded winter coat with zip front",
+   "board": "Men's Fall Style Essentials",
+   "section": "Jackets & Outerwear",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-2/padded-coat",
+   "title": "Thermal Lined Coat Under $55 for Real Cold ❄️",
+   "description": "$54.58 for a black padded coat with a thick thermal lining. It's made for real cold and plain enough to go over a hoodie or a sweater. Gameday-ready and fine for the commute too. Worth sorting before the first deep freeze.",
+   "hashtags": [
+    "#MensFallJackets",
+    "#DealAlert",
+    "#MensCasualOutfits",
+    "#WinterStyle"
+   ],
+   "alt_text": "Men's black thermal lined padded coat with a collar",
+   "board": "Game Day Outfits for Men",
+   "section": "Cold Weather Game Day",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "streetwear/streetwear-outfit-nov-9/padded-coat",
+   "title": "Light Grey Short Padded Coat Under $60 🌨️",
+   "description": "$59.98 for a light grey short padded coat with a stand collar and zip front. It's clean winter streetwear that sits nicely over a hoodie and sweats. Everyday-ready. Light grey is a nice break from all the black coats out there this season.",
+   "hashtags": [
+    "#StreetStyleMen",
+    "#ShopThisLook",
+    "#MensFallJackets",
+    "#WinterStreetwear"
+   ],
+   "alt_text": "Men's light grey short padded coat with stand collar",
+   "board": "Men's Casual Streetwear 2026",
+   "section": "Winter Streetwear",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "formal/formal-outfit-nov-9/overcoat",
+   "title": "A Short Wool Overcoat Under $45 🖤",
+   "description": "$41.01 for a short black wool overcoat with a collar and button front, cut to the upper thigh. It looks sharp over a suit and just as good over a sweater. Office-appropriate and date-night ready. Holiday party season is close, so it's good timing.",
+   "hashtags": [
+    "#DapperMensOutfits",
+    "#DealAlert",
+    "#MensFallJackets",
+    "#MensStyle"
+   ],
+   "alt_text": "Men's short black wool overcoat with button front",
+   "board": "Men's Fall Style Essentials",
+   "section": "Jackets & Outerwear",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "date-night/date-night-nov-9/trench-coat",
+   "title": "Khaki Trench Coat Under $55 for Date Night 🌙",
+   "description": "$53 for a khaki button-front trench coat, and it's on sale right now. It goes straight over a black turtleneck for an easy smart look. Date-night ready and office-appropriate. A classic trench is one of those pieces you keep wearing year after year.",
+   "hashtags": [
+    "#DapperMensOutfits",
+    "#ShopThisLook",
+    "#MensFallJackets",
+    "#MensStyle"
+   ],
+   "alt_text": "Men's khaki button-front trench coat",
+   "board": "Business Casual Outfits for Men",
+   "section": "Date Night & Night Out",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-3/moto-jacket",
+   "title": "A Black Moto Jacket Under $55 🏍️",
+   "description": "$54.79 for a black faux leather moto jacket with a zip front. It adds an edge to a plain sweatshirt and jeans in about two seconds. Gameday-ready and good for a night out. A moto jacket is the easiest way to make a simple fit look intentional.",
+   "hashtags": [
+    "#StreetStyleMen",
+    "#ShopThisLook",
+    "#MensFallJackets",
+    "#MensOutfits"
+   ],
+   "alt_text": "Men's black faux leather zip-up moto jacket",
+   "board": "Men's Fall Style Essentials",
+   "section": "Jackets & Outerwear",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-6/sherpa-jacket",
+   "title": "The Sherpa-Lined Brown Jacket for Cold Tailgates 🍂",
+   "description": "$91.55 for a brown faux leather jacket with a beige sherpa lining and collar. It's warm enough for a cold tailgate and looks better with every wear. Gameday-ready. Sherpa collars are one of the best-looking ways to stay warm this winter.",
+   "hashtags": [
+    "#MensFallJackets",
+    "#TailgateOutfitMen",
+    "#ShopThisLook",
+    "#MensFashion"
+   ],
+   "alt_text": "Men's brown faux leather jacket with beige sherpa lining",
+   "board": "Game Day Outfits for Men",
+   "section": "Cold Weather Game Day",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "streetwear/streetwear-outfit-nov-9-2/chore-jacket",
+   "title": "A Wool Blend Chore-Style Jacket Under $45 🧥",
+   "description": "$40.68 for a khaki wool blend shirt jacket in a chore-coat style. It layers right over a hoodie for winter streetwear and looks just as good with a sweater. Everyday-ready. Chore-style layers are having a moment, and this one keeps it simple.",
+   "hashtags": [
+    "#ChoreCoatOutfitsMen",
+    "#DealAlert",
+    "#StreetStyleMen",
+    "#MensOutfits"
+   ],
+   "alt_text": "Men's khaki wool blend chore-style shirt jacket",
+   "board": "Men's Casual Streetwear 2026",
+   "section": "Winter Streetwear",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "casual/casual-outfit-nov-9/shacket",
+   "title": "A Brown Faux Suede Shacket Under $30 🤎",
+   "description": "$28.58 for a brown faux suede shacket with a fleece lining. It's a warm brown layer that works over a knit sweater or a plain tee. Everyday-ready and easy to dress up. Brown is the colour of the season, and this is a cheap way to try it.",
+   "hashtags": [
+    "#ShacketOutfitsMen",
+    "#Under30Finds",
+    "#ChocolateBrownOutfitsMen",
+    "#MensCasualOutfits"
+   ],
+   "alt_text": "Men's brown faux suede fleece lined shacket",
+   "board": "Men's Fall Style Essentials",
+   "section": "Jackets & Outerwear",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "streetwear/streetwear-outfit-nov-9-2/hoodie",
+   "title": "The Plain Black Hoodie Under $30 🖤",
+   "description": "$28.40 for a plain black pullover hoodie with a drawstring hood and kangaroo pocket. It's the base layer for most winter fits, and it's on sale right now. Everyday-ready. If your current hoodie has seen better days, this is the simple replacement.",
+   "hashtags": [
+    "#Under30Finds",
+    "#MensOutfits",
+    "#StreetStyleMen",
+    "#MensFashion"
+   ],
+   "alt_text": "Men's plain black pullover hoodie with kangaroo pocket",
+   "board": "Men's Basic & Essentials",
+   "section": "Hoodies",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "casual/casual-outfit-nov-9/sweater",
+   "title": "A Beige Quarter-Zip Sweater for Under $40 🎁",
+   "description": "$37.52 for a beige knit quarter-zip sweater with a stand collar. It's a soft layer that works under a jacket or on its own, and it makes an easy gift for him. Office-appropriate and weekend-ready. Quarter-zips are the easiest winter layer to wear.",
+   "hashtags": [
+    "#MensFallSweaters",
+    "#DealAlert",
+    "#ChristmasGiftsForMen",
+    "#MensStyle"
+   ],
+   "alt_text": "Men's beige knit quarter-zip sweater with stand collar",
+   "board": "Christmas Gifts for Men 2026",
+   "section": "$25–$60",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "business-casual/business-casual-nov-9/cardigan",
+   "title": "A Black Button Cardigan Under $25 🖤",
+   "description": "$24.98 for a black button-front cardigan. It layers neatly between a dress shirt and a blazer when the office gets cold. Office-appropriate and fine with jeans on the weekend. A plain cardigan is one of the cheapest upgrades you can make to your winter rotation.",
+   "hashtags": [
+    "#Under25Finds",
+    "#MensFallSweaters",
+    "#DapperMensOutfits",
+    "#MensStyle"
+   ],
+   "alt_text": "Men's black button-front cardigan",
+   "board": "Business Casual Outfits for Men",
+   "section": "Sweaters & Layers",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "budget/budget-outfit-nov-9/sweater",
+   "title": "A Dark Grey Crew Neck Sweater Under $25 🌫️",
+   "description": "$22.08 for a dark grey crew neck sweater. It's simple, warm and easy to layer over a henley or a collared shirt. Everyday-ready and office-appropriate. A plain dark sweater goes with everything you already own, which makes this an easy pick for winter.",
+   "hashtags": [
+    "#Under25Finds",
+    "#MensFallSweaters",
+    "#MensCasualOutfits",
+    "#MensOutfits"
+   ],
+   "alt_text": "Men's dark grey crew neck sweater",
+   "board": "Men's Fall Style Essentials",
+   "section": "Sweaters & Layers",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-3/jeans",
+   "title": "Fleece-Lined Thermal Jeans Under $55 🔥",
+   "description": "$51.58 for blue water-washed jeans with a thermal lining, and they're on sale right now. It's warm denim for cold game nights and icy walks to work. Gameday-ready and everyday-easy. Once you try lined jeans in January, there's no going back.",
+   "hashtags": [
+    "#MensFallFashion",
+    "#ShopThisLook",
+    "#GameDayOutfitMen",
+    "#MensOutfits"
+   ],
+   "alt_text": "Men's blue water-washed thermal lined jeans with fleece lining",
+   "board": "Men's Fall Style Essentials",
+   "section": "Fall Pants & Bottoms",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "business-casual/business-casual-aug-10/pants",
+   "title": "Black Pleated Dress Pants Under $30 👖",
+   "description": "$27.04 for black pleated straight leg dress pants, on sale right now. They work with a sweater for dinner or a shirt for the office. Office-appropriate and date-night ready. A good pair of black pleated pants is the piece that makes the rest of your closet work harder.",
+   "hashtags": [
+    "#Under30Finds",
+    "#DapperMensOutfits",
+    "#MensStyle",
+    "#MensOutfits"
+   ],
+   "alt_text": "Men's black pleated straight leg dress pants",
+   "board": "Business Casual Outfits for Men",
+   "section": "Pants & Chinos",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "budget/budget-outfit-nov-9/sweatpants",
+   "title": "Black Cuffed Sweatpants Under $20 🛋️",
+   "description": "$19.48 for black cuffed sweatpants with a drawstring waist. They're comfortable joggers for lazy days, the gym or a cozy fit at home. Everyday-ready. If your current pair is looking tired, this is an easy swap that won't cost much.",
+   "hashtags": [
+    "#Under20Finds",
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#MensFashion"
+   ],
+   "alt_text": "Men's black cuffed sweatpants with drawstring waist",
+   "board": "Men's Basic & Essentials",
+   "section": "Under $20",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-3/sweatshirt",
+   "title": "A Red and White Sweatshirt Under $25 🚨",
+   "description": "$23.08 for a red and white letter print sweatshirt. It's bold enough for hockey night and easy under a black jacket. Gameday-ready with no team logo to worry about. A red top is the simple way to show up in team colours this season.",
+   "hashtags": [
+    "#Under25Finds",
+    "#GameDayOutfitMen",
+    "#TeamColorOutfit",
+    "#MensOutfits"
+   ],
+   "alt_text": "Men's red and white letter print sweatshirt",
+   "board": "Game Day Outfits for Men",
+   "section": "Hockey Night",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-4/zip-sweatshirt",
+   "title": "A Colour Block Zip Sweatshirt Under $30 🖤",
+   "description": "$25.88 for a black colour block zip-up sweatshirt, on sale right now. There's no logo or text, so it goes with anything. Gameday-ready and easy under a coat. A zip layer makes it simple to warm up or cool down in a packed arena.",
+   "hashtags": [
+    "#Under30Finds",
+    "#GameDayOutfitMen",
+    "#MensOutfits",
+    "#StreetStyleMen"
+   ],
+   "alt_text": "Men's black colour block zip-up sweatshirt",
+   "board": "Game Day Outfits for Men",
+   "section": "Hockey Night",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "formal/formal-outfit-nov-9/turtleneck",
+   "title": "A Slim Black Turtleneck Under $15 🖤",
+   "description": "$14.55 for a black slim fit turtleneck, on sale right now. Wear it under a suit in place of a shirt and tie, or under a coat for dinner. Date-night ready and office-appropriate. It's about the cheapest way to look sharp all winter.",
+   "hashtags": [
+    "#Under15Finds",
+    "#DapperMensOutfits",
+    "#MensStyle",
+    "#DealAlert"
+   ],
+   "alt_text": "Men's black slim fit turtleneck",
+   "board": "Business Casual Outfits for Men",
+   "section": "Sweaters & Layers",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "budget/budget-outfit-nov-9/henley",
+   "title": "A Burgundy Henley Under $20 🍷",
+   "description": "$15.78 for a burgundy long sleeve henley with a button front. It layers nicely under a crew neck sweater or goes on its own with jeans. Everyday-ready. Burgundy is an easy way to add some colour to a winter closet full of black and grey.",
+   "hashtags": [
+    "#Under20Finds",
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#MensFashion"
+   ],
+   "alt_text": "Men's burgundy long sleeve henley with button front",
+   "board": "Men's Basic & Essentials",
+   "section": "Under $20",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "business-casual/business-casual-nov-9/shirt",
+   "title": "A Light Blue Button Down Under $25 👔",
+   "description": "$21.32 for a light blue button down shirt, on sale right now. It's made for smart casual and office fits, and it looks right under a cardigan or blazer. Office-appropriate. A light blue shirt is the one every guy ends up wearing the most.",
+   "hashtags": [
+    "#Under25Finds",
+    "#DapperMensOutfits",
+    "#MensStyle",
+    "#MensOutfits"
+   ],
+   "alt_text": "Men's light blue smart casual button down shirt",
+   "board": "Business Casual Outfits for Men",
+   "section": "Shirts",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "trending-products/trending-products-nov-9/pajama-set",
+   "title": "A Fluffy Pajama Set Under $40 🛋️",
+   "description": "Under $40 for a fluffy fleece pajama set: a royal blue crew neck top with navy and white plaid pants. It's soft, cozy and made for lazy mornings. Sold by SHEIN. It's a good one to keep on your own list or pick up as a Christmas gift for him.",
+   "hashtags": [
+    "#DealAlert",
+    "#ChristmasGiftsForMen",
+    "#MensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's royal blue fleece pajama top with navy and white plaid pants",
+   "board": "Christmas Gifts for Men 2026",
+   "section": "$25–$60",
+   "keywords": [
+    "mens casual outfits",
+    "dapper mens outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "business-casual/business-casual-nov-9/blazer",
+   "title": "A Navy Suit Blazer Under $40 💼",
+   "description": "$35.98 for a navy blue suit blazer. It layers over a cardigan and dress shirt for the office, or goes over a turtleneck for dinner. Office-appropriate and date-night ready. If you only own one blazer, navy is the right one to own.",
+   "hashtags": [
+    "#DapperMensOutfits",
+    "#DealAlert",
+    "#MensStyle",
+    "#MensOutfits"
+   ],
+   "alt_text": "Men's navy blue suit blazer",
+   "board": "Business Casual Outfits for Men",
+   "section": "Business Casual Outfits",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "formal/formal-outfit-nov-9/suit",
+   "title": "A Full Navy Suit Set Under $70 🤵",
+   "description": "$69 for a navy blue suit set with a notched collar blazer and matching pants, on sale right now. It handles holiday parties, weddings and big meetings. Office-appropriate and event-ready. With party season coming, it's a good time to have a suit ready to go.",
+   "hashtags": [
+    "#DapperMensOutfits",
+    "#ShopThisLook",
+    "#MensStyle",
+    "#MensFashion"
+   ],
+   "alt_text": "Men's navy blue notched collar blazer and pants suit set",
+   "board": "Life Events & Special Occasions Outfits for Men",
+   "section": "Holiday Party Style",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9/jacket",
+   "title": "The Columbia Hooded Jacket for Winter Game Days 🧥",
+   "description": "Columbia's insulated Labyrinth Loop II jacket with a hood, in black. It's a warm everyday winter jacket from a brand that knows the cold. Gameday-ready and good for the commute. Check price on Amazon, and get it sorted before the real cold shows up.",
+   "hashtags": [
+    "#MensFallJackets",
+    "#GameDayOutfitMen",
+    "#MensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black Columbia insulated hooded winter jacket",
+   "board": "Men's Fall Style Essentials",
+   "section": "Jackets & Outerwear",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-7/puffer-jacket",
+   "title": "The Calvin Klein Puffer in Iron Grey 🥶",
+   "description": "A Calvin Klein full-zip down puffer jacket in Iron grey. It's easy to throw over a hoodie, and the dark grey goes with nearly everything. Everyday-ready and sideline-ready. Check price on Amazon. A good puffer is the one piece you'll wear every day until spring.",
+   "hashtags": [
+    "#MensFallJackets",
+    "#MensStyle",
+    "#GameDayOutfitMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's Calvin Klein iron grey full-zip down puffer jacket",
+   "board": "Game Day Outfits for Men",
+   "section": "Cold Weather Game Day",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-5/trucker-jacket",
+   "title": "Levi's Corduroy Sherpa Trucker in Navy 💙",
+   "description": "Levi's navy corduroy trucker jacket with a sherpa lining and collar. It's a classic cold-weather layer that looks good with chinos or jeans. Everyday-ready. Check price on Amazon. Corduroy and sherpa together are hard to beat for winter texture.",
+   "hashtags": [
+    "#CorduroyOutfitsMen",
+    "#MensFallJackets",
+    "#MensStyle",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's navy corduroy Levi's trucker jacket with sherpa collar",
+   "board": "Men's Fall Style Essentials",
+   "section": "Jackets & Outerwear",
+   "keywords": [
+    "mens fall jackets",
+    "layered fall outfits men",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-8/zip-sweater",
+   "title": "A Clean Black Full-Zip Sweater 🖤",
+   "description": "Amazon Essentials' black full-zip cotton sweater. It's a clean layer over a tee that dresses up or down without any fuss. Everyday-ready and office-appropriate. Check price on Amazon. A plain zip layer is the piece you reach for more than you'd expect.",
+   "hashtags": [
+    "#MensFallSweaters",
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black full-zip cotton sweater",
+   "board": "Men's Fall Style Essentials",
+   "section": "Sweaters & Layers",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "trending-products/trending-products-nov-9/sherpa-fleece",
+   "title": "A Burgundy Sherpa-Lined Hooded Fleece 🍷",
+   "description": "Amazon Essentials' burgundy full-zip hooded fleece with a sherpa lining. It's a cozy layer for cold days and a nice break from all the black and grey. Everyday-ready. Check price on Amazon. A sherpa hood is about as warm as a sweater gets.",
+   "hashtags": [
+    "#MensFallSweaters",
+    "#MensCasualOutfits",
+    "#MensFashion",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's burgundy full-zip hooded fleece with sherpa lining",
+   "board": "Men's Fall Style Essentials",
+   "section": "Sweaters & Layers",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-7/hoodie",
+   "title": "A Heavy Hoodie for the Coldest Game Days 🥶",
+   "description": "The Legendary Whitetails Horizon hooded sweatshirt in black heather. It's a hoodie built for layering under a puffer when the temperature drops. Gameday-ready. Check price on Amazon. When it's this cold, the hoodie matters as much as the coat.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#MensOutfits",
+    "#MensCasualOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black heather Legendary Whitetails hooded sweatshirt",
+   "board": "Game Day Outfits for Men",
+   "section": "Cold Weather Game Day",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "trending-products/trending-products-nov-9/quarter-zip",
+   "title": "The Easy Fleece Quarter-Zip From Wrangler 🌫️",
+   "description": "Wrangler's fleece quarter-zip pullover in light heather gray. It's an easy layer over a tee or henley, and it looks tidy without trying. Everyday-ready and office-appropriate. Check price on Amazon. A grey quarter-zip goes with every pair of pants you own.",
+   "hashtags": [
+    "#MensFallSweaters",
+    "#MensCasualOutfits",
+    "#MensStyle",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's light heather gray Wrangler fleece quarter-zip pullover",
+   "board": "Men's Fall Style Essentials",
+   "section": "Sweaters & Layers",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-3/chelsea-boots",
+   "title": "Black Chelsea Boots That Go With Everything 🖤",
+   "description": "Amazon Essentials' black Chelsea ankle boots with elastic side panels. They slip on fast and work with jeans or a suit. Office-appropriate and date-night ready. Check price on Amazon. Every guy needs one pair of black boots that handles all of it.",
+   "hashtags": [
+    "#MensFallBoots",
+    "#MensStyle",
+    "#DapperMensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black Chelsea ankle boots with elastic side panels",
+   "board": "Men's Fall Style Essentials",
+   "section": "Fall Footwear",
+   "keywords": [
+    "mens fall boots",
+    "mens casual outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-5/chelsea-boots",
+   "title": "Dark Brown Chelsea Boots for Chinos and Trousers 🤎",
+   "description": "The Deer Stags Router Chelsea boot in dark brown. It's an easy boot for chinos and trousers, and brown warms up a navy or black outfit. Office-appropriate. Check price on Amazon. Brown boots are the fastest way to make a fit look more grown up.",
+   "hashtags": [
+    "#MensFallBoots",
+    "#MensCasualOutfits",
+    "#ChocolateBrownOutfitsMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's dark brown Deer Stags Chelsea boots",
+   "board": "Men's Fall Style Essentials",
+   "section": "Fall Footwear",
+   "keywords": [
+    "mens fall boots",
+    "mens casual outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "casual/casual-outfit-nov-9/chelsea-boots",
+   "title": "Timberland Chelsea Boots in Full-Grain Leather 🍂",
+   "description": "Timberland's Britton Falls Chelsea boot in dark brown full-grain leather. It's a dressier winter boot from a name you already trust. Date-night ready and good for dinners out. Check price on Amazon. These are the boots to wear when sneakers won't cut it.",
+   "hashtags": [
+    "#MensFallBoots",
+    "#MensStyle",
+    "#RuggedLuxuryMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's dark brown full-grain leather Timberland Chelsea boots",
+   "board": "Men's Accessories & Hats",
+   "section": "Shoes & Loafers",
+   "keywords": [
+    "mens fall boots",
+    "mens casual outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-2/boots",
+   "title": "The Sleek Black Tommy Hilfiger Boot 🖤",
+   "description": "The Tommy Hilfiger SESAME boot in black. It's a sleek boot for trousers or dark jeans that looks sharper than a sneaker on a cold night out. Date-night ready. Check price on Amazon. A clean black boot is one of the most useful things in a winter closet.",
+   "hashtags": [
+    "#MensFallBoots",
+    "#MensStyle",
+    "#DapperMensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black Tommy Hilfiger lace-up boots",
+   "board": "Men's Accessories & Hats",
+   "section": "Shoes & Loafers",
+   "keywords": [
+    "mens fall boots",
+    "mens casual outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9/snow-boots",
+   "title": "Kamik Snow Boots for the Walk to the Game ❄️",
+   "description": "Kamik's Forester snow boot in black. It's a warm winter boot for snowy walks to the game and everything else winter throws at you. Gameday-ready. Check price on Amazon. Canadian winters call for a real boot, and this is a solid one to have by the door.",
+   "hashtags": [
+    "#MensFallBoots",
+    "#GameDayOutfitMen",
+    "#MensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black Kamik Forester snow boots",
+   "board": "Game Day Outfits for Men",
+   "section": "Cold Weather Game Day",
+   "keywords": [
+    "mens fall boots",
+    "mens casual outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-4/boots",
+   "title": "Columbia Firecamp Boots for Cold, Wet Days 🥾",
+   "description": "Columbia's Firecamp boot in black and City Grey. It's a rugged lace-up boot for cold, wet days and long walks from the parking lot. Gameday-ready. Check price on Amazon. Good boots make a long cold day a lot easier, and these look good doing it.",
+   "hashtags": [
+    "#MensFallBoots",
+    "#GameDayOutfitMen",
+    "#RuggedLuxuryMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black and grey Columbia Firecamp lace-up boots",
+   "board": "Men's Fall Style Essentials",
+   "section": "Fall Footwear",
+   "keywords": [
+    "mens fall boots",
+    "mens casual outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "streetwear/streetwear-outfit-nov-9-2/sneakers",
+   "title": "Tommy Hilfiger Low-Tops in White and Navy 👟",
+   "description": "Tommy Hilfiger's Pandora2 sneaker in white and navy. It's a clean low-top for everyday fits that goes with black trousers or jeans. Everyday-ready. Check price on Amazon. White sneakers with a small hit of colour keep a dark winter outfit from feeling flat.",
+   "hashtags": [
+    "#StreetStyleMen",
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's white and navy Tommy Hilfiger low-top sneakers",
+   "board": "Men's Accessories & Hats",
+   "section": "Shoes & Loafers",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "streetwear/streetwear-outfit-nov-9/sneakers",
+   "title": "Reebok Club C: The Classic Court Sneaker 👟",
+   "description": "Reebok Club C sneakers in Chalk, Paperwhite and Glen Green. It's a classic court sneaker with a small hit of green, and it works with sweats or chinos. Everyday-ready. Check price on Amazon. Some sneakers never go out of style, and this is one of them.",
+   "hashtags": [
+    "#StreetStyleMen",
+    "#MensCasualOutfits",
+    "#MensFashion",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's chalk white and green Reebok Club C court sneakers",
+   "board": "Men's Casual Streetwear 2026",
+   "section": "Sneaker Pairings",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-3/scarf",
+   "title": "The Tommy Hilfiger Striped Scarf He'll Actually Wear 🎁",
+   "description": "Tommy Hilfiger's Vertical Global Stripe scarf in Primary Red Multi. It's a pop of red for winter and an easy Christmas gift for him. Gameday-ready with a black coat. Check price on Amazon. A good scarf is a simple gift that gets worn all season.",
+   "hashtags": [
+    "#ChristmasGiftsForMen",
+    "#MensStyle",
+    "#GameDayOutfitMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's red striped Tommy Hilfiger scarf",
+   "board": "Christmas Gifts for Men 2026",
+   "section": "$25–$60",
+   "keywords": [
+    "mens casual outfits",
+    "dapper mens outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-2/gloves",
+   "title": "Leather Touchscreen Gloves, a Gift That Gets Used 🎁",
+   "description": "Dockers' black leather gloves with touchscreen fingertips and a ribbed cuff. He can answer his phone without taking them off, which is the whole point. Office-appropriate and gameday-ready. Check price on Amazon. Winter gloves are a gift he'll use every single day.",
+   "hashtags": [
+    "#ChristmasGiftsForMen",
+    "#MensStyle",
+    "#DapperMensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black leather touchscreen gloves with ribbed cuff",
+   "board": "Christmas Gifts for Men 2026",
+   "section": "$25–$60",
+   "keywords": [
+    "mens casual outfits",
+    "dapper mens outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9/beanie",
+   "title": "The Classic Carhartt Beanie 🖤",
+   "description": "Carhartt's classic knit cuffed beanie in black. It's the beanie you've seen everywhere for a reason, and it goes with every winter outfit. Everyday-ready and gameday-ready. Check price on Amazon. It's a simple piece that does its job all winter long.",
+   "hashtags": [
+    "#HeritageWorkwear",
+    "#MensOutfits",
+    "#StreetStyleMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black Carhartt knit cuffed beanie",
+   "board": "Men's Accessories & Hats",
+   "section": "Hats & Caps",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "casual/casual-outfit-nov-9/watch",
+   "title": "The Timex Easy Reader, a Gift That Never Dates ⌚",
+   "description": "The Timex Easy Reader 38mm watch with a brown leather strap and a silver-tone case. It's a simple, classic watch that goes with everything from a sweater to a suit. Office-appropriate. Check price on Amazon. A clean watch is a Christmas gift he'll actually wear.",
+   "hashtags": [
+    "#ChristmasGiftsForMen",
+    "#MensStyle",
+    "#DapperMensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's Timex Easy Reader watch with brown leather strap",
+   "board": "Christmas Gifts for Men 2026",
+   "section": "$25–$60",
+   "keywords": [
+    "mens casual outfits",
+    "dapper mens outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-4/beanie-scarf-set",
+   "title": "Levi's Red Plaid Beanie and Scarf Set 🧣",
+   "description": "A Levi's waffle knit beanie and plaid scarf set in red plaid. It's a two-piece hit of colour that sorts out a plain black winter outfit. Everyday-ready and gameday-ready. Check price on Amazon. A matching set means one less thing to think about on cold mornings.",
+   "hashtags": [
+    "#MensStyle",
+    "#MensOutfits",
+    "#GameDayOutfitMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's red plaid Levi's waffle beanie and scarf set",
+   "board": "Men's Accessories & Hats",
+   "section": "Hats & Caps",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-5/watch",
+   "title": "The Casio Diver Style Watch ⌚",
+   "description": "Casio's diver style watch with a silver-tone stainless steel band. It looks at home with a blazer or a hoodie, and that's the whole appeal. Everyday-ready and office-appropriate. Check price on Amazon. A steel watch quietly finishes off just about any outfit.",
+   "hashtags": [
+    "#MensStyle",
+    "#MensOutfits",
+    "#DapperMensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's silver-tone Casio diver style stainless steel watch",
+   "board": "Men's Accessories & Hats",
+   "section": "Watches & Belts",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9/jeans",
+   "title": "Levi's 505: The Straight Jeans That Just Work 👖",
+   "description": "Levi's 505 regular fit jeans in blue. It's a straight, classic pair of jeans that goes with boots or sneakers. Everyday-ready and gameday-ready. Check price on Amazon. Some jeans stick around for decades because they simply work, and the 505 is one of them.",
+   "hashtags": [
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#HeritageWorkwear",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's blue Levi's 505 regular fit jeans",
+   "board": "Men's Fall Style Essentials",
+   "section": "Fall Pants & Bottoms",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-5/chinos",
+   "title": "Dark Khaki Stretch Chinos for Every Day 🍂",
+   "description": "Amazon Essentials' athletic-fit stretch chinos in dark khaki. They have room in the thigh, and the stretch makes them easy to wear all day. Office-appropriate and everyday-ready. Check price on Amazon. Dark khaki goes with navy, black and brown, so they earn their spot.",
+   "hashtags": [
+    "#MensCasualOutfits",
+    "#MensFallFashion",
+    "#MensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's dark khaki athletic-fit stretch chinos",
+   "board": "Business Casual Outfits for Men",
+   "section": "Pants & Chinos",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-2/trousers",
+   "title": "The Black Stretch Trousers That Do It All 🖤",
+   "description": "Amazon Essentials' straight-fit stretch twill trousers in black. They work for the office, a night out or a cold game. Office-appropriate and date-night ready. Check price on Amazon. Black trousers show up in more of our outfits this week than anything else, and that says it all.",
+   "hashtags": [
+    "#DapperMensOutfits",
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black straight-fit stretch twill trousers",
+   "board": "Business Casual Outfits for Men",
+   "section": "Pants & Chinos",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9/leafs-hoodie",
+   "title": "A Leafs Retro Hoodie for Hockey Night 🏒",
+   "description": "Calhoun's retro heritage pullover hoodie for the Toronto Maple Leafs, officially licensed NHL. It's fan gear you can wear to the game and the grocery store. Gameday-ready. The photo is a colour match, so check the listing for the real logo. Check price on Amazon.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#FootballFanStyle",
+    "#TeamColorOutfit",
+    "#ShopThisLook"
+   ],
+   "alt_text": "AI colour match of a blue hoodie for a licensed Leafs hoodie",
+   "board": "Game Day Outfits for Men",
+   "section": "Team Gear",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-2/oilers-hoodie",
+   "title": "An Oilers Hoodie for Hockey Night 🧡💙",
+   "description": "Fanatics' Goaltender Defender pullover hoodie for the Edmonton Oilers in royal, officially licensed NHL. It layers well under a winter coat. Gameday-ready. The photo is a colour match, so check the listing for the real logo. Check price on Amazon.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#FootballFanStyle",
+    "#TeamColorOutfit",
+    "#ShopThisLook"
+   ],
+   "alt_text": "AI colour match of a royal hoodie for a licensed Oilers hoodie",
+   "board": "Game Day Outfits for Men",
+   "section": "Team Gear",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-8/raptors-tee",
+   "title": "A '47 Raptors Vintage Tee for Game Night 🏀",
+   "description": "'47's vintage big tee for the Toronto Raptors in black, officially licensed NBA. It works on its own or under a zip layer. Gameday-ready. The photo is a colour match, so check the listing for the real logo. Check price on Amazon.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#FootballFanStyle",
+    "#StreetStyleMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "AI colour match of a black tee for a licensed Raptors tee",
+   "board": "Game Day Outfits for Men",
+   "section": "Team Gear",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "date-night/date-night-nov-9/turtleneck",
+   "title": "A Black Rib Knit Turtleneck for Date Night 🌙",
+   "description": "Amazon Essentials' black rib knit cotton turtleneck sweater. It's an easy date night layer that looks great under a trench or a blazer. Date-night ready and office-appropriate. Check price on Amazon. A black turtleneck is the quickest way to look like you have it together.",
+   "hashtags": [
+    "#DapperMensOutfits",
+    "#MensFallSweaters",
+    "#MensStyle",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black rib knit cotton turtleneck sweater",
+   "board": "Business Casual Outfits for Men",
+   "section": "Date Night & Night Out",
+   "keywords": [
+    "dapper mens outfits",
+    "mens casual outfits",
+    "male preppy outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "trending-products/trending-products-nov-9/henley",
+   "title": "An Olive Long-Sleeve Henley for Easy Layers 🌿",
+   "description": "Amazon Essentials' regular-fit long-sleeve henley in olive heather. It's a soft, simple top for layering under a flannel or wearing on its own. Everyday-ready. Check price on Amazon. Olive is one of the easiest colours to add to a closet of black and navy.",
+   "hashtags": [
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#MensFashion",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's olive heather long-sleeve henley",
+   "board": "Men's Basic & Essentials",
+   "section": "Shirts",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-6/flannel",
+   "title": "The Relaxed Plaid Flannel for Cold Tailgates 🍂",
+   "description": "Amazon Essentials' relaxed-fit long-sleeve flannel shirt in a brown and red plaid. Wear it buttoned or open as a warm mid layer under a jacket. Gameday-ready and everyday-easy. Check price on Amazon. Flannel season is here, and a plaid shirt never lets you down.",
+   "hashtags": [
+    "#FlannelShirtOutfitsMen",
+    "#MensFallFashion",
+    "#TailgateOutfitMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's brown and red plaid relaxed-fit flannel shirt",
+   "board": "Men's Fall Style Essentials",
+   "section": "Sweaters & Layers",
+   "keywords": [
+    "layered fall outfits men",
+    "mens fall sweaters",
+    "mens casual outfits"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "trending-products/trending-products-nov-9/fleece-hoodie",
+   "title": "The House of Blanks Hoodie for a Splurge Gift 🎁",
+   "description": "House of Blanks' 3013 relaxed fit fleece hoodie in Off Black. It's a plain, well-made blank with no logos, for the guy who wants one really good hoodie. Everyday-ready. A hoodie like this is a Christmas gift he'll wear on repeat all winter.",
+   "hashtags": [
+    "#ChristmasGiftsForMen",
+    "#MensStyle",
+    "#StreetStyleMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's off black House of Blanks relaxed fit fleece hoodie",
+   "board": "Christmas Gifts for Men 2026",
+   "section": "Splurge $100+",
+   "keywords": [
+    "mens casual outfits",
+    "dapper mens outfits",
+    "casual autumn style men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-5/crewneck",
+   "title": "The House of Blanks Navy Crewneck for Hockey Night 💙",
+   "description": "House of Blanks' 4009 relaxed fit fleece crewneck in navy. It's a plain crewneck that layers under a jacket and shows up in team colours without a logo. Gameday-ready. Navy is an easy way to dress for the rink this winter.",
+   "hashtags": [
+    "#GameDayOutfitMen",
+    "#TeamColorOutfit",
+    "#MensStyle",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's navy House of Blanks relaxed fit fleece crewneck",
+   "board": "Game Day Outfits for Men",
+   "section": "Hockey Night",
+   "keywords": [
+    "game day outfit men casual",
+    "football fan style men",
+    "team color outfit men casual"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "streetwear/streetwear-outfit-nov-9/hoodie",
+   "title": "House of Blanks Black Speckle Hoodie 🌨️",
+   "description": "House of Blanks' 3008 pullover hoodie in Black Speckle. The speckled finish gives a plain hoodie some texture without any logos. Everyday-ready. It's quiet winter streetwear that looks best under a light coat with tonal sweats.",
+   "hashtags": [
+    "#StreetStyleMen",
+    "#WinterStreetwear",
+    "#MensOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black speckle House of Blanks pullover hoodie",
+   "board": "Men's Casual Streetwear 2026",
+   "section": "Winter Streetwear",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "gameday/gameday-nov-9-4/sweatpants",
+   "title": "House of Blanks Black Straight Leg Sweatpants 🖤",
+   "description": "House of Blanks' 7013 straight leg sweatpants in black. The straight cut looks cleaner than a cuffed jogger, so they work outside the house too. Everyday-ready. Plain black sweats are the backbone of winter streetwear.",
+   "hashtags": [
+    "#StreetStyleMen",
+    "#WinterStreetwear",
+    "#MensCasualOutfits",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's black House of Blanks straight leg sweatpants",
+   "board": "Men's Casual Streetwear 2026",
+   "section": "Winter Streetwear",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "streetwear/streetwear-outfit-nov-9/sweatpants",
+   "title": "Heather Ash Straight Leg Sweatpants 🌫️",
+   "description": "House of Blanks' 7013 straight leg sweatpants in Heather Ash. It's a light grey basic that pairs with a hoodie and white sneakers. Everyday-ready. Grey sweats are a simple essential that always looks right, and the straight leg keeps them tidy.",
+   "hashtags": [
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#StreetStyleMen",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's heather ash House of Blanks straight leg sweatpants",
+   "board": "Men's Basic & Essentials",
+   "section": "Pants",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  },
+  {
+   "type": "product",
+   "id": "trending-products/trending-products-nov-9/long-sleeve-tee",
+   "title": "The House of Blanks Heavyweight Long Sleeve Tee 🖤",
+   "description": "House of Blanks' 1011 heavyweight long sleeve tee in Off Black. It's a plain blank for layering under a hoodie or wearing on its own. Everyday-ready. A good heavyweight tee is one of those basics you end up buying twice.",
+   "hashtags": [
+    "#MensCasualOutfits",
+    "#MensOutfits",
+    "#MensFashion",
+    "#ShopThisLook"
+   ],
+   "alt_text": "Men's off black House of Blanks heavyweight long sleeve tee",
+   "board": "Men's Basic & Essentials",
+   "section": "Shirts",
+   "keywords": [
+    "street style men",
+    "mens casual outfits",
+    "layered fall outfits men"
+   ]
+  }
+ ]
+}

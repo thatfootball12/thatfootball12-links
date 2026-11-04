@@ -16,9 +16,10 @@ Inputs (all in pinterest/):
       is optional. An outfit id is its folder under outfits/; a product
       id is its products.json id. week_start is the batch week's Monday.
     pin_settings.json   the disclosure appended to every description
-      (disclosure_shein_only when every item in the pin is SHEIN, else
-      disclosure; a pin with a retailer outside disclosure_retailers,
-      e.g. Awin, is an error), the AI line added for AI-image pins (every outfit pin, and product
+      (disclosure_shein_only when every item in the pin is SHEIN,
+      disclosure_awin when any item is Awin (the wording names House of
+      Blanks, the only Awin merchant pinned so far), else disclosure; a
+      pin with a retailer outside disclosure_retailers is an error), the AI line added for AI-image pins (every outfit pin, and product
       pins whose retailer is in ai_image_retailers), and the account's
       boards with their sections. Pinterest CREATES any board or section
       named in the CSV that doesn't exist, so these must match the
@@ -188,10 +189,13 @@ def resolve(pin, products, by_id, settings, problems, warnings):
 
 
 def disclosure(pin, settings):
-    """The SHEIN-only wording for a pin whose items are all SHEIN, else
-    the full one (SHEIN + Amazon)."""
+    """The SHEIN-only wording for a pin whose items are all SHEIN, the
+    Awin one for a pin with any Awin item, else the full one (SHEIN +
+    Amazon)."""
     if pin["retailers"] == {"SHEIN"}:
         return settings["disclosure_shein_only"].strip()
+    if "Awin" in pin["retailers"]:
+        return settings["disclosure_awin"].strip()
     return settings["disclosure"].strip()
 
 
