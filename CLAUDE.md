@@ -295,8 +295,9 @@ both required) is merged and live, write the pin copy into
 template layout (split into `_1`, `_2`, ... over Pinterest's 200-row
 limit) plus `pinterest_bulk_<date>_report.md`. The description is the
 copy + the disclosure from `pinterest/pin_settings.json` (the
-SHEIN-only wording when every item in the pin is SHEIN, the House of
-Blanks one when any item is Awin, else the SHEIN + Amazon one) (+ "Image created with AI." on every outfit pin and
+SHEIN-only wording when every item in the pin is SHEIN, a House of
+Blanks line naming only the partners present when any item is Awin, else
+the SHEIN + Amazon one) (+ "Image created with AI." on every outfit pin and
 Amazon product pin) + the hashtags. Pins are scheduled across the batch week (Mon–Sun), 2 outfit
 pins a day with gameday first (over 14 outfits spread evenly across all
 7 days), product and gift pins filling the days evenly,
@@ -320,7 +321,8 @@ alt text or the AI-modified label, so the report lists both to add by
 hand after upload. An Amazon gift guide card with no product page gets a
 `"type": "gift"` pin (id = the card's data-id): its image comes from
 `holiday-2026/pins/` (`<id>_holiday.png`, else `<id>_ai.jpg`, both AI,
-never the Amazon photo) and it links to the card's price section. `--dry-run` validates and prints the report without
+never the Amazon photo) and it links to the card's price section, or to
+a product page when the pin names one in `"page"`. `--dry-run` validates and prints the report without
 writing anything.
 
 When a page needs a photo that has to be sourced by hand at the

@@ -47,7 +47,11 @@ These are Jesse's standing rules for writing Pinterest pin copy. Follow them for
 ## Disclosure (exact wording, at the end of the description)
 - **SHEIN only:** "As a SHEIN Affiliate, I earn from qualifying purchases. Prices may change."
 - **Any Amazon item:** "As a SHEIN Affiliate and Amazon Associate, I earn from qualifying purchases. Prices may change."
-- **Any House of Blanks (Awin) item:** "As a SHEIN Affiliate, Amazon Associate and House of Blanks affiliate, I earn from qualifying purchases. Prices may change."
+- **Any House of Blanks (Awin) item:** name only the partners in the pin.
+  - House of Blanks only: "As a House of Blanks affiliate, I earn from qualifying purchases. Prices may change."
+  - With Amazon: "As an Amazon Associate and House of Blanks affiliate, I earn from qualifying purchases. Prices may change."
+  - With SHEIN: "As a SHEIN Affiliate and House of Blanks affiliate, I earn from qualifying purchases. Prices may change."
+  - With both: "As a SHEIN Affiliate, Amazon Associate and House of Blanks affiliate, I earn from qualifying purchases. Prices may change."
 - **AI image** (all outfit pins and Amazon pins): also add "Image created with AI." In Pinterest, also tick "Mark as AI-modified", plus "includes an AI-generated person" when a person appears.
 
 ## Boards

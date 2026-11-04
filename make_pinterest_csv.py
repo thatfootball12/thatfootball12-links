@@ -18,10 +18,12 @@ Inputs (all in pinterest/):
       gift-guide/index.html (type "gift", for cards with no product page
       of their own). week_start is the batch week's Monday.
     pin_settings.json   the disclosure appended to every description
-      (disclosure_shein_only when every item in the pin is SHEIN,
-      disclosure_awin when any item is Awin (the wording names House of
-      Blanks, the only Awin merchant pinned so far), else disclosure; a
-      pin with a retailer outside disclosure_retailers is an error), the AI line added for AI-image pins (every outfit pin, and product
+      (disclosure_shein_only when every item in the pin is SHEIN; with
+      any Awin item, the line naming only the partners present:
+      disclosure_awin_only, _awin_amazon, _awin_shein or disclosure_awin
+      for all three (the wording names House of Blanks, the only Awin
+      merchant pinned so far); else disclosure; a pin with a retailer
+      outside disclosure_retailers is an error), the AI line added for AI-image pins (every outfit pin, and product
       pins whose retailer is in ai_image_retailers), and the account's
       boards with their sections. Pinterest CREATES any board or section
       named in the CSV that doesn't exist, so these must match the
@@ -34,7 +36,9 @@ Per pin:
                 for products make_product_pin.py --pick didn't choose).
                 A gift pin uses holiday-2026/pins/<id>_holiday.png, or
                 <id>_ai.jpg: AI images, never the Amazon product photo.
-                Its Link is the card's price section on the gift guide.
+                Its Link is the product page of the products.json id in
+                its optional "page" field, else the card's price section
+                on the gift guide.
                 A batch where no SHEIN product pin has a product-pin.jpg
                 is an error: make_product_pin.py wasn't run.
     Description copy + disclosure [+ AI line] + hashtags.
@@ -71,6 +75,7 @@ import argparse
 import csv
 import json
 import os
+import posixpath
 import re
 import sys
 import urllib.error
@@ -159,9 +164,14 @@ def resolve(pin, products, by_id, settings, problems, warnings):
         pin["link"] = page_url(rel)
         pin["media"] = page_url(rel) + name
         pin["ai"] = True
-        items = [p for p in products if p["detail_page_url"].startswith(rel + "/")]
-        if not items:
-            problems.append(f"{label}: no products.json records under {rel}/")
+        with open(os.path.join(REPO, rel, "index.html"), encoding="utf-8") as f:
+            cards = re.findall(r'<a class="card" href="([^"]+)"', f.read())
+        # A card can link to a page in another outfit's folder: go by the
+        # cards, not the folder, or that item's retailer goes undisclosed.
+        pages = {posixpath.normpath(posixpath.join(rel, h)) + "/index.html" for h in cards}
+        items = [p for p in products if p["detail_page_url"] in pages]
+        if len(items) != len(pages):
+            problems.append(f"{label}: {len(pages) - len(items)} card(s) with no products.json record")
             return False
         pin["retailers"] = {p.get("retailer") for p in items}
         pin["has_amazon"] = "Amazon" in pin["retailers"]
@@ -218,6 +228,12 @@ def resolve(pin, products, by_id, settings, problems, warnings):
             return False
         pin["media"] = f"{SITE}{gift_guide.PIN_DIR}/{name}"
         pin["link"] = f"{SITE}gift-guide/#{card[0]}"
+        if pin.get("page"):
+            rec = by_id.get(pin["page"])
+            if rec is None:
+                problems.append(f"{label}: page {pin['page']} isn't in products.json")
+                return False
+            pin["link"] = page_url(os.path.dirname(rec["detail_page_url"]))
         pin["ai"] = True
         pin["retailers"] = {"Amazon"}
         pin["has_amazon"] = True
@@ -228,13 +244,17 @@ def resolve(pin, products, by_id, settings, problems, warnings):
 
 
 def disclosure(pin, settings):
-    """The SHEIN-only wording for a pin whose items are all SHEIN, the
-    Awin one for a pin with any Awin item, else the full one (SHEIN +
-    Amazon)."""
-    if pin["retailers"] == {"SHEIN"}:
+    """The SHEIN-only wording for a pin whose items are all SHEIN; with
+    any Awin item, the line naming only the partners present; else the
+    full one (SHEIN + Amazon)."""
+    retailers = pin["retailers"]
+    if retailers == {"SHEIN"}:
         return settings["disclosure_shein_only"].strip()
-    if "Awin" in pin["retailers"]:
-        return settings["disclosure_awin"].strip()
+    if "Awin" in retailers:
+        key = {frozenset({"Awin"}): "disclosure_awin_only",
+               frozenset({"Awin", "Amazon"}): "disclosure_awin_amazon",
+               frozenset({"Awin", "SHEIN"}): "disclosure_awin_shein"}.get(frozenset(retailers), "disclosure_awin")
+        return settings[key].strip()
     return settings["disclosure"].strip()
 
 
