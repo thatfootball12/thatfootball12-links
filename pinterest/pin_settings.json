@@ -1,4 +1,5 @@
 {
+  "_comment": "The Oct 26 and Nov 2 CSVs used the misspelling \"Men's Basic & Essentials\" on 22 pins. Never write it to new rows: the board is \"Men's Basics & Essentials\".",
   "disclosure": "As a SHEIN Affiliate and Amazon Associate, I earn from qualifying purchases. Prices may change.",
   "disclosure_shein_only": "As a SHEIN Affiliate, I earn from qualifying purchases. Prices may change.",
   "disclosure_awin": "As a SHEIN Affiliate, Amazon Associate and House of Blanks affiliate, I earn from qualifying purchases. Prices may change.",
@@ -40,7 +41,7 @@
       "Under $50",
       "Cold Weather Game Day",
       "Team Jersey Styling",
-      "Basketball"
+      "Basketball Styling"
     ],
     "Men's Summer Outfits 2026 🏝️": [
       "Beach & Vacation",
@@ -50,8 +51,7 @@
       "Date Night/Night Out",
       "Shoes & Accessories",
       "Pants & Chinos",
-      "Shirts",
-      "Sweaters & Layers",
+      "Shirts, Sweaters & Layers",
       "Business Casual Outfits"
     ],
     "Fall Casual Outfits for Men": [
@@ -105,13 +105,6 @@
       "Shoes & Loafers",
       "Hats & Caps",
       "Under $15"
-    ],
-    "Men's Basic & Essentials": [
-      "Under $20",
-      "Pants",
-      "Shorts",
-      "Hoodies",
-      "Shirts"
     ],
     "Men's Stadium Streetwear": [
       "Under $50",

@@ -22,14 +22,13 @@ Files: pinterest/pinterest_bulk_nov-9.csv
 | Business Casual Outfits for Men | Business Casual Outfits | 2 |
 | Business Casual Outfits for Men | Date Night/Night Out | 3 |
 | Business Casual Outfits for Men | Pants & Chinos | 3 |
-| Business Casual Outfits for Men | Shirts | 1 |
-| Business Casual Outfits for Men | Sweaters & Layers | 1 |
-| Christmas Gifts for Men 2026 | $25–$60 | 10 |
+| Business Casual Outfits for Men | Shirts, Sweaters & Layers | 2 |
+| Christmas Gifts for Men 2026 | $25–$60 | 9 |
 | Christmas Gifts for Men 2026 | $60–$100 | 5 |
 | Christmas Gifts for Men 2026 | Gameday Gifts | 3 |
 | Christmas Gifts for Men 2026 | Splurge $100+ | 6 |
 | Christmas Gifts for Men 2026 | Under $25 | 2 |
-| Game Day Outfits for Men | Basketball | 1 |
+| Game Day Outfits for Men | Basketball Styling | 1 |
 | Game Day Outfits for Men | Cold Weather Game Day | 7 |
 | Game Day Outfits for Men | Hockey Night | 8 |
 | Game Day Outfits for Men | Team Gear | 3 |
@@ -38,7 +37,7 @@ Files: pinterest/pinterest_bulk_nov-9.csv
 | Men's Accessories & Hats | Shoes & Loafers | 3 |
 | Men's Accessories & Hats | Watches & Belts | 1 |
 | Men's Basics & Essentials | Hoodies | 1 |
-| Men's Basics & Essentials | Pants | 1 |
+| Men's Basics & Essentials | Pants | 2 |
 | Men's Basics & Essentials | Shirts | 2 |
 | Men's Basics & Essentials | Under $20 | 3 |
 | Men's Casual Streetwear 2026 | Sneaker Pairings | 1 |
