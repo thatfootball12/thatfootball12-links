@@ -14,7 +14,9 @@ Inputs (all in pinterest/):
       Every pin has title, description, hashtags (list, each starting
       with #), alt_text, board and section ("" for none); keywords (list)
       is optional. An outfit id is its folder under outfits/; a product
-      id is its products.json id. week_start is the batch week's Monday.
+      id is its products.json id; a gift id is an Amazon card's data-id on
+      gift-guide/index.html (type "gift", for cards with no product page
+      of their own). week_start is the batch week's Monday.
     pin_settings.json   the disclosure appended to every description
       (disclosure_shein_only when every item in the pin is SHEIN,
       disclosure_awin when any item is Awin (the wording names House of
@@ -30,6 +32,9 @@ Per pin:
     Media URL   outfit-pin.jpg / product-pin.jpg (falls back to
                 outfit-preview.jpg with a warning, or the product photo
                 for products make_product_pin.py --pick didn't choose).
+                A gift pin uses holiday-2026/pins/<id>_holiday.png, or
+                <id>_ai.jpg: AI images, never the Amazon product photo.
+                Its Link is the card's price section on the gift guide.
                 A batch where no SHEIN product pin has a product-pin.jpg
                 is an error: make_product_pin.py wasn't run.
     Description copy + disclosure [+ AI line] + hashtags.
@@ -38,8 +43,8 @@ Per pin:
                 only and the report lists them to move by hand.
 
 Schedule: across week_start's Mon-Sun, outfit pins 2 a day (gameday
-first, then file order), product pins each onto the day with the fewest
-pins so far, every day's pins spread evenly between 10:00 and 23:00
+first, then file order; over 14 they spread evenly across all 7 days),
+product and gift pins each onto the day with the fewest pins so far, every day's pins spread evenly between 10:00 and 23:00
 Atlantic time (9 am-10 pm Eastern), written in UTC (Pinterest reads
 Publish date as UTC). DAY_END_H stays below 24 so no slot lands on the
 next day's 00:00. Pins scheduled by hand or by any other script
@@ -66,6 +71,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -120,6 +126,18 @@ def load_json(path):
 
 def page_url(rel_dir):
     return SITE + rel_dir.strip("/").replace("\\", "/") + "/"
+
+
+def gift_card(card_id):
+    """(section id, retailer class) of a gift guide card, or None."""
+    with open(os.path.join(REPO, gift_guide.PAGE), encoding="utf-8") as f:
+        page = f.read()
+    at = page.find(f'data-id="{card_id}"')
+    if at < 0:
+        return None
+    section = re.findall(r'<section class="section tier" id="([^"]+)"', page[:at])
+    retailer = re.search(r'class="retailer (\w+)"', page[at:])
+    return (section[-1] if section else None), (retailer.group(1) if retailer else None)
 
 
 def resolve(pin, products, by_id, settings, problems, warnings):
@@ -184,7 +202,28 @@ def resolve(pin, products, by_id, settings, problems, warnings):
         pin["has_amazon"] = rec.get("retailer") == "Amazon"
         return True
 
-    problems.append(f"{label}: type must be 'outfit' or 'product'")
+    if pin.get("type") == "gift":
+        card = gift_card(pin["id"])
+        if card is None or not card[0]:
+            problems.append(f"{label}: no card with that data-id in a gift guide price section")
+            return False
+        if card[1] != "amazon":
+            problems.append(f"{label}: gift pins are for Amazon cards (this one is {card[1]})")
+            return False
+        for name in (f"{pin['id']}_holiday.png", f"{pin['id']}_ai.jpg"):
+            if os.path.isfile(os.path.join(REPO, gift_guide.PIN_DIR, name)):
+                break
+        else:
+            problems.append(f"{label}: no AI pin image in {gift_guide.PIN_DIR}")
+            return False
+        pin["media"] = f"{SITE}{gift_guide.PIN_DIR}/{name}"
+        pin["link"] = f"{SITE}gift-guide/#{card[0]}"
+        pin["ai"] = True
+        pin["retailers"] = {"Amazon"}
+        pin["has_amazon"] = True
+        return True
+
+    problems.append(f"{label}: type must be 'outfit', 'product' or 'gift'")
     return False
 
 
@@ -229,11 +268,13 @@ def schedule(pins, week_start):
     """Sets pin['local'] (naive Atlantic datetime) on every pin."""
     outfits = [p for p in pins if p["type"] == "outfit"]
     outfits.sort(key=lambda p: not p["id"].startswith("gameday/"))   # stable
-    per_day = max(OUTFITS_PER_DAY, -(-len(outfits) // 7))
     days = [[] for _ in range(7)]
     for i, p in enumerate(outfits):
-        days[min(i // per_day, 6)].append(p)
-    for p in (p for p in pins if p["type"] == "product"):
+        if len(outfits) > 7 * OUTFITS_PER_DAY:
+            days[i * 7 // len(outfits)].append(p)
+        else:
+            days[i // OUTFITS_PER_DAY].append(p)
+    for p in (p for p in pins if p["type"] != "outfit"):
         min(days, key=len).append(p)        # earliest of the emptiest days
 
     window = (DAY_END_H - DAY_START_H) * 60
@@ -373,17 +414,19 @@ def report(batch, days, pins, warnings, csv_paths):
     if csv_paths:
         L += ["Files: " + ", ".join(os.path.relpath(p, REPO).replace("\\", "/") for p in csv_paths), ""]
     L += ["## Pins per day (Atlantic time)", "",
-          "| Day | Outfit | Product | Total | Times |", "|---|---|---|---|---|"]
+          "| Day | Outfit | Product | Gift | Total | Times |", "|---|---|---|---|---|---|"]
     for day_pins in days:
         if not day_pins:
             continue
         d = day_pins[0]["local"]
-        times = ", ".join(p["local"].strftime("%H:%M") + (" O" if p["type"] == "outfit" else " P")
+        times = ", ".join(p["local"].strftime("%H:%M") + " " + p["type"][0].upper()
                           for p in sorted(day_pins, key=lambda p: p["local"]))
-        no = sum(p["type"] == "outfit" for p in day_pins)
-        L.append(f"| {d:%a %b} {d.day} | {no} | {len(day_pins) - no} | {len(day_pins)} | {times} |")
+        n = {t: sum(p["type"] == t for p in day_pins) for t in ("outfit", "product", "gift")}
+        L.append(f"| {d:%a %b} {d.day} | {n['outfit']} | {n['product']} | {n['gift']} | "
+                 f"{len(day_pins)} | {times} |")
     L += [f"| **Total** | {sum(p['type'] == 'outfit' for p in pins)} | "
-          f"{sum(p['type'] == 'product' for p in pins)} | {len(pins)} | |", ""]
+          f"{sum(p['type'] == 'product' for p in pins)} | "
+          f"{sum(p['type'] == 'gift' for p in pins)} | {len(pins)} | |", ""]
 
     L += ["## Manual follow-ups", ""]
     unset = [(p, board_field(p)[1]) for p in pins if board_field(p)[1]]
