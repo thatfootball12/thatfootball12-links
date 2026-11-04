@@ -107,7 +107,7 @@ The CSV has no column for it. Paste after upload:
 - A Wool Blend Chore-Style Jacket Under $45 🧥: Men's khaki wool blend chore-style shirt jacket
 - Black Pleated Dress Pants Under $30 👖: Men's black pleated straight leg dress pants
 - The All-Black Fit for a Late Puck Drop 🖤: Men's all-black hockey night outfit with padded coat and red plaid beanie and scarf
-- A Fluffy Pajama Set Under $40 🛋️: Men's royal blue fleece pajama top with navy and white plaid pants
+- A Fluffy Pajama Set Under $40 🛋️: Men's royal blue fleece pajama top with black and white plaid pants
 - A Burgundy Sherpa-Lined Hooded Fleece 🍷: Men's burgundy full-zip hooded fleece with sherpa lining
 - Kamik Snow Boots for the Walk to the Game ❄️: Men's black Kamik Forester snow boots
 - The Timex Easy Reader, a Gift That Never Dates ⌚: Men's Timex Easy Reader watch with brown leather strap
