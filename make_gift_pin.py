@@ -8,6 +8,7 @@ wording, so it's safe for Amazon. The source photo is never written to.
 Usage:
     py -3 make_gift_pin.py N74 N78 ...                (GIFT IDEA FOR HIM)
     py -3 make_gift_pin.py --use N100 N72 ...         (THE GIFT HE'LL USE)
+    py -3 make_gift_pin.py N74 --photo new.jpg        (from another photo)
 """
 
 import argparse
@@ -24,11 +25,14 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0].strip())
     ap.add_argument("cards", nargs="+", help="gift guide card ids, e.g. N74")
     ap.add_argument("--use", action="store_true", help="THE GIFT HE'LL USE headline")
+    ap.add_argument("--photo", help="source photo instead of <id>_ai.jpg (one card only)")
     args = ap.parse_args()
+    if args.photo and len(args.cards) > 1:
+        ap.error("--photo takes one card")
     runs = (("MEN'S GIFT GUIDE", pin.WHITE), HEADLINES[args.use])
     for card in args.cards:
         base = os.path.join(pin.REPO, gift_guide.PIN_DIR, card)
-        img, path = pin.render(base + "_ai.jpg", None, runs)
+        img, path = pin.render(args.photo or base + "_ai.jpg", None, runs)
         img.save(base + "_gift.jpg", "JPEG", quality=88, optimize=True, progressive=True)
         print(f"made  {gift_guide.PIN_DIR}/{card}_gift.jpg [{path}]")
 

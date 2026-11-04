@@ -1,5 +1,6 @@
 {
- "_comment": "Gift pin copy held until each card has a fresh AI photo: every current image, and every clean photo, is the same render as a pin already live on the Christmas board. Add a pin back to a pins_<date>.json once its new photo is in holiday-2026/pins/.",
+ "batch": "nov-9_gifts",
+ "start_date": "2026-11-12",
  "pins": [
   {
    "type": "gift",
