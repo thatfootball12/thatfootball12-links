@@ -214,13 +214,12 @@ def vertical_fade(img, y0, y1, colour, max_alpha=255):
     img.alpha_composite(overlay)
 
 
-def draw_text(img, top, bottom, cap):
-    """"SHOP NOW" over "UNDER $X!", centred between top and bottom: the
-    price line as wide as TEXT_WIDTH allows, smaller if the block is
-    taller than the space."""
+def draw_text(img, top, bottom, cap, runs=None):
+    """"SHOP NOW" over "UNDER $X!", or runs = (top run, big runs) in their
+    place, centred between top and bottom: the big line as wide as
+    TEXT_WIDTH allows, smaller if the block is taller than the space."""
     w = img.size[0]
-    top_run = ("SHOP NOW", WHITE)
-    big_runs = [("UNDER ", WHITE), (f"${cap}!", GOLD)]
+    top_run, big_runs = runs or (("SHOP NOW", WHITE), [("UNDER ", WHITE), (f"${cap}!", GOLD)])
     big_text = "".join(t for t, _ in big_runs)
 
     def block(big):
@@ -240,7 +239,7 @@ def draw_text(img, top, bottom, cap):
     draw_runs(img, (w - text_width(big, big_text)) / 2, y + cap_h(small) + gap, big_runs, big)
 
 
-def render(photo_path, cap):
+def render(photo_path, cap, runs=None):
     """Returns (pin image, path taken: "overlay" or "shrink")."""
     with Image.open(photo_path) as src:
         img = ImageOps.exif_transpose(src).convert("RGBA")
@@ -248,11 +247,11 @@ def render(photo_path, cap):
     if h / w >= TALL - 0.005:
         calm = calm_bottom(img)
         if calm >= MIN_CALM:
-            return render_overlay(img, cap, calm).convert("RGB"), "overlay"
-    return render_shrink(img, cap).convert("RGB"), "shrink"
+            return render_overlay(img, cap, calm, runs).convert("RGB"), "overlay"
+    return render_shrink(img, cap, runs).convert("RGB"), "shrink"
 
 
-def render_overlay(img, cap, calm):
+def render_overlay(img, cap, calm, runs=None):
     w, h = img.size
     pin = img.resize((PIN_W, round(h * PIN_W / w)), Image.LANCZOS)
     pw, ph = pin.size
@@ -261,11 +260,11 @@ def render_overlay(img, cap, calm):
     # Fade from a little above the floor, ending at 85% so the floor
     # still reads as floor, not as a pasted bar.
     vertical_fade(pin, max(0, floor_top - round(0.06 * ph)), ph, colour, max_alpha=round(255 * 0.85))
-    draw_text(pin, floor_top + 0.1 * (ph - floor_top), ph - 0.04 * ph, cap)
+    draw_text(pin, floor_top + 0.1 * (ph - floor_top), ph - 0.04 * ph, cap, runs)
     return pin
 
 
-def render_shrink(img, cap):
+def render_shrink(img, cap, runs=None):
     w, h = img.size
     scale = min(PIN_W / w, (PIN_H - SPACE) / h)
     pw, ph = round(w * scale), round(h * scale)
@@ -290,7 +289,7 @@ def render_shrink(img, cap):
     # strength exactly at the photo's lower edge so there's no seam.
     vertical_fade(pin, ph - min(round(FADE * PIN_H), ph), ph, colour)
     # The text stays in the new space, clear of the photo.
-    draw_text(pin, ph + 0.02 * PIN_H, PIN_H - 0.045 * PIN_H, cap)
+    draw_text(pin, ph + 0.02 * PIN_H, PIN_H - 0.045 * PIN_H, cap, runs)
     return pin
 
 

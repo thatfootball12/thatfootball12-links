@@ -295,10 +295,12 @@ both required) is merged and live, write the pin copy into
 template layout (split into `_1`, `_2`, ... over Pinterest's 200-row
 limit) plus `pinterest_bulk_<date>_report.md`. The description is the
 copy + the disclosure from `pinterest/pin_settings.json` (the
-SHEIN-only wording when every item in the pin is SHEIN, the House of
-Blanks one when any item is Awin, else the SHEIN + Amazon one) (+ "Image created with AI." on every outfit pin and
+SHEIN-only wording when every item in the pin is SHEIN, a House of
+Blanks line naming only the partners present when any item is Awin, else
+the SHEIN + Amazon one) (+ "Image created with AI." on every outfit pin and
 Amazon product pin) + the hashtags. Pins are scheduled across the batch week (Mon–Sun), 2 outfit
-pins a day with gameday first, product pins filling the days evenly,
+pins a day with gameday first (over 14 outfits spread evenly across all
+7 days), product and gift pins filling the days evenly,
 10:00–23:00 Atlantic (9 am–10 pm Eastern; `DAY_START_H, DAY_END_H` in
 `make_pinterest_csv.py`, with the end hour kept below 24 so nothing
 lands on the next day's 00:00), written as UTC (Pinterest reads Publish
@@ -316,7 +318,12 @@ section must be listed in `pin_settings.json`. Keep that list identical
 to the Pinterest account, emojis included: Pinterest silently creates
 any board or section it doesn't recognise. The CSV has no column for
 alt text or the AI-modified label, so the report lists both to add by
-hand after upload. `--dry-run` validates and prints the report without
+hand after upload. An Amazon gift guide card with no product page gets a
+`"type": "gift"` pin (id = the card's data-id): its image comes from
+`holiday-2026/pins/` (`<id>_gift.jpg`, else `<id>_holiday.png`, else
+`<id>_ai.jpg`, all AI, never the Amazon photo; `make_gift_pin.py` makes
+the `_gift.jpg` headline pins, with no price or deal wording) and it links to the card's price section, or to
+a product page when the pin names one in `"page"`. `--dry-run` validates and prints the report without
 writing anything.
 
 When a page needs a photo that has to be sourced by hand at the

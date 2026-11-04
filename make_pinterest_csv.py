@@ -5,6 +5,7 @@ Builds the weekly Pinterest bulk-upload CSV from a batch's pin copy.
 Usage:
     py -3 make_pinterest_csv.py oct-19             (reads pinterest/pins_oct-19.json)
     py -3 make_pinterest_csv.py oct-19 --dry-run   (validate + report, write nothing)
+    py -3 make_pinterest_csv.py oct-19 --unpushed-media   (see below)
 
 Inputs (all in pinterest/):
     pins_<batch>.json   one entry per pin, copy supplied by hand:
@@ -14,12 +15,16 @@ Inputs (all in pinterest/):
       Every pin has title, description, hashtags (list, each starting
       with #), alt_text, board and section ("" for none); keywords (list)
       is optional. An outfit id is its folder under outfits/; a product
-      id is its products.json id. week_start is the batch week's Monday.
+      id is its products.json id; a gift id is an Amazon card's data-id on
+      gift-guide/index.html (type "gift", for cards with no product page
+      of their own). week_start is the batch week's Monday.
     pin_settings.json   the disclosure appended to every description
-      (disclosure_shein_only when every item in the pin is SHEIN,
-      disclosure_awin when any item is Awin (the wording names House of
-      Blanks, the only Awin merchant pinned so far), else disclosure; a
-      pin with a retailer outside disclosure_retailers is an error), the AI line added for AI-image pins (every outfit pin, and product
+      (disclosure_shein_only when every item in the pin is SHEIN; with
+      any Awin item, the line naming only the partners present:
+      disclosure_awin_only, _awin_amazon, _awin_shein or disclosure_awin
+      for all three (the wording names House of Blanks, the only Awin
+      merchant pinned so far); else disclosure; a pin with a retailer
+      outside disclosure_retailers is an error), the AI line added for AI-image pins (every outfit pin, and product
       pins whose retailer is in ai_image_retailers), and the account's
       boards with their sections. Pinterest CREATES any board or section
       named in the CSV that doesn't exist, so these must match the
@@ -30,6 +35,12 @@ Per pin:
     Media URL   outfit-pin.jpg / product-pin.jpg (falls back to
                 outfit-preview.jpg with a warning, or the product photo
                 for products make_product_pin.py --pick didn't choose).
+                A gift pin uses holiday-2026/pins/<id>_gift.jpg (see
+                make_gift_pin.py), <id>_holiday.png, or <id>_ai.jpg: AI
+                images, never the Amazon product photo.
+                Its Link is the product page of the products.json id in
+                its optional "page" field, else the card's price section
+                on the gift guide.
                 A batch where no SHEIN product pin has a product-pin.jpg
                 is an error: make_product_pin.py wasn't run.
     Description copy + disclosure [+ AI line] + hashtags.
@@ -38,8 +49,8 @@ Per pin:
                 only and the report lists them to move by hand.
 
 Schedule: across week_start's Mon-Sun, outfit pins 2 a day (gameday
-first, then file order), product pins each onto the day with the fewest
-pins so far, every day's pins spread evenly between 10:00 and 23:00
+first, then file order; over 14 they spread evenly across all 7 days),
+product and gift pins each onto the day with the fewest pins so far, every day's pins spread evenly between 10:00 and 23:00
 Atlantic time (9 am-10 pm Eastern), written in UTC (Pinterest reads
 Publish date as UTC). DAY_END_H stays below 24 so no slot lands on the
 next day's 00:00. Pins scheduled by hand or by any other script
@@ -55,6 +66,10 @@ prices can't be shown), no product pin of a SHEIN product whose seller
 is "marketplace" (a third-party store; see sellers.py). Product pins
 whose seller is still "unchecked" go through, listed in the report.
 
+--unpushed-media turns a Media URL that isn't live yet but exists in the
+repo into a warning, so a CSV can go in a PR with its new images. Rebuild
+without it after the merge, before uploading.
+
 Output: pinterest/pinterest_bulk_<batch>.csv in Pinterest's own
 template layout (pinterest_bulk_<batch>_1.csv, _2.csv, ... over 200
 rows, Pinterest's per-file limit) and pinterest_bulk_<batch>_report.md:
@@ -66,6 +81,8 @@ import argparse
 import csv
 import json
 import os
+import posixpath
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -122,6 +139,18 @@ def page_url(rel_dir):
     return SITE + rel_dir.strip("/").replace("\\", "/") + "/"
 
 
+def gift_card(card_id):
+    """(section id, retailer class) of a gift guide card, or None."""
+    with open(os.path.join(REPO, gift_guide.PAGE), encoding="utf-8") as f:
+        page = f.read()
+    at = page.find(f'data-id="{card_id}"')
+    if at < 0:
+        return None
+    section = re.findall(r'<section class="section tier" id="([^"]+)"', page[:at])
+    retailer = re.search(r'class="retailer (\w+)"', page[at:])
+    return (section[-1] if section else None), (retailer.group(1) if retailer else None)
+
+
 def resolve(pin, products, by_id, settings, problems, warnings):
     """Adds link, media, ai, has_amazon to pin. Returns False if it can't."""
     label = f"{pin.get('type')} {pin.get('id')}"
@@ -141,9 +170,14 @@ def resolve(pin, products, by_id, settings, problems, warnings):
         pin["link"] = page_url(rel)
         pin["media"] = page_url(rel) + name
         pin["ai"] = True
-        items = [p for p in products if p["detail_page_url"].startswith(rel + "/")]
-        if not items:
-            problems.append(f"{label}: no products.json records under {rel}/")
+        with open(os.path.join(REPO, rel, "index.html"), encoding="utf-8") as f:
+            cards = re.findall(r'<a class="card" href="([^"]+)"', f.read())
+        # A card can link to a page in another outfit's folder: go by the
+        # cards, not the folder, or that item's retailer goes undisclosed.
+        pages = {posixpath.normpath(posixpath.join(rel, h)) + "/index.html" for h in cards}
+        items = [p for p in products if p["detail_page_url"] in pages]
+        if len(items) != len(pages):
+            problems.append(f"{label}: {len(pages) - len(items)} card(s) with no products.json record")
             return False
         pin["retailers"] = {p.get("retailer") for p in items}
         pin["has_amazon"] = "Amazon" in pin["retailers"]
@@ -184,18 +218,49 @@ def resolve(pin, products, by_id, settings, problems, warnings):
         pin["has_amazon"] = rec.get("retailer") == "Amazon"
         return True
 
-    problems.append(f"{label}: type must be 'outfit' or 'product'")
+    if pin.get("type") == "gift":
+        card = gift_card(pin["id"])
+        if card is None or not card[0]:
+            problems.append(f"{label}: no card with that data-id in a gift guide price section")
+            return False
+        if card[1] != "amazon":
+            problems.append(f"{label}: gift pins are for Amazon cards (this one is {card[1]})")
+            return False
+        for name in (f"{pin['id']}_gift.jpg", f"{pin['id']}_holiday.png", f"{pin['id']}_ai.jpg"):
+            if os.path.isfile(os.path.join(REPO, gift_guide.PIN_DIR, name)):
+                break
+        else:
+            problems.append(f"{label}: no AI pin image in {gift_guide.PIN_DIR}")
+            return False
+        pin["media"] = f"{SITE}{gift_guide.PIN_DIR}/{name}"
+        pin["link"] = f"{SITE}gift-guide/#{card[0]}"
+        if pin.get("page"):
+            rec = by_id.get(pin["page"])
+            if rec is None:
+                problems.append(f"{label}: page {pin['page']} isn't in products.json")
+                return False
+            pin["link"] = page_url(os.path.dirname(rec["detail_page_url"]))
+        pin["ai"] = True
+        pin["retailers"] = {"Amazon"}
+        pin["has_amazon"] = True
+        return True
+
+    problems.append(f"{label}: type must be 'outfit', 'product' or 'gift'")
     return False
 
 
 def disclosure(pin, settings):
-    """The SHEIN-only wording for a pin whose items are all SHEIN, the
-    Awin one for a pin with any Awin item, else the full one (SHEIN +
-    Amazon)."""
-    if pin["retailers"] == {"SHEIN"}:
+    """The SHEIN-only wording for a pin whose items are all SHEIN; with
+    any Awin item, the line naming only the partners present; else the
+    full one (SHEIN + Amazon)."""
+    retailers = pin["retailers"]
+    if retailers == {"SHEIN"}:
         return settings["disclosure_shein_only"].strip()
-    if "Awin" in pin["retailers"]:
-        return settings["disclosure_awin"].strip()
+    if "Awin" in retailers:
+        key = {frozenset({"Awin"}): "disclosure_awin_only",
+               frozenset({"Awin", "Amazon"}): "disclosure_awin_amazon",
+               frozenset({"Awin", "SHEIN"}): "disclosure_awin_shein"}.get(frozenset(retailers), "disclosure_awin")
+        return settings[key].strip()
     return settings["disclosure"].strip()
 
 
@@ -229,11 +294,13 @@ def schedule(pins, week_start):
     """Sets pin['local'] (naive Atlantic datetime) on every pin."""
     outfits = [p for p in pins if p["type"] == "outfit"]
     outfits.sort(key=lambda p: not p["id"].startswith("gameday/"))   # stable
-    per_day = max(OUTFITS_PER_DAY, -(-len(outfits) // 7))
     days = [[] for _ in range(7)]
     for i, p in enumerate(outfits):
-        days[min(i // per_day, 6)].append(p)
-    for p in (p for p in pins if p["type"] == "product"):
+        if len(outfits) > 7 * OUTFITS_PER_DAY:
+            days[i * 7 // len(outfits)].append(p)
+        else:
+            days[i // OUTFITS_PER_DAY].append(p)
+    for p in (p for p in pins if p["type"] != "outfit"):
         min(days, key=len).append(p)        # earliest of the emptiest days
 
     window = (DAY_END_H - DAY_START_H) * 60
@@ -275,7 +342,7 @@ def http_status(url):
     return "error", ""
 
 
-def check_live(pins, problems):
+def check_live(pins, problems, warnings, unpushed_media=False):
     urls = sorted({p["link"] for p in pins} | {p["media"] for p in pins})
     with ThreadPoolExecutor(max_workers=8) as ex:
         results = dict(zip(urls, ex.map(http_status, urls)))
@@ -286,6 +353,9 @@ def check_live(pins, problems):
             problems.append(f"{label}: Link returned {status}: {p['link']}")
         status, ctype = results[p["media"]]
         if status != 200:
+            if unpushed_media and os.path.isfile(os.path.join(REPO, p["media"][len(SITE):])):
+                warnings.append(f"{label}: Media URL not live yet: {p['media']}")
+                continue
             problems.append(f"{label}: Media URL returned {status} (pushed yet?): {p['media']}")
         elif not ctype.startswith("image/"):
             problems.append(f"{label}: Media URL is {ctype or 'no content type'}, not an image: {p['media']}")
@@ -373,17 +443,26 @@ def report(batch, days, pins, warnings, csv_paths):
     if csv_paths:
         L += ["Files: " + ", ".join(os.path.relpath(p, REPO).replace("\\", "/") for p in csv_paths), ""]
     L += ["## Pins per day (Atlantic time)", "",
-          "| Day | Outfit | Product | Total | Times |", "|---|---|---|---|---|"]
+          "| Day | Outfit | Product | Gift | Total | Times |", "|---|---|---|---|---|---|"]
     for day_pins in days:
         if not day_pins:
             continue
         d = day_pins[0]["local"]
-        times = ", ".join(p["local"].strftime("%H:%M") + (" O" if p["type"] == "outfit" else " P")
+        times = ", ".join(p["local"].strftime("%H:%M") + " " + p["type"][0].upper()
                           for p in sorted(day_pins, key=lambda p: p["local"]))
-        no = sum(p["type"] == "outfit" for p in day_pins)
-        L.append(f"| {d:%a %b} {d.day} | {no} | {len(day_pins) - no} | {len(day_pins)} | {times} |")
+        n = {t: sum(p["type"] == t for p in day_pins) for t in ("outfit", "product", "gift")}
+        L.append(f"| {d:%a %b} {d.day} | {n['outfit']} | {n['product']} | {n['gift']} | "
+                 f"{len(day_pins)} | {times} |")
     L += [f"| **Total** | {sum(p['type'] == 'outfit' for p in pins)} | "
-          f"{sum(p['type'] == 'product' for p in pins)} | {len(pins)} | |", ""]
+          f"{sum(p['type'] == 'product' for p in pins)} | "
+          f"{sum(p['type'] == 'gift' for p in pins)} | {len(pins)} | |", ""]
+
+    counts = {}
+    for p in pins:
+        key = (p["board"], (p.get("section") or "").strip())
+        counts[key] = counts.get(key, 0) + 1
+    L += ["## Boards and sections", "", "| Board | Section | Pins |", "|---|---|---|"]
+    L += [f"| {b} | {s or '(none)'} | {n} |" for (b, s), n in sorted(counts.items())] + [""]
 
     L += ["## Manual follow-ups", ""]
     unset = [(p, board_field(p)[1]) for p in pins if board_field(p)[1]]
@@ -399,7 +478,9 @@ def report(batch, days, pins, warnings, csv_paths):
         L += ["### AI-modified label",
               "The CSV has no column for it. Add the label to each of these pins after "
               f"upload ({len(ai)}):", ""]
-        L += [f"- {p['local']:%a %H:%M} — {p['title'].strip()}" for p in ai] + [""]
+        L += [f"- {p['local']:%a %H:%M} — {p['title'].strip()}"
+              + (" (also tick: includes an AI-generated person)" if p["type"] == "outfit" else "")
+              for p in ai] + [""]
     L += ["### Alt text",
           "The CSV has no column for it. Paste after upload:", ""]
     L += [f"- {p['title'].strip()}: {p['alt_text'].strip()}"
@@ -421,6 +502,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("batch", help="batch date, e.g. oct-19 (reads pinterest/pins_<batch>.json)")
     ap.add_argument("--dry-run", action="store_true", help="validate and report, write nothing")
+    ap.add_argument("--unpushed-media", action="store_true",
+                    help="a Media URL not live yet but in the repo is a warning, not a problem")
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")    # titles carry emoji; cp1252 consoles can't
 
@@ -461,7 +544,7 @@ def main():
                 problems.append(f"{p['type']} {p['id']}: publish time {p['local']:%a %b %d %H:%M} "
                                 f"Atlantic is in the past")
         print(f"Checking {len({p['link'] for p in pins} | {p['media'] for p in pins})} URLs on the live site...")
-        check_live(pins, problems)
+        check_live(pins, problems, warnings, args.unpushed_media)
 
     if problems:
         print(f"\n{len(problems)} problem(s), no CSV written:")
