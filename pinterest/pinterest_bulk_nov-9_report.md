@@ -224,3 +224,19 @@ The CSV has no column for it. Paste after upload:
 - His New Signature Scent, Sorted 🎁: Nautica Voyage eau de toilette men's fragrance bottle
 - Hot Coffee at the Tailgate: The Stanley Gift ☕: Hammertone Green Stanley Classic vacuum bottle, a tailgate gift
 
+## Warnings
+
+- gift N74: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N74_gift.jpg
+- gift N78: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N78_gift.jpg
+- gift N86: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N86_gift.jpg
+- gift N80: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N80_gift.jpg
+- gift N100: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N100_gift.jpg
+- gift N72: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N72_gift.jpg
+- gift N66: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N66_gift.jpg
+- gift N75: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N75_gift.jpg
+- gift N61: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N61_gift.jpg
+- gift N70: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N70_gift.jpg
+- gift N69: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N69_gift.jpg
+- gift N84: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N84_gift.jpg
+- gift N82: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N82_gift.jpg
+

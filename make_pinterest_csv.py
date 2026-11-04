@@ -5,6 +5,7 @@ Builds the weekly Pinterest bulk-upload CSV from a batch's pin copy.
 Usage:
     py -3 make_pinterest_csv.py oct-19             (reads pinterest/pins_oct-19.json)
     py -3 make_pinterest_csv.py oct-19 --dry-run   (validate + report, write nothing)
+    py -3 make_pinterest_csv.py oct-19 --unpushed-media   (see below)
 
 Inputs (all in pinterest/):
     pins_<batch>.json   one entry per pin, copy supplied by hand:
@@ -34,8 +35,9 @@ Per pin:
     Media URL   outfit-pin.jpg / product-pin.jpg (falls back to
                 outfit-preview.jpg with a warning, or the product photo
                 for products make_product_pin.py --pick didn't choose).
-                A gift pin uses holiday-2026/pins/<id>_holiday.png, or
-                <id>_ai.jpg: AI images, never the Amazon product photo.
+                A gift pin uses holiday-2026/pins/<id>_gift.jpg (see
+                make_gift_pin.py), <id>_holiday.png, or <id>_ai.jpg: AI
+                images, never the Amazon product photo.
                 Its Link is the product page of the products.json id in
                 its optional "page" field, else the card's price section
                 on the gift guide.
@@ -63,6 +65,10 @@ the past, no "$" in the copy of a pin with an Amazon item (Amazon
 prices can't be shown), no product pin of a SHEIN product whose seller
 is "marketplace" (a third-party store; see sellers.py). Product pins
 whose seller is still "unchecked" go through, listed in the report.
+
+--unpushed-media turns a Media URL that isn't live yet but exists in the
+repo into a warning, so a CSV can go in a PR with its new images. Rebuild
+without it after the merge, before uploading.
 
 Output: pinterest/pinterest_bulk_<batch>.csv in Pinterest's own
 template layout (pinterest_bulk_<batch>_1.csv, _2.csv, ... over 200
@@ -220,7 +226,7 @@ def resolve(pin, products, by_id, settings, problems, warnings):
         if card[1] != "amazon":
             problems.append(f"{label}: gift pins are for Amazon cards (this one is {card[1]})")
             return False
-        for name in (f"{pin['id']}_holiday.png", f"{pin['id']}_ai.jpg"):
+        for name in (f"{pin['id']}_gift.jpg", f"{pin['id']}_holiday.png", f"{pin['id']}_ai.jpg"):
             if os.path.isfile(os.path.join(REPO, gift_guide.PIN_DIR, name)):
                 break
         else:
@@ -336,7 +342,7 @@ def http_status(url):
     return "error", ""
 
 
-def check_live(pins, problems):
+def check_live(pins, problems, warnings, unpushed_media=False):
     urls = sorted({p["link"] for p in pins} | {p["media"] for p in pins})
     with ThreadPoolExecutor(max_workers=8) as ex:
         results = dict(zip(urls, ex.map(http_status, urls)))
@@ -347,6 +353,9 @@ def check_live(pins, problems):
             problems.append(f"{label}: Link returned {status}: {p['link']}")
         status, ctype = results[p["media"]]
         if status != 200:
+            if unpushed_media and os.path.isfile(os.path.join(REPO, p["media"][len(SITE):])):
+                warnings.append(f"{label}: Media URL not live yet: {p['media']}")
+                continue
             problems.append(f"{label}: Media URL returned {status} (pushed yet?): {p['media']}")
         elif not ctype.startswith("image/"):
             problems.append(f"{label}: Media URL is {ctype or 'no content type'}, not an image: {p['media']}")
@@ -491,6 +500,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("batch", help="batch date, e.g. oct-19 (reads pinterest/pins_<batch>.json)")
     ap.add_argument("--dry-run", action="store_true", help="validate and report, write nothing")
+    ap.add_argument("--unpushed-media", action="store_true",
+                    help="a Media URL not live yet but in the repo is a warning, not a problem")
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")    # titles carry emoji; cp1252 consoles can't
 
@@ -531,7 +542,7 @@ def main():
                 problems.append(f"{p['type']} {p['id']}: publish time {p['local']:%a %b %d %H:%M} "
                                 f"Atlantic is in the past")
         print(f"Checking {len({p['link'] for p in pins} | {p['media'] for p in pins})} URLs on the live site...")
-        check_live(pins, problems)
+        check_live(pins, problems, warnings, args.unpushed_media)
 
     if problems:
         print(f"\n{len(problems)} problem(s), no CSV written:")

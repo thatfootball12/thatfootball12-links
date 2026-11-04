@@ -320,8 +320,9 @@ any board or section it doesn't recognise. The CSV has no column for
 alt text or the AI-modified label, so the report lists both to add by
 hand after upload. An Amazon gift guide card with no product page gets a
 `"type": "gift"` pin (id = the card's data-id): its image comes from
-`holiday-2026/pins/` (`<id>_holiday.png`, else `<id>_ai.jpg`, both AI,
-never the Amazon photo) and it links to the card's price section, or to
+`holiday-2026/pins/` (`<id>_gift.jpg`, else `<id>_holiday.png`, else
+`<id>_ai.jpg`, all AI, never the Amazon photo; `make_gift_pin.py` makes
+the `_gift.jpg` headline pins, with no price or deal wording) and it links to the card's price section, or to
 a product page when the pin names one in `"page"`. `--dry-run` validates and prints the report without
 writing anything.
 
