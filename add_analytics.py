@@ -146,7 +146,7 @@ PRIVACY_PAGE = "privacy/index.html"
 CONSENT_VERSION = 2
 # Pages whose own markup already says this don't get the footer's copy.
 DISCLOSURE_MARK = "earns from qualifying purchases"
-DISCLOSURE = ("As an Amazon Associate, SHEIN affiliate, and Moosehill (Awin) affiliate, "
+DISCLOSURE = ("As an Amazon Associate, SHEIN affiliate, and Moosehill and House of Blanks (Awin) affiliate, "
               "ThatFootball12 earns from qualifying purchases made through links on this site.")
 
 # __PRIVACY__ and __VERSION__ are substituted per page (str.replace, not %:
