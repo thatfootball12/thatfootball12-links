@@ -322,8 +322,8 @@ hand after upload. An Amazon gift guide card with no product page gets a
 `"type": "gift"` pin (id = the card's data-id): its image comes from
 `holiday-2026/pins/` (`<id>_gift.jpg`, else `<id>_holiday.png`, else
 `<id>_ai.jpg`, all AI, never the Amazon photo; `make_gift_pin.py` makes
-the `_gift.jpg` headline pins, with no price or deal wording) and it links to the card's price section, or to
-a product page when the pin names one in `"page"`. `--dry-run` validates and prints the report without
+the `_gift.jpg` headline pins, with no price or deal wording) and it links to the card's own anchor
+(`gift-guide/#<id>`), or to a product page when the pin names one in `"page"`. A pin batch that doesn't start on a Monday sets `start_date`. `--dry-run` validates and prints the report without
 writing anything.
 
 When a page needs a photo that has to be sourced by hand at the

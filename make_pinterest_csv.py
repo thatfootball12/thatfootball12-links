@@ -17,7 +17,8 @@ Inputs (all in pinterest/):
       is optional. An outfit id is its folder under outfits/; a product
       id is its products.json id; a gift id is an Amazon card's data-id on
       gift-guide/index.html (type "gift", for cards with no product page
-      of their own). week_start is the batch week's Monday.
+      of their own). week_start is the batch week's Monday; a batch that
+      runs on other dates gives start_date instead (its 7 days start there).
     pin_settings.json   the disclosure appended to every description
       (disclosure_shein_only when every item in the pin is SHEIN; with
       any Awin item, the line naming only the partners present:
@@ -39,8 +40,8 @@ Per pin:
                 make_gift_pin.py), <id>_holiday.png, or <id>_ai.jpg: AI
                 images, never the Amazon product photo.
                 Its Link is the product page of the products.json id in
-                its optional "page" field, else the card's price section
-                on the gift guide.
+                its optional "page" field, else the card's own anchor on
+                the gift guide (gift-guide/#<id>).
                 A batch where no SHEIN product pin has a product-pin.jpg
                 is an error: make_product_pin.py wasn't run.
     Description copy + disclosure [+ AI line] + hashtags.
@@ -233,7 +234,7 @@ def resolve(pin, products, by_id, settings, problems, warnings):
             problems.append(f"{label}: no AI pin image in {gift_guide.PIN_DIR}")
             return False
         pin["media"] = f"{SITE}{gift_guide.PIN_DIR}/{name}"
-        pin["link"] = f"{SITE}gift-guide/#{card[0]}"
+        pin["link"] = f"{SITE}gift-guide/#{pin['id']}"
         if pin.get("page"):
             rec = by_id.get(pin["page"])
             if rec is None:
@@ -514,10 +515,10 @@ def main():
 
     problems, warnings = [], []
     try:
-        week_start = date.fromisoformat(data["week_start"])
+        week_start = date.fromisoformat(data.get("start_date") or data["week_start"])
     except (KeyError, ValueError):
         sys.exit("pins file needs week_start as YYYY-MM-DD (the batch week's Monday)")
-    if week_start.weekday() != 0:
+    if week_start.weekday() != 0 and not data.get("start_date"):
         problems.append(f"week_start {week_start} is a {week_start:%A}, not a Monday")
 
     pins = []
