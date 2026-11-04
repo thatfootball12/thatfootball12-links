@@ -12,8 +12,15 @@
     "Amazon"
   ],
   "boards": {
-    "Men's Basics & Essentials": [],
+    "Men's Basics & Essentials": [
+      "Under $20",
+      "Pants",
+      "Shorts",
+      "Hoodies",
+      "Shirts"
+    ],
     "Life Events & Special Occasions Outfits for Men": [
+      "Holiday",
       "New Year's Eve Style",
       "Formal Events & Galas",
       "Anniversary & Milestone Celebrations",
@@ -41,6 +48,7 @@
       "Under $20"
     ],
     "Business Casual Outfits for Men": [
+      "Date Night",
       "Date Night & Night Out",
       "Shoes & Accessories",
       "Pants & Chinos",

@@ -15,6 +15,41 @@ Files: pinterest/pinterest_bulk_nov-9.csv
 | Sun Nov 15 | 2 | 8 | 3 | 13 | 10:30 P, 11:30 P, 12:30 P, 13:30 O, 14:30 P, 15:30 P, 16:30 P, 17:30 P, 18:30 P, 19:30 O, 20:30 G, 21:30 G, 22:30 G |
 | **Total** | 15 | 60 | 20 | 95 | |
 
+## Boards and sections
+
+| Board | Section | Pins |
+|---|---|---|
+| Business Casual Outfits for Men | Business Casual Outfits | 2 |
+| Business Casual Outfits for Men | Date Night | 1 |
+| Business Casual Outfits for Men | Date Night & Night Out | 2 |
+| Business Casual Outfits for Men | Pants & Chinos | 3 |
+| Business Casual Outfits for Men | Shirts | 1 |
+| Business Casual Outfits for Men | Sweaters & Layers | 1 |
+| Christmas Gifts for Men 2026 | $25–$60 | 10 |
+| Christmas Gifts for Men 2026 | $60–$100 | 5 |
+| Christmas Gifts for Men 2026 | Gameday Gifts | 3 |
+| Christmas Gifts for Men 2026 | Splurge $100+ | 6 |
+| Christmas Gifts for Men 2026 | Under $25 | 2 |
+| Game Day Outfits for Men | Basketball | 1 |
+| Game Day Outfits for Men | Cold Weather Game Day | 7 |
+| Game Day Outfits for Men | Hockey Night | 8 |
+| Game Day Outfits for Men | Team Gear | 3 |
+| Life Events & Special Occasions Outfits for Men | Holiday | 2 |
+| Life Events & Special Occasions Outfits for Men | Holiday Party Style | 1 |
+| Men's Accessories & Hats | Hats & Caps | 2 |
+| Men's Accessories & Hats | Shoes & Loafers | 3 |
+| Men's Accessories & Hats | Watches & Belts | 1 |
+| Men's Basics & Essentials | Hoodies | 1 |
+| Men's Basics & Essentials | Pants | 1 |
+| Men's Basics & Essentials | Shirts | 2 |
+| Men's Basics & Essentials | Under $20 | 3 |
+| Men's Casual Streetwear 2026 | Sneaker Pairings | 1 |
+| Men's Casual Streetwear 2026 | Winter Streetwear | 7 |
+| Men's Fall Style Essentials | Fall Footwear | 3 |
+| Men's Fall Style Essentials | Fall Pants & Bottoms | 2 |
+| Men's Fall Style Essentials | Jackets & Outerwear | 6 |
+| Men's Fall Style Essentials | Sweaters & Layers | 5 |
+
 ## Manual follow-ups
 
 ### AI-modified label

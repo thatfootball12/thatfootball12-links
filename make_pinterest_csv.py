@@ -428,6 +428,13 @@ def report(batch, days, pins, warnings, csv_paths):
           f"{sum(p['type'] == 'product' for p in pins)} | "
           f"{sum(p['type'] == 'gift' for p in pins)} | {len(pins)} | |", ""]
 
+    counts = {}
+    for p in pins:
+        key = (p["board"], (p.get("section") or "").strip())
+        counts[key] = counts.get(key, 0) + 1
+    L += ["## Boards and sections", "", "| Board | Section | Pins |", "|---|---|---|"]
+    L += [f"| {b} | {s or '(none)'} | {n} |" for (b, s), n in sorted(counts.items())] + [""]
+
     L += ["## Manual follow-ups", ""]
     unset = [(p, board_field(p)[1]) for p in pins if board_field(p)[1]]
     if unset:
