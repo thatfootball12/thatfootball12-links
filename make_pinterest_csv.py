@@ -478,7 +478,9 @@ def report(batch, days, pins, warnings, csv_paths):
         L += ["### AI-modified label",
               "The CSV has no column for it. Add the label to each of these pins after "
               f"upload ({len(ai)}):", ""]
-        L += [f"- {p['local']:%a %H:%M} — {p['title'].strip()}" for p in ai] + [""]
+        L += [f"- {p['local']:%a %H:%M} — {p['title'].strip()}"
+              + (" (also tick: includes an AI-generated person)" if p["type"] == "outfit" else "")
+              for p in ai] + [""]
     L += ["### Alt text",
           "The CSV has no column for it. Paste after upload:", ""]
     L += [f"- {p['title'].strip()}: {p['alt_text'].strip()}"
