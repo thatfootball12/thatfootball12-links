@@ -20,8 +20,7 @@ Files: pinterest/pinterest_bulk_nov-9.csv
 | Board | Section | Pins |
 |---|---|---|
 | Business Casual Outfits for Men | Business Casual Outfits | 2 |
-| Business Casual Outfits for Men | Date Night | 1 |
-| Business Casual Outfits for Men | Date Night & Night Out | 2 |
+| Business Casual Outfits for Men | Date Night/Night Out | 3 |
 | Business Casual Outfits for Men | Pants & Chinos | 3 |
 | Business Casual Outfits for Men | Shirts | 1 |
 | Business Casual Outfits for Men | Sweaters & Layers | 1 |
@@ -34,8 +33,7 @@ Files: pinterest/pinterest_bulk_nov-9.csv
 | Game Day Outfits for Men | Cold Weather Game Day | 7 |
 | Game Day Outfits for Men | Hockey Night | 8 |
 | Game Day Outfits for Men | Team Gear | 3 |
-| Life Events & Special Occasions Outfits for Men | Holiday | 2 |
-| Life Events & Special Occasions Outfits for Men | Holiday Party Style | 1 |
+| Life Events & Special Occasions Outfits for Men | Holiday Party Style | 3 |
 | Men's Accessories & Hats | Hats & Caps | 2 |
 | Men's Accessories & Hats | Shoes & Loafers | 3 |
 | Men's Accessories & Hats | Watches & Belts | 1 |
@@ -51,6 +49,13 @@ Files: pinterest/pinterest_bulk_nov-9.csv
 | Men's Fall Style Essentials | Sweaters & Layers | 5 |
 
 ## Manual follow-ups
+
+### Sections the CSV can't set
+These section names contain "/", which Pinterest's board column uses to separate board from section, so these pins go to the board only. Move them after upload, or rename the section without a "/" and list the new name in pin_settings.json.
+
+- The Winter Date Night Trench Fit 🌙 → Business Casual Outfits for Men › Date Night/Night Out
+- Khaki Trench Coat Under $55 for Date Night 🌙 → Business Casual Outfits for Men › Date Night/Night Out
+- A Black Rib Knit Turtleneck for Date Night 🌙 → Business Casual Outfits for Men › Date Night/Night Out
 
 ### AI-modified label
 The CSV has no column for it. Add the label to each of these pins after upload (65):
@@ -176,7 +181,7 @@ The CSV has no column for it. Paste after upload:
 - The Casio Diver Style Watch ⌚: Men's silver-tone Casio diver style stainless steel watch
 - A Black Rib Knit Turtleneck for Date Night 🌙: Men's black rib knit cotton turtleneck sweater
 - Heather Ash Straight Leg Sweatpants 🌫️: Men's heather ash House of Blanks straight leg sweatpants
-- Friendsgiving Fit in Warm Browns 🍂: Men's Friendsgiving outfit with beige quarter-zip, brown shacket and black pants
+- Friendsgiving Fit in Warm Browns 🍂: Men's holiday outfit with beige quarter-zip, brown shacket and black pants
 - The Columbia Fleece He'll Reach for All Winter 🎁: Black and grey Columbia Steens Mountain full-zip fleece for men
 - Warm Hands, Phone Ready: The North Face Etip Gift 🧤: Black The North Face Etip touchscreen gloves for men
 - The Timberland 6-Inch: A Boot Gift That Lasts 🎁: Wheat nubuck Timberland Premium 6-inch waterproof boot for men
