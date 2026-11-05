@@ -14,7 +14,7 @@ sync_catalog.py imports audit(), untracked_links() and ungated_tags()
 from here and reports any page whose blocks are missing, stale, or
 present where they shouldn't be.
 
-Pages: homepage, shop grid, outfit generator, gift guide, the privacy page, the blog
+Pages: homepage, shop grid, outfit generator, gift guide, the privacy page, Work with me, the blog
 (listing, posts and drafts), the outfits/ and
 videos/ hubs, every category page, every campaign page (legacy link-list
 pages and redirect pages like the retired this-or-that-aug-14 included),
@@ -64,8 +64,8 @@ Consent (see privacy/index.html for the visitor-facing explanation):
     never covers the end of the page. Accept and Decline are identical
     buttons.
 
-Footer: "Holiday Gift Guide · Privacy · Cookie settings", plus the
-affiliate disclosure line
+Footer: "Holiday Gift Guide · Work with me · Privacy · Cookie settings",
+plus the affiliate disclosure line
 unless the page already carries one (the homepage and legacy pages have
 their own <footer> fine-print; repeating it would stack two copies).
 The privacy link is relative, since this is a GitHub Pages project site
@@ -73,7 +73,9 @@ served under /thatfootball12-links/, where a root-relative /privacy/
 would point at the wrong site. The gift guide link is seasonal: it's
 on while FOOTER_GIFT_GUIDE (top of this script) is True, never on the
 gift guide itself, and relative for the same reason. Set it to False
-in January and rerun the script to take it off every page. Every page's body is a flex row holding
+in January and rerun the script to take it off every page. "Work with me"
+is permanent, relative for the same reason, and left off its own page.
+Every page's body is a flex row holding
 one .wrap column, so the footer's CSS (in the head block) sets
 flex-wrap on body to put it on its own line under the column.
 
@@ -98,6 +100,11 @@ affiliate_click tracking:
     affiliate link in the text (.bp-aff), same as the gift guide
     (product_id "blog/<slug>/<slug of name>"). The listing (blog/) gets
     the tag only.
+
+fiverr_click tracking: every a[data-fiverr-gig] link on work-with-me/
+sends fiverr_click with gig_name set to that attribute ("Profile" for the
+closing button). It goes through the same consent gate: nothing is sent
+unless the visitor accepted.
 
 Every tracked link opens in a new tab (target="_blank"), so the page
 isn't unloading when the event is sent. The handler therefore never
@@ -125,6 +132,7 @@ import gift_guide
 # (and rerun) to take it off every page after the holidays.
 FOOTER_GIFT_GUIDE = True
 GIFT_GUIDE_PAGE = "gift-guide/index.html"
+WORK_PAGE = "work-with-me/index.html"
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
@@ -326,6 +334,20 @@ TRACKER = """<script>
 </script>"""
 
 
+FIVERR_TRACKER = """<script>
+(function () {
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[data-fiverr-gig]') : null;
+    if (!a) return;
+    try { gtag('event', 'fiverr_click', { gig_name: a.getAttribute('data-fiverr-gig') }); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>"""
+
+
 def _abs(rel):
     return os.path.join(REPO, rel.replace("/", os.sep))
 
@@ -371,6 +393,8 @@ def targets():
            + _rel_glob("outfits/*/index.html") + _rel_glob("videos/*/index.html")}
     if os.path.isfile(_abs(PRIVACY_PAGE)):
         out[PRIVACY_PAGE] = None
+    if os.path.isfile(_abs(WORK_PAGE)):
+        out[WORK_PAGE] = None
     out["index.html"] = (None, "home", "a.link-card, a.affiliate-banner")
     if os.path.isfile(_abs("gift-guide/index.html")):
         out["gift-guide/index.html"] = (None, "gift-guide", "a.gg-shop")
@@ -407,6 +431,11 @@ def blog_config(rel):
     return (None, rel[:-len("/index.html")], "a.bp-shop, a.bp-aff")
 
 
+def work_href(rel):
+    """Relative link from page rel to the Work with me page."""
+    return "../" * rel.count("/") + "work-with-me/"
+
+
 def privacy_href(rel):
     """Relative link from page rel to the privacy page."""
     return "../" * rel.count("/") + "privacy/"
@@ -429,6 +458,8 @@ def expected_block(rel, config, page_html):
     if config is not None:
         product, context, selector = config
         parts.append(TRACKER % {"product": _js(product), "context": _js(context), "selector": _js(selector)})
+    if rel == WORK_PAGE:
+        parts.append(FIVERR_TRACKER)
     parts.append(END)
     return _nl(page_html, "\n".join(parts))
 
@@ -441,7 +472,10 @@ def expected_footer(rel, page_html):
     gift = ""
     if FOOTER_GIFT_GUIDE and rel != GIFT_GUIDE_PAGE:
         gift = '<a href="' + gift_guide_href(rel) + '">Holiday Gift Guide</a> · '
-    lines += ['  <p class="tf12-foot-links">' + gift + '<a href="' + privacy_href(rel) + '">Privacy</a> · '
+    work = ""
+    if rel != WORK_PAGE:
+        work = '<a href="' + work_href(rel) + '">Work with me</a> · '
+    lines += ['  <p class="tf12-foot-links">' + gift + work + '<a href="' + privacy_href(rel) + '">Privacy</a> · '
               '<button type="button" data-tf12-consent-open>Cookie settings</button></p>',
               "</div>", FOOT_END]
     return _nl(page_html, "\n".join(lines))

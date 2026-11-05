@@ -8,7 +8,7 @@ Usage:
 
 Included:
   - The homepage, the shop grid (products/), the outfit generator, the
-    gift guide (gift-guide/) and the privacy page
+    gift guide (gift-guide/), the privacy page and Work with me
   - The blog listing (blog/) and every published post (blog/<slug>/,
     built by build_blog.py). Drafts (blog/drafts/<slug>/, noindex) never.
   - The outfits/ and videos/ hubs and every category page under them
@@ -107,6 +107,8 @@ def expected_urls():
         entries.append(("gift-guide/index.html", ["gift-guide/index.html"]))
     if os.path.isfile(_abs("privacy/index.html")):
         entries.append(("privacy/index.html", ["privacy/index.html"]))
+    if os.path.isfile(_abs("work-with-me/index.html")):
+        entries.append(("work-with-me/index.html", ["work-with-me/index.html"]))
     for rel in _rel_glob("blog/index.html") + _rel_glob("blog/*/index.html"):
         # blog/drafts/<slug>/ is two levels down, so the glob never sees a
         # draft; the noindex check is a second guard.

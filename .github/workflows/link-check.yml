@@ -43,6 +43,7 @@ jobs:
             pin.it
             www.priv.gc.ca
             www.cai.gouv.qc.ca
+            www.fiverr.com
         run: |
           grep -oE 'https?://[^/?#[:space:]]+' lychee/links.txt \
             | sed -E 's#^https?://##' | tr 'A-Z' 'a-z' | sort | uniq -c > lychee/hosts.txt
