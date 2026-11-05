@@ -32,6 +32,7 @@ exclude = [
   # Known failures that aren't broken pages on this site.
   '(?i)^https?://([^/?#]+\.)?redbubble\.com([:/?#]|$)',    # 410 Gone
   '(?i)^https?://([^/?#]+\.)?instagram\.com([:/?#]|$)',    # 429 to bots
+  '(?i)^https?://([^/?#]+\.)?fiverr\.com([:/?#]|$)',       # 403 bot check
   '(?i)^https?://fonts\.(googleapis|gstatic)\.com([:/?#]|$)',  # bare origin 404s
   '^https://thatfootball12\.github\.io/thatfootball12-links/blog/drafts/',
 ]
