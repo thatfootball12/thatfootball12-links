@@ -1,7 +1,7 @@
 name: Weekly Affiliate Link Check
 
 # Distinct from "Weekly Broken Link Check" (link-check.yml), which uses
-# lychee against every .html file's links generically. This workflow
+# lychee against the site's non-affiliate links. This workflow
 # checks whether each SHEIN product in products.json is still listed, by
 # its plain ca.shein.com product page, never the affiliate link (Amazon
 # and Awin aren't checked). It commits data/dead_links.json when it
