@@ -253,6 +253,31 @@
     padding:18px 16px;
   }
   .card:last-child:nth-child(odd){grid-column:1 / -1;}
+  .pins{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+  .pins img,.looks img,.sample img{display:block;width:100%;height:auto;border-radius:10px;}
+  .pins img{border:1px solid var(--panel-line);}
+  .img-note{margin-top:10px;text-align:center;font-size:11px;line-height:1.5;color:var(--bone-dim);}
+  .card a.more{display:block;margin:-6px 0 14px;font-size:13px;color:var(--gold);text-decoration:none;}
+  .lead{font-size:14px;line-height:1.65;color:var(--bone-dim);text-align:center;margin-bottom:18px;}
+  .looks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;}
+  .looks figcaption{margin-top:7px;text-align:center;font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--bone);}
+  .sub{font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gold);text-align:center;margin:26px 0 14px;}
+  .sample{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:16px;align-items:center;background:var(--ink);border:1px solid var(--panel-line);border-radius:12px;padding:14px;}
+  .sample-title{font-size:14px;font-weight:600;color:var(--bone);margin-bottom:8px;}
+  .sample ul{list-style:none;}
+  .sample li{padding:8px 0;border-top:1px solid var(--panel-line);}
+  .sample li small{display:block;font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--bone-dim);}
+  .sample li span{display:block;font-size:13px;line-height:1.4;color:var(--bone);}
+  .sample li em{display:block;font-style:normal;font-size:12px;font-weight:600;color:var(--gold);}
+  .included{list-style:none;}
+  .included li{position:relative;padding-left:20px;margin-bottom:8px;font-size:13px;line-height:1.55;color:var(--bone-dim);}
+  .included li::before{content:'';position:absolute;left:3px;top:7px;width:7px;height:7px;border-radius:50%;background:var(--gold);}
+  .tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:18px;}
+  .tier{background:var(--ink);border:1px solid var(--panel-line);border-radius:12px;padding:16px 12px;text-align:center;}
+  .tier h4{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:.5px;line-height:1.3;color:var(--bone);}
+  .tier b{display:block;margin:8px 0 2px;font-family:'Anton',sans-serif;font-size:26px;font-weight:400;line-height:1.1;color:var(--gold);}
+  .tier small{display:block;margin-bottom:8px;font-size:11px;color:var(--bone-dim);}
+  .tier p{font-size:12px;line-height:1.5;color:var(--bone-dim);}
   .card h3{
     font-family:'Oswald',sans-serif;
     font-size:17px;
@@ -303,7 +328,10 @@
   @media (max-width:520px){
     h1{font-size:36px;}
     .section{padding:20px 16px;}
-    .cards{grid-template-columns:minmax(0,1fr);}
+    .cards,.tiers{grid-template-columns:minmax(0,1fr);}
+    .looks{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .sample{grid-template-columns:minmax(0,1fr);}
+    .sample picture{display:block;width:60%;margin:0 auto;}
   }
 </style>
 <!-- favicons:start -->
@@ -342,6 +370,13 @@
       <div class="stat"><b>~251,000</b><span>Monthly audience</span></div>
     </div>
     <p class="as-of">As of October 2026</p>
+    <h3 class="sub">Recent Pins</h3>
+    <div class="pins">
+      <picture><source srcset="img/pin-date-night.webp" type="image/webp"><img src="img/pin-date-night.jpg" alt="ThatFootball12 Pinterest pin of a date night outfit, a navy turtleneck and brown boots, with the text Shop the Look Under $125" width="400" height="600" loading="lazy" decoding="async"></picture>
+      <picture><source srcset="img/pin-old-money.webp" type="image/webp"><img src="img/pin-old-money.jpg" alt="ThatFootball12 Pinterest pin of an old money outfit, a long brown coat and tan trousers, with the text Shop the Look Under $140" width="400" height="600" loading="lazy" decoding="async"></picture>
+      <picture><source srcset="img/pin-wedding.webp" type="image/webp"><img src="img/pin-wedding.jpg" alt="ThatFootball12 Pinterest pin of a wedding guest outfit, a beige suit in a garden, with the text Shop the Look Under $140" width="400" height="600" loading="lazy" decoding="async"></picture>
+    </div>
+    <p class="img-note">Pins from the ThatFootball12 account. Images created with AI.</p>
   </section>
 
   <section class="section" aria-labelledby="services-title">
@@ -360,9 +395,54 @@
       <article class="card">
         <h3>Men's Outfit Shopping List</h3>
         <p>A complete outfit, put together as a shopping list for any occasion.</p>
+        <a class="more" href="#outfit-lists">See what's included ↓</a>
         <a class="btn" href="https://www.fiverr.com/s/EmrjeGY" target="_blank" rel="noopener" data-fiverr-gig="Men's outfit shopping list">View on Fiverr</a>
       </article>
     </div>
+  </section>
+
+  <section class="section" id="outfit-lists" aria-labelledby="outfit-title">
+    <h2 id="outfit-title">Men's Outfit Shopping Lists</h2>
+    <p class="lead">Need a complete outfit but don't want to spend hours scrolling? Tell me the occasion and I'll put together a full look, built around your budget, fit and style, with a direct link to every piece.</p>
+
+    <div class="looks">
+      <figure><picture><source srcset="img/look-gameday.webp" type="image/webp"><img src="img/look-gameday.jpg" alt="Game day outfit with a dusty pink sweater, light jeans and white sneakers" width="424" height="632" loading="lazy" decoding="async"></picture><figcaption>Game Day</figcaption></figure>
+      <figure><picture><source srcset="img/look-business-casual.webp" type="image/webp"><img src="img/look-business-casual.jpg" alt="Business casual outfit with a burgundy cardigan, khaki chinos and brown shoes" width="424" height="632" loading="lazy" decoding="async"></picture><figcaption>Business Casual</figcaption></figure>
+      <figure><picture><source srcset="img/look-first-date.webp" type="image/webp"><img src="img/look-first-date.jpg" alt="First date outfit with a grey overcoat, dark jeans and brown boots" width="424" height="632" loading="lazy" decoding="async"></picture><figcaption>First Date</figcaption></figure>
+      <figure><picture><source srcset="img/look-wedding.webp" type="image/webp"><img src="img/look-wedding.jpg" alt="Wedding guest outfit with a navy suit and brown dress shoes" width="424" height="632" loading="lazy" decoding="async"></picture><figcaption>Wedding Guest</figcaption></figure>
+    </div>
+    <p class="img-note">Example looks. Images created with AI.</p>
+
+    <h3 class="sub">What Your List Looks Like</h3>
+    <div class="sample">
+      <picture><source srcset="img/look-sample.webp" type="image/webp"><img src="img/look-sample.jpg" alt="Old money outfit with a cream cable knit sweater, tan pleated trousers and brown penny loafers" width="424" height="632" loading="lazy" decoding="async"></picture>
+      <div>
+        <p class="sample-title">Sample: Autumn Old Money Look</p>
+        <ul>
+          <li><small>Top</small><span>Cream cable knit sweater</span><em>Buy link →</em></li>
+          <li><small>Bottom</small><span>Tan pleated trousers</span><em>Buy link →</em></li>
+          <li><small>Shoes</small><span>Brown penny loafers</span><em>Buy link →</em></li>
+          <li><small>Accessories</small><span>Watch with a black leather strap</span><em>Buy link →</em></li>
+        </ul>
+      </div>
+    </div>
+    <p class="img-note">Sample layout only. Your list has a real product link for each piece.</p>
+
+    <h3 class="sub">What's Included</h3>
+    <ul class="included">
+      <li>Real product links, organized by category: top, bottom, shoes and accessories</li>
+      <li>Shoes and accessories matched to the look</li>
+      <li>Picks from a range of retailers, and you can name your favourite stores</li>
+      <li>Direct, non-affiliate links, so every pick is based on fit and style, not commission</li>
+    </ul>
+
+    <h3 class="sub">Pick Your Package</h3>
+    <div class="tiers">
+      <div class="tier"><h4>Single Outfit Shopping List</h4><b>US$25</b><small>2-day delivery</small><p>One outfit idea with up to 5 items, each with a direct buy link.</p></div>
+      <div class="tier"><h4>Occasion Bundle</h4><b>US$55</b><small>3-day delivery</small><p>3 outfit options with budget, mid-range and splurge variations.</p></div>
+      <div class="tier"><h4>Full Week Lookbook</h4><b>US$95</b><small>4-day delivery</small><p>5 to 7 outfits for a trip or event, lookbook style.</p></div>
+    </div>
+    <a class="btn" href="https://www.fiverr.com/s/EmrjeGY" target="_blank" rel="noopener" data-fiverr-gig="Men's outfit shopping list">Get Your Outfit List on Fiverr</a>
   </section>
 
   <section class="section" aria-labelledby="how-title">
