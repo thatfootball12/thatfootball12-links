@@ -103,11 +103,21 @@ affiliate_click tracking:
 
 fiverr_click tracking: every a[data-fiverr-gig] link on work-with-me/
 sends fiverr_click with gig_name set to that attribute ("Profile" for the
-closing button). It goes through the same consent gate: nothing is sent
-unless the visitor accepted.
+closing button). A link that also has data-fiverr-position sends it as
+button_position, which tells apart two buttons for the same gig ("card"
+or "packages" on the outfit list buttons). It goes through the same
+consent gate: nothing is sent unless the visitor accepted.
 
-Every tracked link opens in a new tab (target="_blank"), so the page
-isn't unloading when the event is sent. The handler therefore never
+work_with_me_click tracking: every a[data-work-location] link sends
+work_with_me_click with location set to that attribute: "footer" on the
+site footer link (written by expected_footer), "home_header" on the
+homepage header button (in index.html by hand). Every page with the
+footer link gets the handler, and the same consent gate applies.
+
+Every tracked link except work_with_me_click's opens in a new tab
+(target="_blank"), so the page isn't unloading when the event is sent.
+Work with me links open in the same tab, so gtag.js has to get the
+event out as the page unloads. The handlers therefore never
 calls preventDefault or delays navigation: it sends the event and lets
 the browser open the link natively. Cancelling the click and navigating
 from a callback/setTimeout (the old analytics.js outbound-link pattern)
@@ -340,7 +350,24 @@ FIVERR_TRACKER = """<script>
     if (e.type === 'auxclick' && e.button !== 1) return;
     var a = e.target && e.target.closest ? e.target.closest('a[data-fiverr-gig]') : null;
     if (!a) return;
-    try { gtag('event', 'fiverr_click', { gig_name: a.getAttribute('data-fiverr-gig') }); } catch (err) {}
+    var params = { gig_name: a.getAttribute('data-fiverr-gig') };
+    var position = a.getAttribute('data-fiverr-position');
+    if (position) params.button_position = position;
+    try { gtag('event', 'fiverr_click', params); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>"""
+
+
+WORK_TRACKER = """<script>
+(function () {
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[data-work-location]') : null;
+    if (!a) return;
+    try { gtag('event', 'work_with_me_click', { location: a.getAttribute('data-work-location') }); } catch (err) {}
   }
   document.addEventListener('click', track);
   document.addEventListener('auxclick', track);
@@ -460,6 +487,8 @@ def expected_block(rel, config, page_html):
         parts.append(TRACKER % {"product": _js(product), "context": _js(context), "selector": _js(selector)})
     if rel == WORK_PAGE:
         parts.append(FIVERR_TRACKER)
+    elif wants_footer(page_html):  # every page with the footer's Work with me link
+        parts.append(WORK_TRACKER)
     parts.append(END)
     return _nl(page_html, "\n".join(parts))
 
@@ -474,7 +503,7 @@ def expected_footer(rel, page_html):
         gift = '<a href="' + gift_guide_href(rel) + '">Holiday Gift Guide</a> · '
     work = ""
     if rel != WORK_PAGE:
-        work = '<a href="' + work_href(rel) + '">Work with me</a> · '
+        work = '<a href="' + work_href(rel) + '" data-work-location="footer">Work with me</a> · '
     lines += ['  <p class="tf12-foot-links">' + gift + work + '<a href="' + privacy_href(rel) + '">Privacy</a> · '
               '<button type="button" data-tf12-consent-open>Cookie settings</button></p>',
               "</div>", FOOT_END]

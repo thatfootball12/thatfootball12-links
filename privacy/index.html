@@ -143,6 +143,18 @@
   .tf12-foot button{background:none;border:0;font:inherit;cursor:pointer;}
   .tf12-foot a:hover,.tf12-foot button:hover{color:#D4A017;}
 </style>
+<script>
+(function () {
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[data-work-location]') : null;
+    if (!a) return;
+    try { gtag('event', 'work_with_me_click', { location: a.getAttribute('data-work-location') }); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>
 <!-- analytics:end -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy • ThatFootball12</title>
@@ -197,7 +209,7 @@
 <body>
 <div class="wrap">
   <h1>Privacy</h1>
-  <div class="updated">Last updated November 4, 2026</div>
+  <div class="updated">Last updated November 5, 2026</div>
 
   <div class="summary">
     <p><strong>The short version:</strong> there are no accounts, sign-up forms, comments or newsletters here, so this site never asks for your name, email or anything else about you. One thing happens on every visit, because that's how a web page gets to your screen: the company that hosts the site sees your IP address. Everything else (Google Analytics, and the Moosehill banner on the homepage) only switches on if you click <strong>Accept</strong> on the cookie banner. Decline and none of it loads.</p>
@@ -221,7 +233,7 @@
   <ul>
     <li>Which pages you view, and roughly how long you spend on them</li>
     <li>The site or app that sent you here (the "referrer"), like TikTok or Pinterest</li>
-    <li>Which product links you click, and the product's name, store and (for SHEIN) listed price, and which Fiverr service links you click on the Work with me page</li>
+    <li>Which product links you click, and the product's name, store and (for SHEIN) listed price, which Fiverr service links you click on the Work with me page, and when you click a link to the Work with me page</li>
     <li>Your device type, browser, operating system, screen size and language</li>
     <li>Your approximate location (country, region and city). Google works this out from your IP address; Google says Analytics doesn't log or store the IP address itself.</li>
   </ul>
@@ -258,7 +270,7 @@
 <!-- site-footer:start -->
 <div class="tf12-foot">
   <p>As an Amazon Associate, SHEIN affiliate, and Moosehill and House of Blanks (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through links on this site.</p>
-  <p class="tf12-foot-links"><a href="../gift-guide/">Holiday Gift Guide</a> · <a href="../work-with-me/">Work with me</a> · <a href="../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
+  <p class="tf12-foot-links"><a href="../gift-guide/">Holiday Gift Guide</a> · <a href="../work-with-me/" data-work-location="footer">Work with me</a> · <a href="../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
 </div>
 <!-- site-footer:end -->
 </body>

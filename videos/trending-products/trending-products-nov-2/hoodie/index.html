@@ -175,6 +175,18 @@
   document.addEventListener('auxclick', track);
 })();
 </script>
+<script>
+(function () {
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[data-work-location]') : null;
+    if (!a) return;
+    try { gtag('event', 'work_with_me_click', { location: a.getAttribute('data-work-location') }); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>
 <!-- analytics:end -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>In My Nature Men Solid Outdoor Hoodie • ThatFootball12</title>
@@ -256,7 +268,7 @@
 <!-- site-footer:start -->
 <div class="tf12-foot">
   <p>As an Amazon Associate, SHEIN affiliate, and Moosehill and House of Blanks (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through links on this site.</p>
-  <p class="tf12-foot-links"><a href="../../../../gift-guide/">Holiday Gift Guide</a> · <a href="../../../../work-with-me/">Work with me</a> · <a href="../../../../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
+  <p class="tf12-foot-links"><a href="../../../../gift-guide/">Holiday Gift Guide</a> · <a href="../../../../work-with-me/" data-work-location="footer">Work with me</a> · <a href="../../../../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
 </div>
 <!-- site-footer:end -->
 </body>
