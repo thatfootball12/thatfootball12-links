@@ -1,0 +1,37 @@
+# Config for the Weekly Broken Link Check (.github/workflows/link-check.yml).
+#
+# Requesting an affiliate link counts as a click, so lychee must never open
+# one. Anything that earns a commission, or redirects through a tracker,
+# goes in `exclude` below. The workflow also refuses to run lychee if any
+# link's host isn't on its ALLOWED_HOSTS list, so a new retailer has to be
+# added to one list or the other before the check will run.
+#
+# Don't set `verbose` here: it makes lychee print every excluded URL.
+
+exclude_mail = true
+
+# GitHub Pages returns the odd 503 on a run of ~2,000 requests.
+max_concurrency = 16
+max_retries = 3
+retry_wait_time = 5
+
+# Draft posts 404 on the live site by design (see _config.yml).
+exclude_path = ["blog/drafts"]
+
+exclude = [
+  # Affiliate links and affiliate redirects: never request these.
+  '(?i)^https?://([^/?#]+\.)?amazon\.[a-z.]+([:/?#]|$)',
+  '(?i)^https?://([^/?#]+\.)?amzn\.[a-z.]+([:/?#]|$)',
+  '(?i)^https?://a\.co([:/?#]|$)',
+  '(?i)^https?://([^/?#]+\.)?link\.amazon([:/?#]|$)',
+  '(?i)^https?://([^/?#]+\.)?shein\.[a-z.]+([:/?#]|$)',
+  '(?i)^https?://([^/?#]+\.)?awin1\.com([:/?#]|$)',
+  '(?i)^https?://([^/?#]+\.)?tidd\.ly([:/?#]|$)',
+  '(?i)^https?://([^/?#]+\.)?tee\.pub([:/?#]|$)',
+
+  # Known failures that aren't broken pages on this site.
+  '(?i)^https?://([^/?#]+\.)?redbubble\.com([:/?#]|$)',    # 410 Gone
+  '(?i)^https?://([^/?#]+\.)?instagram\.com([:/?#]|$)',    # 429 to bots
+  '(?i)^https?://fonts\.(googleapis|gstatic)\.com([:/?#]|$)',  # bare origin 404s
+  '^https://thatfootball12\.github\.io/thatfootball12-links/blog/drafts/',
+]

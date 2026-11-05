@@ -92,6 +92,14 @@ together. Currently sold out (remove from both `data/dead_links.json` and
 `hidden` when it's back): `trending-products/trending-products-nov-2-2/yellow-wash-jeans`,
 `trending-products/trending-products-oct-26-2/lace-up-boots`.
 
+**The weekly lychee check must never open an affiliate link.** Each
+request counts as a click. `link-check.yml` reads its excludes from
+`.github/lychee.toml`, then lists the links without requesting them and
+stops the job if any host isn't on its `ALLOWED_HOSTS` list. So a new
+retailer or affiliate network fails the check until you add it: to the
+excludes if a request could count as a click, else to `ALLOWED_HOSTS`.
+Don't add `--verbose`: it prints every excluded URL in the log.
+
 **Amazon links must carry one of Jesse's tags.** amazon.ca:
 `thatfootballg-ca-20` (use this one for new links), `thatfootballg-us-20`
 or `thatfootballg-20`; amazon.com: `thatfootbal01-20`. Any other tag

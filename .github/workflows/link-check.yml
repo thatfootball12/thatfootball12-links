@@ -1,5 +1,11 @@
 name: Weekly Broken Link Check
 
+# Never let this workflow request an affiliate link: each request counts as
+# a click. The excludes live in .github/lychee.toml. The first two steps
+# below make no network requests to the links: they list what lychee would
+# check, and stop the job if any host isn't on ALLOWED_HOSTS. Don't add
+# --verbose to either lychee step, since it prints excluded URLs too.
+
 on:
   schedule:
     # Runs every Monday at 9:00 AM UTC — adjust the cron time if you'd prefer a different day/time
@@ -13,13 +19,55 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: List the links to check (no link is requested)
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >
+            --config .github/lychee.toml
+            --dump
+            './**/*.html'
+          format: json
+          output: lychee/links.txt
+          jobSummary: false
+          fail: true
+
+      - name: Stop if any link is on an unapproved host
+        env:
+          # Only add a host here if requesting it can't count as a click.
+          # An affiliate or tracking host goes in .github/lychee.toml instead.
+          ALLOWED_HOSTS: >-
+            thatfootball12.github.io
+            docs.github.com
+            policies.google.com
+            www.tiktok.com
+            pin.it
+            www.priv.gc.ca
+            www.cai.gouv.qc.ca
+        run: |
+          grep -oE 'https?://[^/?#[:space:]]+' lychee/links.txt \
+            | sed -E 's#^https?://##' | tr 'A-Z' 'a-z' | sort | uniq -c > lychee/hosts.txt
+          echo "Hosts lychee will request:"
+          cat lychee/hosts.txt
+          if ! grep -q ' thatfootball12\.github\.io$' lychee/hosts.txt; then
+            echo "::error::The link list is missing this site, so it can't be trusted."
+            exit 1
+          fi
+          bad=0
+          while read -r count host; do
+            case " $ALLOWED_HOSTS " in
+              *" $host "*) ;;
+              *) echo "::error::Unapproved host $host ($count links). Add it to .github/lychee.toml if it's affiliate or tracking, else to ALLOWED_HOSTS."
+                 bad=1 ;;
+            esac
+          done < lychee/hosts.txt
+          exit "$bad"
+
       - name: Check links
         uses: lycheeverse/lychee-action@v1
         with:
           args: >
-            --verbose
+            --config .github/lychee.toml
             --no-progress
-            --exclude-mail
             './**/*.html'
           fail: true
         env:
