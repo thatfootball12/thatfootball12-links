@@ -149,7 +149,10 @@
     if (e.type === 'auxclick' && e.button !== 1) return;
     var a = e.target && e.target.closest ? e.target.closest('a[data-fiverr-gig]') : null;
     if (!a) return;
-    try { gtag('event', 'fiverr_click', { gig_name: a.getAttribute('data-fiverr-gig') }); } catch (err) {}
+    var params = { gig_name: a.getAttribute('data-fiverr-gig') };
+    var position = a.getAttribute('data-fiverr-position');
+    if (position) params.button_position = position;
+    try { gtag('event', 'fiverr_click', params); } catch (err) {}
   }
   document.addEventListener('click', track);
   document.addEventListener('auxclick', track);
@@ -396,7 +399,7 @@
         <h3>Men's Outfit Shopping List</h3>
         <p>A complete outfit, put together as a shopping list for any occasion.</p>
         <a class="more" href="#outfit-lists">See what's included ↓</a>
-        <a class="btn" href="https://www.fiverr.com/s/EmrjeGY" target="_blank" rel="noopener" data-fiverr-gig="Men's outfit shopping list">View on Fiverr</a>
+        <a class="btn" href="https://www.fiverr.com/s/EmrjeGY" target="_blank" rel="noopener" data-fiverr-gig="Men's outfit shopping list" data-fiverr-position="card">View on Fiverr</a>
       </article>
     </div>
   </section>
@@ -442,7 +445,7 @@
       <div class="tier"><h4>Occasion Bundle</h4><b>US$55</b><small>3-day delivery</small><p>3 outfit options with budget, mid-range and splurge variations.</p></div>
       <div class="tier"><h4>Full Week Lookbook</h4><b>US$95</b><small>4-day delivery</small><p>5 to 7 outfits for a trip or event, lookbook style.</p></div>
     </div>
-    <a class="btn" href="https://www.fiverr.com/s/EmrjeGY" target="_blank" rel="noopener" data-fiverr-gig="Men's outfit shopping list">Get Your Outfit List on Fiverr</a>
+    <a class="btn" href="https://www.fiverr.com/s/EmrjeGY" target="_blank" rel="noopener" data-fiverr-gig="Men's outfit shopping list" data-fiverr-position="packages">Get Your Outfit List on Fiverr</a>
     <p class="img-note">Prices are in US dollars. Fiverr shows them in your local currency.</p>
   </section>
 
