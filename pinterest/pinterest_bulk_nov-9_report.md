@@ -107,7 +107,7 @@ The CSV has no column for it. Paste after upload:
 
 - The Sherpa-Lined Brown Jacket for Cold Tailgates 🍂: Men's brown faux leather jacket with beige sherpa lining
 - The Leafs Night Fit That Still Looks Like an Outfit 🏒: Men's hockey night outfit with blue hoodie, black jacket, jeans and snow boots
-- Fleece-Lined Thermal Jeans Under $55 🔥: Men's blue water-washed thermal lined jeans with fleece lining
+- Thermal-Lined Jeans Under $55 🔥: Men's blue water-washed jeans with thermal lining
 - A Light Blue Button Down Under $25 👔: Men's light blue smart casual button down shirt
 - A Clean Black Full-Zip Sweater 🖤: Men's black full-zip cotton sweater
 - Oilers Fans, This Is the Cold-Weather Fit 🧡💙: Men's winter street outfit with royal blue hoodie, black padded coat and black boots
