@@ -248,9 +248,9 @@ records exist, since the price comes from there), run
 also covers `-oct-12-2`, `-oct-12-3`, ...). It writes the Pinterest pin
 image `outfit-pin.jpg` into each campaign folder from its
 `outfit-preview.*`, with the price overlay that used to be added by hand
-in Gemini: "UNDER $X!" from the outfit's total rounded up to the next
-$5, or "FULL FIT ↓" when any item has no stored price (Amazon, Awin),
-under "SHOP THE LOOK" ("ON SALE NOW" if any item has a discount, unless
+in Gemini: "UNDER CA$X!" from the outfit's total rounded up to the next
+$5 (CA$ when every item is CAD, as SHEIN prices are), or "FULL FIT ↓"
+when any item has no stored price (Amazon, Awin), under "SHOP THE LOOK" ("ON SALE NOW" if any item has a discount, unless
 you pass `--no-sale-line`, as the Oct 26 / Nov 2 batch did). The
 site keeps using the plain `outfit-preview`, which the script never
 modifies. It prints one line per pin naming the path it took:
@@ -279,7 +279,7 @@ picks the batch's 20 best SHEIN deals (any with `discount_percent` of
 20 or more first, biggest discount first, then the rest cheapest first;
 smaller discounts don't count), prints the list, and writes the
 Pinterest pin `product-pin.jpg` into each product's folder: a 1000x1500
-pin with the product photo above "SHOP NOW" / "UNDER $X!" (the price
+pin with the product photo above "SHOP NOW" / "UNDER CA$X!" (the price
 rounded up: to the next dollar under $10, else to the next $5). Amazon
 and Awin products, products with no price, and `image_pending` products
 are skipped. The product's own photo is never modified. Add `--dry-run`
@@ -319,7 +319,9 @@ were hand-scheduled). It validates everything first and writes no CSV if anythin
 fails: every Link and Media URL must return 200 on the live site (so
 the pin images must be pushed first), titles ≤ 100 and full
 descriptions ≤ 500 characters, no duplicates, no past publish times,
-no "$" in the copy of a pin with an Amazon item, no retailer the
+no "$" in the copy of a pin with an Amazon item, no bare "$" (not
+"CA$") in the title, description or alt text of a pin with a SHEIN
+item (a report warning for batches before Nov 9), no retailer the
 disclosures don't cover (the Awin wording names House of Blanks, so another
 Awin merchant needs its own first), and every board and
 section must be listed in `pin_settings.json`. Keep that list identical

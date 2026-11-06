@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Makes the Pinterest pin image for a single SHEIN product: the product's
-own photo with "SHOP NOW / UNDER $X!" text, saved as product-pin.jpg
+own photo with "SHOP NOW / UNDER CA$X!" text, saved as product-pin.jpg
 in the product folder. The photo is never cropped, and the original is
 never written to.
 
@@ -22,14 +22,15 @@ Layout: the same two paths as make_outfit_pin.py --style fade.
              at the bottom keeps its shape (scaled to 1000 wide); the text
              goes in a fade over that floor.
 Text: two centred Anton lines with a soft drop shadow, small
-letter-spaced white "SHOP NOW" over "UNDER $X!" (UNDER white, price
+letter-spaced white "SHOP NOW" over "UNDER CA$X!" (UNDER white, price
 gold #D4A017), the price line up to 70% of the pin's width, smaller if
 the block doesn't fit the space.
 
 Price: the product's products.json price, rounded UP. Under $10 to the
-next whole dollar (4.20 -> UNDER $5); $10 and up to the next $5
-(14.38 -> UNDER $15). An exact step goes one higher (15.00 -> UNDER $20)
-so "under" stays true. No % off is ever printed.
+next whole dollar (4.20 -> UNDER CA$5); $10 and up to the next $5
+(14.38 -> UNDER CA$15). An exact step goes one higher (15.00 -> UNDER CA$20)
+so "under" stays true. No % off is ever printed. A product with currency
+CAD reads CA$ (SHEIN links go to SHEIN Canada); any other reads a plain $.
 
 SHEIN only: Amazon/Awin products and products without a price are
 skipped, as are image_pending products (no photo yet).
@@ -92,6 +93,12 @@ def price_cap(price):
     if cents < 1000:
         return cents // 100 + 1
     return (cents // 500 + 1) * 5
+
+
+def price_text(p):
+    """The price as the pin prints it: "CA$15" for a CAD product, else "$15"."""
+    symbol = "CA$" if p.get("currency") == "CAD" else "$"
+    return f"{symbol}{price_cap(p['price'])}"
 
 
 def eligible(p):
@@ -215,11 +222,12 @@ def vertical_fade(img, y0, y1, colour, max_alpha=255):
 
 
 def draw_text(img, top, bottom, cap, runs=None):
-    """"SHOP NOW" over "UNDER $X!", or runs = (top run, big runs) in their
-    place, centred between top and bottom: the big line as wide as
-    TEXT_WIDTH allows, smaller if the block is taller than the space."""
+    """"SHOP NOW" over "UNDER <cap>!" (cap as price_text gives it), or runs =
+    (top run, big runs) in their place, centred between top and bottom: the
+    big line as wide as TEXT_WIDTH allows, smaller if the block is taller
+    than the space."""
     w = img.size[0]
-    top_run, big_runs = runs or (("SHOP NOW", WHITE), [("UNDER ", WHITE), (f"${cap}!", GOLD)])
+    top_run, big_runs = runs or (("SHOP NOW", WHITE), [("UNDER ", WHITE), (f"{cap}!", GOLD)])
     big_text = "".join(t for t, _ in big_runs)
 
     def block(big):
@@ -374,10 +382,10 @@ def main():
         if dead:
             note += f" ({len(dead)} dead or sold out)"
         print(f"{args.batch}: {len(pool)} products, {len(ok)} eligible SHEIN{note}, picked {len(chosen)}\n")
-        print(f"  {'#':>2}  {'price':>7}  {'disc':>4}  {'tag':<9}  product")
+        print(f"  {'#':>2}  {'price':>7}  {'disc':>4}  {'tag':<12}  product")
         for i, p in enumerate(chosen, 1):
             disc = f"{p['discount_percent']}%" if p.get("discount_percent") else "-"
-            print(f"  {i:>2}  {p['price']:>7.2f}  {disc:>4}  UNDER ${price_cap(p['price']):<3}  {p['id']}")
+            print(f"  {i:>2}  {p['price']:>7.2f}  {disc:>4}  UNDER {price_text(p):<6}  {p['id']}")
         print()
         todo += [p for p in chosen if p not in todo]
 
@@ -401,9 +409,9 @@ def main():
             continue
         if args.dry_run:
             continue
-        pin, path = render(photo, price_cap(p["price"]))
+        pin, path = render(photo, price_text(p))
         pin.save(out, quality=92, optimize=True)
-        print(f"made  {os.path.relpath(out, REPO)} [{path}]: UNDER ${price_cap(p['price'])}")
+        print(f"made  {os.path.relpath(out, REPO)} [{path}]: UNDER {price_text(p)}")
         made += 1
 
     if not args.dry_run:
