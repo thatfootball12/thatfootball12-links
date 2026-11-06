@@ -328,7 +328,7 @@ def build_record(rel_path):
         flags.append("no <h1> found — name could not be determined")
 
     shop_m = SHOP_LINK_RE.search(content)
-    outbound_url = shop_m.group(1) if shop_m else None
+    outbound_url = html.unescape(shop_m.group(1)) if shop_m else None
     if outbound_url is None:
         flags.append("no <a class=\"shop\"> link found — retailer/currency could not be determined")
 
