@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- analytics:start -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+</script>
+<!-- Google tag (gtag.js): loaded only after the visitor accepts analytics cookies. See add_analytics.py. -->
+<script>
+(function () {
+  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 2, MAX_AGE = 365 * 864e5;
+  var PRIVACY = '../../privacy/', LABELS = { granted: 'Accepted', denied: 'Declined' };
+  var loaded = false, bar = null;
+  function stored() {
+    try {
+      var c = JSON.parse(localStorage.getItem(KEY));
+      if (c && c.v === VERSION && Date.now() - c.ts < MAX_AGE && LABELS[c.choice]) return c.choice;
+    } catch (e) {}
+    return null;
+  }
+  function store(choice) {
+    try { localStorage.setItem(KEY, JSON.stringify({ v: VERSION, choice: choice, ts: Date.now() })); } catch (e) {}
+  }
+  function load() {
+    if (loaded) return;
+    loaded = true;
+    dataLayer.length = 0;
+    gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', ID);
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+    document.head.appendChild(s);
+  }
+  function clearCookies() {
+    var host = location.hostname;
+    document.cookie.split(';').forEach(function (c) {
+      var name = c.split('=')[0].trim();
+      if (!/^_ga(_|$)/.test(name)) return;
+      ['', host, '.' + host].forEach(function (d) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : '');
+      });
+    });
+  }
+  // Affiliate banners (the homepage's Moosehill/Awin one): an empty
+  // [data-tf12-awin] box gets its image and link only after Accept.
+  function banners(on) {
+    var els = document.querySelectorAll('[data-tf12-awin]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      el.innerHTML = '';
+      el.hidden = !on;
+      if (!on) continue;
+      var a = document.createElement('a'), img = document.createElement('img');
+      a.className = 'affiliate-banner';
+      a.href = el.getAttribute('data-tf12-awin-href');
+      a.target = '_blank';
+      a.rel = 'nofollow sponsored noopener';
+      img.alt = el.getAttribute('data-tf12-awin-alt') || '';
+      img.width = 300;
+      img.height = 250;
+      img.src = el.getAttribute('data-tf12-awin');
+      a.appendChild(img);
+      el.appendChild(a);
+    }
+  }
+  function showStatus() {
+    var choice = stored(), els = document.querySelectorAll('[data-tf12-consent-status]');
+    for (var i = 0; i < els.length; i++) els[i].textContent = LABELS[choice] || 'Not chosen yet';
+    if (bar) bar.querySelector('.tf12-consent-now').hidden = !choice;
+  }
+  function hide() {
+    if (!bar) return;
+    bar.hidden = true;
+    document.body.style.paddingBottom = '';
+  }
+  function show(focus) {
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'tf12-consent';
+      bar.setAttribute('role', 'region');
+      bar.setAttribute('aria-label', 'Cookie choice');
+      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out, and show a Moosehill banner from Awin on the homepage (Awin sets its own cookie)? Neither happens unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
+        '<p class="tf12-consent-now">Current choice: <b data-tf12-consent-status></b></p>' +
+        '<div class="tf12-consent-btns"><button type="button" data-tf12-choice="denied">Decline</button>' +
+        '<button type="button" data-tf12-choice="granted">Accept</button></div>';
+      document.body.appendChild(bar);
+    }
+    bar.hidden = false;
+    showStatus();
+    pad();
+    if (focus) bar.querySelector('button').focus();
+  }
+  function pad() {
+    if (bar && !bar.hidden) document.body.style.paddingBottom = (bar.offsetHeight + 24) + 'px';
+  }
+  window.addEventListener('resize', pad);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(pad);
+  function choose(choice) {
+    store(choice);
+    hide();
+    showStatus();
+    banners(choice === 'granted');
+    if (choice === 'granted') return load();
+    if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
+    clearCookies();
+    if (loaded) location.reload();
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-tf12-choice], [data-tf12-consent-open]') : null;
+    if (!t) return;
+    if (t.hasAttribute('data-tf12-consent-open')) show(true);
+    else choose(t.getAttribute('data-tf12-choice'));
+  });
+  var initial = stored();
+  if (initial === 'granted') load();
+  function ready() {
+    showStatus();
+    if (initial === 'granted') banners(true);
+    if (!initial) show(false);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
+  else ready();
+})();
+</script>
+<style>
+  .tf12-consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:2147483000;max-width:560px;margin:0 auto;padding:14px 16px;background:#18140F;color:#F3EFE6;border:1px solid #2A2620;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.55);font:13px/1.5 'Poppins',system-ui,sans-serif;text-align:left;}
+  .tf12-consent[hidden],.tf12-consent [hidden]{display:none;}
+  .tf12-consent p{margin:0 0 12px;font-size:13px;line-height:1.5;color:#F3EFE6;}
+  .tf12-consent a{color:#D4A017;}
+  .tf12-consent .tf12-consent-now{color:#B8B2A4;}
+  .tf12-consent-btns{display:flex;gap:10px;}
+  .tf12-consent-btns button{flex:1 1 0;min-height:44px;padding:10px 12px;border:1px solid #F3EFE6;border-radius:8px;background:transparent;color:#F3EFE6;font:600 14px/1 'Oswald',system-ui,sans-serif;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+  .tf12-consent-btns button:hover,.tf12-consent-btns button:focus-visible{background:#F3EFE6;color:#0D0D0D;}
+  body{flex-wrap:wrap;align-content:flex-start;}
+  .tf12-foot{flex:0 0 100%;margin-top:32px;text-align:center;font:11px/1.6 'Poppins',system-ui,sans-serif;color:#B8B2A4;}
+  .tf12-foot p{max-width:520px;margin:0 auto 4px;font-size:11px;line-height:1.6;color:#B8B2A4;}
+  .tf12-foot .tf12-foot-links{font-size:13px;}
+  .tf12-foot a,.tf12-foot button{display:inline-block;padding:6px 4px;color:#B8B2A4;text-decoration:underline;text-underline-offset:2px;}
+  .tf12-foot button{background:none;border:0;font:inherit;cursor:pointer;}
+  .tf12-foot a:hover,.tf12-foot button:hover{color:#D4A017;}
+</style>
+<script>
+(function () {
+  var P = null, C = "blog/made-in-canada-hoodies-2026", SEL = "a.bp-shop, a.bp-aff";
+  var SKIP = /(^|\.)(tiktok\.com|instagram\.com|pin\.it|pinterest\.[a-z.]+)$/;
+  function retailer(host) {
+    if (/(^|\.)amazon\.|(^|\.)amzn\.to$/.test(host)) return 'Amazon';
+    if (/(^|\.)shein\.com$/.test(host)) return 'SHEIN';
+    if (/(^|\.)awin1\.com$|(^|\.)tidd\.ly$/.test(host)) return 'Awin';
+    if (/(^|\.)tee\.pub$|(^|\.)teepublic\.com$/.test(host)) return 'TeePublic';
+    if (/(^|\.)redbubble\.com$/.test(host)) return 'Redbubble';
+    return host;
+  }
+  function linkParams(a) {
+    var host = a.hostname.replace(/^www\./, '');
+    if (SKIP.test(host)) return null;
+    var t = a.querySelector('.link-text'), img = a.querySelector('img[alt]');
+    var name = (t ? t.textContent : img ? img.alt : a.textContent).replace(/\s+/g, ' ').trim();
+    var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return { retailer: retailer(host), product_id: C + '/' + slug, product_name: name };
+  }
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest(SEL) : null;
+    if (!a || !/^https?:$/.test(a.protocol)) return;
+    var params = P || linkParams(a);
+    if (!params) return;
+    try { gtag('event', 'affiliate_click', params); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>
+<script>
+(function () {
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[data-work-location]') : null;
+    if (!a) return;
+    try { gtag('event', 'work_with_me_click', { location: a.getAttribute('data-work-location') }); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>
+<!-- analytics:end -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Made-in-Canada Hoodies for Men (2026) • ThatFootball12</title>
+<meta name="description" content="Made in Canada hoodies for men: two 400 GSM House of Blanks fleece hoodies, plus a crewneck, sweatpants and long sleeve tee, with fit and layering notes.">
+<link rel="canonical" href="https://thatfootball12.github.io/thatfootball12-links/blog/made-in-canada-hoodies-2026/">
+<meta property="og:title" content="Made-in-Canada Hoodies for Men (2026)">
+<meta property="og:description" content="Made in Canada hoodies for men: two 400 GSM House of Blanks fleece hoodies, plus a crewneck, sweatpants and long sleeve tee, with fit and layering notes.">
+<meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/blog/made-in-canada-hoodies-2026/img/fleece-hoodie-500.jpg">
+<meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/blog/made-in-canada-hoodies-2026/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ThatFootball12">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Made-in-Canada Hoodies for Men (2026)">
+<meta name="twitter:description" content="Made in Canada hoodies for men: two 400 GSM House of Blanks fleece hoodies, plus a crewneck, sweatpants and long sleeve tee, with fit and layering notes.">
+<meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/blog/made-in-canada-hoodies-2026/img/fleece-hoodie-500.jpg">
+<meta property="article:published_time" content="2026-11-06">
+<meta property="article:modified_time" content="2026-11-06">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "@id": "https://thatfootball12.github.io/thatfootball12-links/blog/made-in-canada-hoodies-2026/#article",
+   "headline": "Made-in-Canada Hoodies for Men (2026)",
+   "description": "Made in Canada hoodies for men: two 400 GSM House of Blanks fleece hoodies, plus a crewneck, sweatpants and long sleeve tee, with fit and layering notes.",
+   "author": {
+    "@type": "Person",
+    "name": "Jesse",
+    "url": "https://thatfootball12.github.io/thatfootball12-links/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ThatFootball12",
+    "url": "https://thatfootball12.github.io/thatfootball12-links/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://thatfootball12.github.io/thatfootball12-links/assets/icons/icon-192.png"
+    }
+   },
+   "datePublished": "2026-11-06",
+   "dateModified": "2026-11-06",
+   "image": "https://thatfootball12.github.io/thatfootball12-links/blog/made-in-canada-hoodies-2026/img/fleece-hoodie-500.jpg",
+   "articleSection": "Style guides",
+   "mainEntityOfPage": "https://thatfootball12.github.io/thatfootball12-links/blog/made-in-canada-hoodies-2026/"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://thatfootball12.github.io/thatfootball12-links/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Blog",
+     "item": "https://thatfootball12.github.io/thatfootball12-links/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Made-in-Canada Hoodies for Men (2026)"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://thatfootball12.github.io/thatfootball12-links/blog/made-in-canada-hoodies-2026/#faq",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Are House of Blanks hoodies really made in Canada?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "All five pieces here are listed as made in Canada on the House of Blanks site, with Canadian-milled fabric. That doesn’t mean every input is Canadian: the listings for the 3013 hoodie and 4009 crewneck say the cotton is grown in the USA."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What does 400 GSM mean?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "GSM stands for grams per square metre, a measure of how heavy a fabric is. A higher number means a heavier fabric. The hoodies, crewneck and sweatpants here are 400 GSM fleece, while the long sleeve tee is a lighter 275 GSM jersey."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Which one should I get if I can only pick one?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "For a gift, the 3008 hoodie is the safest choice, since it fits true to size. If he likes more room, go for the 3013. If he usually wears a jacket over everything, go for the 4009 crewneck."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can he return it if it doesn’t fit?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "House of Blanks’ returns page says items must be returned within 14 days of delivery, in new and unused condition, and worn or washed items aren’t refunded. That window can close before Christmas morning if you order early, so check the current policy on the site before you buy, and keep the tags on until he’s tried it."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<style>
+  .bp-table{overflow-x:auto;margin:0 0 20px;border:1px solid var(--panel-line);border-radius:12px;}
+  .bp-table table{width:100%;border-collapse:collapse;background:var(--panel);}
+  .bp-table th,.bp-table td{padding:10px 12px;text-align:left;vertical-align:top;font-size:14px;line-height:1.45;color:var(--bone);}
+  .bp-table th{
+    font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;
+    text-transform:uppercase;color:var(--gold);white-space:nowrap;
+  }
+  .bp-table tbody tr{border-top:1px solid var(--panel-line);}
+</style>
+<style>
+  :root{
+    --ink:#0D0D0D;
+    --panel:#18140F;
+    --panel-line:#2A2620;
+    --gold:#D4A017;
+    --crimson:#C8102E;
+    --bone:#F3EFE6;
+    --bone-dim:#B8B2A4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(212,160,23,0.08), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
+  }
+  .wrap{width:100%;max-width:480px;min-width:0;}
+  @media (min-width:768px){
+    .wrap{max-width:1080px;}
+    .post-wrap{max-width:720px;}
+  }
+  .crumbs{margin-bottom:20px;font-size:13px;}
+  .crumbs ol{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:4px;color:var(--bone-dim);}
+  .crumbs li{min-width:0;overflow-wrap:anywhere;}
+  .crumbs li + li::before{content:'›';margin-right:4px;color:var(--bone-dim);}
+  .crumbs a{color:var(--gold);text-decoration:none;}
+  .crumbs a:hover{text-decoration:underline;}
+  header{text-align:center;margin-bottom:20px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--panel-line);
+    padding:5px 14px;border-radius:999px;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--crimson);display:inline-block;}
+  h1{
+    font-family:'Anton',sans-serif;
+    font-size:34px;
+    letter-spacing:1px;
+    line-height:1.05;
+    color:var(--bone);
+    text-transform:uppercase;
+    overflow-wrap:anywhere;
+  }
+  h1 span{color:var(--gold);}
+  @media (min-width:768px){
+    h1{font-size:46px;}
+  }
+  .tagline{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-top:10px;
+  }
+  .byline{font-size:12px;color:var(--bone-dim);margin-top:12px;}
+  .back{
+    display:block;
+    text-align:center;
+    margin-top:28px;
+    color:var(--gold);
+    font-size:13px;
+    text-decoration:none;
+  }
+  .bp-draft{
+    margin-bottom:16px;padding:8px 12px;border-radius:8px;
+    background:var(--crimson);color:#FFFFFF;text-align:center;
+    font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  }
+  .bp-disclosure{
+    text-align:center;font-size:12px;line-height:1.6;color:var(--bone-dim);
+    max-width:640px;margin:0 auto 20px;
+  }
+  .bp-hero,.bp-figure{margin:0 auto 22px;max-width:500px;}
+  .bp-hero picture,.bp-figure picture{display:block;}
+  .bp-photo{
+    display:block;width:100%;height:auto;
+    border-radius:12px;border:1px solid var(--panel-line);background:var(--panel);
+  }
+  .bp-figure figcaption{margin-top:8px;text-align:center;font-size:12px;line-height:1.5;color:var(--bone-dim);}
+  .intro p,.post-body p,.post-body li{font-size:16px;line-height:1.7;color:var(--bone);}
+  .intro p{margin-bottom:14px;}
+  .post-body p,.post-body ul,.post-body ol{margin-bottom:16px;}
+  .post-body ul,.post-body ol{padding-left:22px;}
+  .post-body li + li{margin-top:6px;}
+  .post-body h2{
+    font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;letter-spacing:1px;
+    text-transform:uppercase;color:var(--gold);margin:32px 0 12px;line-height:1.25;
+    scroll-margin-top:16px;
+  }
+  .post-body h3{
+    font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;letter-spacing:.5px;
+    color:var(--bone);margin:22px 0 8px;line-height:1.3;scroll-margin-top:16px;
+  }
+  .intro a,.post-body a:not(.bp-shop):not(.bp-details){color:var(--gold);text-underline-offset:2px;}
+  .bp-price{font-weight:600;color:var(--gold);white-space:nowrap;}
+  .toc{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+    padding:14px 16px;margin-bottom:18px;
+  }
+  .toc-title{
+    font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:1.5px;text-transform:uppercase;color:var(--bone-dim);margin-bottom:8px;
+  }
+  .toc ol{list-style:none;display:flex;flex-direction:column;gap:2px;}
+  .toc a{display:inline-block;padding:4px 0;color:var(--gold);font-size:14px;text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .bp-products{
+    display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:12px;margin:0 0 20px;
+  }
+  @media (min-width:768px){
+    .bp-products{grid-template-columns:repeat(3, minmax(0,1fr));gap:16px;}
+  }
+  .bp-card{
+    display:flex;flex-direction:column;background:var(--panel);
+    border:1px solid var(--panel-line);border-radius:12px;overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .bp-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .bp-card picture{display:block;}
+  .bp-thumb{
+    width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;display:block;
+    background:var(--ink);border-bottom:1px solid var(--panel-line);
+  }
+  .bp-card-body{padding:10px 12px 12px;flex:1 1 auto;display:flex;flex-direction:column;}
+  .card-meta{
+    margin-bottom:4px;font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;
+    letter-spacing:1px;text-transform:uppercase;
+  }
+  .retailer{color:var(--bone-dim);}
+  .post-body .prod-name{
+    font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;line-height:1.35;
+    letter-spacing:0;color:var(--bone);margin:0 0 8px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .post-body .bp-card-price{font-size:14px;font-weight:600;color:var(--gold);margin:0 0 10px;}
+  a.bp-shop{
+    margin-top:auto;padding:6px 8px;display:flex;align-items:center;justify-content:center;
+    min-height:38px;border-radius:8px;background:var(--gold);color:var(--ink);
+    font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.5px;
+    text-transform:uppercase;text-decoration:none;text-align:center;
+  }
+  a.bp-shop:hover{filter:brightness(1.08);}
+  a.bp-shop:focus-visible{outline:2px solid var(--bone);outline-offset:2px;}
+  a.bp-details{
+    display:block;margin-top:6px;padding:4px 0;text-align:center;font-size:12px;
+    color:var(--bone-dim);text-decoration:underline;text-underline-offset:2px;
+  }
+  .bp-faq .faq-item{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;padding:14px 16px;
+  }
+  .bp-faq .faq-item + .faq-item{margin-top:12px;}
+  .bp-faq .faq-item h3{margin:0 0 6px;}
+  .bp-faq .faq-item p{font-size:15px;margin-bottom:8px;}
+  .bp-faq .faq-item p:last-child{margin-bottom:0;}
+  .explore{
+    margin-top:32px;background:var(--panel);border:1px solid var(--panel-line);
+    border-radius:12px;padding:16px;
+  }
+  .explore h2{
+    font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--gold);margin-bottom:12px;text-align:center;
+  }
+  .explore ul{list-style:none;display:grid;gap:10px;}
+  .explore-link{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    min-height:48px;padding:12px 14px;border:1px solid var(--panel-line);border-radius:10px;
+    background:var(--ink);color:var(--bone);text-decoration:none;
+    font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;letter-spacing:.5px;
+  }
+  .explore-link span{color:var(--gold);}
+  .explore-link:hover{border-color:var(--gold);}
+  .bl-section{
+    font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--gold);margin:8px 0 14px;text-align:center;
+  }
+  .bl-grid{display:grid;gap:16px;margin-bottom:28px;}
+  @media (min-width:768px){
+    .bl-grid{grid-template-columns:repeat(3, minmax(0,1fr));}
+  }
+  .bl-card{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .bl-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .bl-link{display:block;color:inherit;text-decoration:none;}
+  .bl-link picture{display:block;}
+  .bl-thumb{
+    width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;
+    background:var(--ink);border-bottom:1px solid var(--panel-line);
+  }
+  .bl-body{padding:12px 14px 16px;}
+  .bl-cat{
+    display:inline-block;margin-bottom:6px;font-family:'Oswald',sans-serif;font-size:11px;
+    font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);
+  }
+  .bl-title{font-family:'Oswald',sans-serif;font-size:19px;font-weight:600;line-height:1.25;color:var(--bone);}
+  .bl-date{margin-top:6px;font-size:12px;color:var(--bone-dim);}
+  .bl-desc{margin-top:8px;font-size:14px;line-height:1.55;color:var(--bone-dim);}
+  .bl-empty{
+    text-align:center;font-size:15px;color:var(--bone-dim);padding:28px 16px;
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .bp-card,.bp-card:hover,.bl-card,.bl-card:hover{transition:none;transform:none;}
+  }
+</style>
+<!-- fonts:start -->
+<link rel="preload" href="../../assets/fonts/web/anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/web/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url(../../assets/fonts/web/anton-400-latin.woff2) format('woff2');}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:500 600;font-display:swap;src:url(../../assets/fonts/web/oswald-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(../../assets/fonts/web/poppins-400-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(../../assets/fonts/web/poppins-500-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(../../assets/fonts/web/poppins-600-latin.woff2) format('woff2');}
+</style>
+<!-- fonts:end -->
+<!-- favicons:start -->
+<link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/icons/apple-touch-icon.png">
+<!-- favicons:end -->
+</head>
+<body>
+<!-- generated by build_blog.py from blog-src/made-in-canada-hoodies-2026/post.md: edit the source, not this file -->
+<div class="wrap post-wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><span aria-current="page">Made-in-Canada Hoodies for Men (2026)</span></li></ol></nav>
+<article class="post">
+<header>
+  <div class="badge">Style guides</div>
+  <h1>Made-in-Canada Hoodies for Men (2026)</h1>
+  <p class="byline">By Jesse, ThatFootball12 · <time datetime="2026-11-06">November 6, 2026</time></p>
+</header>
+<p class="bp-disclosure">As an Amazon Associate, SHEIN affiliate, and Moosehill and House of Blanks (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through links on this site.</p>
+<figure class="bp-hero"><picture><source type="image/webp" srcset="img/fleece-hoodie-500.webp"><img class="bp-photo" src="img/fleece-hoodie-500.jpg" alt="House of Blanks 3013 relaxed fit fleece hoodie in Off Black, laid flat on a grey background" width="500" height="500" fetchpriority="high" decoding="async"></picture></figure>
+<div class="intro">
+<p><em>Updated November 2026</em></p>
+<p>A hoodie is usually the piece he wears most from November to March, so it’s worth choosing one built for that kind of use. These five heavyweight basics from House of Blanks are all listed as made in Canada: two hoodies, a crewneck, a pair of sweatpants and a long sleeve tee.</p>
+<p>House of Blanks is the factory brand of Roopa Knitting Mills, so the company behind the fabric is also behind the finished piece. The fabric is Canadian milled, and it’s heavy: the fleece here is 400 GSM. There’s nothing printed on the front, which also makes these an easy Christmas gift. You don’t have to guess his team or his taste, only his size.</p>
+<p>Living in Canada, we know how cold it gets, and not just in winter. Fall can be just as raw, so cool weather really lasts up to half the year. A heavy hoodie that holds its shape matters, and I like that these are made here in Canada.</p>
+<p>We checked these listings on the House of Blanks site on November 6th, 2026, so the specs below match what was there then.</p>
+</div>
+<nav class="toc" aria-labelledby="toc-title">
+  <p class="toc-title" id="toc-title">In this post</p>
+  <ol>
+    <li><a href="#at-a-glance">At a glance</a></li>
+    <li><a href="#the-hoodies">The hoodies</a></li>
+    <li><a href="#the-rest-of-the-set">The rest of the set</a></li>
+    <li><a href="#how-to-layer-them-for-winter">How to layer them for winter</a></li>
+    <li><a href="#sizing-and-care">Sizing and care</a></li>
+    <li><a href="#more-gift-ideas">More gift ideas</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ol>
+</nav>
+<div class="post-body">
+<h2 id="at-a-glance">At a glance</h2>
+<div class="bp-table"><table><thead><tr><th scope="col">Piece</th><th scope="col">Best for</th><th scope="col">Fabric</th><th scope="col">Fit</th></tr></thead><tbody><tr><td>3013 Relaxed Fit Hoodie</td><td>A roomier everyday hoodie</td><td>400 GSM cotton fleece</td><td>Relaxed, spacious hood</td></tr><tr><td>3008 Pullover Hoodie</td><td>A classic hoodie</td><td>400 GSM cotton fleece</td><td>True to size</td></tr><tr><td>4009 Relaxed Fit Crewneck</td><td>Layering under a jacket</td><td>400 GSM cotton fleece</td><td>Relaxed</td></tr><tr><td>7013 Straight Leg Sweatpant</td><td>Matching a hoodie or crewneck</td><td>400 GSM cotton fleece</td><td>Open, straight leg</td></tr><tr><td>1011 Heavyweight L/S Tee</td><td>A base layer</td><td>275 GSM cotton jersey</td><td>Traditional</td></tr></tbody></table></div>
+<h2 id="the-hoodies">The hoodies</h2>
+<h3 id="1-house-of-blanks-3013-relaxed-fit-fleece-hooded-sweatshirt">1. House of Blanks 3013 Relaxed Fit Fleece Hooded Sweatshirt</h3>
+<p>This one is cut for room. It’s 400 GSM cotton fleece with a matching 400 GSM rib, a spacious hood and a relaxed silhouette. The cotton is American grown, and the fabric is milled and the hoodie made in Canada. It’s shown here in Off Black.</p>
+<p><strong>Best for:</strong> the guy who likes a roomier hoodie for every day.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../videos/trending-products/trending-products-nov-9/fleece-hoodie/fleece-hoodie-424.webp"><img class="bp-thumb" src="../../videos/trending-products/trending-products-nov-9/fleece-hoodie/fleece-hoodie-424.jpg" alt="House of Blanks 3013 Relaxed Fit Fleece Hooded Sweatshirt" width="424" height="424" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">House of Blanks</span></div><h3 class="prod-name">House of Blanks 3013 Relaxed Fit Fleece Hooded Sweatshirt</h3><a class="bp-shop" href="https://www.awin1.com/cread.php?awinmid=117971&amp;awinaffid=2968527&amp;ued=https%3A%2F%2Fwww.houseofblanks.com%2Fproducts%2F3013-relaxed-fit-fleece-hooded-sweatshirt-offblack" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop House of Blanks 3013 Relaxed Fit Fleece Hooded Sweatshirt on House of Blanks (opens in a new tab)">Shop House of Blanks<span class="link-text" hidden>House of Blanks 3013 Relaxed Fit Fleece Hooded Sweatshirt</span></a><a class="bp-details" href="../../videos/trending-products/trending-products-nov-9/fleece-hoodie/">Details</a></div></article></div>
+<h3 id="2-house-of-blanks-3008-pullover-hooded-sweatshirt">2. House of Blanks 3008 Pullover Hooded Sweatshirt</h3>
+<p>The more traditional of the two. It uses the same weight of fleece, a cross-grain cut with a 400 GSM rib and flatlock seams, and House of Blanks says it fits true to size. The brand also says the fabric softens when washed. It’s shown here in Black Speckle, a black with small flecks of colour through it.</p>
+<p><strong>Best for:</strong> the guy who wants a classic hoodie that fits the way he expects.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../outfits/streetwear/streetwear-outfit-nov-9/hoodie/hoodie-424.webp"><img class="bp-thumb" src="../../outfits/streetwear/streetwear-outfit-nov-9/hoodie/hoodie-424.jpg" alt="House of Blanks 3008 Pullover Hooded Sweatshirt" width="424" height="424" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">House of Blanks</span></div><h3 class="prod-name">House of Blanks 3008 Pullover Hooded Sweatshirt</h3><a class="bp-shop" href="https://www.awin1.com/cread.php?awinmid=117971&amp;awinaffid=2968527&amp;ued=https%3A%2F%2Fwww.houseofblanks.com%2Fproducts%2F3008-pullover-hooded-sweatshirt-black-speckle" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop House of Blanks 3008 Pullover Hooded Sweatshirt on House of Blanks (opens in a new tab)">Shop House of Blanks<span class="link-text" hidden>House of Blanks 3008 Pullover Hooded Sweatshirt</span></a><a class="bp-details" href="../../outfits/streetwear/streetwear-outfit-nov-9/hoodie/">Details</a></div></article></div>
+<h2 id="the-rest-of-the-set">The rest of the set</h2>
+<h3 id="3-house-of-blanks-4009-relaxed-fit-fleece-crewneck">3. House of Blanks 4009 Relaxed Fit Fleece Crewneck</h3>
+<p>The same 400 GSM fleece without the hood, which makes it the easiest of the five to wear under a jacket. It has a hardwearing face and a soft interior, with a relaxed fit. The cotton is grown in the USA, and the fabric is Canadian milled. It’s shown here in navy.</p>
+<p><strong>Best for:</strong> the guy who layers under a jacket and doesn’t want a hood in the way.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../outfits/gameday/gameday-nov-9-5/crewneck/crewneck-424.webp"><img class="bp-thumb" src="../../outfits/gameday/gameday-nov-9-5/crewneck/crewneck-424.jpg" alt="House of Blanks 4009 Relaxed Fit Fleece Crewneck" width="424" height="424" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">House of Blanks</span></div><h3 class="prod-name">House of Blanks 4009 Relaxed Fit Fleece Crewneck</h3><a class="bp-shop" href="https://www.awin1.com/cread.php?awinmid=117971&amp;awinaffid=2968527&amp;ued=https%3A%2F%2Fwww.houseofblanks.com%2Fproducts%2F4009-relaxed-fit-fleece-crewneck-navy" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop House of Blanks 4009 Relaxed Fit Fleece Crewneck on House of Blanks (opens in a new tab)">Shop House of Blanks<span class="link-text" hidden>House of Blanks 4009 Relaxed Fit Fleece Crewneck</span></a><a class="bp-details" href="../../outfits/gameday/gameday-nov-9-5/crewneck/">Details</a></div></article></div>
+<h3 id="4-house-of-blanks-7013-straight-leg-sweatpant">4. House of Blanks 7013 Straight Leg Sweatpant</h3>
+<p>Heavyweight sweats in the same 400 GSM cross-grain fleece, with an open straight leg rather than a cuffed ankle and a ribbed elastic waistband. The straight leg sits cleanly over a boot or sneaker. Either hoodie pairs with them for a set in the same weight of fleece.</p>
+<p><strong>Best for:</strong> the guy who wants a matching set, or sweats that don’t look like gym wear.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../outfits/gameday/gameday-nov-9-4/sweatpants/sweatpants-424.webp"><img class="bp-thumb" src="../../outfits/gameday/gameday-nov-9-4/sweatpants/sweatpants-424.jpg" alt="House of Blanks 7013 Straight Leg Sweatpant" width="424" height="424" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">House of Blanks</span></div><h3 class="prod-name">House of Blanks 7013 Straight Leg Sweatpant</h3><a class="bp-shop" href="https://www.awin1.com/cread.php?awinmid=117971&amp;awinaffid=2968527&amp;ued=https%3A%2F%2Fwww.houseofblanks.com%2Fproducts%2F7013-straight-leg-sweatpant-black" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop House of Blanks 7013 Straight Leg Sweatpant on House of Blanks (opens in a new tab)">Shop House of Blanks<span class="link-text" hidden>House of Blanks 7013 Straight Leg Sweatpant</span></a><a class="bp-details" href="../../outfits/gameday/gameday-nov-9-4/sweatpants/">Details</a></div></article></div>
+<h3 id="5-house-of-blanks-1011-heavyweight-l-s-t-shirt">5. House of Blanks 1011 Heavyweight L/S T-Shirt</h3>
+<p>This is the lightest of the five: 275 GSM combed cotton jersey with a 300 GSM rib, milled and made in Canada. House of Blanks positions it as the option for warmer weather, so in a Canadian winter it’s a layer rather than the warm piece. It’s shown here in Black.</p>
+<p><strong>Best for:</strong> the guy who wants a solid base layer under a hoodie or crewneck.</p>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../videos/trending-products/trending-products-nov-9/long-sleeve-tee-black/long-sleeve-tee-black-424.webp"><img class="bp-thumb" src="../../videos/trending-products/trending-products-nov-9/long-sleeve-tee-black/long-sleeve-tee-black-424.jpg" alt="House of Blanks 1011 Heavyweight L/S T-Shirt (Black)" width="424" height="424" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">House of Blanks</span></div><h3 class="prod-name">House of Blanks 1011 Heavyweight L/S T-Shirt (Black)</h3><a class="bp-shop" href="https://www.awin1.com/cread.php?awinmid=117971&amp;awinaffid=2968527&amp;ued=https%3A%2F%2Fwww.houseofblanks.com%2Fproducts%2Fheavyweight-l-s-t-shirt-black" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop House of Blanks 1011 Heavyweight L/S T-Shirt (Black) on House of Blanks (opens in a new tab)">Shop House of Blanks<span class="link-text" hidden>House of Blanks 1011 Heavyweight L/S T-Shirt (Black)</span></a><a class="bp-details" href="../../videos/trending-products/trending-products-nov-9/long-sleeve-tee-black/">Details</a></div></article></div>
+<h2 id="how-to-layer-them-for-winter">How to layer them for winter</h2>
+<p>Fleece this heavy does a lot of the work, but it isn’t a winter coat. Start with the long sleeve tee, add a hoodie or the crewneck, then put a shell over it that has room for the fleece. Three pieces from our November outfits work well with them:</p>
+<ul><li><a href="../../outfits/gameday/gameday-nov-9-4/padded-coat/">Manfinity Homme Black Winter Hooded Padded Coat</a> (SHEIN): a black padded coat with an attached hood and a zip front, for the coldest days.</li><li><a href="../../outfits/gameday/gameday-nov-9-5/trucker-jacket/">Levi’s Corduroy Sherpa Lined Trucker Jacket</a> (Amazon): a navy corduroy jacket with a sherpa lining and collar, which pairs well with the crewneck.</li><li><a href="../../outfits/gameday/gameday-nov-9/snow-boots/">Kamik Forester Snow Boot</a> (Amazon): a warm black winter boot that the 7013’s straight leg can sit over.</li></ul>
+<p>Only the House of Blanks pieces in this post are listed as made in Canada. The coat, jacket and boots are here for warmth.</p>
+<p>My go-to for a hockey game: a long sleeve tee under a hoodie, a nice pair of jeans and boots. It’s warm enough for the stands, and the hoodie still looks put together once you’re inside. And if you have a jersey, it usually goes over top to complete the look.</p>
+<h2 id="sizing-and-care">Sizing and care</h2>
+<p>All five come in XS to XXL, and each listing has a size guide in centimetres. If you’re buying a gift, measure a hoodie he already wears and compare it with the guide.</p>
+<ul><li><strong>3013 hoodie:</strong> the listing has no sizing note, so go by the size guide and keep in mind that it’s cut relaxed.</li><li><strong>3008 hoodie:</strong> fits true to size. If he’s between sizes or likes a looser fit, size up.</li><li><strong>4009 crewneck:</strong> relaxed fit. Pick his usual size, or size up for an oversized look.</li><li><strong>7013 sweatpant:</strong> the listing has no sizing note, so go by the size guide.</li><li><strong>1011 tee:</strong> the model is 6’1” and 175 lb and wears an XL.</li></ul>
+<p>The listings don’t give care instructions, so follow the label inside each piece. As a general rule for heavy cotton, wash it cold and inside out, then hang it to dry or use low heat, since cotton can shrink in a hot dryer.</p>
+<p>If you’re buying for someone else and you’re stuck between two sizes, go up. Nobody’s ever really complained that a hoodie was too roomy, and the 14-day return window doesn’t leave much room for exchanges.</p>
+<h2 id="more-gift-ideas">More gift ideas</h2>
+<p>If you’re shopping for Christmas and want to see more options, the <a href="../../gift-guide/">gift guide</a> has picks split by budget.</p>
+<section class="bp-faq">
+<h2 id="faq">FAQ</h2>
+<div class="faq-item">
+<h3 id="are-house-of-blanks-hoodies-really-made-in-canada">Are House of Blanks hoodies really made in Canada?</h3>
+<p>All five pieces here are listed as made in Canada on the House of Blanks site, with Canadian-milled fabric. That doesn’t mean every input is Canadian: the listings for the 3013 hoodie and 4009 crewneck say the cotton is grown in the USA.</p>
+</div>
+<div class="faq-item">
+<h3 id="what-does-400-gsm-mean">What does 400 GSM mean?</h3>
+<p>GSM stands for grams per square metre, a measure of how heavy a fabric is. A higher number means a heavier fabric. The hoodies, crewneck and sweatpants here are 400 GSM fleece, while the long sleeve tee is a lighter 275 GSM jersey.</p>
+</div>
+<div class="faq-item">
+<h3 id="which-one-should-i-get-if-i-can-only-pick-one">Which one should I get if I can only pick one?</h3>
+<p>For a gift, the 3008 hoodie is the safest choice, since it fits true to size. If he likes more room, go for the 3013. If he usually wears a jacket over everything, go for the 4009 crewneck.</p>
+</div>
+<div class="faq-item">
+<h3 id="can-he-return-it-if-it-doesn-t-fit">Can he return it if it doesn’t fit?</h3>
+<p>House of Blanks’ returns page says items must be returned within 14 days of delivery, in new and unused condition, and worn or washed items aren’t refunded. That window can close before Christmas morning if you order early, so check the current policy on the site before you buy, and keep the tags on until he’s tried it.</p>
+</div>
+</section>
+</div>
+<aside class="explore" aria-labelledby="explore-title">
+  <h2 id="explore-title">Explore more</h2>
+  <ul>
+    <li><a class="explore-link" href="../../gift-guide/">105 Christmas Gifts for Men 2026 (Canada)<span aria-hidden="true">→</span></a></li>
+    <li><a class="explore-link" href="../../blog/christmas-gifts-under-50-2026/">Christmas Gifts for Men Under $50 (2026)<span aria-hidden="true">→</span></a></li>
+    <li><a class="explore-link" href="../../outfits/">Outfit Categories<span aria-hidden="true">→</span></a></li>
+  </ul>
+</aside>
+</article>
+<a class="back" href="../../blog/">← All blog posts</a>
+</div>
+<!-- site-footer:start -->
+<div class="tf12-foot">
+  <p class="tf12-foot-links"><a href="../../gift-guide/">Holiday Gift Guide</a> · <a href="../../work-with-me/" data-work-location="footer">Work with me</a> · <a href="../../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
+</div>
+<!-- site-footer:end -->
+</body>
+</html>
