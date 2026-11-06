@@ -34,7 +34,9 @@ subset: "key: value" lines, and "- item" lines under "related:"):
 
 The body is a Markdown subset: "## " and "### " headings (the title is
 the only <h1>), paragraphs, "- " and "1. " lists (one level), **bold**,
-*italic*, [text](url) links, and, each on a line of its own:
+*italic*, [text](url) links, "| a | b |" tables (the first row is the
+header; a "|---|---|" line under it is optional), and, each on a line of
+its own:
     ![alt](photo.jpg "Caption")   a photo from the post folder, with an
                                   optional caption
     {{product <id>}}              a product card for a products.json id;
@@ -124,6 +126,8 @@ PRICE_TOKEN_RE = re.compile(r"\{\{price\s+([^\s}]+)\s*\}\}")
 ANY_TOKEN_RE = re.compile(r"\{\{(\w+)[^}]*\}\}")
 IMAGE_LINE_RE = re.compile(r'^!\[([^\]]*)\]\(\s*([^)\s"]+)(?:\s+"([^"]*)")?\s*\)$')
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*#*$")
+TABLE_ROW_RE = re.compile(r"^\|(.+)\|$")
+TABLE_RULE_RE = re.compile(r"^:?-+:?$")
 UL_RE = re.compile(r"^[-*]\s+(.*)$")
 OL_RE = re.compile(r"^\d+[.)]\s+(.*)$")
 LINK_RE = re.compile(r"\[([^\]]+)\]\(\s*([^)\s]+)\s*\)")
@@ -251,7 +255,8 @@ def load_dead():
 
 def parse_blocks(post):
     """[(kind, data, line)] for the body: heading (level, text),
-    para text, ul/ol [items], image (alt, file, caption), products [ids]."""
+    para text, ul/ol [items], image (alt, file, caption), products [ids],
+    table [rows of cells]."""
     blocks, para, items, kind = [], [], [], None
 
     def flush():
@@ -263,6 +268,7 @@ def parse_blocks(post):
         para, items, kind = [], [], None
 
     start = post.body_start
+    table_end = None
     for n, raw in enumerate(post.body_lines, post.body_start):
         line = raw.strip()
         if not line:
@@ -284,6 +290,16 @@ def parse_blocks(post):
                 blocks[-1][1].append(m.group(1))
             else:
                 blocks.append(("products", [m.group(1)], n))
+            continue
+        m = TABLE_ROW_RE.match(line)
+        if m:
+            flush()
+            cells = [c.strip() for c in m.group(1).split("|")]
+            if not (blocks and blocks[-1][0] == "table" and table_end == n - 1):
+                blocks.append(("table", [], n))
+            table_end = n
+            if not all(TABLE_RULE_RE.match(c) for c in cells):
+                blocks[-1][1].append(cells)
             continue
         m = IMAGE_LINE_RE.match(line)
         if m:
@@ -319,6 +335,8 @@ def block_text(block):
         return data
     if kind in ("ul", "ol"):
         return " ".join(data)
+    if kind == "table":
+        return " ".join(cell for row in data for cell in row)
     if kind == "heading":
         return data[1]
     if kind == "image":
@@ -594,6 +612,12 @@ def render_blocks(post, blocks, products, ids):
         elif kind in ("ul", "ol"):
             lis = "".join(f"<li>{inline(item, rel, products)}</li>" for item in data)
             out.append(f"<{kind}>{lis}</{kind}>")
+        elif kind == "table":
+            head_row = "".join(f'<th scope="col">{inline(c, rel, products)}</th>' for c in data[0])
+            rows = "".join("<tr>" + "".join(f"<td>{inline(c, rel, products)}</td>" for c in row) + "</tr>"
+                           for row in data[1:])
+            out.append(f'<div class="bp-table"><table><thead><tr>{head_row}</tr></thead>'
+                       f"<tbody>{rows}</tbody></table></div>")
         elif kind == "image":
             alt, name, caption = data
             jpg, webp = photo_outputs(post, name)
@@ -622,12 +646,14 @@ def product_card(p, rel):
         details = (f'<a class="bp-details" href="{esc(pre + p["detail_page_url"][:-len("index.html")])}">'
                    "Details</a>")
     retailer = p["retailer"]
+    merchant = p.get("merchant")  # Awin records: the shop itself, since Awin is only the network
+    label = f"Shop {merchant}" if merchant else f"Shop on {retailer}"
     return (f'<article class="bp-card">{thumb}<div class="bp-card-body">'
-            f'<div class="card-meta"><span class="retailer">{esc(retailer)}</span></div>'
+            f'<div class="card-meta"><span class="retailer">{esc(merchant or retailer)}</span></div>'
             f'<h3 class="prod-name">{esc(p["name"])}</h3>{price}'
             f'<a class="bp-shop" href="{esc(p["outbound_url"])}" target="_blank" '
-            f'rel="nofollow sponsored noopener" aria-label="Shop {esc(p["name"])} on {esc(retailer)} '
-            f'(opens in a new tab)">Shop on {esc(retailer)}<span class="link-text" hidden>{esc(p["name"])}</span></a>'
+            f'rel="nofollow sponsored noopener" aria-label="Shop {esc(p["name"])} on {esc(merchant or retailer)} '
+            f'(opens in a new tab)">{esc(label)}<span class="link-text" hidden>{esc(p["name"])}</span></a>'
             f"{details}</div></article>")
 
 
@@ -744,6 +770,8 @@ def render_post(post, blocks, products):
     extra = [f'<meta property="article:published_time" content="{esc(meta.get("date", ""))}">',
              f'<meta property="article:modified_time" content="{esc(post.updated or "")}">',
              ld_json(graph)]
+    if any(b[0] == "table" for b in blocks):
+        extra.append(TABLE_CSS)
     parts = [head(rel, title, description, None if post.draft else post.url, og_image, "article",
                   "\n".join(extra), robots="noindex" if post.draft else None),
              "</head>", "<body>", GENERATED.format(src=post.src), '<div class="wrap post-wrap">']
@@ -1084,6 +1112,18 @@ def main():
         print("Posts with errors were not built. Fix them and run again.")
         sys.exit(1)
 
+
+# Only on posts with a table, so a post without one is unchanged.
+TABLE_CSS = """<style>
+  .bp-table{overflow-x:auto;margin:0 0 20px;border:1px solid var(--panel-line);border-radius:12px;}
+  .bp-table table{width:100%;border-collapse:collapse;background:var(--panel);}
+  .bp-table th,.bp-table td{padding:10px 12px;text-align:left;vertical-align:top;font-size:14px;line-height:1.45;color:var(--bone);}
+  .bp-table th{
+    font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;
+    text-transform:uppercase;color:var(--gold);white-space:nowrap;
+  }
+  .bp-table tbody tr{border-top:1px solid var(--panel-line);}
+</style>"""
 
 CSS = """  :root{
     --ink:#0D0D0D;

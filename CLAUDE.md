@@ -386,7 +386,7 @@ filename; also og:image and twitter:image), `hero_alt`, `draft`
 `outfits/gameday/`).
 
 **Body.** Markdown subset: `##`/`###` headings, paragraphs, `-` and `1.`
-lists, `**bold**`, `*italic*`, links (site pages as `/outfits/gameday/`;
+lists, `| a | b |` tables, `**bold**`, `*italic*`, links (site pages as `/outfits/gameday/`;
 they become relative and must exist), `![alt](photo.jpg "Caption")` on
 its own line, and `{{product <products.json id>}}` on its own line for a
 product card (name, photo, retailer and affiliate link all come from
@@ -394,6 +394,10 @@ product card (name, photo, retailer and affiliate link all come from
 prints a SHEIN price inline. A `## FAQ` section with `###` questions
 gets FAQPage JSON-LD. Four or more `##` headings add a table of
 contents.
+
+**Awin product cards.** The tag and button ("Shop <merchant>") use the
+record's `merchant` field (`--append` doesn't set it, so add it to a new
+Awin record, or the card falls back to "Shop on Awin").
 
 **Prices.** Never type a price. SHEIN prices come from `products.json`
 (the card shows it; `{{price <id>}}` inline). Amazon and Awin products
