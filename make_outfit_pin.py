@@ -16,7 +16,7 @@ Styles (default fade):
              (price line up to 70% of the width): a letter-spaced "SHOP THE
              LOOK" (gold "ON SALE NOW" if any item has a discount_percent,
              unless --no-sale-line)
-             at half the height of "UNDER $X!" below it (price in gold).
+             at half the height of "UNDER CA$X!" below it (price in gold).
              A photo taller than 3:4 with at least 18% empty floor at the
              bottom keeps its shape; the text goes in a fade over that floor.
              Anything else becomes a 1000x1500 (2:3) pin: the photo shrunk so
@@ -35,8 +35,10 @@ plain outfit-preview; outfit-pin.jpg is only for Pinterest.
 
 Price: the outfit's products.json prices (every record its page's cards
 link to, including items reused from another campaign) are totalled and rounded up to the next
-$5, giving "UNDER $X!" (112.30 -> UNDER $115!). An exact multiple of $5
-goes up to the next one (115.00 -> UNDER $120!) so the claim stays true.
+$5, giving "UNDER CA$X!" (112.30 -> UNDER CA$115!). An exact multiple of $5
+goes up to the next one (115.00 -> UNDER CA$120!) so the claim stays true.
+That's CA$ when every priced item is CAD (SHEIN links go to SHEIN Canada),
+else a plain $.
 If any item has no stored price (Amazon, Awin) the total would be
 wrong, so fade reads "SHOP THE LOOK" / "FULL FIT ↓" instead
 (the other styles say "SHOP THE FULL LOOK").
@@ -117,6 +119,16 @@ def price_cap(items):
         return None
     cents = sum(round(p["price"] * 100) for p in items)
     return (cents // 500 + 1) * 5
+
+
+def price_text(items):
+    """The total as the pin prints it: "CA$115" when every item is CAD, "$115"
+    otherwise, or None when price_cap has no total."""
+    cap = price_cap(items)
+    if cap is None:
+        return None
+    symbol = "CA$" if all(p.get("currency") == "CAD" for p in items) else "$"
+    return f"{symbol}{cap}"
 
 
 # ---------------------------------------------------------------- helpers
@@ -220,7 +232,7 @@ def deep_colour(img, box, value=0.18):
 
 def style_classic(img, cap, on_sale):
     w, h = img.size
-    text = f"UNDER ${cap}!" if cap else FALLBACK_TEXT
+    text = f"UNDER {cap}!" if cap else FALLBACK_TEXT
     top, bottom = round(0.678 * h), round(0.811 * h)
     overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
     ImageDraw.Draw(overlay).rectangle([0, top, w, bottom], fill=(0, 0, 0, 140))
@@ -258,7 +270,7 @@ def fade_text(pin, top, bottom, cap, on_sale):
         top_run, big_runs = ("SHOP THE LOOK", WHITE), [("FULL FIT ↓", WHITE)]
     else:
         top_run = ("ON SALE NOW", GOLD) if on_sale else ("SHOP THE LOOK", WHITE)
-        big_runs = [("UNDER ", WHITE), (f"${cap}!", GOLD)]
+        big_runs = [("UNDER ", WHITE), (f"{cap}!", GOLD)]
     big_text = "".join(t for t, _ in big_runs)
     w = pin.size[0]
 
@@ -352,7 +364,7 @@ def fade_extend(img, cap, on_sale):
 
 def style_tag(img, cap, on_sale):
     w, h = img.size
-    text = f"UNDER ${cap}" if cap else FALLBACK_TEXT
+    text = f"UNDER {cap}" if cap else FALLBACK_TEXT
     font = font_for_cap(0.032 * h)
     pad_x, pad_y = 0.9 * cap_h(font), 0.65 * cap_h(font)
     bw = text_width(font, text, 0.04 * cap_h(font)) + 2 * pad_x
@@ -380,7 +392,7 @@ def style_tag(img, cap, on_sale):
 
 def style_band(img, cap, on_sale):
     w, h = img.size
-    text = f"UNDER ${cap}!" if cap else FALLBACK_TEXT
+    text = f"UNDER {cap}!" if cap else FALLBACK_TEXT
     bh = round(0.085 * h)
     edges = edge_map(img)
     # Top tops from flush with the top edge; bottom ones down to flush
@@ -403,8 +415,9 @@ STYLES = {"classic": style_classic, "fade": style_fade, "tag": style_tag, "band"
 
 
 def render(preview_path, cap, on_sale, style="fade"):
-    """Returns (pin image, path taken). Only fade has paths ("overlay" or
-    "shrink") and returns a new canvas; the others draw on the photo."""
+    """Returns (pin image, path taken). cap is price_text's string, or None
+    for the no-total wording. Only fade has paths ("overlay" or "shrink")
+    and returns a new canvas; the others draw on the photo."""
     with Image.open(preview_path) as src:
         img = ImageOps.exif_transpose(src).convert("RGBA")
     pin, path = STYLES[style](img, cap, on_sale) or (img, None)
@@ -460,9 +473,9 @@ def main():
                 print(f"skip  {rel}: {why}")
                 skipped += 1
             continue
-        cap = price_cap(items)
+        cap = price_text(items)
         on_sale = not args.no_sale_line and any((p.get("discount_percent") or 0) > 0 for p in items)
-        label = (f"UNDER ${cap}" if cap else "no total") + (", on sale" if on_sale else "")
+        label = (f"UNDER {cap}" if cap else "no total") + (", on sale" if on_sale else "")
         pin, path = render(preview, cap, on_sale, args.style)
         pin.save(os.path.join(d, PIN_NAME), quality=92, optimize=True)
         how = f"{args.style}: {path}" if path else args.style

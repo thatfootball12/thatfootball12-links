@@ -50,7 +50,7 @@ Files: pinterest/pinterest_bulk_nov-9.csv
 These section names contain "/", which Pinterest's board column uses to separate board from section, so these pins go to the board only. Move them after upload, or rename the section without a "/" and list the new name in pin_settings.json.
 
 - The Winter Date Night Trench Fit 🌙 → Business Casual Outfits for Men › Date Night/Night Out
-- Khaki Trench Coat Under $55 for Date Night 🌙 → Business Casual Outfits for Men › Date Night/Night Out
+- Khaki Trench Coat Under CA$55 for Date Night 🌙 → Business Casual Outfits for Men › Date Night/Night Out
 - A Black Rib Knit Turtleneck for Date Night 🌙 → Business Casual Outfits for Men › Date Night/Night Out
 
 ### AI-modified label
@@ -107,8 +107,8 @@ The CSV has no column for it. Paste after upload:
 
 - The Sherpa-Lined Brown Jacket for Cold Tailgates 🍂: Men's brown faux leather jacket with beige sherpa lining
 - The Leafs Night Fit That Still Looks Like an Outfit 🏒: Men's hockey night outfit with blue hoodie, black jacket, jeans and snow boots
-- Thermal-Lined Jeans Under $55 🔥: Men's blue water-washed jeans with thermal lining
-- A Light Blue Button Down Under $25 👔: Men's light blue smart casual button down shirt
+- Thermal-Lined Jeans Under CA$55 🔥: Men's blue water-washed jeans with thermal lining
+- A Light Blue Button Down Under CA$25 👔: Men's light blue smart casual button down shirt
 - A Clean Black Full-Zip Sweater 🖤: Men's black full-zip cotton sweater
 - Oilers Fans, This Is the Cold-Weather Fit 🧡💙: Men's winter street outfit with royal blue hoodie, black padded coat and black boots
 - The Sleek Black Tommy Hilfiger Boot 🖤: Men's black Tommy Hilfiger lace-up boots
@@ -117,42 +117,42 @@ The CSV has no column for it. Paste after upload:
 - Red Goal Light Energy, No Jersey Needed 🚨: Men's hockey night outfit with red sweatshirt, black moto jacket, jeans and red scarf
 - The House of Blanks Navy Crewneck for Hockey Night 💙: Men's navy House of Blanks relaxed fit fleece crewneck
 - A Hooded Padded Coat for Winter Nights 🖤: Men's black hooded padded winter coat with zip front
-- A Wool Blend Chore-Style Jacket Under $45 🧥: Men's khaki wool blend chore-style shirt jacket
+- A Wool Blend Chore-Style Jacket Under CA$45 🧥: Men's khaki wool blend chore-style shirt jacket
 - The All-Black Fit for a Late Puck Drop 🖤: Men's all-black hockey night outfit with padded coat and red plaid beanie and scarf
-- Black Pleated Dress Pants Under $30 👖: Men's black pleated straight leg dress pants
-- A Fluffy Pajama Set Under $40 🛋️: Men's royal blue fleece pajama top with black and white plaid pants
+- Black Pleated Dress Pants Under CA$30 👖: Men's black pleated straight leg dress pants
+- A Fluffy Pajama Set Under CA$40 🛋️: Men's royal blue fleece pajama top with black and white plaid pants
 - A Burgundy Sherpa-Lined Hooded Fleece 🍷: Men's burgundy full-zip hooded fleece with sherpa lining
 - Kamik Snow Boots for the Walk to the Game ❄️: Men's black Kamik Forester snow boots
 - The Timex Easy Reader, a Gift That Never Dates ⌚: Men's Timex Easy Reader watch with brown leather strap
 - Navy Night at the Rink, Done Right 💙: Men's navy outfit with sherpa trucker jacket, khaki chinos and brown Chelsea boots
 - An Oilers Hoodie for Hockey Night 🧡💙: AI colour match of a royal hoodie for a licensed Oilers hoodie
 - House of Blanks Black Speckle Hoodie 🌨️: Men's black speckle House of Blanks pullover hoodie
-- Thermal Lined Coat Under $55 for Real Cold ❄️: Men's black thermal lined padded coat with a collar
-- A Brown Faux Suede Shacket Under $30 🤎: Men's brown faux suede fleece lined shacket
+- Thermal Lined Coat Under CA$55 for Real Cold ❄️: Men's black thermal lined padded coat with a collar
+- A Brown Faux Suede Shacket Under CA$30 🤎: Men's brown faux suede fleece lined shacket
 - The Cold Tailgate Fit That Actually Keeps You Warm 🏈: Men's cold tailgate outfit with plaid flannel, brown sherpa jacket, jeans and boots
-- Black Cuffed Sweatpants Under $20 🛋️: Men's black cuffed sweatpants with drawstring waist
-- A Navy Suit Blazer Under $40 💼: Men's navy blue suit blazer
+- Black Cuffed Sweatpants Under CA$20 🛋️: Men's black cuffed sweatpants with drawstring waist
+- A Navy Suit Blazer Under CA$40 💼: Men's navy blue suit blazer
 - A Heavy Hoodie for the Coldest Game Days 🥶: Men's black heather Legendary Whitetails hooded sweatshirt
 - Columbia Firecamp Boots for Cold, Wet Days 🥾: Men's black and grey Columbia Firecamp lace-up boots
 - Levi's Red Plaid Beanie and Scarf Set 🧣: Men's red plaid Levi's waffle beanie and scarf set
 - Winter Sideline Fit, Built for the Late Season 🥶: Men's cold game day outfit with grey puffer jacket, black hoodie, gloves and boots
 - A '47 Raptors Vintage Tee for Game Night 🏀: AI colour match of a black tee for a licensed Raptors tee
 - House of Blanks Black Straight Leg Sweatpants 🖤: Men's black House of Blanks straight leg sweatpants
-- Light Grey Short Padded Coat Under $60 🌨️: Men's light grey short padded coat with stand collar
-- The Plain Black Hoodie Under $30 🖤: Men's plain black pullover hoodie with kangaroo pocket
+- Light Grey Short Padded Coat Under CA$60 🌨️: Men's light grey short padded coat with stand collar
+- The Plain Black Hoodie Under CA$30 🖤: Men's plain black pullover hoodie with kangaroo pocket
 - Raptors Night, Layered and Easy 🏀: Men's basketball night outfit with black tee, black zip sweater and white sneakers
-- A Red and White Sweatshirt Under $25 🚨: Men's red and white letter print sweatshirt
-- A Full Navy Suit Set Under $70 🤵: Men's navy blue notched collar blazer and pants suit set
+- A Red and White Sweatshirt Under CA$25 🚨: Men's red and white letter print sweatshirt
+- A Full Navy Suit Set Under CA$70 🤵: Men's navy blue notched collar blazer and pants suit set
 - The Easy Fleece Quarter-Zip From Wrangler 🌫️: Men's light heather gray Wrangler fleece quarter-zip pullover
 - Tommy Hilfiger Low-Tops in White and Navy 👟: Men's white and navy Tommy Hilfiger low-top sneakers
 - The Casio Diver Style Watch ⌚: Men's silver-tone Casio diver style stainless steel watch
 - Friendsgiving Fit in Warm Browns 🍂: Men's holiday outfit with beige quarter-zip, brown shacket and black pants
 - A Black Rib Knit Turtleneck for Date Night 🌙: Men's black rib knit cotton turtleneck sweater
 - Heather Ash Straight Leg Sweatpants 🌫️: Men's heather ash House of Blanks straight leg sweatpants
-- A Short Wool Overcoat Under $45 🖤: Men's short black wool overcoat with button front
-- A Beige Quarter-Zip Sweater for Under $40 🎁: Men's beige knit quarter-zip sweater with stand collar
+- A Short Wool Overcoat Under CA$45 🖤: Men's short black wool overcoat with button front
+- A Beige Quarter-Zip Sweater for Under CA$40 🎁: Men's beige knit quarter-zip sweater with stand collar
 - The Holiday Party Suit, Minus the Tie 🎄: Men's holiday party outfit with navy suit, black turtleneck and short black overcoat
-- A Colour Block Zip Sweatshirt Under $30 🖤: Men's black colour block zip-up sweatshirt
+- A Colour Block Zip Sweatshirt Under CA$30 🖤: Men's black colour block zip-up sweatshirt
 - The Columbia Hooded Jacket for Winter Game Days 🧥: Men's black Columbia insulated hooded winter jacket
 - Black Chelsea Boots That Go With Everything 🖤: Men's black Chelsea ankle boots with elastic side panels
 - Reebok Club C: The Classic Court Sneaker 👟: Men's chalk white and green Reebok Club C court sneakers
@@ -160,20 +160,20 @@ The CSV has no column for it. Paste after upload:
 - Speckle and Ash: Quiet Winter Streetwear 🌨️: Men's winter streetwear outfit with light grey padded coat and grey sweatpants
 - An Olive Long-Sleeve Henley for Easy Layers 🌿: Men's olive heather long-sleeve henley
 - The House of Blanks Heavyweight Long Sleeve Tee 🖤: Men's off black House of Blanks heavyweight long sleeve tee
-- Khaki Trench Coat Under $55 for Date Night 🌙: Men's khaki button-front trench coat
-- A Black Button Cardigan Under $25 🖤: Men's black button-front cardigan
+- Khaki Trench Coat Under CA$55 for Date Night 🌙: Men's khaki button-front trench coat
+- A Black Button Cardigan Under CA$25 🖤: Men's black button-front cardigan
 - Black Hoodie, Chore Coat, Done 🧥: Men's streetwear outfit with black hoodie, khaki chore jacket and red plaid scarf
-- A Slim Black Turtleneck Under $15 🖤: Men's black slim fit turtleneck
+- A Slim Black Turtleneck Under CA$15 🖤: Men's black slim fit turtleneck
 - The Calvin Klein Puffer in Iron Grey 🥶: Men's Calvin Klein iron grey full-zip down puffer jacket
 - Dark Brown Chelsea Boots for Chinos and Trousers 🤎: Men's dark brown Deer Stags Chelsea boots
 - The Tommy Hilfiger Striped Scarf He'll Actually Wear 🎁: Men's red striped Tommy Hilfiger scarf
 - The Winter Date Night Trench Fit 🌙: Men's winter date night outfit with khaki trench coat and black turtleneck
 - Dark Khaki Stretch Chinos for Every Day 🍂: Men's dark khaki athletic-fit stretch chinos
 - The Relaxed Plaid Flannel for Cold Tailgates 🍂: Men's brown and red plaid relaxed-fit flannel shirt
-- A Black Moto Jacket Under $55 🏍️: Men's black faux leather zip-up moto jacket
-- A Dark Grey Crew Neck Sweater Under $25 🌫️: Men's dark grey crew neck sweater
+- A Black Moto Jacket Under CA$55 🏍️: Men's black faux leather zip-up moto jacket
+- A Dark Grey Crew Neck Sweater Under CA$25 🌫️: Men's dark grey crew neck sweater
 - The Navy Blazer Office Fit That Works All Winter 💼: Men's business casual outfit with navy blazer, black cardigan and light blue shirt
-- A Burgundy Henley Under $20 🍷: Men's burgundy long sleeve henley with button front
+- A Burgundy Henley Under CA$20 🍷: Men's burgundy long sleeve henley with button front
 - Levi's Corduroy Sherpa Trucker in Navy 💙: Men's navy corduroy Levi's trucker jacket with sherpa collar
 - Timberland Chelsea Boots in Full-Grain Leather 🍂: Men's dark brown full-grain leather Timberland Chelsea boots
 - Leather Touchscreen Gloves, a Gift That Gets Used 🎁: Men's black leather touchscreen gloves with ribbed cuff

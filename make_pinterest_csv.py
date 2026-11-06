@@ -63,9 +63,13 @@ the live site (so push the pin images first), title <= 100 and full
 description <= 500 characters (Pinterest's limits), boards/sections in
 pin_settings.json, no duplicate pins/images/titles, no publish time in
 the past, no "$" in the copy of a pin with an Amazon item (Amazon
-prices can't be shown), no product pin of a SHEIN product whose seller
-is "marketplace" (a third-party store; see sellers.py). Product pins
-whose seller is still "unchecked" go through, listed in the report.
+prices can't be shown), no bare "$" (one not preceded by "CA") in the
+title, description or alt text of a pin with a SHEIN item (SHEIN prices
+are CAD, so they read CA$; only a warning in the report for a batch
+starting before CAD_COPY_FROM, whose pins are already uploaded), no
+product pin of a SHEIN product whose seller is "marketplace" (a
+third-party store; see sellers.py). Product pins whose seller is still
+"unchecked" go through, listed in the report.
 
 --unpushed-media turns a Media URL that isn't live yet but exists in the
 repo into a warning, so a CSV can go in a PR with its new images. Rebuild
@@ -365,9 +369,11 @@ def check_live(pins, problems, warnings, unpushed_media=False):
 # --- validation ------------------------------------------------------------
 
 REQUIRED = ("type", "id", "title", "description", "hashtags", "alt_text", "board", "section")
+BARE_DOLLAR = re.compile(r"(?<!CA)\$")
+CAD_COPY_FROM = date(2026, 11, 9)   # first batch held to CA$ in its pin copy
 
 
-def validate(pins, settings, problems):
+def validate(pins, settings, problems, warnings, week_start):
     boards = settings["boards"]
     seen = {}
     for p in pins:
@@ -399,6 +405,12 @@ def validate(pins, settings, problems):
                             f"(disclosure_retailers in pin_settings.json)")
         if p["has_amazon"] and "$" in title + p["description"]:
             problems.append(f"{label}: '$' in the copy of a pin with an Amazon item")
+        if "SHEIN" in p["retailers"]:
+            bare = [k for k in ("title", "description", "alt_text") if BARE_DOLLAR.search(p[k])]
+            if bare:
+                listed = problems if week_start >= CAD_COPY_FROM else warnings
+                listed.append(f"{label}: bare '$' in the {', '.join(bare)} of a pin with a "
+                              f"SHEIN item (SHEIN prices are CAD: write CA$)")
         for key, val in (("pin", (p["type"], p["id"])), ("Media URL", p["media"]),
                          ("title", title.casefold())):
             if (key, val) in seen:
@@ -537,7 +549,7 @@ def main():
     if not pins:
         problems.append("no usable pins")
     else:
-        validate(pins, settings, problems)
+        validate(pins, settings, problems, warnings, week_start)
         days = schedule(pins, week_start)
         now = datetime.now(timezone.utc)
         for p in pins:
