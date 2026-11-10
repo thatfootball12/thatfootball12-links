@@ -153,19 +153,24 @@ batch first) on every run, so working down that file is the backlog;
 `py -3 set_seller.py --list` just refreshes it. The shared rules live
 in `sellers.py`, for any future pin script to import.
 
-**Gift guide listings.** SHEIN products that appear only on the holiday
-gift guide (`gift-guide/index.html`) and its pins
-(`holiday-2026/pins/<pin>_holiday.png`) have no detail page, but they're
-in `products.json` so the seller gates, the link checker and CI cover
-them: `detail_page_url` is `gift-guide/index.html`, `holiday_pin` names
-the pin (`S02` etc.), `outbound_url` and `image` are the tile's link and
-photo, `price` is null, and the id is listed in `categories.json`
-`hidden` (campaign `holiday-2026` sits in `generator.json` `unthemed`).
-`gift_guide.py` holds the rule; the page-based scripts skip these
-records, and `sync_catalog.py` report item 2 fails if a listing's tile
-leaves the gift guide or its pin image goes missing. A gift guide
-product whose goods_id is already in the catalog keeps that record and
-just gets `holiday_pin` added. Don't create a second record for it.
+**Gift guide listings.** Products that appear only on the holiday gift
+guide (`gift-guide/index.html`) have no detail page, but they're in
+`products.json` so the seller gates, the link and tag checks and CI
+cover them. They can be SHEIN, Amazon or Awin. `--append` can't make
+them (it only reads detail pages), so write the record by hand:
+`detail_page_url` is `gift-guide/index.html`, `outbound_url` and `image`
+are the tile's link and photo, `price` is null, and the id is listed in
+`categories.json` `hidden` (campaign `holiday-2026` sits in
+`generator.json` `unthemed`). Amazon listings carry `asin`, Awin ones
+`merchant`, SHEIN ones `goods_id` and `seller`. `holiday_pin` (`S02`
+etc.) is optional: add it once `holiday-2026/pins/<pin>_holiday.png`
+exists, since pins can come later. `gift_guide.py` holds the rule; the
+page-based scripts skip these records, and `sync_catalog.py` report item
+2 fails if a listing's tile leaves the gift guide, it isn't hidden, it
+has a price, its `asin` or `merchant` is missing, or a pin it names has
+no image. A gift guide product whose goods_id is already in the catalog
+keeps that record and just gets `holiday_pin` added. Don't create a
+second record for it.
 
 Then run `python add_product_schema.py` (after any `--append`, since it
 reads `products.json`). It writes the schema.org Product JSON-LD block
