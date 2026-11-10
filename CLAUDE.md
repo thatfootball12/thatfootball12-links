@@ -118,7 +118,8 @@ listing, when its `amazon_store` is missing, its link is amazon.ca
 without `ca-only`, or it says `com` but the link isn't amazon.com with
 `thatfootbal01-20`. Older records and page links on amazon.ca still
 pass: item 16 just prints one WARNING line counting amazon.com,
-amazon.ca and amzn.to links, to track the switch (action item #110).
+amazon.ca, amzn.to and link.amazon links, to track the switch (action
+item #110).
 It reads amzn.to links through
 `data/amazon_short_links.json`, resolving and adding any new one (one
 redirect hop, Amazon itself is never fetched), so commit that file when

@@ -131,8 +131,9 @@ Report (always runs):
      link that isn't amazon.com + thatfootbal01-20, or a missing or unknown
      amazon_store on such a record is an error; so is amazon_store on a
      record that isn't Amazon. Older records and page links may stay on
-     amazon.ca: a WARNING line counts the amazon.com, amazon.ca and amzn.to
-     links (unique URLs across tracked files) to track the move to US tags.
+     amazon.ca: a WARNING line counts the amazon.com, amazon.ca, amzn.to and
+     link.amazon links (unique URLs across tracked files) to track the move
+     to US tags. link.amazon links are only counted, not tag-checked.
 
 Exit status: 1 when item 1, 2, 10, 11, 12, 13, 14, 15 or 16 has an error, or item 8
 finds a missing <picture> file (report-only runs;
@@ -248,6 +249,7 @@ AMAZON_STORES = ("com", "ca-only")
 # hop (amzn.to only, Amazon itself is never fetched) and added here.
 AMAZON_SHORT_LINKS = os.path.join(REPO, "data", "amazon_short_links.json")
 AMAZON_URL_RE = re.compile(r'''https?://(?:www\.)?(?:amzn\.to|amazon\.(?:ca|com))/[^\s"'<>)\],\\]*''', re.I)
+LINK_AMAZON_URL_RE = re.compile(r'''https?://link\.amazon/[^\s"'<>)\],\\]*''', re.I)
 AMAZON_SCAN_EXTS = (".html", ".json", ".md", ".csv", ".xml")
 # A documented template such as amazon.ca/dp/<ASIN>?tag=... (CLAUDE.md) isn't a link.
 AMAZON_TEMPLATE_RE = re.compile(r"<[A-Z][A-Z_]*>")
@@ -578,7 +580,7 @@ def amazon_tag_issues():
     (direct, or amzn.to resolved through AMAZON_SHORT_LINKS) must carry a
     tag from VALID_AMAZON_TAGS for its store. Short links missing from the
     cache are resolved and written to it. Returns (errors, counts): counts
-    maps "amazon.com" / "amazon.ca" / "amzn.to" to the number of unique
+    maps "amazon.com" / "amazon.ca" / "amzn.to" / "link.amazon" to the number of unique
     links of each kind, for the US-tag progress warning."""
     try:
         files = subprocess.run(["git", "ls-files"], cwd=REPO, capture_output=True,
@@ -593,7 +595,7 @@ def amazon_tag_issues():
     except (OSError, ValueError):
         cache = {}
     errors, resolved_new = [], False
-    seen = {"amazon.com": set(), "amazon.ca": set(), "amzn.to": set()}
+    seen = {"amazon.com": set(), "amazon.ca": set(), "amzn.to": set(), "link.amazon": set()}
     for rel in sorted(files):
         if not rel.endswith(AMAZON_SCAN_EXTS) or rel == cache_rel:
             continue
@@ -604,6 +606,10 @@ def amazon_tag_issues():
             continue
         urls = {m.group(0) for m in AMAZON_URL_RE.finditer(content)
                 if not AMAZON_TEMPLATE_RE.match(content, m.end())}
+        # link.amazon short links are only counted for the US-tag warning;
+        # their tag isn't checked (they never were).
+        seen["link.amazon"].update(html.unescape(m.group(0)).rstrip(".;")
+                                   for m in LINK_AMAZON_URL_RE.finditer(content))
         for url in sorted(urls):
             url = html.unescape(url).rstrip(".;")
             host = urllib.parse.urlparse(url).netloc.lower().removeprefix("www.")
@@ -1017,9 +1023,10 @@ def main():
         print(f"   New links: https://www.amazon.com/dp/<ASIN>?tag={AMAZON_US_TAG} with "
               "\"amazon_store\": \"com\" (valid tags: VALID_AMAZON_TAGS).")
     c = amazon_link_counts
-    if c["amazon.ca"] or c["amzn.to"]:
+    if c["amazon.ca"] or c["amzn.to"] or c["link.amazon"]:
         print(f"   WARNING Amazon links: {c['amazon.com']} amazon.com (US tag), "
-              f"{c['amazon.ca']} amazon.ca, {c['amzn.to']} amzn.to short links")
+              f"{c['amazon.ca']} amazon.ca, {c['amzn.to']} amzn.to short links, "
+              f"{c['link.amazon']} link.amazon short links")
     print()
 
     if (not missing_from_catalog and not orphaned_records and not listing_issues
