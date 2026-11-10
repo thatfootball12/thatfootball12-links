@@ -122,6 +122,17 @@ Report (always runs):
      that has no tag). amzn.to links are read through
      data/amazon_short_links.json; a short link not in it is resolved one
      hop (amzn.to only) and added, and one that won't resolve is an error.
+     US-tag rule (AMAZON_US_RULE_FROM): an Amazon record whose week or
+     added date is on or after 2026-11-16, and every Amazon gift guide
+     listing (none existed before the rule), must link to amazon.com with
+     tag thatfootbal01-20 and carry "amazon_store": "com", or carry
+     "amazon_store": "ca-only" (checked: the ASIN isn't on amazon.com) and
+     link to amazon.ca. An amazon.ca link without "ca-only", "com" on a
+     link that isn't amazon.com + thatfootbal01-20, or a missing or unknown
+     amazon_store on such a record is an error; so is amazon_store on a
+     record that isn't Amazon. Older records and page links may stay on
+     amazon.ca: a WARNING line counts the amazon.com, amazon.ca and amzn.to
+     links (unique URLs across tracked files) to track the move to US tags.
 
 Exit status: 1 when item 1, 2, 10, 11, 12, 13, 14, 15 or 16 has an error, or item 8
 finds a missing <picture> file (report-only runs;
@@ -225,6 +236,13 @@ VALID_AMAZON_TAGS = {
     "amazon.ca": {"thatfootballg-ca-20", "thatfootballg-us-20", "thatfootballg-20"},
     "amazon.com": {"thatfootbal01-20"},
 }
+# The US-tag rule (item 16): Amazon records from this date on (week or
+# added), and every Amazon gift guide listing, must be amazon.com with the
+# US tag ("amazon_store": "com"), or amazon.ca only when checked
+# ("amazon_store": "ca-only": the ASIN isn't on amazon.com).
+AMAZON_US_RULE_FROM = datetime.date(2026, 11, 16)
+AMAZON_US_TAG = "thatfootbal01-20"
+AMAZON_STORES = ("com", "ca-only")
 # amzn.to short link -> the amazon URL it redirects to, so item 16 can read
 # a short link's tag without the network. New short links are resolved one
 # hop (amzn.to only, Amazon itself is never fetched) and added here.
@@ -559,7 +577,9 @@ def amazon_tag_issues():
     """Errors for item 16: every Amazon link in a tracked page or data file
     (direct, or amzn.to resolved through AMAZON_SHORT_LINKS) must carry a
     tag from VALID_AMAZON_TAGS for its store. Short links missing from the
-    cache are resolved and written to it."""
+    cache are resolved and written to it. Returns (errors, counts): counts
+    maps "amazon.com" / "amazon.ca" / "amzn.to" to the number of unique
+    links of each kind, for the US-tag progress warning."""
     try:
         files = subprocess.run(["git", "ls-files"], cwd=REPO, capture_output=True,
                                text=True, check=True).stdout.splitlines()
@@ -573,6 +593,7 @@ def amazon_tag_issues():
     except (OSError, ValueError):
         cache = {}
     errors, resolved_new = [], False
+    seen = {"amazon.com": set(), "amazon.ca": set(), "amzn.to": set()}
     for rel in sorted(files):
         if not rel.endswith(AMAZON_SCAN_EXTS) or rel == cache_rel:
             continue
@@ -585,6 +606,9 @@ def amazon_tag_issues():
                 if not AMAZON_TEMPLATE_RE.match(content, m.end())}
         for url in sorted(urls):
             url = html.unescape(url).rstrip(".;")
+            host = urllib.parse.urlparse(url).netloc.lower().removeprefix("www.")
+            if host in seen:
+                seen[host].add(url)
             final = url
             if "amzn.to" in url.lower():
                 final = cache.get(url)
@@ -607,6 +631,73 @@ def amazon_tag_issues():
         with open(AMAZON_SHORT_LINKS, "w", encoding="utf-8", newline="\n") as f:
             json.dump(dict(sorted(cache.items())), f, indent=1)
             f.write("\n")
+    return errors, {k: len(v) for k, v in seen.items()}
+
+
+def _record_date(p):
+    """The later of a record's added date and its pin week (e.g. "nov-16",
+    read in the added year, else this year), or None if neither parses."""
+    dates = []
+    try:
+        dates.append(datetime.date.fromisoformat(p.get("added") or ""))
+    except ValueError:
+        pass
+    week = p.get("week")
+    if week:
+        year = dates[0].year if dates else datetime.date.today().year
+        try:
+            dates.append(datetime.datetime.strptime(f"{week}-{year}", "%b-%d-%Y").date())
+        except ValueError:
+            pass
+    return max(dates) if dates else None
+
+
+def amazon_us_rule_applies(p):
+    """True for an Amazon record under the US-tag rule (item 16)."""
+    if p.get("retailer") != "Amazon":
+        return False
+    if gift_guide.listing_only(p):
+        return True
+    d = _record_date(p)
+    return d is not None and d >= AMAZON_US_RULE_FROM
+
+
+def amazon_store_issues(products):
+    """Errors for item 16's US-tag rule, one per products.json record."""
+    try:
+        with open(AMAZON_SHORT_LINKS, encoding="utf-8") as f:
+            cache = json.load(f)
+    except (OSError, ValueError):
+        cache = {}
+    errors = []
+    for p in products:
+        store_field = p.get("amazon_store")
+        if p.get("retailer") != "Amazon":
+            if "amazon_store" in p:
+                errors.append(f"{p['id']}: amazon_store on a {p.get('retailer')} record (Amazon only)")
+            continue
+        if not amazon_us_rule_applies(p):
+            if "amazon_store" in p and store_field not in AMAZON_STORES:
+                errors.append(f"{p['id']}: amazon_store {store_field!r} (must be \"com\" or \"ca-only\")")
+            continue
+        url = p.get("outbound_url") or ""
+        final = cache.get(url, url) if "amzn.to" in url.lower() else url
+        parsed = urllib.parse.urlparse(final)
+        host = parsed.netloc.lower().removeprefix("www.")
+        tag = urllib.parse.parse_qs(parsed.query).get("tag", [None])[0]
+        if store_field not in AMAZON_STORES:
+            shown = "missing" if store_field is None else repr(store_field)
+            errors.append(f"{p['id']}: amazon_store {shown} (set \"com\", or \"ca-only\" once "
+                          "you've checked the ASIN isn't on amazon.com)")
+        elif host == "amazon.ca" and store_field != "ca-only":
+            errors.append(f"{p['id']}: {url} is amazon.ca but amazon_store is \"{store_field}\" "
+                          f"(use https://www.amazon.com/dp/<ASIN>?tag={AMAZON_US_TAG}, "
+                          "or set \"ca-only\" if it isn't on amazon.com)")
+        elif store_field == "com" and (host != "amazon.com" or tag != AMAZON_US_TAG):
+            errors.append(f"{p['id']}: amazon_store \"com\" but {url} isn't amazon.com with "
+                          f"tag {AMAZON_US_TAG}")
+        elif store_field == "ca-only" and host != "amazon.ca":
+            errors.append(f"{p['id']}: amazon_store \"ca-only\" but {url} isn't an amazon.ca link")
     return errors
 
 
@@ -734,7 +825,8 @@ def main():
     font_issues = add_fonts.audit()
     font_issues += [(path, "font file missing") for path in add_fonts.missing_fonts()]
     blog_issues = build_blog.audit()
-    amazon_tag_errors = amazon_tag_issues()
+    amazon_tag_errors, amazon_link_counts = amazon_tag_issues()
+    amazon_tag_errors += amazon_store_issues(products)
 
     schema_issues = []
     for p in products:
@@ -917,12 +1009,17 @@ def main():
         print("   Fix the post's source in blog-src/, then run: py -3 build_blog.py")
     print()
 
-    print(f"16. Amazon links with a tag that doesn't pay ThatFootball12: {len(amazon_tag_errors)}")
+    print(f"16. Amazon links with a tag that doesn't pay ThatFootball12, or that break the "
+          f"US-tag rule: {len(amazon_tag_errors)}")
     for e in amazon_tag_errors:
         print(f"   ERROR {e}")
     if amazon_tag_errors:
-        print("   Replace it with https://www.amazon.ca/dp/<ASIN>?tag=thatfootballg-ca-20 "
-              "(valid tags: VALID_AMAZON_TAGS).")
+        print(f"   New links: https://www.amazon.com/dp/<ASIN>?tag={AMAZON_US_TAG} with "
+              "\"amazon_store\": \"com\" (valid tags: VALID_AMAZON_TAGS).")
+    c = amazon_link_counts
+    if c["amazon.ca"] or c["amzn.to"]:
+        print(f"   WARNING Amazon links: {c['amazon.com']} amazon.com (US tag), "
+              f"{c['amazon.ca']} amazon.ca, {c['amzn.to']} amzn.to short links")
     print()
 
     if (not missing_from_catalog and not orphaned_records and not listing_issues
@@ -962,7 +1059,8 @@ def main():
         # and its card isn't on GIFT_GUIDE_REMOTE_ALLOWLIST. Item 14 fails it
         # when a page loads fonts from Google or a font file is missing.
         # Item 15 fails it on any blog error or stale blog page, item 16 on
-        # any Amazon link whose tag isn't in VALID_AMAZON_TAGS.
+        # any Amazon link whose tag isn't in VALID_AMAZON_TAGS or any record
+        # that breaks the US-tag rule (the link-count warning never fails it).
         if (missing_from_catalog or orphaned_records or listing_issues or category_errors
                 or generator_errors or seller_errors or missing_picture_files
                 or remote_image_errors or font_issues or blog_issues or amazon_tag_errors):
