@@ -18794,7 +18794,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B07WJ3FPBP?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B07WJ3FPBP?tag=thatfootbal01-20",
     "image": "gift-guide/img/N106_trendoux-merino-touchscreen-gloves-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -18806,7 +18806,8 @@
     "discount_percent": null,
     "asin": "B07WJ3FPBP",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/got-sports-fleece-neck-warmer",
@@ -18817,7 +18818,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B08KG22Z12?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B08KG22Z12?tag=thatfootbal01-20",
     "image": "gift-guide/img/N107_got-sports-fleece-neck-warmer-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -18829,7 +18830,8 @@
     "discount_percent": null,
     "asin": "B08KG22Z12",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/ihuan-waterproof-ski-gloves",
@@ -18852,7 +18854,8 @@
     "discount_percent": null,
     "asin": "B0D6RD4NBV",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "ca-only"
   },
   {
     "id": "gift-guides/holiday-2026/magcomsen-fleece-lined-thermal-top",
@@ -18863,7 +18866,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B0CSYNSQ1Q?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B0CSYNSQ1Q?tag=thatfootbal01-20",
     "image": "gift-guide/img/N109_magcomsen-fleece-lined-thermal-top-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -18875,7 +18878,8 @@
     "discount_percent": null,
     "asin": "B0CSYNSQ1Q",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/columbia-whirlibird-watch-cap-beanie",
@@ -18886,7 +18890,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B00RC6X4R6?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B00RC6X4R6?tag=thatfootbal01-20",
     "image": "gift-guide/img/N110_columbia-whirlibird-watch-cap-beanie-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -18898,7 +18902,8 @@
     "discount_percent": null,
     "asin": "B00RC6X4R6",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/lerat-rechargeable-hand-warmers",
@@ -18921,7 +18926,8 @@
     "discount_percent": null,
     "asin": "B0DL2BZWKD",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "ca-only"
   },
   {
     "id": "gift-guides/holiday-2026/fz-beanie-scarf-gloves-set",
@@ -18932,7 +18938,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B0777FLXKP?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B0777FLXKP?tag=thatfootbal01-20",
     "image": "gift-guide/img/N112_fz-beanie-scarf-gloves-set-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -18944,7 +18950,8 @@
     "discount_percent": null,
     "asin": "B0777FLXKP",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/cl-convallaria-thermal-long-johns-set",
@@ -18955,7 +18962,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B08DQYVLZ4?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B08DQYVLZ4?tag=thatfootbal01-20",
     "image": "gift-guide/img/N113_cl-convallaria-thermal-long-johns-set-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -18967,7 +18974,8 @@
     "discount_percent": null,
     "asin": "B08DQYVLZ4",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/waterproof-fleece-stadium-blanket",
@@ -18978,7 +18986,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B07ZSG89Z1?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B07ZSG89Z1?tag=thatfootbal01-20",
     "image": "gift-guide/img/N114_waterproof-fleece-stadium-blanket-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -18990,7 +18998,8 @@
     "discount_percent": null,
     "asin": "B07ZSG89Z1",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/portable-stadium-seat-back-support",
@@ -19013,7 +19022,8 @@
     "discount_percent": null,
     "asin": "B0DWZVYRVR",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "ca-only"
   },
   {
     "id": "gift-guides/holiday-2026/amazon-essentials-packable-puffer-vest",
@@ -19024,7 +19034,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B08SS4GJ5G?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B08SS4GJ5G?tag=thatfootbal01-20",
     "image": "gift-guide/img/N116_amazon-essentials-packable-puffer-vest-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -19036,7 +19046,8 @@
     "discount_percent": null,
     "asin": "B08SS4GJ5G",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/amazon-essentials-packable-puffer-jacket",
@@ -19047,7 +19058,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B07C8YBM2T?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B07C8YBM2T?tag=thatfootbal01-20",
     "image": "gift-guide/img/N117_amazon-essentials-packable-puffer-jacket-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -19059,7 +19070,8 @@
     "discount_percent": null,
     "asin": "B07C8YBM2T",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/david-archy-thermal-base-layer-set",
@@ -19082,7 +19094,8 @@
     "discount_percent": null,
     "asin": "B07DWR5Q8X",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "ca-only"
   },
   {
     "id": "gift-guides/holiday-2026/onetigris-wearable-blanket-poncho",
@@ -19093,7 +19106,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B0FKMV75W2?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B0FKMV75W2?tag=thatfootbal01-20",
     "image": "gift-guide/img/N119_onetigris-wearable-blanket-poncho-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -19105,7 +19118,8 @@
     "discount_percent": null,
     "asin": "B0FKMV75W2",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/heated-vest-16000mah-battery",
@@ -19116,7 +19130,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B0BBGPT59X?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B0BBGPT59X?tag=thatfootbal01-20",
     "image": "gift-guide/img/N120_heated-vest-16000mah-battery-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -19128,7 +19142,8 @@
     "discount_percent": null,
     "asin": "B0BBGPT59X",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/calvin-klein-sherpa-lined-puffer",
@@ -19139,7 +19154,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B08ZNZ9NFT?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B08ZNZ9NFT?tag=thatfootbal01-20",
     "image": "gift-guide/img/N121_calvin-klein-sherpa-lined-puffer-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -19151,7 +19166,8 @@
     "discount_percent": null,
     "asin": "B08ZNZ9NFT",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/savior-heat-app-control-heated-gloves",
@@ -19162,7 +19178,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B0H32BG8Z9?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B0H32BG8Z9?tag=thatfootbal01-20",
     "image": "gift-guide/img/N122_savior-heat-app-control-heated-gloves-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -19174,7 +19190,8 @@
     "discount_percent": null,
     "asin": "B0H32BG8Z9",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/carhartt-sherpa-lined-mock-neck-vest",
@@ -19185,7 +19202,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B08BG6GY76?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B08BG6GY76?tag=thatfootbal01-20",
     "image": "gift-guide/img/N123_carhartt-sherpa-lined-mock-neck-vest-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -19197,7 +19214,8 @@
     "discount_percent": null,
     "asin": "B08BG6GY76",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/carhartt-bartlett-jacket",
@@ -19208,7 +19226,7 @@
     "currency": null,
     "currency_source": null,
     "retailer": "Amazon",
-    "outbound_url": "https://www.amazon.ca/dp/B07RX5VMT8?tag=thatfootballg-ca-20",
+    "outbound_url": "https://www.amazon.com/dp/B07RX5VMT8?tag=thatfootbal01-20",
     "image": "gift-guide/img/N124_carhartt-bartlett-jacket-500.jpg",
     "image_pending": false,
     "detail_page_url": "gift-guide/index.html",
@@ -19220,7 +19238,8 @@
     "discount_percent": null,
     "asin": "B07RX5VMT8",
     "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail_webp": null,
+    "amazon_store": "com"
   },
   {
     "id": "gift-guides/holiday-2026/manfinity-zip-up-padded-puffer-vest",
