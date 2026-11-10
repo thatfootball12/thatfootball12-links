@@ -101,13 +101,26 @@ excludes if a request could count as a click, else to `ALLOWED_HOSTS`.
 Don't add `--verbose`: it prints every excluded URL in the log.
 
 **Amazon links must carry one of Jesse's tags.** amazon.ca:
-`thatfootballg-ca-20` (use this one for new links), `thatfootballg-us-20`
-or `thatfootballg-20`; amazon.com: `thatfootbal01-20`. Any other tag
-(41 links had `thatfootbal05-20` until Nov 2026), or none, earns
-nothing. Write new links as `https://www.amazon.ca/dp/<ASIN>?tag=thatfootballg-ca-20`.
+`thatfootballg-ca-20`, `thatfootballg-us-20` or `thatfootballg-20`;
+amazon.com: `thatfootbal01-20`. Any other tag (41 links had
+`thatfootbal05-20` until Nov 2026), or none, earns nothing.
+**US-tag rule (Nov 16 batch on):** write new links as
+`https://www.amazon.com/dp/<ASIN>?tag=thatfootbal01-20` and give the
+record `"amazon_store": "com"`. Only when you've checked that the ASIN
+isn't on amazon.com, link `https://www.amazon.ca/dp/<ASIN>?tag=thatfootballg-ca-20`
+and set `"amazon_store": "ca-only"`. `amazon_store` goes on Amazon
+records only, and `--append` doesn't set it.
 `sync_catalog.py` report item 16 fails (exit 1, so CI fails) on any
 Amazon link in a tracked page or data file with another tag or none
-(`VALID_AMAZON_TAGS`). It reads amzn.to links through
+(`VALID_AMAZON_TAGS`), and on any Amazon record whose `week` or `added`
+is 2026-11-16 or later (`AMAZON_US_RULE_FROM`), or that is a gift guide
+listing, when its `amazon_store` is missing, its link is amazon.ca
+without `ca-only`, or it says `com` but the link isn't amazon.com with
+`thatfootbal01-20`. Older records and page links on amazon.ca still
+pass: item 16 just prints one WARNING line counting amazon.com,
+amazon.ca, amzn.to and link.amazon links, to track the switch (action
+item #110).
+It reads amzn.to links through
 `data/amazon_short_links.json`, resolving and adding any new one (one
 redirect hop, Amazon itself is never fetched), so commit that file when
 it changes.
