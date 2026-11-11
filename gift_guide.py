@@ -1,28 +1,36 @@
 #!/usr/bin/env python3
 """
-Gift guide listings in products.json: SHEIN products that appear only on
-the holiday gift guide (gift-guide/index.html) and its Pinterest pins
-(holiday-2026/pins/<pin>_holiday.png), with no product detail page.
+Gift guide listings in products.json: products that appear only on the
+holiday gift guide (gift-guide/index.html), with no product detail page.
+They can be SHEIN, Amazon or Awin.
 
-They're in the catalog so the seller gates (sellers.py), the link checker
-and CI cover them. A listing record has:
+They're in the catalog so the seller gates (sellers.py), the link and tag
+checks and CI cover them. A listing record has:
     detail_page_url  "gift-guide/index.html" (the page that lists it)
-    holiday_pin      its pin id, e.g. "S02"
     outbound_url     the gift guide tile's affiliate link
-    image            the tile's photo URL (remote; no local copy, so no
-                     thumbnail)
+    image            the tile's photo (a remote URL on the older SHEIN
+                     records, gift-guide/img/... on newer ones; no
+                     thumbnail either way)
     price            null (the gift guide shows a price tier, not a price)
+    holiday_pin      optional: its pin id, e.g. "S02", once it has a pin
+                     (holiday-2026/pins/<pin>_holiday.png). Leave it off
+                     until then: pins come later (make_gift_pin.py).
+    asin             Amazon listings: the product's ASIN
+    merchant         Awin listings: the store, e.g. "Moosehill"
+    goods_id, seller SHEIN listings, as on any SHEIN record
 It's in categories.json "hidden" (no tile on products/, and the outfit
 generator skips it), its campaign holiday-2026 is in generator.json
 "unthemed", and the page-based scripts (add_product_schema.py,
 add_analytics.py, write_sitemap.py, make_product_pin.py) leave it out.
-sync_catalog.py checks its tile and pin image still exist.
+sync_catalog.py checks each listing's tile, its required fields, that
+it's hidden, and any pin image it names.
 
 A gift guide product that already has a catalog record (same goods_id)
 keeps that record and just gets holiday_pin added.
 """
 
 import html as htmllib
+import json
 import os
 import re
 
@@ -47,7 +55,7 @@ def page_links():
     if not os.path.isfile(path):
         return set()
     with open(path, encoding="utf-8") as f:
-        return set(re.findall(r'<a class="gg-shop" href="([^"]+)"', f.read()))
+        return {htmllib.unescape(u) for u in re.findall(r'<a class="gg-shop" href="([^"]+)"', f.read())}
 
 
 def card_key(card_id):
@@ -76,18 +84,32 @@ def shein_cards():
     return out
 
 
+def hidden_ids():
+    with open(os.path.join(REPO, "categories.json"), encoding="utf-8") as f:
+        return set(json.load(f)["hidden"])
+
+
 def audit(products):
     """Problems with listing records: a tile that's gone from the gift
-    guide, or a missing holiday_pin / pin image (on any record that names
-    a pin)."""
+    guide, a listing that shows on products/ or has a price, an Amazon
+    listing whose asin isn't in its link, an Awin listing with no
+    merchant, or a named pin image that's missing (on any record)."""
     links = page_links()
+    hidden = hidden_ids()
     out = []
     for p in products:
         if listing_only(p):
-            if not p.get("holiday_pin"):
-                out.append(f"{p['id']}: gift guide listing with no holiday_pin")
-            if p.get("outbound_url") not in links:
+            url = p.get("outbound_url") or ""
+            if url not in links:
                 out.append(f"{p['id']}: its link is no longer on {PAGE}")
+            if p["id"] not in hidden:
+                out.append(f"{p['id']}: gift guide listing not in categories.json hidden")
+            if p.get("price") is not None:
+                out.append(f"{p['id']}: gift guide listing with a price (should be null)")
+            if p.get("retailer") == "Amazon" and (not p.get("asin") or p["asin"] not in url):
+                out.append(f"{p['id']}: Amazon listing whose asin isn't in its link")
+            if p.get("retailer") == "Awin" and not p.get("merchant"):
+                out.append(f"{p['id']}: Awin listing with no merchant")
         img = pin_image(p)
         if img and not os.path.isfile(os.path.join(REPO, img.replace("/", os.sep))):
             out.append(f"{p['id']}: holiday pin image missing ({img})")

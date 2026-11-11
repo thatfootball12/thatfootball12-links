@@ -34,9 +34,10 @@ Scope:
 Report (always runs):
   1. Detail pages on disk with no products.json record.
   2. products.json records whose detail page no longer exists on disk,
-     plus gift guide listings (gift_guide.py: SHEIN products shown only
-     on gift-guide/index.html and a holiday pin) whose tile link is gone
-     from the gift guide, or whose holiday pin image is missing.
+     plus gift guide listings (gift_guide.py: products shown only on
+     gift-guide/index.html) whose tile link is gone from the gift guide,
+     that aren't hidden, have a price, lack their asin or merchant, or
+     name a holiday pin image that's missing.
   3. products.json records whose thumbnail or thumbnail_webp file is
      missing on disk (or whose thumbnail_webp field isn't set).
   4. Product detail pages whose schema.org JSON-LD block is missing, stale,
