@@ -19393,8 +19393,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0CLR3LL88?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-4/jacket/jacket.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-4/jacket/index.html",
     "campaign": "gameday-nov-16-4",
     "theme": "gameday",
@@ -19406,8 +19406,8 @@
     "asin": "B0CLR3LL88",
     "amazon_store": "com",
     "gift_tier": "$100+",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-4/jacket/jacket-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-4/jacket/jacket-424.webp"
   },
   {
     "id": "gameday/gameday-nov-16-7/puffer-jacket",
@@ -19469,8 +19469,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B09BHP3CGR?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/casual/casual-outfit-nov-16-2/overcoat/overcoat.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/casual/casual-outfit-nov-16-2/overcoat/index.html",
     "campaign": "casual-outfit-nov-16-2",
     "theme": "casual",
@@ -19482,8 +19482,8 @@
     "asin": "B09BHP3CGR",
     "amazon_store": "com",
     "gift_tier": "$60-100",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/casual/casual-outfit-nov-16-2/overcoat/overcoat-424.jpg",
+    "thumbnail_webp": "outfits/casual/casual-outfit-nov-16-2/overcoat/overcoat-424.webp"
   },
   {
     "id": "date-night/date-night-nov-16/pea-coat",
@@ -19495,8 +19495,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0D5HHQWP3?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/date-night/date-night-nov-16/pea-coat/pea-coat.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/date-night/date-night-nov-16/pea-coat/index.html",
     "campaign": "date-night-nov-16",
     "theme": "date-night",
@@ -19508,8 +19508,8 @@
     "asin": "B0D5HHQWP3",
     "amazon_store": "com",
     "gift_tier": "$60-100",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/date-night/date-night-nov-16/pea-coat/pea-coat-424.jpg",
+    "thumbnail_webp": "outfits/date-night/date-night-nov-16/pea-coat/pea-coat-424.webp"
   },
   {
     "id": "streetwear/streetwear-outfit-nov-16/trucker-jacket",
@@ -19521,8 +19521,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0F9ZDLH5H?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/streetwear/streetwear-outfit-nov-16/trucker-jacket/trucker-jacket.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/streetwear/streetwear-outfit-nov-16/trucker-jacket/index.html",
     "campaign": "streetwear-outfit-nov-16",
     "theme": "streetwear",
@@ -19534,8 +19534,8 @@
     "asin": "B0F9ZDLH5H",
     "amazon_store": "com",
     "gift_tier": "$100+",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/streetwear/streetwear-outfit-nov-16/trucker-jacket/trucker-jacket-424.jpg",
+    "thumbnail_webp": "outfits/streetwear/streetwear-outfit-nov-16/trucker-jacket/trucker-jacket-424.webp"
   },
   {
     "id": "trending-products/trending-products-nov-16/corduroy-jacket",
@@ -19572,8 +19572,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0CFBZSRF9?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/streetwear/streetwear-outfit-nov-16-2/parka/parka.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/streetwear/streetwear-outfit-nov-16-2/parka/index.html",
     "campaign": "streetwear-outfit-nov-16-2",
     "theme": "streetwear",
@@ -19585,8 +19585,8 @@
     "asin": "B0CFBZSRF9",
     "amazon_store": "com",
     "gift_tier": "$100+",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/streetwear/streetwear-outfit-nov-16-2/parka/parka-424.jpg",
+    "thumbnail_webp": "outfits/streetwear/streetwear-outfit-nov-16-2/parka/parka-424.webp"
   },
   {
     "id": "trending-products/trending-products-nov-16/bomber-jacket",
@@ -19807,8 +19807,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B0FLXGVGGR?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/casual/casual-outfit-nov-16/quarter-zip/quarter-zip.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/casual/casual-outfit-nov-16/quarter-zip/index.html",
     "campaign": "casual-outfit-nov-16",
     "theme": "casual",
@@ -19820,8 +19820,8 @@
     "asin": "B0FLXGVGGR",
     "amazon_store": "ca-only",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/casual/casual-outfit-nov-16/quarter-zip/quarter-zip-424.jpg",
+    "thumbnail_webp": "outfits/casual/casual-outfit-nov-16/quarter-zip/quarter-zip-424.webp"
   },
   {
     "id": "gameday/gameday-nov-16-7/quarter-zip",
@@ -19833,8 +19833,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0CYPVTBHM?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-7/quarter-zip/quarter-zip.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-7/quarter-zip/index.html",
     "campaign": "gameday-nov-16-7",
     "theme": "gameday",
@@ -19846,8 +19846,8 @@
     "asin": "B0CYPVTBHM",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-7/quarter-zip/quarter-zip-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-7/quarter-zip/quarter-zip-424.webp"
   },
   {
     "id": "casual/casual-outfit-nov-16-2/quarter-zip-sweater",
@@ -20343,8 +20343,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0CLSDWYDZ?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-2/boots/boots.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-2/boots/index.html",
     "campaign": "gameday-nov-16-2",
     "theme": "gameday",
@@ -20356,8 +20356,8 @@
     "asin": "B0CLSDWYDZ",
     "amazon_store": "com",
     "gift_tier": "$100+",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-2/boots/boots-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-2/boots/boots-424.webp"
   },
   {
     "id": "gameday/gameday-nov-16-5/snow-boots",
@@ -20369,8 +20369,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B09TRZP92T?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-5/snow-boots/snow-boots.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-5/snow-boots/index.html",
     "campaign": "gameday-nov-16-5",
     "theme": "gameday",
@@ -20382,8 +20382,8 @@
     "asin": "B09TRZP92T",
     "amazon_store": "com",
     "gift_tier": "$100+",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-5/snow-boots/snow-boots-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-5/snow-boots/snow-boots-424.webp"
   },
   {
     "id": "casual/casual-outfit-nov-16/desert-boots",
@@ -20395,8 +20395,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B07F4P3TN2?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/casual/casual-outfit-nov-16/desert-boots/desert-boots.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/casual/casual-outfit-nov-16/desert-boots/index.html",
     "campaign": "casual-outfit-nov-16",
     "theme": "casual",
@@ -20408,8 +20408,8 @@
     "asin": "B07F4P3TN2",
     "amazon_store": "com",
     "gift_tier": "$60-100",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/casual/casual-outfit-nov-16/desert-boots/desert-boots-424.jpg",
+    "thumbnail_webp": "outfits/casual/casual-outfit-nov-16/desert-boots/desert-boots-424.webp"
   },
   {
     "id": "gift-guides/gift-guide-nov-16/slippers",
@@ -20421,8 +20421,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B07WCK878X?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/slippers/slippers.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/slippers/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -20434,8 +20434,8 @@
     "asin": "B07WCK878X",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/slippers/slippers-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/slippers/slippers-424.webp"
   },
   {
     "id": "casual/casual-outfit-nov-16-2/loafers",
@@ -20597,8 +20597,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B07HQCFZHQ?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-7/gloves/gloves.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-7/gloves/index.html",
     "campaign": "gameday-nov-16-7",
     "theme": "gameday",
@@ -20610,8 +20610,8 @@
     "asin": "B07HQCFZHQ",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-7/gloves/gloves-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-7/gloves/gloves-424.webp"
   },
   {
     "id": "casual/casual-outfit-nov-16-2/scarf",
@@ -20623,8 +20623,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B08G4T4FFH?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/casual/casual-outfit-nov-16-2/scarf/scarf.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/casual/casual-outfit-nov-16-2/scarf/index.html",
     "campaign": "casual-outfit-nov-16-2",
     "theme": "casual",
@@ -20636,8 +20636,8 @@
     "asin": "B08G4T4FFH",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/casual/casual-outfit-nov-16-2/scarf/scarf-424.jpg",
+    "thumbnail_webp": "outfits/casual/casual-outfit-nov-16-2/scarf/scarf-424.webp"
   },
   {
     "id": "gameday/gameday-nov-16-3/beanie",
@@ -20674,8 +20674,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0C3J73TGY?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/wallet/wallet.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/wallet/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -20687,8 +20687,8 @@
     "asin": "B0C3J73TGY",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/wallet/wallet-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/wallet/wallet-424.webp"
   },
   {
     "id": "casual/casual-outfit-nov-16/belt",
@@ -20725,8 +20725,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B01AFTLZKY?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/formal/formal-outfit-nov-16/watch/watch.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/formal/formal-outfit-nov-16/watch/index.html",
     "campaign": "formal-outfit-nov-16",
     "theme": "formal",
@@ -20738,8 +20738,8 @@
     "asin": "B01AFTLZKY",
     "amazon_store": "com",
     "gift_tier": "$100+",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/formal/formal-outfit-nov-16/watch/watch-424.jpg",
+    "thumbnail_webp": "outfits/formal/formal-outfit-nov-16/watch/watch-424.webp"
   },
   {
     "id": "gameday/gameday-nov-16-4/hat-scarf-gloves-set",
@@ -20751,8 +20751,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B0DHWWG26J?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-4/hat-scarf-gloves-set/hat-scarf-gloves-set.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-4/hat-scarf-gloves-set/index.html",
     "campaign": "gameday-nov-16-4",
     "theme": "gameday",
@@ -20764,8 +20764,8 @@
     "asin": "B0DHWWG26J",
     "amazon_store": "ca-only",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-4/hat-scarf-gloves-set/hat-scarf-gloves-set-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-4/hat-scarf-gloves-set/hat-scarf-gloves-set-424.webp"
   },
   {
     "id": "gift-guides/gift-guide-nov-16/driving-gloves",
@@ -21105,8 +21105,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B07K6WDR2Z?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/beard-kit/beard-kit.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/beard-kit/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -21118,8 +21118,8 @@
     "asin": "B07K6WDR2Z",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/beard-kit/beard-kit-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/beard-kit/beard-kit-424.webp"
   },
   {
     "id": "gift-guides/gift-guide-nov-16/face-shaver",
@@ -21131,8 +21131,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0C9LKH31T?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/face-shaver/face-shaver.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/face-shaver/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -21144,8 +21144,8 @@
     "asin": "B0C9LKH31T",
     "amazon_store": "com",
     "gift_tier": "$100+",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/face-shaver/face-shaver-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/face-shaver/face-shaver-424.webp"
   },
   {
     "id": "gift-guides/gift-guide-nov-16/toiletry-bag",
@@ -21157,8 +21157,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B075SP9QL4?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/toiletry-bag/toiletry-bag.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/toiletry-bag/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -21170,8 +21170,8 @@
     "asin": "B075SP9QL4",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/toiletry-bag/toiletry-bag-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/toiletry-bag/toiletry-bag-424.webp"
   },
   {
     "id": "gift-guides/gift-guide-nov-16/body-wash",
@@ -21183,8 +21183,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B00VWK6YBQ?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/body-wash/body-wash.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/body-wash/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -21196,8 +21196,8 @@
     "asin": "B00VWK6YBQ",
     "amazon_store": "ca-only",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/body-wash/body-wash-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/body-wash/body-wash-424.webp"
   },
   {
     "id": "gift-guides/gift-guide-nov-16/spa-gift-set",
@@ -21209,8 +21209,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0CTCGRKV7?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/spa-gift-set/spa-gift-set.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/spa-gift-set/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -21222,8 +21222,8 @@
     "asin": "B0CTCGRKV7",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/spa-gift-set/spa-gift-set-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/spa-gift-set/spa-gift-set-424.webp"
   },
   {
     "id": "gift-guides/gift-guide-nov-16/robe",
@@ -21235,8 +21235,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B07N2VPGPZ?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/robe/robe.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/robe/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -21248,8 +21248,8 @@
     "asin": "B07N2VPGPZ",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/robe/robe-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/robe/robe-424.webp"
   },
   {
     "id": "gift-guides/gift-guide-nov-16/flannel-pajama-pants",
@@ -21261,8 +21261,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0BWN7XJH4?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/flannel-pajama-pants/flannel-pajama-pants.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/flannel-pajama-pants/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -21274,8 +21274,8 @@
     "asin": "B0BWN7XJH4",
     "amazon_store": "com",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/flannel-pajama-pants/flannel-pajama-pants-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/flannel-pajama-pants/flannel-pajama-pants-424.webp"
   },
   {
     "id": "gift-guides/gift-guide-nov-16/fleece-pajama-pants",
@@ -21287,8 +21287,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B07XDS3495?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/fleece-pajama-pants/fleece-pajama-pants.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/fleece-pajama-pants/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -21300,8 +21300,8 @@
     "asin": "B07XDS3495",
     "amazon_store": "ca-only",
     "gift_tier": "$25-60",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/fleece-pajama-pants/fleece-pajama-pants-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/fleece-pajama-pants/fleece-pajama-pants-424.webp"
   },
   {
     "id": "formal/formal-outfit-nov-16/suit",
@@ -21338,8 +21338,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0B7X8BMMM?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/formal/formal-outfit-nov-16/velvet-blazer/velvet-blazer.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/formal/formal-outfit-nov-16/velvet-blazer/index.html",
     "campaign": "formal-outfit-nov-16",
     "theme": "formal",
@@ -21351,8 +21351,9 @@
     "asin": "B0B7X8BMMM",
     "amazon_store": "com",
     "gift_tier": "$100+",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/formal/formal-outfit-nov-16/velvet-blazer/velvet-blazer-424.jpg",
+    "thumbnail_webp": "outfits/formal/formal-outfit-nov-16/velvet-blazer/velvet-blazer-424.webp",
+    "ai_image": false
   },
   {
     "id": "trending-products/trending-products-nov-16-2/brown-blazer",
