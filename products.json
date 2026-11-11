@@ -19419,8 +19419,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0C4F9F15K?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-7/puffer-jacket/puffer-jacket.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-7/puffer-jacket/index.html",
     "campaign": "gameday-nov-16-7",
     "theme": "gameday",
@@ -19431,8 +19431,9 @@
     "week": "nov-16",
     "asin": "B0C4F9F15K",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-7/puffer-jacket/puffer-jacket-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-7/puffer-jacket/puffer-jacket-424.webp",
+    "ai_image": false
   },
   {
     "id": "trending-products/trending-products-nov-16/puffer-coat",
@@ -19444,8 +19445,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B07PJQDRX7?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/trending-products/trending-products-nov-16/puffer-coat/puffer-coat.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/trending-products/trending-products-nov-16/puffer-coat/index.html",
     "campaign": "trending-products-nov-16",
     "theme": "trending-products",
@@ -19456,8 +19457,9 @@
     "week": "nov-16",
     "asin": "B07PJQDRX7",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/trending-products/trending-products-nov-16/puffer-coat/puffer-coat-424.jpg",
+    "thumbnail_webp": "videos/trending-products/trending-products-nov-16/puffer-coat/puffer-coat-424.webp",
+    "ai_image": false
   },
   {
     "id": "casual/casual-outfit-nov-16-2/overcoat",
@@ -19547,8 +19549,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0BMFZY9ZZ?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/trending-products/trending-products-nov-16/corduroy-jacket/corduroy-jacket.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/trending-products/trending-products-nov-16/corduroy-jacket/index.html",
     "campaign": "trending-products-nov-16",
     "theme": "trending-products",
@@ -19559,8 +19561,9 @@
     "week": "nov-16",
     "asin": "B0BMFZY9ZZ",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/trending-products/trending-products-nov-16/corduroy-jacket/corduroy-jacket-424.jpg",
+    "thumbnail_webp": "videos/trending-products/trending-products-nov-16/corduroy-jacket/corduroy-jacket-424.webp",
+    "ai_image": false
   },
   {
     "id": "streetwear/streetwear-outfit-nov-16-2/parka",
@@ -20192,8 +20195,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B073S71M77?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16/jeans/jeans.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16/jeans/index.html",
     "campaign": "gameday-nov-16",
     "theme": "gameday",
@@ -20204,8 +20207,9 @@
     "week": "nov-16",
     "asin": "B073S71M77",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16/jeans/jeans-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16/jeans/jeans-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-2/pants",
@@ -20447,8 +20451,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B07QMB3375?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/casual/casual-outfit-nov-16-2/loafers/loafers.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/casual/casual-outfit-nov-16-2/loafers/index.html",
     "campaign": "casual-outfit-nov-16-2",
     "theme": "casual",
@@ -20459,8 +20463,9 @@
     "week": "nov-16",
     "asin": "B07QMB3375",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/casual/casual-outfit-nov-16-2/loafers/loafers-424.jpg",
+    "thumbnail_webp": "outfits/casual/casual-outfit-nov-16-2/loafers/loafers-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-3/sneakers",
@@ -20472,8 +20477,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0CDZJ5QV8?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-3/sneakers/sneakers.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-3/sneakers/index.html",
     "campaign": "gameday-nov-16-3",
     "theme": "gameday",
@@ -20484,8 +20489,9 @@
     "week": "nov-16",
     "asin": "B0CDZJ5QV8",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-3/sneakers/sneakers-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-3/sneakers/sneakers-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16/duck-boots",
@@ -20497,8 +20503,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B08BCBQVC3?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16/duck-boots/duck-boots.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16/duck-boots/index.html",
     "campaign": "gameday-nov-16",
     "theme": "gameday",
@@ -20509,8 +20515,9 @@
     "week": "nov-16",
     "asin": "B08BCBQVC3",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16/duck-boots/duck-boots-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16/duck-boots/duck-boots-424.webp",
+    "ai_image": false
   },
   {
     "id": "formal/formal-outfit-nov-16/chelsea-boots",
@@ -20522,8 +20529,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0CLHCGWKT?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/formal/formal-outfit-nov-16/chelsea-boots/chelsea-boots.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/formal/formal-outfit-nov-16/chelsea-boots/index.html",
     "campaign": "formal-outfit-nov-16",
     "theme": "formal",
@@ -20534,8 +20541,9 @@
     "week": "nov-16",
     "asin": "B0CLHCGWKT",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/formal/formal-outfit-nov-16/chelsea-boots/chelsea-boots-424.jpg",
+    "thumbnail_webp": "outfits/formal/formal-outfit-nov-16/chelsea-boots/chelsea-boots-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-4/winter-boots",
@@ -20547,8 +20555,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B016PJF4CS?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-4/winter-boots/winter-boots.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-4/winter-boots/index.html",
     "campaign": "gameday-nov-16-4",
     "theme": "gameday",
@@ -20559,8 +20567,9 @@
     "week": "nov-16",
     "asin": "B016PJF4CS",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-4/winter-boots/winter-boots-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-4/winter-boots/winter-boots-424.webp",
+    "ai_image": false
   },
   {
     "id": "date-night/date-night-nov-16/chukka-boots",
@@ -20572,8 +20581,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0CKZ6YHTC?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/date-night/date-night-nov-16/chukka-boots/chukka-boots.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/date-night/date-night-nov-16/chukka-boots/index.html",
     "campaign": "date-night-nov-16",
     "theme": "date-night",
@@ -20584,8 +20593,9 @@
     "week": "nov-16",
     "asin": "B0CKZ6YHTC",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/date-night/date-night-nov-16/chukka-boots/chukka-boots-424.jpg",
+    "thumbnail_webp": "outfits/date-night/date-night-nov-16/chukka-boots/chukka-boots-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-7/gloves",
@@ -20649,8 +20659,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0FSKYRZLZ?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-3/beanie/beanie.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-3/beanie/index.html",
     "campaign": "gameday-nov-16-3",
     "theme": "gameday",
@@ -20661,8 +20671,9 @@
     "week": "nov-16",
     "asin": "B0FSKYRZLZ",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-3/beanie/beanie-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-3/beanie/beanie-424.webp",
+    "ai_image": false
   },
   {
     "id": "gift-guides/gift-guide-nov-16/wallet",
@@ -20700,8 +20711,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B08BYVBD2M?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/casual/casual-outfit-nov-16/belt/belt.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/casual/casual-outfit-nov-16/belt/index.html",
     "campaign": "casual-outfit-nov-16",
     "theme": "casual",
@@ -20712,8 +20723,9 @@
     "week": "nov-16",
     "asin": "B08BYVBD2M",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/casual/casual-outfit-nov-16/belt/belt-424.jpg",
+    "thumbnail_webp": "outfits/casual/casual-outfit-nov-16/belt/belt-424.webp",
+    "ai_image": false
   },
   {
     "id": "formal/formal-outfit-nov-16/watch",
@@ -20777,8 +20789,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B016KXJXW6?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/driving-gloves/driving-gloves.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/driving-gloves/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -20789,8 +20801,9 @@
     "week": "nov-16",
     "asin": "B016KXJXW6",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/driving-gloves/driving-gloves-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/driving-gloves/driving-gloves-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-2/beanie",
@@ -20802,8 +20815,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0BBZX5Z2M?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-2/beanie/beanie.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-2/beanie/index.html",
     "campaign": "gameday-nov-16-2",
     "theme": "gameday",
@@ -20814,8 +20827,9 @@
     "week": "nov-16",
     "asin": "B0BBZX5Z2M",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-2/beanie/beanie-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-2/beanie/beanie-424.webp",
+    "ai_image": false
   },
   {
     "id": "gift-guides/gift-guide-nov-16/slim-wallet",
@@ -20827,8 +20841,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B07RY7WLL5?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "videos/gift-guides/gift-guide-nov-16/slim-wallet/slim-wallet.jpg",
+    "image_pending": false,
     "detail_page_url": "videos/gift-guides/gift-guide-nov-16/slim-wallet/index.html",
     "campaign": "gift-guide-nov-16",
     "theme": "gift-guides",
@@ -20839,8 +20853,9 @@
     "week": "nov-16",
     "asin": "B07RY7WLL5",
     "amazon_store": "ca-only",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "videos/gift-guides/gift-guide-nov-16/slim-wallet/slim-wallet-424.jpg",
+    "thumbnail_webp": "videos/gift-guides/gift-guide-nov-16/slim-wallet/slim-wallet-424.webp",
+    "ai_image": false
   },
   {
     "id": "date-night/date-night-nov-16/cashmere-scarf",
@@ -20852,8 +20867,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B07GDS4QGW?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/date-night/date-night-nov-16/cashmere-scarf/cashmere-scarf.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/date-night/date-night-nov-16/cashmere-scarf/index.html",
     "campaign": "date-night-nov-16",
     "theme": "date-night",
@@ -20864,8 +20879,9 @@
     "week": "nov-16",
     "asin": "B07GDS4QGW",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/date-night/date-night-nov-16/cashmere-scarf/cashmere-scarf-424.jpg",
+    "thumbnail_webp": "outfits/date-night/date-night-nov-16/cashmere-scarf/cashmere-scarf-424.webp",
+    "ai_image": false
   },
   {
     "id": "business-casual/business-casual-nov-16/watch",
@@ -20877,8 +20893,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B0F4WW35MB?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/business-casual/business-casual-nov-16/watch/watch.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/business-casual/business-casual-nov-16/watch/index.html",
     "campaign": "business-casual-nov-16",
     "theme": "business-casual",
@@ -20889,8 +20905,9 @@
     "week": "nov-16",
     "asin": "B0F4WW35MB",
     "amazon_store": "ca-only",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/business-casual/business-casual-nov-16/watch/watch-424.jpg",
+    "thumbnail_webp": "outfits/business-casual/business-casual-nov-16/watch/watch-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-2/hockey-jersey",
@@ -20902,8 +20919,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B084YRNVFR?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-2/hockey-jersey/hockey-jersey.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-2/hockey-jersey/index.html",
     "campaign": "gameday-nov-16-2",
     "theme": "gameday",
@@ -20914,8 +20931,9 @@
     "week": "nov-16",
     "asin": "B084YRNVFR",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-2/hockey-jersey/hockey-jersey-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-2/hockey-jersey/hockey-jersey-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-3/hockey-jersey",
@@ -20927,8 +20945,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.ca/dp/B0CSJVYYGJ?tag=thatfootballg-ca-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-3/hockey-jersey/hockey-jersey.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-3/hockey-jersey/index.html",
     "campaign": "gameday-nov-16-3",
     "theme": "gameday",
@@ -20939,8 +20957,9 @@
     "week": "nov-16",
     "asin": "B0CSJVYYGJ",
     "amazon_store": "ca-only",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-3/hockey-jersey/hockey-jersey-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-3/hockey-jersey/hockey-jersey-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16/pom-beanie",
@@ -20952,8 +20971,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B077H2GD48?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16/pom-beanie/pom-beanie.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16/pom-beanie/index.html",
     "campaign": "gameday-nov-16",
     "theme": "gameday",
@@ -20964,8 +20983,9 @@
     "week": "nov-16",
     "asin": "B077H2GD48",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16/pom-beanie/pom-beanie-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16/pom-beanie/pom-beanie-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-5/varsity-jacket",
@@ -20977,8 +20997,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0DC6H9R8C?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-5/varsity-jacket/varsity-jacket.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-5/varsity-jacket/index.html",
     "campaign": "gameday-nov-16-5",
     "theme": "gameday",
@@ -20989,8 +21009,9 @@
     "week": "nov-16",
     "asin": "B0DC6H9R8C",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-5/varsity-jacket/varsity-jacket-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-5/varsity-jacket/varsity-jacket-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-6/basketball-jersey",
@@ -21002,8 +21023,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B09ST95SVX?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/gameday/gameday-nov-16-6/basketball-jersey/basketball-jersey.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/gameday/gameday-nov-16-6/basketball-jersey/index.html",
     "campaign": "gameday-nov-16-6",
     "theme": "gameday",
@@ -21014,8 +21035,9 @@
     "week": "nov-16",
     "asin": "B09ST95SVX",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/gameday/gameday-nov-16-6/basketball-jersey/basketball-jersey-424.jpg",
+    "thumbnail_webp": "outfits/gameday/gameday-nov-16-6/basketball-jersey/basketball-jersey-424.webp",
+    "ai_image": false
   },
   {
     "id": "gameday/gameday-nov-16-6/long-sleeve-tee",
@@ -21313,8 +21335,8 @@
     "currency_source": null,
     "retailer": "Amazon",
     "outbound_url": "https://www.amazon.com/dp/B0DRCGRY62?tag=thatfootbal01-20",
-    "image": null,
-    "image_pending": true,
+    "image": "outfits/formal/formal-outfit-nov-16/suit/suit.jpg",
+    "image_pending": false,
     "detail_page_url": "outfits/formal/formal-outfit-nov-16/suit/index.html",
     "campaign": "formal-outfit-nov-16",
     "theme": "formal",
@@ -21325,8 +21347,9 @@
     "week": "nov-16",
     "asin": "B0DRCGRY62",
     "amazon_store": "com",
-    "thumbnail": null,
-    "thumbnail_webp": null
+    "thumbnail": "outfits/formal/formal-outfit-nov-16/suit/suit-424.jpg",
+    "thumbnail_webp": "outfits/formal/formal-outfit-nov-16/suit/suit-424.webp",
+    "ai_image": false
   },
   {
     "id": "formal/formal-outfit-nov-16/velvet-blazer",
