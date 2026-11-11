@@ -246,14 +246,13 @@ wedding/wedding-outfit-sept-28/loafers	507671665	https://ca.shein.com/Salkin-Cla
 wedding/wedding-outfit-sept-28/pants	43221777	https://ca.shein.com/Manfinity-Mode-Men-s-Solid-Color-Waist-Belt-Pockets-Straight-Leg-Suit-Formal-Pants-Ceremony-p-43221777.html
 wedding/wedding-outfit-sept-28/shirt	476383471	https://ca.shein.com/Manfinity-Mode-Men-s-White-Long-Sleeve-Dress-Shirt-With-Contrast-Black-Buttons-Formal-Business-Slim-Fit-p-476383471.html
 
-# added 2026-09-22 (11)
+# added 2026-09-22 (10)
 budget/budget-outfit-sept-22/chinos	33661363	https://ca.shein.com/Manfinity-Homme-Men-Solid-Color-Simple-Style-Daily-Dress-Pants-For-Ceremony-Formal-p-33661363.html
 budget/budget-outfit-sept-22/shirt	195592135	https://ca.shein.com/Manfinity-Mode-Men-s-Fashion-Casual-Long-Sleeve-Shirt-Solid-Color-Button-Long-Sleeve-Shirt-Formal-Old-Money-p-195592135.html
 budget/budget-outfit-sept-22/zip-up	388650054	https://ca.shein.com/1pc-Men-s-Half-Zip-Collar-Lightweight-Solid-Color-Long-Sleeve-Sweatshirt-p-388650054.html
 casual/casual-outfit-sept-22/bracelet	22973439	https://ca.shein.com/1pc-Pure-PU-Leather-Bracelet-Punk-Leather-Wristband-Titanium-Steel-Braided-Leather-Rope-p-22973439.html
 casual/casual-outfit-sept-22/flannel	559215099	https://ca.shein.com/DREXORIN-Men-s-Red-Plaid-Long-Sleeve-Flannel-Shirt-p-559215099.html
 casual/casual-outfit-sept-22/jeans	47170013	https://ca.shein.com/QuarKem-Men-s-Multi-Pocket-Minimalist-Baggy-Denim-Casual-Jeans-p-47170013.html
-gameday/chargers-game-day-sept-22/jeans	47723152	https://ca.shein.com/Manfinity-Homme-Men-s-Solid-Color-With-Pocket-Casual-Versatile-Straight-Leg-Jeans-p-47723152.html
 gameday/chargers-game-day-sept-22/shoes	75988234	https://ca.shein.com/Men-s-Simple-Style-Pure-White-Patchwork-Lace-Up-Skate-Shoes-p-75988234.html
 trending-products/trending-products-sept-22/blazer	462854462	https://ca.shein.com/Men-s-Retro-Plaid-Business-Casual-Blazer-Classic-For-Commuting-p-462854462.html
 trending-products/trending-products-sept-22/jeans	51975380	https://ca.shein.com/Manfinity-CityGents-Loose-Men-Slant-Pocket-Straight-Leg-Jeans-p-51975380.html
