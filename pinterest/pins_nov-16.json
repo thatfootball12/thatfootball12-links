@@ -106,7 +106,7 @@
       "type": "outfit",
       "id": "gameday/gameday-nov-16-6",
       "title": "90s Courtside Layers for Basketball Night 🏀",
-      "description": "A blank mesh jersey over a letter print long sleeve, a faux suede baseball jacket, House of Blanks sweats and clean court sneakers. Pick the jersey in your team's colours. Throwback layering is having a real moment this season.",
+      "description": "A blank mesh jersey over a white letter print long sleeve, a faux suede baseball jacket, House of Blanks sweats and clean court sneakers. Pick the jersey in your team's colours. Throwback layering is having a real moment this season.",
       "hashtags": [
         "#GameDayOutfitMen",
         "#StreetStyleMen",
@@ -146,7 +146,7 @@
       "type": "outfit",
       "id": "casual/casual-outfit-nov-16",
       "title": "The Friendsgiving Fit: Plaid Under Cable Knit 🍂",
-      "description": "A vintage plaid shirt with the collar out over a cable knit quarter zip, fleece lined jeans, Clarks desert boots and a leather belt. A Thanksgiving outfit for men that's relaxed but put together. Right on time for Friendsgiving.",
+      "description": "A vintage plaid shirt with the collar out over a cable knit quarter zip, fleece lined jeans, Clarks Bushacre 2 chukka boots and a leather belt. A Thanksgiving outfit for men that's relaxed but put together. Right on time for Friendsgiving.",
       "hashtags": [
         "#ThanksgivingOutfit",
         "#MensFallFashion",
@@ -465,11 +465,11 @@
     {
       "type": "product",
       "id": "trending-products/trending-products-nov-16/bomber-jacket",
-      "title": "20% Off: Quilted Bomber Now CA$42.94 🔥",
-      "description": "CA$42.94 for a loose fit quilted bomber from Manfinity Homme, down from CA$53.68. It's a light, easy layer over a hoodie or a tee. Everyday-ready. Bombers are the jacket of the season, so this is a good week to grab one.",
+      "title": "Quilted Bomber Jacket for CA$53.68 🧥",
+      "description": "CA$53.68 for a loose fit quilted bomber from Manfinity Homme. It's a light, easy layer over a hoodie or a tee. Everyday-ready. Bombers are the jacket of the season, so this is a good week to grab one.",
       "hashtags": [
         "#MensFallJackets",
-        "#DealAlert",
+        "#MensOutfits",
         "#StreetStyleMen",
         "#ShopThisLook"
       ],
@@ -1105,15 +1105,15 @@
     {
       "type": "product",
       "id": "casual/casual-outfit-nov-16/desert-boots",
-      "title": "Clarks Desert Boots: A Gift That Never Misses 🎁",
-      "description": "Clarks' classic desert boots, with over fifteen thousand ratings. Check price on Amazon. They go with jeans and chinos, from Friendsgiving to the office. A Christmas gift with real staying power.",
+      "title": "Clarks Bushacre 2 Chukkas: A Gift That Never Misses 🎁",
+      "description": "Clarks' classic Bushacre 2 chukka boots, with over fifteen thousand ratings. Check price on Amazon. They go with jeans and chinos, from Friendsgiving to the office. A Christmas gift with real staying power.",
       "hashtags": [
         "#ChristmasGiftsForMen",
         "#GiftsForHim",
         "#MensFallBoots",
         "#ShopThisLook"
       ],
-      "alt_text": "Clarks men's suede desert boots",
+      "alt_text": "Clarks men's suede Bushacre 2 chukka boots",
       "board": "Christmas Gifts for Men 2026",
       "section": "$60–$100",
       "keywords": [
@@ -1881,31 +1881,26 @@
         "dapper mens outfits",
         "male preppy outfits"
       ]
-    }
-  ],
-  "held": [
+    },
     {
-      "note": "HOLD: product photo is an LA varsity jacket, not the letter-print long sleeve (goods 266181734). Its product-pin.jpg shows the wrong item. Move back into pins once the correct product/photo is wired and product-pin.jpg is remade.",
-      "pin": {
-        "type": "product",
-        "id": "gameday/gameday-nov-16-6/long-sleeve-tee",
-        "title": "Letter Print Long Sleeve for CA$30.82 🔤",
-        "description": "CA$30.82 for a letter print contrast colour long sleeve from Manfinity Hypemode. A sporty layer under a jersey or a jacket. Gameday-ready. It's the base layer that makes the whole fit work.",
-        "hashtags": [
-          "#GameDayOutfitMen",
-          "#DealAlert",
-          "#StreetStyleMen",
-          "#MensOutfits"
-        ],
-        "alt_text": "Men's letter print contrast colour long sleeve tee",
-        "board": "Game Day Outfits for Men",
-        "section": "Basketball Styling",
-        "keywords": [
-          "game day streetwear",
-          "athleisure football fan style",
-          "street style men"
-        ]
-      }
+      "type": "product",
+      "id": "gameday/gameday-nov-16-6/long-sleeve-tee",
+      "title": "20% Off: Letter Print Long Sleeve Now CA$18.70 🔥",
+      "description": "CA$18.70 for a white loose fit long sleeve tee from Manfinity Hypemode, down from CA$23.38. The Boundless script print gives it a sporty varsity feel under a jersey or a jacket. Gameday-ready, and it's the base layer that makes the whole fit work.",
+      "hashtags": [
+        "#GameDayOutfitMen",
+        "#DealAlert",
+        "#StreetStyleMen",
+        "#MensOutfits"
+      ],
+      "alt_text": "Men's white loose fit long sleeve tee with a Boundless script letter print",
+      "board": "Game Day Outfits for Men",
+      "section": "Basketball Styling",
+      "keywords": [
+        "game day streetwear",
+        "athleisure football fan style",
+        "street style men"
+      ]
     }
   ]
 }
