@@ -266,7 +266,7 @@
       "type": "outfit",
       "id": "business-casual/business-casual-nov-16",
       "title": "Blazer Over a Quarter Zip: Office Layers That Work 💼",
-      "description": "A Manfinity Mode blazer over a dark grey quarter zip, dark wash jeans, tassel loafers, a leather belt and a leather strap watch. Polished for the office, relaxed enough for after. The easiest winter business casual formula there is.",
+      "description": "A Manfinity Mode blazer over a dark grey quarter zip, fleece lined Wrangler jeans, tassel loafers, a leather belt and a leather strap watch. Polished for the office, relaxed enough for after. The easiest winter business casual formula there is.",
       "hashtags": [
         "#BusinessCasualMen",
         "#Menswear",
@@ -1604,26 +1604,6 @@
     },
     {
       "type": "product",
-      "id": "gameday/gameday-nov-16-6/long-sleeve-tee",
-      "title": "Letter Print Long Sleeve for CA$30.82 🔤",
-      "description": "CA$30.82 for a letter print contrast colour long sleeve from Manfinity Hypemode. A sporty layer under a jersey or a jacket. Gameday-ready. It's the base layer that makes the whole fit work.",
-      "hashtags": [
-        "#GameDayOutfitMen",
-        "#DealAlert",
-        "#StreetStyleMen",
-        "#MensOutfits"
-      ],
-      "alt_text": "Men's letter print contrast colour long sleeve tee",
-      "board": "Game Day Outfits for Men",
-      "section": "Basketball Styling",
-      "keywords": [
-        "game day streetwear",
-        "athleisure football fan style",
-        "street style men"
-      ]
-    },
-    {
-      "type": "product",
       "id": "gameday/gameday-nov-16-4/colour-block-shirt",
       "title": "Colour Block Shirt for Game Night, CA$34 🖤",
       "description": "CA$34.09 for a colour block patchwork shirt from Manfinity RebelGame. A bold layer for game nights, open over a tee or buttoned under a jacket. Gameday-ready. Team-colour energy without the jersey.",
@@ -1901,6 +1881,31 @@
         "dapper mens outfits",
         "male preppy outfits"
       ]
+    }
+  ],
+  "held": [
+    {
+      "note": "HOLD: product photo is an LA varsity jacket, not the letter-print long sleeve (goods 266181734). Its product-pin.jpg shows the wrong item. Move back into pins once the correct product/photo is wired and product-pin.jpg is remade.",
+      "pin": {
+        "type": "product",
+        "id": "gameday/gameday-nov-16-6/long-sleeve-tee",
+        "title": "Letter Print Long Sleeve for CA$30.82 🔤",
+        "description": "CA$30.82 for a letter print contrast colour long sleeve from Manfinity Hypemode. A sporty layer under a jersey or a jacket. Gameday-ready. It's the base layer that makes the whole fit work.",
+        "hashtags": [
+          "#GameDayOutfitMen",
+          "#DealAlert",
+          "#StreetStyleMen",
+          "#MensOutfits"
+        ],
+        "alt_text": "Men's letter print contrast colour long sleeve tee",
+        "board": "Game Day Outfits for Men",
+        "section": "Basketball Styling",
+        "keywords": [
+          "game day streetwear",
+          "athleisure football fan style",
+          "street style men"
+        ]
+      }
     }
   ]
 }
