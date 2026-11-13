@@ -26,7 +26,8 @@ Inputs (all in pinterest/):
       for all three (the wording names House of Blanks, the only Awin
       merchant pinned so far); else disclosure; a pin with a retailer
       outside disclosure_retailers is an error), the AI line added for AI-image pins (every outfit pin, and product
-      pins whose retailer is in ai_image_retailers), and the account's
+      pins whose retailer is in ai_image_retailers, unless the record
+      says "ai_image": false), and the account's
       boards with their sections. Pinterest CREATES any board or section
       named in the CSV that doesn't exist, so these must match the
       account exactly; anything not listed is an error.
@@ -218,7 +219,10 @@ def resolve(pin, products, by_id, settings, problems, warnings):
             pin["media"] = SITE + rec["image"]
         pin["shein_page"] = rec.get("retailer") == "SHEIN" and not gift_guide.listing_only(rec)
         pin["link"] = page_url(rel)
-        pin["ai"] = rec.get("retailer") in settings.get("ai_image_retailers", [])
+        # "ai_image": false on a record marks a real retailer photo used in
+        # place of the AI image (e.g. when Gemini got the product wrong).
+        pin["ai"] = rec.get("ai_image",
+                            rec.get("retailer") in settings.get("ai_image_retailers", []))
         pin["retailers"] = {rec.get("retailer")}
         pin["has_amazon"] = rec.get("retailer") == "Amazon"
         return True
