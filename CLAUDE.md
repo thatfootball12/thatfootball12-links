@@ -239,7 +239,10 @@ stale one, and any missing font file. `--check` reports without
 changing anything.
 
 Then run `python write_sitemap.py` and commit the regenerated
-`sitemap.xml` with the batch. It lists the homepage, the shop grid,
+`sitemap.xml` and `sitemap-*.xml` files with the batch. `sitemap.xml` is
+a sitemap index (the URL submitted in Search Console) pointing to
+`sitemap-pages.xml`, `sitemap-outfits.xml`, `sitemap-products.xml` and
+`sitemap-blog.xml`. Together they list the homepage, the shop grid,
 every category and campaign page, and every product detail page in
 `products.json`, and leaves out redirect pages (the root redirect
 stubs and retired campaign pages, detected by their meta refresh) and
@@ -393,7 +396,8 @@ publish each `post.md` as an unstyled page).
    `py -3 write_sitemap.py` (adds the post), and
    `py -3 sync_catalog.py`, which must end clean (item 15 included).
 5. Check `blog/<slug>/` and `blog/` on the local server, then commit
-   `blog-src/<slug>/`, `blog/` and `sitemap.xml` together.
+   `blog-src/<slug>/`, `blog/`, `sitemap.xml` and `sitemap-blog.xml`
+   together.
 
 **Front matter** (between `---` lines): `title`, `description` (the meta
 description), `date` and `updated` (YYYY-MM-DD), `category` (label on
