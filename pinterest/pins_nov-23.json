@@ -19,21 +19,6 @@
     },
     {
       "type": "product",
-      "id": "trending-products/trending-products-nov-23/puffer-jacket",
-      "title": "The Puffer That Handles Wet Snow 🌨️",
-      "description": "Lightweight puffer with a water-shedding shell for slushy commutes. Layer it over a hoodie and call it done.",
-      "hashtags": [
-        "#mensjackets",
-        "#falloutfitsmen",
-        "#mensstyle",
-        "#OutfitIdeasMen"
-      ],
-      "alt_text": "Men's lightweight water-shedding puffer jacket for cold weather",
-      "board": "Men's Fall Style Essentials",
-      "section": "Jackets & Outerwear"
-    },
-    {
-      "type": "product",
       "id": "date-night/date-night-nov-23/wool-coat",
       "title": "A Wool Coat With the Scarf Built In 🧣",
       "description": "Dockers wool-blend coat comes with a detachable plaid scarf, so the outfit is basically decided. A gift that looks far pricier than it is.",
@@ -139,21 +124,6 @@
     },
     {
       "type": "product",
-      "id": "trending-products/trending-products-nov-23/puffer-vest",
-      "title": "Puffer Vest for CA$30.86 🧥",
-      "description": "Slant-pocket padded vest that layers over hoodies and shirts without bulk. A simple SHEIN layer that works with everything.",
-      "hashtags": [
-        "#mensfallfashion",
-        "#layeredfalloutfitsmen",
-        "#mensstyle",
-        "#BlackFridayDeals"
-      ],
-      "alt_text": "Men's slant pocket zip up padded puffer vest",
-      "board": "Men's Fall Style Essentials",
-      "section": "Jackets & Outerwear"
-    },
-    {
-      "type": "product",
       "id": "trending-products/trending-products-nov-23/double-breasted-coat",
       "title": "The Trench That Makes It Look Planned 🖤",
       "description": "Double-breasted black trench for CA$65.08, with a clean long line that finishes any winter outfit. A statement coat that looks way higher-end.",
@@ -184,21 +154,6 @@
     },
     {
       "type": "product",
-      "id": "streetwear/streetwear-outfit-nov-23/thermal-jacket",
-      "title": "Thermal Lined Jacket Under CA$36 🧥",
-      "description": "Thermal-lined casual jacket coat for CA$35.26 that's warm without bulk. Minimalist enough to wear everywhere, from campus to the office.",
-      "hashtags": [
-        "#mensjackets",
-        "#coolweathermensfashion",
-        "#mensstyle",
-        "#Under50Finds"
-      ],
-      "alt_text": "Men's thermal lined minimalist casual jacket coat",
-      "board": "Men's Fall Style Essentials",
-      "section": "Jackets & Outerwear"
-    },
-    {
-      "type": "product",
       "id": "trending-products/trending-products-nov-23/corduroy-coat",
       "title": "Sherpa Collar + Corduroy = Cold-Proof 🍂",
       "description": "Corduroy padded coat with a sherpa collar for CA$36.14. It's thick, workwear-ready and made for freezing days.",
@@ -211,21 +166,6 @@
       "alt_text": "Men's corduroy padded coat with sherpa collar",
       "board": "Men's Fall Style Essentials",
       "section": "Jackets & Outerwear"
-    },
-    {
-      "type": "product",
-      "id": "trending-products/trending-products-nov-23/hooded-jacket",
-      "title": "Thermal Hooded Jacket, CA$40.68 🤎",
-      "description": "Manfinity Homme hooded jacket with a thermal lining and a brown that goes with everything. Throw it on and run out the door.",
-      "hashtags": [
-        "#mensjackets",
-        "#chocolatebrownoutfitsmen",
-        "#mensfashion",
-        "#DealAlert"
-      ],
-      "alt_text": "Men's brown thermal lined hooded jacket",
-      "board": "Men's Fall Streetwear 2026",
-      "section": "Moto & Utility Jackets"
     },
     {
       "type": "product",
@@ -271,36 +211,6 @@
       "alt_text": "Spyder fleece lined men's thermal underwear base layer set",
       "board": "Men's Gym & Training Outfits",
       "section": "Running"
-    },
-    {
-      "type": "product",
-      "id": "trending-products/trending-products-nov-23-2/knit-sweater",
-      "title": "Knit Sweater for CA$33.58 🎄",
-      "description": "Thermal-lined knit sweater that's warm and holiday-safe. Wear it to dinner, family photos or the office party.",
-      "hashtags": [
-        "#mensfallsweaters",
-        "#chunkyknitwearmen",
-        "#mensfashion",
-        "#DealAlert"
-      ],
-      "alt_text": "Men's thermal lined knit sweater for fall and winter",
-      "board": "Men's Fall Style Essentials",
-      "section": "Sweaters & Layers"
-    },
-    {
-      "type": "product",
-      "id": "trending-products/trending-products-nov-23-2/hooded-sweatshirt",
-      "title": "CA$23.34 Hoodie That Looks Pricier 🤍",
-      "description": "Textured hooded sweatshirt with a drawstring and a clean, simple finish. An easy everyday layer that works for most guys.",
-      "hashtags": [
-        "#mensstyle",
-        "#mensfashion",
-        "#falloutfitsmen",
-        "#Under30Finds"
-      ],
-      "alt_text": "Men's solid texture hooded sweatshirt with drawstring",
-      "board": "Men's Basics & Essentials",
-      "section": "Hoodies"
     },
     {
       "type": "product",
@@ -376,21 +286,6 @@
       "alt_text": "Men's solid color pocketed straight leg pants",
       "board": "Business Casual Outfits for Men",
       "section": "Pants & Chinos"
-    },
-    {
-      "type": "product",
-      "id": "gameday/gameday-nov-23-5/joggers",
-      "title": "Beige Joggers, CA$19.50 🤎",
-      "description": "Elastic-waist tapered joggers that look put-together but feel like sweatpants. Pair them with a hoodie or a coat.",
-      "hashtags": [
-        "#mensstyle",
-        "#streetstylemen",
-        "#falloutfitsmen",
-        "#Under20Finds"
-      ],
-      "alt_text": "Men's beige khaki tapered jogger pants",
-      "board": "Men's Fall Style Essentials",
-      "section": "Fall Pants & Bottoms"
     },
     {
       "type": "product",
@@ -889,36 +784,6 @@
     },
     {
       "type": "product",
-      "id": "formal/formal-outfit-nov-23/navy-blazer",
-      "title": "Navy Blazer for CA$35.98 🔵",
-      "description": "Minimalist navy blazer that works at the office, weddings and holiday parties. A clean fit for a good price.",
-      "hashtags": [
-        "#businesscasual",
-        "#mensoutfits",
-        "#dappermensoutfits",
-        "#DealAlert"
-      ],
-      "alt_text": "Men's navy blue suit blazer for formal and casual",
-      "board": "Life Events & Special Occasions Outfits for Men",
-      "section": "Holiday Party Style"
-    },
-    {
-      "type": "product",
-      "id": "trending-products/trending-products-nov-23-2/blazer-trousers-set",
-      "title": "Brown Blazer + Trousers Set, CA$65.10 🤎",
-      "description": "Solid brown lapel blazer and matching trousers. One purchase, one full formal look.",
-      "hashtags": [
-        "#chocolatebrownoutfitsmen",
-        "#dappermensoutfits",
-        "#mensoutfits",
-        "#DealAlert"
-      ],
-      "alt_text": "Men's brown lapel blazer and trousers suit set",
-      "board": "Life Events & Special Occasions Outfits for Men",
-      "section": "Formal Events & Galas"
-    },
-    {
-      "type": "product",
       "id": "night-out/night-out-nov-23/leather-blazer",
       "title": "Leather Shawl Collar Blazer, CA$36.41 🖤",
       "description": "PU leather blazer with a shawl collar, built for New Year's Eve. It's a party piece you can also wear with jeans.",
@@ -931,21 +796,6 @@
       "alt_text": "Men's PU leather shawl collar blazer for party",
       "board": "Life Events & Special Occasions Outfits for Men",
       "section": "New Year's Eve Style"
-    },
-    {
-      "type": "product",
-      "id": "trending-products/trending-products-nov-23-2/blazer",
-      "title": "Wedding-Season Blazer, CA$51.08 💍",
-      "description": "Casual versatile blazer that goes from a wedding to dinner. Comfortable, polished and easy to dress down.",
-      "hashtags": [
-        "#dappermensoutfits",
-        "#mensoutfits",
-        "#businesscasual",
-        "#DealAlert"
-      ],
-      "alt_text": "Men's casual versatile blazer for weddings and events",
-      "board": "Life Events & Special Occasions Outfits for Men",
-      "section": "Wedding Guest Looks"
     },
     {
       "type": "product",
@@ -1036,36 +886,6 @@
       "alt_text": "ZHATS licensed NHL pom beanie for hockey fans",
       "board": "Game Day Outfits for Men",
       "section": "Hockey Night"
-    },
-    {
-      "type": "product",
-      "id": "casual/casual-outfit-nov-23/bomber-jacket",
-      "title": "Zip-Up Bomber for CA$35.99 ✈️",
-      "description": "Manfinity Homme plain zip bomber without the tee, a light layer for fall and winter. Clean, wearable and easy to style.",
-      "hashtags": [
-        "#mensjackets",
-        "#mensstyle",
-        "#streetstylemen",
-        "#DealAlert"
-      ],
-      "alt_text": "Men's plain zip up bomber jacket for fall",
-      "board": "Men's Fall Streetwear 2026",
-      "section": "Moto & Utility Jackets"
-    },
-    {
-      "type": "product",
-      "id": "gameday/gameday-nov-23-3/jeans",
-      "title": "Multi-Pocket Jeans for CA$31.90 👖",
-      "description": "KRYTIVO straight, loose-fit denim jeans with multiple pockets. Relaxed and roomy for everyday wear.",
-      "hashtags": [
-        "#streetstylemen",
-        "#mensstyle",
-        "#mensfashion",
-        "#DealAlert"
-      ],
-      "alt_text": "Men's straight loose fit multi pocket denim jeans",
-      "board": "Men's Fall Style Essentials",
-      "section": "Fall Pants & Bottoms"
     },
     {
       "type": "product",
