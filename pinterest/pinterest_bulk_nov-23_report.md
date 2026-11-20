@@ -77,7 +77,7 @@ The CSV has no column for it. Add the label to each of these pins after upload (
 - Tue 13:45 — Puffer + Hockey Hoodie for Cold Rink Nights 🏒 (also tick: includes an AI-generated person)
 - Tue 15:00 — Dr. Martens Chelsea, Built to Last 🖤
 - Tue 16:00 — Touchscreen Gloves That Actually Work 📱
-- Tue 18:00 — The NBA Hoodie Without the Logo 🏀
+- Tue 18:00 — Raptors Hoodie for the Basketball Fan 🏀
 - Tue 19:15 — Fuzzy Socks for Cold Feet 🧦
 - Tue 20:15 — Hockey Night, Sherpa Style 🏒 (also tick: includes an AI-generated person)
 - Wed 10:30 — A Wool Coat With the Scarf Built In 🧣
@@ -139,7 +139,7 @@ The CSV has no column for it. Paste after upload:
 - Dr. Martens Chelsea, Built to Last 🖤: Dr. Martens Embury leather Chelsea boot for men
 - Touchscreen Gloves That Actually Work 📱: TRENDOUX Thinsulate touchscreen winter gloves for men
 - A CA$8.93 Herringbone Scarf 🧣: Men's plain herringbone scarf for fall and winter
-- The NBA Hoodie Without the Logo 🏀: Ultra-soft pullover hoodie for basketball fans
+- Raptors Hoodie for the Basketball Fan 🏀: Black Raptors graphic pullover hoodie for basketball fans
 - Fuzzy Socks for Cold Feet 🧦: Fuzzy cloud socks for men gift idea
 - Hockey Night, Sherpa Style 🏒: Men's casual hockey game outfit with sherpa jacket and joggers
 - Official NHL Beanie for Hockey Nights 🏒: Officially licensed ZHATS NHL Force beanie
