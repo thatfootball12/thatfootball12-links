@@ -19,6 +19,12 @@ Inputs (all in pinterest/):
       gift-guide/index.html (type "gift", for cards with no product page
       of their own). week_start is the batch week's Monday; a batch that
       runs on other dates gives start_date instead (its 7 days start there).
+      Optional per pin: "publish" ("YYYY-MM-DDTHH:MM", Atlantic) fixes its
+      time instead of the automatic schedule (still inside the 7 days and
+      the 10:00-23:00 window); "hold" (a reason) validates and schedules
+      the pin but leaves its row out of the CSV, listed in the report.
+      Optional per batch: "hashtags_first": true puts the hashtags right
+      after the copy, before the disclosure and AI line.
     pin_settings.json   the disclosure appended to every description
       (disclosure_shein_only when every item in the pin is SHEIN; with
       any Awin item, the line naming only the partners present:
@@ -274,11 +280,15 @@ def disclosure(pin, settings):
 
 
 def full_description(pin, settings):
-    parts = [pin["description"].strip(), disclosure(pin, settings)]
+    tags = [" ".join(pin["hashtags"])] if pin["hashtags"] else []
+    parts = [pin["description"].strip()]
+    if pin.get("hashtags_first"):
+        parts += tags
+    parts.append(disclosure(pin, settings))
     if pin["ai"]:
         parts.append(settings["ai_line"].strip())
-    if pin["hashtags"]:
-        parts.append(" ".join(pin["hashtags"]))
+    if not pin.get("hashtags_first"):
+        parts += tags
     return " ".join(parts)
 
 
@@ -299,21 +309,42 @@ def spread(n_slots, picks):
     return [int((i + 0.5) * n_slots / picks) for i in range(picks)]
 
 
-def schedule(pins, week_start):
-    """Sets pin['local'] (naive Atlantic datetime) on every pin."""
-    outfits = [p for p in pins if p["type"] == "outfit"]
-    outfits.sort(key=lambda p: not p["id"].startswith("gameday/"))   # stable
+def schedule(pins, week_start, problems=None):
+    """Sets pin['local'] (naive Atlantic datetime) on every pin. A pin with
+    "publish" ("YYYY-MM-DDTHH:MM", Atlantic) keeps that time; it must fall in
+    the batch's 7 days and the DAY_START_H-DAY_END_H window."""
+    problems = problems if problems is not None else []
     days = [[] for _ in range(7)]
+    fixed = [p for p in pins if p.get("publish")]
+    for p in fixed:
+        try:
+            local = datetime.fromisoformat(p["publish"])
+        except ValueError:
+            problems.append(f"{p['type']} {p['id']}: publish {p['publish']!r} isn't YYYY-MM-DDTHH:MM")
+            local = datetime.combine(week_start, datetime.min.time()) + timedelta(hours=DAY_START_H)
+        d = (local.date() - week_start).days
+        if not 0 <= d < 7:
+            problems.append(f"{p['type']} {p['id']}: publish {local:%Y-%m-%d} is outside the batch's 7 days")
+            d = min(max(d, 0), 6)
+        if not (DAY_START_H * 60 <= local.hour * 60 + local.minute <= DAY_END_H * 60):
+            problems.append(f"{p['type']} {p['id']}: publish {local:%H:%M} is outside "
+                            f"{DAY_START_H:02d}:00-{DAY_END_H:02d}:00 Atlantic")
+        p["local"], p["utc"] = local, atlantic_to_utc(local)
+        days[d].append(p)
+    rest_pins = [p for p in pins if not p.get("publish")]
+    outfits = [p for p in rest_pins if p["type"] == "outfit"]
+    outfits.sort(key=lambda p: not p["id"].startswith("gameday/"))   # stable
     for i, p in enumerate(outfits):
         if len(outfits) > 7 * OUTFITS_PER_DAY:
             days[i * 7 // len(outfits)].append(p)
         else:
             days[i // OUTFITS_PER_DAY].append(p)
-    for p in (p for p in pins if p["type"] != "outfit"):
+    for p in (p for p in rest_pins if p["type"] != "outfit"):
         min(days, key=len).append(p)        # earliest of the emptiest days
 
     window = (DAY_END_H - DAY_START_H) * 60
-    for d, day_pins in enumerate(days):
+    for d, all_day_pins in enumerate(days):
+        day_pins = [p for p in all_day_pins if not p.get("publish")]
         n = len(day_pins)
         if not n:
             continue
@@ -426,7 +457,7 @@ def validate(pins, settings, problems, warnings, week_start):
 
 def csv_rows(pins):
     rows = []
-    for p in sorted(pins, key=lambda p: p["utc"]):
+    for p in sorted((p for p in pins if not p.get("hold")), key=lambda p: p["utc"]):
         board, _ = board_field(p)
         rows.append({
             "Title": p["title"].strip(),
@@ -482,7 +513,14 @@ def report(batch, days, pins, warnings, csv_paths):
     L += [f"| {b} | {s or '(none)'} | {n} |" for (b, s), n in sorted(counts.items())] + [""]
 
     L += ["## Manual follow-ups", ""]
-    unset = [(p, board_field(p)[1]) for p in pins if board_field(p)[1]]
+    held = [p for p in sorted(pins, key=lambda p: p["utc"]) if p.get("hold")]
+    if held:
+        L += ["### Held pins (validated, NOT in the CSV)",
+              "Their row is left out of the upload CSV. Add it (or rebuild without "
+              f"\"hold\") once the issue is fixed ({len(held)}):", ""]
+        L += [f"- {p['local']:%a %b} {p['local'].day} {p['local']:%H:%M} — {p['id']} — "
+              f"{p['title'].strip()}: {p['hold']}" for p in held] + [""]
+    unset =[(p, board_field(p)[1]) for p in pins if board_field(p)[1]]
     if unset:
         L += ["### Sections the CSV can't set",
               "These section names contain \"/\", which Pinterest's board column uses to "
@@ -544,6 +582,7 @@ def main():
             problems.append(f"pin #{i} ({p.get('id')}): missing {', '.join(missing)}")
             continue
         if resolve(p, products, by_id, settings, problems, warnings):
+            p["hashtags_first"] = bool(data.get("hashtags_first"))
             pins.append(p)
     shein = [p for p in pins if p["type"] == "product" and p["shein_page"]]
     if shein and not any(p.get("price_pin") for p in shein):
@@ -554,7 +593,7 @@ def main():
         problems.append("no usable pins")
     else:
         validate(pins, settings, problems, warnings, week_start)
-        days = schedule(pins, week_start)
+        days = schedule(pins, week_start, problems)
         now = datetime.now(timezone.utc)
         for p in pins:
             if p["utc"] <= now:
