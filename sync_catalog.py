@@ -266,6 +266,12 @@ def find_detail_pages():
             # src/theme/campaign/slug/index.html
             if len(parts) != 5:
                 continue
+            # A retired product page replaced by a meta-refresh redirect
+            # (e.g. budget-outfit-oct-19/hoodie/, kept so old pins don't 404)
+            # isn't a detail page and has no record.
+            with open(path, encoding="utf-8") as f:
+                if re.search(r'http-equiv="refresh"', f.read(), re.I):
+                    continue
             pages.append(rel)
     return sorted(pages)
 
