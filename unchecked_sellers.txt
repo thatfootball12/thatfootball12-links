@@ -71,7 +71,7 @@ trending-products/trending-products-oct-19-4/brown-blazer	560048656	https://ca.s
 trending-products/trending-products-oct-19-4/grey-blazer	242887313	https://ca.shein.com/Calvornis-Men-s-Dark-Grey-Autumn-Casual-Jacket-Long-Sleeve-Lapel-Neck-Business-Casual-Elegant-Blazer-Stylish-Evening-Party-Old-Money-Outdoor-Travel-Gift-p-242887313.html
 wedding/wedding-outfit-oct-19/suit	29104809	https://ca.shein.com/Calvornis-Men-s-Dark-Blue-Fashionable-Suit-Set-Formal-Ceremony-p-29104809.html
 
-# added 2026-10-12 (52)
+# added 2026-10-12 (51)
 business-casual/business-casual-oct-12/boots	210511793	https://ca.shein.com/STARNOVO-Men-s-Thermal-Lined-Winter-Boots-p-210511793.html
 business-casual/business-casual-oct-12/gloves	347231802	https://ca.shein.com/Men-s-Genuine-Leather-Touchscreen-Fleece-Gloves-p-347231802.html
 business-casual/business-casual-oct-12/jacket	225078441	https://ca.shein.com/Manfinity-Homme-Men-s-Contrast-Trim-Button-Front-Pocket-Fleece-Jacket-p-225078441.html
@@ -113,7 +113,6 @@ casual/casual-outfit-oct-12-5/sweatpants	556488470	https://ca.shein.com/PAVTROS-
 casual/casual-outfit-oct-12-6/jacket	170762636	https://ca.shein.com/Men-s-Thermal-Lined-Casual-Jacket-p-170762636.html
 casual/casual-outfit-oct-12-6/tee	30566750	https://ca.shein.com/Fenqiro-Men-s-Plain-Round-Neck-Short-Sleeve-Brown-T-Shirt-p-30566750.html
 casual/casual-outfit-oct-12-6/watch	17882903	https://ca.shein.com/Men-s-Stainless-Steel-Luminous-Sport-Wristwatch-p-17882903.html
-streetwear/streetwear-outfit-oct-12/beanie	6903927	https://ca.shein.com/Men-Knit-Cuff-Beanie-p-6903927.html
 streetwear/streetwear-outfit-oct-12/boots	159640877	https://ca.shein.com/Men-s-Winter-Plush-Lined-Snow-Boots-Non-Slip-Thick-Sole-p-159640877.html
 streetwear/streetwear-outfit-oct-12/shirt	11698977	https://ca.shein.com/Manfinity-Homme-Loose-Fit-Plaid-Print-Patch-Pocket-Long-Sleeve-Shirt-p-11698977.html
 streetwear/streetwear-outfit-oct-12-2/beanie	11736719	https://ca.shein.com/JZML-Men-Letter-Label-Decor-Beanie-p-11736719.html
