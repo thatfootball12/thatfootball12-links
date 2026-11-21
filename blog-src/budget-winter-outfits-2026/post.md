@@ -25,9 +25,9 @@ We checked these prices on SHEIN Canada on November 20 and 21, 2026, before coup
 **At a glance:**
 
 - The weekend hoodie fit: CA$79.58 with shoes and a beanie
-- The navy fit: CA$60.71 with shoes
+- The navy fit: CA$64.88 with shoes
 - The layered fit: CA$59.78 before shoes
-- The sharp fit: CA$57.09 before shoes
+- The sharp fit: CA$55.99 before shoes
 
 ## 1. The weekend hoodie fit (CA$79.58)
 
@@ -44,7 +44,7 @@ Grey hoodies go exceptionally well on Sundays with sweats. Why should this be an
 
 **Total:** CA$79.58 with US 9 sneakers.
 
-## 2. The navy fit (CA$60.71)
+## 2. The navy fit (CA$64.88)
 
 A navy crew neck sweatshirt with matching navy lightweight pants and white skate shoes. Tonal navy is an easy way to look like you planned the outfit, and it works with almost any jacket on top.
 
@@ -54,7 +54,7 @@ The sweatshirt was {{price budget/budget-outfit-nov-2/sweatshirt}} in size M and
 {{product budget/budget-outfit-nov-2/pants}}
 {{product gameday/gameday-sept-28/sneakers}}
 
-**Total:** CA$60.71 with shoes. That's 71¢ over $60, so call it an "under $65" outfit.
+**Total:** CA$64.88 with US 9.5 shoes. The shoes run from about CA$21 to CA$33 depending on size.
 
 ## 3. The layered fit (CA$59.78)
 
@@ -68,7 +68,7 @@ We priced all three pieces in size M: the long sleeve {{price budget/budget-outf
 
 **Total:** CA$59.78 in size M, shoes not included. White sneakers or the canvas pair from outfit 1 both work here.
 
-## 4. The sharp fit (CA$57.09)
+## 4. The sharp fit (CA$55.99)
 
 A light grey faux suede baseball jacket over a dark brown slim-fit turtleneck, with grey warm-lined joggers. The turtleneck and jacket do the dressing up, so joggers still look intentional.
 
@@ -78,7 +78,7 @@ The jacket was {{price budget/budget-outfit-nov-16/suede-jacket}} in size L and 
 {{product budget/budget-outfit-nov-16/turtleneck}}
 {{product gameday/gameday-nov-16-4/sweatpants}}
 
-**Total:** CA$57.09 before shoes.
+**Total:** CA$55.99 before shoes.
 
 ## How to keep a winter outfit cheap
 

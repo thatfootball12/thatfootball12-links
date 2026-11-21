@@ -200,7 +200,7 @@ streetwear/streetwear-outfit-oct-5-4/sunglasses	37517113	https://ca.shein.com/Me
 trending-products/trending-products-oct-5/boots	459004063	https://ca.shein.com/STARNOVO-Men-s-Tactical-Boots-Shock-Absorbing-Desert-Combat-Boots-p-459004063.html
 trending-products/trending-products-oct-5/plaid-shirt	557837714	https://ca.shein.com/PAVTROS-Men-s-Vintage-Black-Plaid-Long-Sleeve-Shirt-Dual-Chest-Pockets-Loose-Streetwear-Top-p-557837714.html
 
-# added 2026-09-28 (40)
+# added 2026-09-28 (39)
 budget/budget-outfit-sept-28/pants	43014419	https://ca.shein.com/Men-s-Lightweight-Drawstring-Waist-Slant-Pocket-Solid-Color-Casual-Pants-p-43014419.html
 budget/budget-outfit-sept-28/sneakers	524302059	https://ca.shein.com/STARNOVO-Retro-Striped-Sneakers-Colorblock-Low-Top-Training-Shoes-p-524302059.html
 budget/budget-outfit-sept-28/tee	29788271	https://ca.shein.com/Fenqiro-Men-s-Solid-Color-Brown-Round-Neck-Short-Sleeve-T-Shirt-p-29788271.html
@@ -221,7 +221,6 @@ formal/formal-outfit-sept-28/pants	365676226	https://ca.shein.com/Manfinity-Homm
 formal/formal-outfit-sept-28/shirt	195592135	https://ca.shein.com/Manfinity-Mode-Men-s-Fashion-Casual-Long-Sleeve-Shirt-Solid-Color-Button-Long-Sleeve-Shirt-Formal-Old-Money-p-195592135.html
 formal/formal-outfit-sept-28/sweatshirt	346697683	https://ca.shein.com/Manfinity-Roghcode-Casual-Men-s-Zip-Up-Sweatshirt-White-Knitted-Fabric-Regular-Length-Stand-Collar-Jacket-p-346697683.html
 gameday/gameday-sept-28/jeans	199546401	https://ca.shein.com/Men-s-Y2K-Straight-Leg-Jeans-Casual-Washed-Denim-Pants-Black-p-199546401.html
-gameday/gameday-sept-28/sneakers	75988234	https://ca.shein.com/Men-s-Simple-Style-Pure-White-Patchwork-Lace-Up-Skate-Shoes-p-75988234.html
 gameday/gameday-sept-28-2/sweatpants	129610029	https://ca.shein.com/Solid-Color-Straight-Leg-Sweatpants-Loose-Fit-Street-Casual-Style-p-129610029.html
 gameday/gameday-sept-28-2/watch	42774501	https://ca.shein.com/Pablo-Raez-Men-s-Business-Quartz-Watch-Stainless-Steel-Case-Black-PU-Leather-Strap-Date-Display-p-42774501.html
 old-money/old-money-sept-28/blazer	464026454	https://ca.shein.com/Men-s-Old-Money-Style-Blazer-Classic-Vintage-Single-Piece-Suit-Jacket-p-464026454.html
