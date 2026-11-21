@@ -17116,31 +17116,6 @@
     "thumbnail_webp": null
   },
   {
-    "id": "gift-guides/holiday-2026/hooded-sweatshirt",
-    "slug": "hooded-sweatshirt",
-    "name": "Manfinity Homme Solid Texture Hooded Sweatshirt",
-    "item_type": "Hoodies/Flannels",
-    "price": null,
-    "currency": null,
-    "currency_source": null,
-    "retailer": "SHEIN",
-    "seller": "shein",
-    "outbound_url": "https://onelink.shein.com/58/65zgcgm2v40p?ismg_ol=FKhoa226Ofo_01_KOC-C",
-    "image": "https://img.ltwebstatic.com/v4/j/pi/2025/09/22/4e/1758510089576c1cde8733feb3f793f742d88387e4_thumbnail_900x.jpg",
-    "image_pending": false,
-    "detail_page_url": "gift-guide/index.html",
-    "campaign": "holiday-2026",
-    "theme": "gift-guides",
-    "source": "gift-guide",
-    "data_new": "no",
-    "added": "2026-10-24",
-    "discount_percent": null,
-    "goods_id": "26653304",
-    "holiday_pin": "N95",
-    "thumbnail": null,
-    "thumbnail_webp": null
-  },
-  {
     "id": "gift-guides/holiday-2026/teddy-fleece-jacket",
     "slug": "teddy-fleece-jacket",
     "name": "Manfinity Homme Patched Teddy Lined Fleece Jacket",
@@ -23721,7 +23696,8 @@
     "thumbnail_webp": "videos/trending-products/trending-products-nov-23-2/hooded-sweatshirt/hooded-sweatshirt-424.webp",
     "week": "nov-23",
     "goods_id": "26653304",
-    "inflated_original": false
+    "inflated_original": false,
+    "holiday_pin": "N95"
   },
   {
     "id": "trending-products/trending-products-nov-23-2/knit-sweater",
