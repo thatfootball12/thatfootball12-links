@@ -9,10 +9,8 @@
 #
 # id<TAB>goods id<TAB>plain SHEIN URL
 
-# added 2026-10-19 (62)
+# added 2026-10-19 (60)
 budget/budget-outfit-oct-19/hoodie	3240765	https://ca.shein.com/INAWLY-Solid-Kangaroo-Pocket-Thermal-Lined-Hoodie-Long-Sleeve-Tops-p-3240765.html
-budget/budget-outfit-oct-19/sneakers	58578502	https://ca.shein.com/STARNOVO-Men-s-Thick-Sole-Versatile-Casual-Canvas-Shoes-Low-Top-Lace-Up-Breathable-Athletic-Sport-Running-Sneakers-p-58578502.html
-budget/budget-outfit-oct-19/sweatpants	58604144	https://ca.shein.com/1pc-Men-s-Loose-Fit-Sweatpants-Black-Sports-Pants-Pockets-Drawstring-Waist-This-Product-Is-Made-Of-100-Polyester-Material-Fall-p-58604144.html
 business-casual/business-casual-oct-19/cardigan	51244900	https://ca.shein.com/Manfinity-Homme-Men-s-Solid-Color-Button-Down-Cardigan-Casual-Long-Sleeve-Autumn-Winter-p-51244900.html
 business-casual/business-casual-oct-19/shirt	82652424	https://ca.shein.com/Manfinity-Mode-Men-s-Business-Casual-Blue-Long-Sleeve-Striped-Shirt-Nice-Shirts-For-Men-For-Fall-Formal-Ceremony-p-82652424.html
 business-casual/business-casual-oct-19/trousers	429754174	https://ca.shein.com/Manfinity-Mode-Men-s-Solid-Color-Slant-Pocket-Buckle-Waist-Casual-Suit-Trousers-Formal-Ceremony-p-429754174.html
