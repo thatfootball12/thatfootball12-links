@@ -39,7 +39,15 @@ Inputs (all in pinterest/):
       account exactly; anything not listed is an error.
 
 Per pin:
-    Link        the outfit or product page on the live site.
+    Link        the outfit or product page on the live site, with UTM
+                tags for batches starting on or after UTM_FROM (see
+                utm_link): utm_source=pinterest, utm_medium=social,
+                utm_campaign=<batch start date, YYYY-MM-DD>,
+                utm_content=<campaign slug>-<item slug, or "outfit">
+                (gift pins: gift-guide-<card id>), utm_term=<pin type>.
+                Only links on SITE get them; a link that leaves the site
+                (Amazon, SHEIN, Awin) never does, and validate_utm makes
+                either mistake a problem.
     Media URL   outfit-pin.jpg / product-pin.jpg (falls back to
                 outfit-preview.jpg with a warning, or the product photo
                 for products make_product_pin.py --pick didn't choose).
@@ -97,6 +105,7 @@ import posixpath
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
@@ -262,6 +271,87 @@ def resolve(pin, products, by_id, settings, problems, warnings):
 
     problems.append(f"{label}: type must be 'outfit', 'product' or 'gift'")
     return False
+
+
+# --- UTM tags --------------------------------------------------------------
+
+# First batch whose hub links carry UTM tags. Batches before it are already
+# uploaded and scheduled on Pinterest: rebuilding one keeps its plain links.
+UTM_FROM = date(2026, 11, 23)
+UTM_KEYS = ("utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term")
+# Hosts a pin Link must never tag: the retailers and affiliate networks.
+AFFILIATE_HOSTS = ("amazon.", "amzn.to", "amzn.", "shein.", "awin1.com", "awin.com")
+
+
+def slug(text):
+    """Lowercase, hyphens only: 'Gameday Nov_23' -> 'gameday-nov-23'."""
+    return re.sub(r"[^a-z0-9]+", "-", str(text).lower()).strip("-")
+
+
+def utm_content(pin):
+    """<campaign slug>-<item slug or "outfit">; gift pins gift-guide-<card id>."""
+    parts = [s for s in pin["id"].strip("/").split("/") if s]
+    if pin["type"] == "outfit":
+        return slug(f"{parts[-1]}-outfit")
+    if pin["type"] == "gift":
+        return slug(f"gift-guide-{pin['id']}")
+    return slug("-".join(parts[-2:]))
+
+
+def utm_params(pin, campaign):
+    return {"utm_source": "pinterest", "utm_medium": "social",
+            "utm_campaign": campaign, "utm_content": utm_content(pin),
+            "utm_term": pin["type"]}
+
+
+def is_hub(url):
+    return url.startswith(SITE)
+
+
+def is_affiliate(url):
+    host = (urllib.parse.urlsplit(url).hostname or "").lower()
+    return any(h in host for h in AFFILIATE_HOSTS)
+
+
+def add_query(url, params):
+    """url with params added to its query (replacing any of the same name),
+    the fragment kept after the query: .../gift-guide/?utm_...#N163."""
+    parts = urllib.parse.urlsplit(url)
+    query = [(k, v) for k, v in urllib.parse.parse_qsl(parts.query, keep_blank_values=True)
+             if k not in params]
+    query += list(params.items())
+    return urllib.parse.urlunsplit(parts._replace(query=urllib.parse.urlencode(query)))
+
+
+def utm_link(pin, campaign):
+    """The pin's Link with UTM tags if it's a hub page; any other link as is."""
+    if not is_hub(pin["link"]):
+        return pin["link"]
+    return add_query(pin["link"], utm_params(pin, campaign))
+
+
+def validate_utm(pins, campaign, problems, tagged=True):
+    """A hub Link without the expected UTM tags (when this batch is tagged)
+    or any non-hub Link carrying utm_* is a problem."""
+    for p in pins:
+        label = f"{p['type']} {p['id']}"
+        query = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(p["link"]).query))
+        has = {k for k in query if k.startswith("utm_")}
+        if not is_hub(p["link"]):
+            if has:
+                kind = "affiliate" if is_affiliate(p["link"]) else "off-site"
+                problems.append(f"{label}: {kind} Link carries UTM tags ({', '.join(sorted(has))}): "
+                                f"{p['link']}")
+            continue
+        if not tagged:
+            continue
+        want = utm_params(p, campaign)
+        wrong = [k for k, v in want.items() if query.get(k) != v]
+        if wrong:
+            problems.append(f"{label}: hub Link missing or wrong {', '.join(wrong)}: {p['link']}")
+        if len(p["link"]) > 500:
+            problems.append(f"{label}: Link is {len(p['link'])} chars (keep it well under "
+                            f"Pinterest's 2,048)")
 
 
 def disclosure(pin, settings):
@@ -589,10 +679,16 @@ def main():
         problems.append(f"none of the {len(shein)} SHEIN product pins has a product-pin.jpg: "
                         f"run py -3 make_product_pin.py --pick 20 --batch {args.batch} "
                         f"(and push the images) first")
+    campaign = week_start.isoformat()
+    tagged = week_start >= UTM_FROM
+    if tagged:
+        for p in pins:
+            p["link"] = utm_link(p, campaign)
     if not pins:
         problems.append("no usable pins")
     else:
         validate(pins, settings, problems, warnings, week_start)
+        validate_utm(pins, campaign, problems, tagged)
         days = schedule(pins, week_start, problems)
         now = datetime.now(timezone.utc)
         for p in pins:
