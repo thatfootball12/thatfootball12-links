@@ -101,6 +101,22 @@ affiliate_click tracking:
     (product_id "blog/<slug>/<slug of name>"). The listing (blog/) gets
     the tag only.
 
+  - Every affiliate_click also carries link_url (the outbound
+    destination without its query string or fragment, so no affiliate
+    tag is stored; an Awin cread.php link reports the merchant page in
+    its ued parameter), link_domain, outbound (true), page_path
+    (location.pathname) and page_type (home, outfit, video, gift-guide,
+    product or blog: product detail pages are "product", legacy link-list
+    pages "outfit" or "video" by folder). gtag.js reads page_path as the
+    event's page path (dp), so it shows under GA's built-in "Page path"
+    dimension rather than as a custom parameter. No transport_type: GA4's
+    gtag.js ignores it (it arrives as a junk custom parameter) and
+    already sends every hit with fetch keepalive / sendBeacon, which
+    survives the page unloading.
+    No separate GA4 "click" event is sent: Enhanced measurement's
+    outbound clicks already send one when that setting is on, and a
+    hand-sent copy would double-count it.
+
 fiverr_click tracking: every a[data-fiverr-gig] link on work-with-me/
 sends fiverr_click with gig_name set to that attribute ("Profile" for the
 closing button). A link that also has data-fiverr-position sends it as
@@ -312,7 +328,7 @@ FOOT_CSS = """  body{flex-wrap:wrap;align-content:flex-start;}
 
 TRACKER = """<script>
 (function () {
-  var P = %(product)s, C = %(context)s, SEL = %(selector)s;
+  var P = %(product)s, C = %(context)s, SEL = %(selector)s, T = %(page_type)s;
   var SKIP = /(^|\\.)(tiktok\\.com|instagram\\.com|pin\\.it|pinterest\\.[a-z.]+)$/;
   function retailer(host) {
     if (/(^|\\.)amazon\\.|(^|\\.)amzn\\.to$/.test(host)) return 'Amazon';
@@ -321,6 +337,19 @@ TRACKER = """<script>
     if (/(^|\\.)tee\\.pub$|(^|\\.)teepublic\\.com$/.test(host)) return 'TeePublic';
     if (/(^|\\.)redbubble\\.com$/.test(host)) return 'Redbubble';
     return host;
+  }
+  // The outbound destination without its query string or fragment, which
+  // is where affiliate tags live (Amazon ?tag=, Awin's ids). An Awin
+  // cread.php link reports the merchant page it forwards to (ued).
+  function linkUrl(a) {
+    var u = a;
+    try {
+      if (/(^|\\.)awin1\\.com$/.test(a.hostname)) {
+        var ued = new URL(a.href).searchParams.get('ued');
+        if (ued) u = new URL(ued);
+      }
+    } catch (err) {}
+    return u.protocol + '//' + u.hostname + u.pathname;
   }
   function linkParams(a) {
     var host = a.hostname.replace(/^www\\./, '');
@@ -334,8 +363,15 @@ TRACKER = """<script>
     if (e.type === 'auxclick' && e.button !== 1) return;
     var a = e.target && e.target.closest ? e.target.closest(SEL) : null;
     if (!a || !/^https?:$/.test(a.protocol)) return;
-    var params = P || linkParams(a);
-    if (!params) return;
+    var base = P || linkParams(a);
+    if (!base) return;
+    var params = {}, k;
+    for (k in base) params[k] = base[k];
+    params.link_url = linkUrl(a);
+    params.link_domain = a.hostname.replace(/^www\\./, '');
+    params.outbound = true;
+    params.page_path = location.pathname;
+    params.page_type = T;
     try { gtag('event', 'affiliate_click', params); } catch (err) {}
   }
   document.addEventListener('click', track);
@@ -413,7 +449,7 @@ def detail_params(p):
 
 def targets():
     """{repo-relative page: tracking config or None (gtag only)}.
-    A tracking config is (product params or None, context, selector)."""
+    A tracking config is (product params or None, context, selector, page_type)."""
     out = {rel: None for rel in
            ["index.html", "products/index.html", "generator/index.html", "outfits/index.html",
             "videos/index.html"]
@@ -422,16 +458,16 @@ def targets():
         out[PRIVACY_PAGE] = None
     if os.path.isfile(_abs(WORK_PAGE)):
         out[WORK_PAGE] = None
-    out["index.html"] = (None, "home", "a.link-card, a.affiliate-banner")
+    out["index.html"] = (None, "home", "a.link-card, a.affiliate-banner", "home")
     if os.path.isfile(_abs("gift-guide/index.html")):
-        out["gift-guide/index.html"] = (None, "gift-guide", "a.gg-shop")
+        out["gift-guide/index.html"] = (None, "gift-guide", "a.gg-shop", "gift-guide")
     for rel in _rel_glob("outfits/*/*/index.html") + _rel_glob("videos/*/*/index.html"):
         campaign_dir = os.path.dirname(_abs(rel))
         if glob.glob(os.path.join(campaign_dir, "*", "index.html")):
             out[rel] = None
         else:  # legacy link-list page (or a retired redirect page)
             context = "/".join(rel.split("/")[1:3])
-            out[rel] = (None, context, "a.link-card")
+            out[rel] = (None, context, "a.link-card", "outfit" if rel.startswith("outfits/") else "video")
     for rel in (_rel_glob("blog/index.html") + _rel_glob("blog/*/index.html")
                 + _rel_glob("blog/drafts/*/index.html")):
         out[rel] = blog_config(rel)
@@ -440,7 +476,7 @@ def targets():
         if gift_guide.listing_only(p):
             continue  # the gift guide page keeps its own a.gg-shop tracking
         if os.path.isfile(_abs(rel)):
-            out[rel] = (detail_params(p), None, "a.shop")
+            out[rel] = (detail_params(p), None, "a.shop", "product")
     return out
 
 
@@ -455,7 +491,7 @@ def blog_config(rel):
     and affiliate links in the text, same as the gift guide."""
     if rel == "blog/index.html":
         return None
-    return (None, rel[:-len("/index.html")], "a.bp-shop, a.bp-aff")
+    return (None, rel[:-len("/index.html")], "a.bp-shop, a.bp-aff", "blog")
 
 
 def work_href(rel):
@@ -483,8 +519,9 @@ def expected_block(rel, config, page_html):
             .replace("__VERSION__", str(CONSENT_VERSION)))
     parts = [START, gtag, "<style>\n" + css + "\n</style>"]
     if config is not None:
-        product, context, selector = config
-        parts.append(TRACKER % {"product": _js(product), "context": _js(context), "selector": _js(selector)})
+        product, context, selector, page_type = config
+        parts.append(TRACKER % {"product": _js(product), "context": _js(context), "selector": _js(selector),
+                                "page_type": _js(page_type)})
     if rel == WORK_PAGE:
         parts.append(FIVERR_TRACKER)
     elif wants_footer(page_html):  # every page with the footer's Work with me link
