@@ -13,6 +13,7 @@ guesses get corrected by hand in the CSV before outfit-building runs.
 """
 
 import csv
+import json
 import re
 
 # Order matters: more specific terms checked first so e.g. "cargo pants"
@@ -118,6 +119,15 @@ def main():
             needs_check += 1
         flag_str = f"  <- {', '.join(flags)}" if flags else ""
         print(f"  [{r['slot']:<10}] [{r['color'] or '?':<12}] [{r['register']:<16}] {r['title'][:50]}{flag_str}")
+
+    # Weekly sourcing slots: 2-3 running products a batch, for the
+    # Men's Gym & Training Outfits > Running pins (pin_settings.json routing).
+    with open("pinterest/pin_settings.json", encoding="utf-8") as f:
+        running = json.load(f)["routing"]["running"]
+    n_run = sum(1 for r in rows if any(has_keyword(r["title"].lower(), k) for k in running["keywords"]))
+    print(f"\nRunning products: {n_run} (weekly target {running['min_per_batch']}-"
+          f"{running['max_per_batch']})" + ("" if n_run >= running["min_per_batch"]
+                                          else " <- source more running items"))
 
     if unclassified:
         print(f"\n{unclassified} item(s) need a manual slot — edit classified_products.csv directly.")

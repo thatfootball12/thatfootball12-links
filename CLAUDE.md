@@ -356,6 +356,31 @@ hand after upload. An Amazon gift guide card with no product page gets a
 the `_gift.jpg` headline pins, with no price or deal wording) and it links to the card's own anchor
 (`gift-guide/#<id>`), or to a product page when the pin names one in `"page"`. A pin batch that doesn't start on a Monday sets `start_date`. `--dry-run` validates and prints the report without
 writing anything.
+**Thin-section routing (Nov 30 batch on).** `pin_settings.json`
+`routing` (applied by `pin_routing.py`, called from
+`make_pinterest_csv.py`) can move a pin's hand-set board/section.
+Price tiers: Fall Casual and Stadium Streetwear pins go by price (an
+outfit's summed item total, a product's `price`), Under $50 meaning
+strictly below CA$50.00 and Splurge Worthy ($50+) CA$50.00 and up. A pin
+with no total (any Amazon/Awin item) gets no price rule. Streetwear /
+Motor Streetwear outfits and streetwear jackets/sneakers at $50+ go to
+Men's Fall Streetwear 2026 › Splurge Worthy ($50+). Basics under $20 go
+to Under $20, and sweat/fleece/lounge/gym shorts to Shorts. Running
+products go to Men's Gym & Training Outfits › Running. Every 3rd Game Day
+outfit outside Hockey Night / Basketball / Pink Out / Cold Weather /
+Jersey Styling moves to Men's Stadium Streetwear (Off Duty when it has a
+licensed item, else Team Colours), and so does the weekly Stadium
+Streetwear Outfit Check pin (`"outfit_check": true`). When a pin
+qualifies for several sections, the thin one with the fewest pins wins
+until it reaches `thin.target` (10). `thin.counts` holds the counts as
+of `thin.counted_batches`; later CSVs are added automatically, but pins
+moved by hand on Pinterest aren't, so update the counts after a
+backfill. The report lists every move and the per-section counts.
+`"section_locked": true` keeps a pin where you put it. Weekly sourcing
+should include 2–3 running products: `classify.py` prints the count, and
+the pin report warns below 2. `py -3 pin_routing.py` rewrites
+`pinterest/thin_section_backfill.md`, the list of past pins to move by hand.
+
 **UTM tags (Nov 23 batch on).** Every pin Link on the hub gets UTM tags
 from the script; never type them into `pins_<date>.json`:
 `utm_source=pinterest`, `utm_medium=social`, `utm_campaign=<batch start
