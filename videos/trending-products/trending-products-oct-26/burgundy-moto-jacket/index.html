@@ -145,7 +145,7 @@
 </style>
 <script>
 (function () {
-  var P = {"retailer": "SHEIN", "product_id": "trending-products/trending-products-oct-26/burgundy-moto-jacket", "product_name": "Men's Retro Turn-Up Collar Motorcycle Jacket Coat, Autumn/Winter", "value": 46.81, "currency": "CAD"}, C = null, SEL = "a.shop";
+  var P = {"retailer": "SHEIN", "product_id": "trending-products/trending-products-oct-26/burgundy-moto-jacket", "product_name": "Men's Retro Turn-Up Collar Motorcycle Jacket Coat, Autumn/Winter", "value": 46.81, "currency": "CAD"}, C = null, SEL = "a.shop", T = "product";
   var SKIP = /(^|\.)(tiktok\.com|instagram\.com|pin\.it|pinterest\.[a-z.]+)$/;
   function retailer(host) {
     if (/(^|\.)amazon\.|(^|\.)amzn\.to$/.test(host)) return 'Amazon';
@@ -154,6 +154,19 @@
     if (/(^|\.)tee\.pub$|(^|\.)teepublic\.com$/.test(host)) return 'TeePublic';
     if (/(^|\.)redbubble\.com$/.test(host)) return 'Redbubble';
     return host;
+  }
+  // The outbound destination without its query string or fragment, which
+  // is where affiliate tags live (Amazon ?tag=, Awin's ids). An Awin
+  // cread.php link reports the merchant page it forwards to (ued).
+  function linkUrl(a) {
+    var u = a;
+    try {
+      if (/(^|\.)awin1\.com$/.test(a.hostname)) {
+        var ued = new URL(a.href).searchParams.get('ued');
+        if (ued) u = new URL(ued);
+      }
+    } catch (err) {}
+    return u.protocol + '//' + u.hostname + u.pathname;
   }
   function linkParams(a) {
     var host = a.hostname.replace(/^www\./, '');
@@ -167,8 +180,15 @@
     if (e.type === 'auxclick' && e.button !== 1) return;
     var a = e.target && e.target.closest ? e.target.closest(SEL) : null;
     if (!a || !/^https?:$/.test(a.protocol)) return;
-    var params = P || linkParams(a);
-    if (!params) return;
+    var base = P || linkParams(a);
+    if (!base) return;
+    var params = {}, k;
+    for (k in base) params[k] = base[k];
+    params.link_url = linkUrl(a);
+    params.link_domain = a.hostname.replace(/^www\./, '');
+    params.outbound = true;
+    params.page_path = location.pathname;
+    params.page_type = T;
     try { gtag('event', 'affiliate_click', params); } catch (err) {}
   }
   document.addEventListener('click', track);
