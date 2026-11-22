@@ -44,3 +44,7 @@ jobs:
 
       - name: Run sync_catalog.py
         run: python3 sync_catalog.py
+
+      - name: Pin CSV UTM tests
+        # Hub pin Links carry UTM tags, affiliate Links never do.
+        run: python3 -m unittest test_make_pinterest_csv

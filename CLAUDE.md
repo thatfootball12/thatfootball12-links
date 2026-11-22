@@ -356,6 +356,38 @@ hand after upload. An Amazon gift guide card with no product page gets a
 the `_gift.jpg` headline pins, with no price or deal wording) and it links to the card's own anchor
 (`gift-guide/#<id>`), or to a product page when the pin names one in `"page"`. A pin batch that doesn't start on a Monday sets `start_date`. `--dry-run` validates and prints the report without
 writing anything.
+**UTM tags (Nov 23 batch on).** Every pin Link on the hub gets UTM tags
+from the script; never type them into `pins_<date>.json`:
+`utm_source=pinterest`, `utm_medium=social`, `utm_campaign=<batch start
+date>` (`week_start`, or `start_date`, e.g. `2026-11-23`),
+`utm_content=<campaign slug>-<item slug>` for a product pin
+(`trending-products-nov-23-depot-jacket`), `<campaign slug>-outfit` for an
+outfit pin (`gameday-nov-23-outfit`) and `gift-guide-<card id>` for a gift
+pin (`gift-guide-n163`; the `#N163` fragment stays after the query), all
+lowercase with hyphens only, and `utm_term=<pin type>` (outfit, product,
+gift). A link that leaves the site (Amazon, SHEIN, Awin) never gets them.
+The validation fails the batch on a hub Link without the right tags or
+any off-site Link carrying `utm_*`, and the Link-returns-200 check runs
+on the tagged URL. Batches starting before `UTM_FROM` (2026-11-23) are
+already scheduled on Pinterest and keep their plain links if rebuilt:
+don't move `UTM_FROM` back. `test_make_pinterest_csv.py` covers the
+rules (`py -3 -m unittest test_make_pinterest_csv`; CI runs it). Never
+point a pin at a root redirect stub: its meta refresh drops the query
+string, so the visit loses its UTMs (and stubs carry no GA tag).
+To read the results in GA4: **Reports > Acquisition > Traffic
+acquisition**, primary dimension *Session source / medium*, row
+`pinterest / social` (it sits in the Organic Social channel group); add
+*Session campaign* as a secondary dimension to split by batch week, and
+pick `affiliate_click` in the key events / event count column (if it's a
+key event). For per-pin results, **Explore > Free form**: dimensions
+*Session manual ad content* (utm_content), *Session campaign*, *Session
+manual term* (utm_term) and *Event name*; metrics *Event count* and
+*Sessions*; rows *Session manual ad content*, values *Event count*;
+filters *Event name* exactly matches `affiliate_click` and *Session
+source / medium* exactly matches `pinterest / social`. Drop the event
+filter and use *Sessions* to see which pins drive visits. Only visitors
+who accept the cookie banner are counted, and new data takes 24–48 hours
+to show.
 
 When a page needs a photo that has to be sourced by hand at the
 campaign level (e.g. a wrong or missing `outfit-preview.jpg`, which no
