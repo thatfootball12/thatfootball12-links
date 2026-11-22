@@ -116,5 +116,131 @@ class ValidateUtmTests(unittest.TestCase):
         self.assertEqual(self.problems([p]), [])
 
 
+
+# --- thin-section routing (pin_routing.py) --------------------------------
+
+import json
+import os
+
+import pin_routing as r
+
+SETTINGS = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                       "pinterest", "pin_settings.json"), encoding="utf-8"))
+CATS = {"fan_gear": {"include": [], "exclude": [], "licensed_keywords": ["nfl"],
+                     "licensed_brands": [], "teams": []}}
+
+
+def item(price, name="Plain Item", item_type="Bottoms", theme="casual", currency="CAD",
+         retailer="SHEIN", id_="x/y/z"):
+    return {"id": id_, "price": price, "currency": currency, "name": name,
+            "item_type": item_type, "theme": theme, "retailer": retailer}
+
+
+def rpin(type_, id_, board, section, items, **kw):
+    p = {"type": type_, "id": id_, "board": board, "section": section,
+         "title": id_, "items": items}
+    if type_ == "product":
+        p["rec"] = items[0]
+    p.update(kw)
+    return p
+
+
+def zero_counts():
+    return {k: 0 for k in r.thin_keys(SETTINGS["routing"])}
+
+
+class RoutingTests(unittest.TestCase):
+    FALL = "Fall Casual Outfits for Men"
+    GAME = "Game Day Outfits for Men"
+    STADIUM = "Men's Stadium Streetwear"
+
+    def route(self, pins, counts=None):
+        counts = counts if counts is not None else zero_counts()
+        r.route(pins, SETTINGS, counts, apply=True, cat_cfg=CATS)
+        return counts
+
+    def test_outfit_total_tiers_boundary(self):
+        under = rpin("outfit", "casual/a", self.FALL, "Weekend Fall Fits", [item(30), item(19.99)])
+        at = rpin("outfit", "casual/b", self.FALL, "Weekend Fall Fits", [item(30), item(20)])
+        self.route([under, at])
+        self.assertEqual(under["section"], "Under $50")             # 49.99
+        self.assertEqual(at["section"], "Splurge Worthy ($50+)")    # 50.00
+
+    def test_no_total_keeps_hand_section(self):
+        p = rpin("outfit", "casual/c", self.FALL, "Weekend Fall Fits",
+                 [item(30), item(None, retailer="Amazon", currency=None)])
+        self.route([p])
+        self.assertEqual(p["section"], "Weekend Fall Fits")
+
+    def test_wrong_tier_always_corrected(self):
+        p = rpin("outfit", "casual/d", self.FALL, "Under $50", [item(80)])
+        counts = zero_counts()
+        counts[(self.FALL, "Splurge Worthy ($50+)")] = 10   # full, still corrected
+        self.route([p], counts)
+        self.assertEqual(p["section"], "Splurge Worthy ($50+)")
+
+    def test_full_thin_section_keeps_hand(self):
+        p = rpin("outfit", "casual/e", self.FALL, "Weekend Fall Fits", [item(80)])
+        counts = zero_counts()
+        counts[(self.FALL, "Splurge Worthy ($50+)")] = 10
+        self.route([p], counts)
+        self.assertEqual(p["section"], "Weekend Fall Fits")
+
+    def test_fewest_pins_wins(self):
+        rec = item(15, name="Fleece Gym Shorts")
+        p = rpin("product", "a/b/shorts", "Men's Basics & Essentials", "Pants", [rec])
+        counts = zero_counts()
+        counts[("Men's Basics & Essentials", "Under $20")] = 4
+        self.route([p], counts)
+        self.assertEqual(p["section"], "Shorts")
+
+    def test_running_keyword(self):
+        p = rpin("product", "a/b/shoes", "Men's Fall Style Essentials", "Fall Footwear",
+                 [item(40, name="Mesh Running Shoes", item_type="Footwear")])
+        self.route([p])
+        self.assertEqual((p["board"], p["section"]), ("Men's Gym & Training Outfits", "Running"))
+
+    def test_streetwear_splurge(self):
+        p = rpin("outfit", "motor-streetwear/m", "Men's Fall Streetwear 2026",
+                 "Fall Layered Streetwear", [item(60)])
+        self.route([p])
+        self.assertEqual(p["section"], "Splurge Worthy ($50+)")
+
+    def test_one_in_three_gameday_to_stadium(self):
+        pins = [rpin("outfit", f"gameday/g{i}", self.GAME, "Team Gear", [item(80)]) for i in range(4)]
+        pins.insert(1, rpin("outfit", "gameday/h", self.GAME, "Hockey Night", [item(80)]))
+        self.route(pins)
+        moved = [p["id"] for p in pins if p["board"] == self.STADIUM]
+        self.assertEqual(moved, ["gameday/g0", "gameday/g3"])
+        self.assertEqual(pins[0]["section"], "Team Colours")
+
+    def test_stadium_off_duty_and_under_50(self):
+        fan = rpin("outfit", "gameday/f", self.GAME, "", [item(90, name="NFL Hoodie")])
+        cheap = rpin("outfit", "gameday/c", self.GAME, "", [item(40)], outfit_check=True)
+        counts = zero_counts()
+        counts[(self.STADIUM, "Team Colours")] = 1   # a tie would keep Team Colours
+        self.route([fan, cheap], counts)
+        self.assertEqual((fan["board"], fan["section"]), (self.STADIUM, "Off Duty"))
+        self.assertEqual((cheap["board"], cheap["section"]), (self.STADIUM, "Under $50"))
+
+    def test_section_locked(self):
+        p = rpin("outfit", "casual/f", self.FALL, "Weekend Fall Fits", [item(80)], section_locked=True)
+        self.route([p])
+        self.assertEqual(p["section"], "Weekend Fall Fits")
+
+    def test_not_applied_counts_real_section(self):
+        p = rpin("outfit", "casual/g", self.FALL, "Weekend Fall Fits", [item(80)])
+        counts = zero_counts()
+        d = r.route([p], SETTINGS, counts, apply=False, cat_cfg=CATS)
+        self.assertEqual(p["section"], "Weekend Fall Fits")
+        self.assertEqual(d[0]["to"], (self.FALL, "Splurge Worthy ($50+)"))
+        self.assertEqual(counts[(self.FALL, "Splurge Worthy ($50+)")], 0)
+
+    def test_routed_sections_exist_in_settings(self):
+        boards = SETTINGS["boards"]
+        for board, section in r.thin_keys(SETTINGS["routing"]):
+            self.assertIn(section, boards[board])
+
+
 if __name__ == "__main__":
     unittest.main()

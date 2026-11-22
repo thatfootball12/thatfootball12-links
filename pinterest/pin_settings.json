@@ -144,5 +144,168 @@
       "$25–$60",
       "Under $25"
     ]
+  },
+  "routing": {
+    "_comment": [
+      "Section routing for thin sections; pin_routing.py applies it (its docstring has the full rules). Prices are products.json 'price' (before any coupon); an outfit's total is the sum of its items, with no total when any item is Amazon/Awin (no price rule then). 'Under $X' is strictly below X; '$X+' is X and up.",
+      "applies_from: first batch (start date) whose pins make_pinterest_csv.py moves; earlier batches only get suggestions in the report.",
+      "thin.counts: pins already in each section as of the batches in thin.counted_batches (from their CSVs). Pins moved by hand on Pinterest aren't in any CSV: add them here. Later batches' CSVs are added automatically."
+    ],
+    "applies_from": "2026-11-30",
+    "price_tiers": [
+      {
+        "board": "Fall Casual Outfits for Men",
+        "types": [
+          "outfit",
+          "product"
+        ],
+        "at": 50,
+        "under": "Under $50",
+        "over": "Splurge Worthy ($50+)"
+      },
+      {
+        "board": "Men's Stadium Streetwear",
+        "types": [
+          "outfit",
+          "product"
+        ],
+        "at": 50,
+        "under": "Under $50",
+        "over": null
+      }
+    ],
+    "streetwear_splurge": {
+      "board": "Men's Fall Streetwear 2026",
+      "section": "Splurge Worthy ($50+)",
+      "at": 50,
+      "themes": [
+        "streetwear",
+        "motor-streetwear"
+      ],
+      "product_boards": [
+        "Men's Fall Streetwear 2026",
+        "Men's Casual Streetwear 2026"
+      ],
+      "products": [
+        {
+          "item_type": "Jackets"
+        },
+        {
+          "item_type": "Footwear",
+          "keywords": [
+            "sneaker",
+            "sneakers",
+            "trainer",
+            "trainers",
+            "skate shoes",
+            "skate shoe"
+          ]
+        }
+      ]
+    },
+    "basics": {
+      "board": "Men's Basics & Essentials",
+      "under_at": 20,
+      "under_section": "Under $20",
+      "shorts": {
+        "section": "Shorts",
+        "keywords": [
+          "sweat",
+          "sweatshorts",
+          "fleece",
+          "lounge",
+          "loungewear",
+          "gym",
+          "terry"
+        ]
+      }
+    },
+    "running": {
+      "board": "Men's Gym & Training Outfits",
+      "section": "Running",
+      "keywords": [
+        "running",
+        "runner",
+        "runners",
+        "marathon",
+        "trail run"
+      ],
+      "min_per_batch": 2,
+      "max_per_batch": 3
+    },
+    "stadium": {
+      "board": "Men's Stadium Streetwear",
+      "from_board": "Game Day Outfits for Men",
+      "every": 3,
+      "stay_sections": [
+        "Hockey Night",
+        "Basketball Styling",
+        "Pink Out & Colourout Games",
+        "Cold Weather Game Day",
+        "Team Jersey Styling"
+      ],
+      "team_colours_section": "Team Colours",
+      "team_gear_section": "Off Duty",
+      "under_section": "Under $50",
+      "under_at": 50
+    },
+    "thin": {
+      "target": 10,
+      "counted_batches": [
+        "gifts-88",
+        "nov-2",
+        "nov-9",
+        "nov-9_gifts",
+        "oct-19",
+        "oct-26"
+      ],
+      "sections": [
+        {
+          "board": "Fall Casual Outfits for Men",
+          "section": "Splurge Worthy ($50+)",
+          "count": 0
+        },
+        {
+          "board": "Fall Casual Outfits for Men",
+          "section": "Under $50",
+          "count": 1
+        },
+        {
+          "board": "Men's Fall Streetwear 2026",
+          "section": "Splurge Worthy ($50+)",
+          "count": 0
+        },
+        {
+          "board": "Men's Stadium Streetwear",
+          "section": "Under $50",
+          "count": 0
+        },
+        {
+          "board": "Men's Stadium Streetwear",
+          "section": "Team Colours",
+          "count": 0
+        },
+        {
+          "board": "Men's Stadium Streetwear",
+          "section": "Off Duty",
+          "count": 0
+        },
+        {
+          "board": "Men's Basics & Essentials",
+          "section": "Under $20",
+          "count": 10
+        },
+        {
+          "board": "Men's Basics & Essentials",
+          "section": "Shorts",
+          "count": 0
+        },
+        {
+          "board": "Men's Gym & Training Outfits",
+          "section": "Running",
+          "count": 0
+        }
+      ]
+    }
   }
 }

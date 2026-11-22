@@ -25,6 +25,14 @@ Inputs (all in pinterest/):
       the pin but leaves its row out of the CSV, listed in the report.
       Optional per batch: "hashtags_first": true puts the hashtags right
       after the copy, before the disclosure and AI line.
+      Section routing: for batches from pin_settings.json
+      routing.applies_from on, pin_routing.py may move a pin's board/
+      section into a thin section (price tiers, basics, running, 1 in 3
+      Game Day outfits to Men's Stadium Streetwear); the report lists every
+      move and the thin-section counts. "section_locked": true on a pin
+      keeps its hand-set board/section; "outfit_check": true marks the
+      weekly Stadium Streetwear Outfit Check (always Men's Stadium
+      Streetwear).
     pin_settings.json   the disclosure appended to every description
       (disclosure_shein_only when every item in the pin is SHEIN; with
       any Awin item, the line naming only the partners present:
@@ -111,6 +119,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 
 import gift_guide
+import pin_routing
 import sellers
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -202,6 +211,7 @@ def resolve(pin, products, by_id, settings, problems, warnings):
             return False
         pin["retailers"] = {p.get("retailer") for p in items}
         pin["has_amazon"] = "Amazon" in pin["retailers"]
+        pin["items"] = items
         return True
 
     if pin.get("type") == "product":
@@ -240,6 +250,7 @@ def resolve(pin, products, by_id, settings, problems, warnings):
                             rec.get("retailer") in settings.get("ai_image_retailers", []))
         pin["retailers"] = {rec.get("retailer")}
         pin["has_amazon"] = rec.get("retailer") == "Amazon"
+        pin["rec"], pin["items"] = rec, [rec]
         return True
 
     if pin.get("type") == "gift":
@@ -576,7 +587,7 @@ def write_csvs(rows, batch):
     return paths
 
 
-def report(batch, days, pins, warnings, csv_paths):
+def report(batch, days, pins, warnings, csv_paths, routing_lines=()):
     L = [f"# Pinterest bulk upload: {batch}", ""]
     if csv_paths:
         L += ["Files: " + ", ".join(os.path.relpath(p, REPO).replace("\\", "/") for p in csv_paths), ""]
@@ -601,6 +612,7 @@ def report(batch, days, pins, warnings, csv_paths):
         counts[key] = counts.get(key, 0) + 1
     L += ["## Boards and sections", "", "| Board | Section | Pins |", "|---|---|---|"]
     L += [f"| {b} | {s or '(none)'} | {n} |" for (b, s), n in sorted(counts.items())] + [""]
+    L += list(routing_lines)
 
     L += ["## Manual follow-ups", ""]
     held = [p for p in sorted(pins, key=lambda p: p["utc"]) if p.get("hold")]
@@ -684,6 +696,20 @@ def main():
     if tagged:
         for p in pins:
             p["link"] = utm_link(p, campaign)
+    routing_lines = []
+    if pins and "routing" in settings:
+        # Thin-section routing (pin_routing.py): moves pins for batches from
+        # routing.applies_from on, only suggests for earlier ones.
+        applied = week_start >= date.fromisoformat(settings["routing"]["applies_from"])
+        before = pin_routing.current_counts(settings["routing"], exclude_batch=args.batch)
+        after = dict(before)
+        decisions = pin_routing.route(pins, settings, after, apply=applied)
+        warnings += pin_routing.warnings_from(decisions)
+        routing_lines = pin_routing.report_lines(pins, settings, before, after, decisions, applied)
+        print("Thin sections this batch (before + this batch = after, target "
+              f"{settings['routing']['thin']['target']}):")
+        for key in pin_routing.thin_keys(settings["routing"]):
+            print(f"  {pin_routing.fmt(key)}: {before[key]} + {after[key] - before[key]} = {after[key]}")
     if not pins:
         problems.append("no usable pins")
     else:
@@ -707,7 +733,7 @@ def main():
         sys.exit(1)
 
     csv_paths = [] if args.dry_run else write_csvs(csv_rows(pins), args.batch)
-    text = report(args.batch, days, pins, warnings, csv_paths)
+    text = report(args.batch, days, pins, warnings, csv_paths, routing_lines)
     if not args.dry_run:
         with open(os.path.join(PIN_DIR, f"pinterest_bulk_{args.batch}_report.md"), "w",
                   encoding="utf-8", newline="\n") as f:
