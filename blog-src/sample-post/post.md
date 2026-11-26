@@ -34,6 +34,8 @@ The SHEIN hoodie is {{price gameday/gameday-pink-out-bold-oct-7/hoodie}} right n
 
 ![Man in a satin team jacket, jeans and sneakers](look.jpg "A satin team jacket keeps the look official without a jersey.")
 
+![Man in a pink hoodie, jeans and sneakers for a pink-out football game](hero.jpg "A {small} photo: 240px wide, for one product photo per item.") {small}
+
 ## Keep it to one team colour
 
 Pick one colour from the team and let the rest stay neutral:
