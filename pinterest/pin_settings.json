@@ -6,6 +6,10 @@
   "disclosure_awin_only": "As a House of Blanks affiliate, I earn from qualifying purchases. Prices may change.",
   "disclosure_awin_amazon": "As an Amazon Associate and House of Blanks affiliate, I earn from qualifying purchases. Prices may change.",
   "disclosure_awin_shein": "As a SHEIN Affiliate and House of Blanks affiliate, I earn from qualifying purchases. Prices may change.",
+  "awin_merchants": [
+    "House of Blanks",
+    "Moosehill"
+  ],
   "disclosure_retailers": [
     "SHEIN",
     "Amazon",

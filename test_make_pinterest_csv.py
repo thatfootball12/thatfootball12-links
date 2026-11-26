@@ -1,4 +1,4 @@
-"""Unit tests for the UTM tagging in make_pinterest_csv.py.
+"""Unit tests for the UTM tagging and Awin disclosure in make_pinterest_csv.py.
 
 Run: py -3 -m unittest test_make_pinterest_csv
 (No network: nothing here fetches a URL.)
@@ -240,6 +240,39 @@ class RoutingTests(unittest.TestCase):
         boards = SETTINGS["boards"]
         for board, section in r.thin_keys(SETTINGS["routing"]):
             self.assertIn(section, boards[board])
+
+
+class AwinDisclosureTests(unittest.TestCase):
+    SETTINGS = {
+        "disclosure": "As a SHEIN Affiliate and Amazon Associate, I earn.",
+        "disclosure_shein_only": "As a SHEIN Affiliate, I earn.",
+        "disclosure_awin": "As a SHEIN Affiliate, Amazon Associate and House of Blanks affiliate, I earn.",
+        "disclosure_awin_only": "As a House of Blanks affiliate, I earn.",
+        "disclosure_awin_amazon": "As an Amazon Associate and House of Blanks affiliate, I earn.",
+        "disclosure_awin_shein": "As a SHEIN Affiliate and House of Blanks affiliate, I earn.",
+    }
+
+    def awin_pin(self, *merchants, others=()):
+        items = [{"retailer": "Awin", "merchant": m_} for m_ in merchants]
+        items += [{"retailer": r} for r in others]
+        return {"retailers": {i["retailer"] for i in items}, "items": items}
+
+    def test_house_of_blanks_unchanged(self):
+        self.assertEqual(m.disclosure(self.awin_pin("House of Blanks"), self.SETTINGS),
+                         "As a House of Blanks affiliate, I earn.")
+
+    def test_moosehill_named(self):
+        self.assertEqual(m.disclosure(self.awin_pin("Moosehill"), self.SETTINGS),
+                         "As a Moosehill affiliate, I earn.")
+
+    def test_two_merchants_with_shein(self):
+        self.assertEqual(m.disclosure(self.awin_pin("Moosehill", "House of Blanks", others=["SHEIN"]),
+                                      self.SETTINGS),
+                         "As a SHEIN Affiliate and House of Blanks and Moosehill affiliate, I earn.")
+
+    def test_merchants_listed(self):
+        self.assertEqual(m.awin_merchants(self.awin_pin("Moosehill", "Moosehill")), ["Moosehill"])
+        self.assertEqual(m.awin_merchants({"items": [{"retailer": "Awin"}]}), ["?"])
 
 
 if __name__ == "__main__":
