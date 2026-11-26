@@ -38,7 +38,9 @@ the only <h1>), paragraphs, "- " and "1. " lists (one level), **bold**,
 header; a "|---|---|" line under it is optional), and, each on a line of
 its own:
     ![alt](photo.jpg "Caption")   a photo from the post folder, with an
-                                  optional caption
+                                  optional caption; add " {small}" at the
+                                  end of the line to show it at 240px wide
+                                  (e.g. one product photo per gift)
     {{product <id>}}              a product card for a products.json id;
                                   consecutive lines make one grid
 Inline, {{price <id>}} prints a SHEIN product's price from products.json.
@@ -124,7 +126,7 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 PRODUCT_LINE_RE = re.compile(r"^\{\{product\s+([^\s}]+)\s*\}\}$")
 PRICE_TOKEN_RE = re.compile(r"\{\{price\s+([^\s}]+)\s*\}\}")
 ANY_TOKEN_RE = re.compile(r"\{\{(\w+)[^}]*\}\}")
-IMAGE_LINE_RE = re.compile(r'^!\[([^\]]*)\]\(\s*([^)\s"]+)(?:\s+"([^"]*)")?\s*\)$')
+IMAGE_LINE_RE = re.compile(r'^!\[([^\]]*)\]\(\s*([^)\s"]+)(?:\s+"([^"]*)")?\s*\)(\s*\{small\})?$')
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*#*$")
 TABLE_ROW_RE = re.compile(r"^\|(.+)\|$")
 TABLE_RULE_RE = re.compile(r"^:?-+:?$")
@@ -304,7 +306,7 @@ def parse_blocks(post):
         m = IMAGE_LINE_RE.match(line)
         if m:
             flush()
-            blocks.append(("image", (m.group(1), m.group(2), m.group(3) or ""), n))
+            blocks.append(("image", (m.group(1), m.group(2), m.group(3) or "", bool(m.group(4))), n))
             continue
         for list_kind, regex in (("ul", UL_RE), ("ol", OL_RE)):
             m = regex.match(line)
@@ -387,7 +389,7 @@ def validate(post, blocks, products, dead):
 
     for i, (kind, data, n) in enumerate(blocks):
         if kind == "image":
-            alt, name, _ = data
+            alt, name, _, _ = data
             if not alt.strip():
                 post.err(f"post.md:{n}: image {name!r} has no alt text")
             check_photo(post, name, f"post.md:{n}: image", line=n)
@@ -619,11 +621,12 @@ def render_blocks(post, blocks, products, ids):
             out.append(f'<div class="bp-table"><table><thead><tr>{head_row}</tr></thead>'
                        f"<tbody>{rows}</tbody></table></div>")
         elif kind == "image":
-            alt, name, caption = data
+            alt, name, caption, small = data
             jpg, webp = photo_outputs(post, name)
             fig = picture(jpg, webp, rel, alt, "bp-photo", lazy=True)
             cap = f"<figcaption>{inline(caption, rel, products)}</figcaption>" if caption else ""
-            out.append(f'<figure class="bp-figure">{fig}{cap}</figure>')
+            cls = "bp-figure bp-figure-small" if small else "bp-figure"
+            out.append(f'<figure class="{cls}">{fig}{cap}</figure>')
         elif kind == "products":
             cards = "".join(product_card(products[pid], rel) for pid in data)
             out.append(f'<div class="bp-products">{cards}</div>')
@@ -1211,6 +1214,7 @@ CSS = """  :root{
   }
   .bp-hero,.bp-figure{margin:0 auto 22px;max-width:500px;}
   .bp-hero picture,.bp-figure picture{display:block;}
+  .bp-figure-small{max-width:240px;}
   .bp-photo{
     display:block;width:100%;height:auto;
     border-radius:12px;border:1px solid var(--panel-line);background:var(--panel);

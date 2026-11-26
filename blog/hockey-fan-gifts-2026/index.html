@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- analytics:start -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+</script>
+<!-- Google tag (gtag.js): loaded only after the visitor accepts analytics cookies. See add_analytics.py. -->
+<script>
+(function () {
+  var ID = 'G-E3HV1TFPEN', KEY = 'tf12_consent', VERSION = 2, MAX_AGE = 365 * 864e5;
+  var PRIVACY = '../../privacy/', LABELS = { granted: 'Accepted', denied: 'Declined' };
+  var loaded = false, bar = null;
+  function stored() {
+    try {
+      var c = JSON.parse(localStorage.getItem(KEY));
+      if (c && c.v === VERSION && Date.now() - c.ts < MAX_AGE && LABELS[c.choice]) return c.choice;
+    } catch (e) {}
+    return null;
+  }
+  function store(choice) {
+    try { localStorage.setItem(KEY, JSON.stringify({ v: VERSION, choice: choice, ts: Date.now() })); } catch (e) {}
+  }
+  function load() {
+    if (loaded) return;
+    loaded = true;
+    dataLayer.length = 0;
+    gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', ID);
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+    document.head.appendChild(s);
+  }
+  function clearCookies() {
+    var host = location.hostname;
+    document.cookie.split(';').forEach(function (c) {
+      var name = c.split('=')[0].trim();
+      if (!/^_ga(_|$)/.test(name)) return;
+      ['', host, '.' + host].forEach(function (d) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : '');
+      });
+    });
+  }
+  // Affiliate banners (the homepage's Moosehill/Awin one): an empty
+  // [data-tf12-awin] box gets its image and link only after Accept.
+  function banners(on) {
+    var els = document.querySelectorAll('[data-tf12-awin]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      el.innerHTML = '';
+      el.hidden = !on;
+      if (!on) continue;
+      var a = document.createElement('a'), img = document.createElement('img');
+      a.className = 'affiliate-banner';
+      a.href = el.getAttribute('data-tf12-awin-href');
+      a.target = '_blank';
+      a.rel = 'nofollow sponsored noopener';
+      img.alt = el.getAttribute('data-tf12-awin-alt') || '';
+      img.width = 300;
+      img.height = 250;
+      img.src = el.getAttribute('data-tf12-awin');
+      a.appendChild(img);
+      el.appendChild(a);
+    }
+  }
+  function showStatus() {
+    var choice = stored(), els = document.querySelectorAll('[data-tf12-consent-status]');
+    for (var i = 0; i < els.length; i++) els[i].textContent = LABELS[choice] || 'Not chosen yet';
+    if (bar) bar.querySelector('.tf12-consent-now').hidden = !choice;
+  }
+  function hide() {
+    if (!bar) return;
+    bar.hidden = true;
+    document.body.style.paddingBottom = '';
+  }
+  function show(focus) {
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'tf12-consent';
+      bar.setAttribute('role', 'region');
+      bar.setAttribute('aria-label', 'Cookie choice');
+      bar.innerHTML = '<p>Can we use Google Analytics cookies to count visits and see which pages and products get checked out, and show a Moosehill banner from Awin on the homepage (Awin sets its own cookie)? Neither happens unless you accept. <a href="' + PRIVACY + '">Privacy policy</a></p>' +
+        '<p class="tf12-consent-now">Current choice: <b data-tf12-consent-status></b></p>' +
+        '<div class="tf12-consent-btns"><button type="button" data-tf12-choice="denied">Decline</button>' +
+        '<button type="button" data-tf12-choice="granted">Accept</button></div>';
+      document.body.appendChild(bar);
+    }
+    bar.hidden = false;
+    showStatus();
+    pad();
+    if (focus) bar.querySelector('button').focus();
+  }
+  function pad() {
+    if (bar && !bar.hidden) document.body.style.paddingBottom = (bar.offsetHeight + 24) + 'px';
+  }
+  window.addEventListener('resize', pad);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(pad);
+  function choose(choice) {
+    store(choice);
+    hide();
+    showStatus();
+    banners(choice === 'granted');
+    if (choice === 'granted') return load();
+    if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
+    clearCookies();
+    if (loaded) location.reload();
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-tf12-choice], [data-tf12-consent-open]') : null;
+    if (!t) return;
+    if (t.hasAttribute('data-tf12-consent-open')) show(true);
+    else choose(t.getAttribute('data-tf12-choice'));
+  });
+  var initial = stored();
+  if (initial === 'granted') load();
+  function ready() {
+    showStatus();
+    if (initial === 'granted') banners(true);
+    if (!initial) show(false);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
+  else ready();
+})();
+</script>
+<style>
+  .tf12-consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:2147483000;max-width:560px;margin:0 auto;padding:14px 16px;background:#18140F;color:#F3EFE6;border:1px solid #2A2620;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.55);font:13px/1.5 'Poppins',system-ui,sans-serif;text-align:left;}
+  .tf12-consent[hidden],.tf12-consent [hidden]{display:none;}
+  .tf12-consent p{margin:0 0 12px;font-size:13px;line-height:1.5;color:#F3EFE6;}
+  .tf12-consent a{color:#D4A017;}
+  .tf12-consent .tf12-consent-now{color:#B8B2A4;}
+  .tf12-consent-btns{display:flex;gap:10px;}
+  .tf12-consent-btns button{flex:1 1 0;min-height:44px;padding:10px 12px;border:1px solid #F3EFE6;border-radius:8px;background:transparent;color:#F3EFE6;font:600 14px/1 'Oswald',system-ui,sans-serif;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+  .tf12-consent-btns button:hover,.tf12-consent-btns button:focus-visible{background:#F3EFE6;color:#0D0D0D;}
+  body{flex-wrap:wrap;align-content:flex-start;}
+  .tf12-foot{flex:0 0 100%;margin-top:32px;text-align:center;font:11px/1.6 'Poppins',system-ui,sans-serif;color:#B8B2A4;}
+  .tf12-foot p{max-width:520px;margin:0 auto 4px;font-size:11px;line-height:1.6;color:#B8B2A4;}
+  .tf12-foot .tf12-foot-links{font-size:13px;}
+  .tf12-foot a,.tf12-foot button{display:inline-block;padding:6px 4px;color:#B8B2A4;text-decoration:underline;text-underline-offset:2px;}
+  .tf12-foot button{background:none;border:0;font:inherit;cursor:pointer;}
+  .tf12-foot a:hover,.tf12-foot button:hover{color:#D4A017;}
+</style>
+<script>
+(function () {
+  var P = null, C = "blog/hockey-fan-gifts-2026", SEL = "a.bp-shop, a.bp-aff", T = "blog";
+  var SKIP = /(^|\.)(tiktok\.com|instagram\.com|pin\.it|pinterest\.[a-z.]+)$/;
+  function retailer(host) {
+    if (/(^|\.)amazon\.|(^|\.)amzn\.to$/.test(host)) return 'Amazon';
+    if (/(^|\.)shein\.com$/.test(host)) return 'SHEIN';
+    if (/(^|\.)awin1\.com$|(^|\.)tidd\.ly$/.test(host)) return 'Awin';
+    if (/(^|\.)tee\.pub$|(^|\.)teepublic\.com$/.test(host)) return 'TeePublic';
+    if (/(^|\.)redbubble\.com$/.test(host)) return 'Redbubble';
+    return host;
+  }
+  // The outbound destination without its query string or fragment, which
+  // is where affiliate tags live (Amazon ?tag=, Awin's ids). An Awin
+  // cread.php link reports the merchant page it forwards to (ued).
+  function linkUrl(a) {
+    var u = a;
+    try {
+      if (/(^|\.)awin1\.com$/.test(a.hostname)) {
+        var ued = new URL(a.href).searchParams.get('ued');
+        if (ued) u = new URL(ued);
+      }
+    } catch (err) {}
+    return u.protocol + '//' + u.hostname + u.pathname;
+  }
+  function linkParams(a) {
+    var host = a.hostname.replace(/^www\./, '');
+    if (SKIP.test(host)) return null;
+    var t = a.querySelector('.link-text'), img = a.querySelector('img[alt]');
+    var name = (t ? t.textContent : img ? img.alt : a.textContent).replace(/\s+/g, ' ').trim();
+    var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return { retailer: retailer(host), product_id: C + '/' + slug, product_name: name };
+  }
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest(SEL) : null;
+    if (!a || !/^https?:$/.test(a.protocol)) return;
+    var base = P || linkParams(a);
+    if (!base) return;
+    var params = {}, k;
+    for (k in base) params[k] = base[k];
+    params.link_url = linkUrl(a);
+    params.link_domain = a.hostname.replace(/^www\./, '');
+    params.outbound = true;
+    params.page_path = location.pathname;
+    params.page_type = T;
+    try { gtag('event', 'affiliate_click', params); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>
+<script>
+(function () {
+  function track(e) {
+    if (e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[data-work-location]') : null;
+    if (!a) return;
+    try { gtag('event', 'work_with_me_click', { location: a.getAttribute('data-work-location') }); } catch (err) {}
+  }
+  document.addEventListener('click', track);
+  document.addEventListener('auxclick', track);
+})();
+</script>
+<!-- analytics:end -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hockey Fan Gift Guide: Gifts for Him That Actually Get Used • ThatFootball12</title>
+<meta name="description" content="Gifts for hockey fans sorted by budget, from puck pint glasses and stocking stuffers to warm hoodies, boots and a down jacket he&#x27;ll actually use.">
+<link rel="canonical" href="https://thatfootball12.github.io/thatfootball12-links/blog/hockey-fan-gifts-2026/">
+<meta property="og:title" content="The Hockey Fan Gift Guide: Gifts for Him That Actually Get Used">
+<meta property="og:description" content="Gifts for hockey fans sorted by budget, from puck pint glasses and stocking stuffers to warm hoodies, boots and a down jacket he&#x27;ll actually use.">
+<meta property="og:image" content="https://thatfootball12.github.io/thatfootball12-links/blog/hockey-fan-gifts-2026/img/puck-pint-glass-500.jpg">
+<meta property="og:url" content="https://thatfootball12.github.io/thatfootball12-links/blog/hockey-fan-gifts-2026/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ThatFootball12">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Hockey Fan Gift Guide: Gifts for Him That Actually Get Used">
+<meta name="twitter:description" content="Gifts for hockey fans sorted by budget, from puck pint glasses and stocking stuffers to warm hoodies, boots and a down jacket he&#x27;ll actually use.">
+<meta name="twitter:image" content="https://thatfootball12.github.io/thatfootball12-links/blog/hockey-fan-gifts-2026/img/puck-pint-glass-500.jpg">
+<meta property="article:published_time" content="2026-11-26">
+<meta property="article:modified_time" content="2026-11-26">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "@id": "https://thatfootball12.github.io/thatfootball12-links/blog/hockey-fan-gifts-2026/#article",
+   "headline": "The Hockey Fan Gift Guide: Gifts for Him That Actually Get Used",
+   "description": "Gifts for hockey fans sorted by budget, from puck pint glasses and stocking stuffers to warm hoodies, boots and a down jacket he'll actually use.",
+   "author": {
+    "@type": "Person",
+    "name": "Jesse",
+    "url": "https://thatfootball12.github.io/thatfootball12-links/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ThatFootball12",
+    "url": "https://thatfootball12.github.io/thatfootball12-links/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://thatfootball12.github.io/thatfootball12-links/assets/icons/icon-192.png"
+    }
+   },
+   "datePublished": "2026-11-26",
+   "dateModified": "2026-11-26",
+   "image": "https://thatfootball12.github.io/thatfootball12-links/blog/hockey-fan-gifts-2026/img/puck-pint-glass-500.jpg",
+   "articleSection": "Gift guides",
+   "mainEntityOfPage": "https://thatfootball12.github.io/thatfootball12-links/blog/hockey-fan-gifts-2026/"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://thatfootball12.github.io/thatfootball12-links/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Blog",
+     "item": "https://thatfootball12.github.io/thatfootball12-links/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "The Hockey Fan Gift Guide: Gifts for Him That Actually Get Used"
+    }
+   ]
+  }
+ ]
+}
+</script>
+<style>
+  :root{
+    --ink:#0D0D0D;
+    --panel:#18140F;
+    --panel-line:#2A2620;
+    --gold:#D4A017;
+    --crimson:#C8102E;
+    --bone:#F3EFE6;
+    --bone-dim:#B8B2A4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(212,160,23,0.08), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(200,16,46,0.08), transparent 45%);
+  }
+  .wrap{width:100%;max-width:480px;min-width:0;}
+  @media (min-width:768px){
+    .wrap{max-width:1080px;}
+    .post-wrap{max-width:720px;}
+  }
+  .crumbs{margin-bottom:20px;font-size:13px;}
+  .crumbs ol{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:4px;color:var(--bone-dim);}
+  .crumbs li{min-width:0;overflow-wrap:anywhere;}
+  .crumbs li + li::before{content:'›';margin-right:4px;color:var(--bone-dim);}
+  .crumbs a{color:var(--gold);text-decoration:none;}
+  .crumbs a:hover{text-decoration:underline;}
+  header{text-align:center;margin-bottom:20px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--panel-line);
+    padding:5px 14px;border-radius:999px;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--crimson);display:inline-block;}
+  h1{
+    font-family:'Anton',sans-serif;
+    font-size:34px;
+    letter-spacing:1px;
+    line-height:1.05;
+    color:var(--bone);
+    text-transform:uppercase;
+    overflow-wrap:anywhere;
+  }
+  h1 span{color:var(--gold);}
+  @media (min-width:768px){
+    h1{font-size:46px;}
+  }
+  .tagline{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    margin-top:10px;
+  }
+  .byline{font-size:12px;color:var(--bone-dim);margin-top:12px;}
+  .back{
+    display:block;
+    text-align:center;
+    margin-top:28px;
+    color:var(--gold);
+    font-size:13px;
+    text-decoration:none;
+  }
+  .bp-draft{
+    margin-bottom:16px;padding:8px 12px;border-radius:8px;
+    background:var(--crimson);color:#FFFFFF;text-align:center;
+    font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  }
+  .bp-disclosure{
+    text-align:center;font-size:12px;line-height:1.6;color:var(--bone-dim);
+    max-width:640px;margin:0 auto 20px;
+  }
+  .bp-hero,.bp-figure{margin:0 auto 22px;max-width:500px;}
+  .bp-hero picture,.bp-figure picture{display:block;}
+  .bp-figure-small{max-width:240px;}
+  .bp-photo{
+    display:block;width:100%;height:auto;
+    border-radius:12px;border:1px solid var(--panel-line);background:var(--panel);
+  }
+  .bp-figure figcaption{margin-top:8px;text-align:center;font-size:12px;line-height:1.5;color:var(--bone-dim);}
+  .intro p,.post-body p,.post-body li{font-size:16px;line-height:1.7;color:var(--bone);}
+  .intro p{margin-bottom:14px;}
+  .post-body p,.post-body ul,.post-body ol{margin-bottom:16px;}
+  .post-body ul,.post-body ol{padding-left:22px;}
+  .post-body li + li{margin-top:6px;}
+  .post-body h2{
+    font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;letter-spacing:1px;
+    text-transform:uppercase;color:var(--gold);margin:32px 0 12px;line-height:1.25;
+    scroll-margin-top:16px;
+  }
+  .post-body h3{
+    font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;letter-spacing:.5px;
+    color:var(--bone);margin:22px 0 8px;line-height:1.3;scroll-margin-top:16px;
+  }
+  .intro a,.post-body a:not(.bp-shop):not(.bp-details){color:var(--gold);text-underline-offset:2px;}
+  .bp-price{font-weight:600;color:var(--gold);white-space:nowrap;}
+  .toc{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+    padding:14px 16px;margin-bottom:18px;
+  }
+  .toc-title{
+    font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:1.5px;text-transform:uppercase;color:var(--bone-dim);margin-bottom:8px;
+  }
+  .toc ol{list-style:none;display:flex;flex-direction:column;gap:2px;}
+  .toc a{display:inline-block;padding:4px 0;color:var(--gold);font-size:14px;text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .bp-products{
+    display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:12px;margin:0 0 20px;
+  }
+  @media (min-width:768px){
+    .bp-products{grid-template-columns:repeat(3, minmax(0,1fr));gap:16px;}
+  }
+  .bp-card{
+    display:flex;flex-direction:column;background:var(--panel);
+    border:1px solid var(--panel-line);border-radius:12px;overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .bp-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .bp-card picture{display:block;}
+  .bp-thumb{
+    width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;display:block;
+    background:var(--ink);border-bottom:1px solid var(--panel-line);
+  }
+  .bp-card-body{padding:10px 12px 12px;flex:1 1 auto;display:flex;flex-direction:column;}
+  .card-meta{
+    margin-bottom:4px;font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;
+    letter-spacing:1px;text-transform:uppercase;
+  }
+  .retailer{color:var(--bone-dim);}
+  .post-body .prod-name{
+    font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;line-height:1.35;
+    letter-spacing:0;color:var(--bone);margin:0 0 8px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .post-body .bp-card-price{font-size:14px;font-weight:600;color:var(--gold);margin:0 0 10px;}
+  a.bp-shop{
+    margin-top:auto;padding:6px 8px;display:flex;align-items:center;justify-content:center;
+    min-height:38px;border-radius:8px;background:var(--gold);color:var(--ink);
+    font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.5px;
+    text-transform:uppercase;text-decoration:none;text-align:center;
+  }
+  a.bp-shop:hover{filter:brightness(1.08);}
+  a.bp-shop:focus-visible{outline:2px solid var(--bone);outline-offset:2px;}
+  a.bp-details{
+    display:block;margin-top:6px;padding:4px 0;text-align:center;font-size:12px;
+    color:var(--bone-dim);text-decoration:underline;text-underline-offset:2px;
+  }
+  .bp-faq .faq-item{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;padding:14px 16px;
+  }
+  .bp-faq .faq-item + .faq-item{margin-top:12px;}
+  .bp-faq .faq-item h3{margin:0 0 6px;}
+  .bp-faq .faq-item p{font-size:15px;margin-bottom:8px;}
+  .bp-faq .faq-item p:last-child{margin-bottom:0;}
+  .explore{
+    margin-top:32px;background:var(--panel);border:1px solid var(--panel-line);
+    border-radius:12px;padding:16px;
+  }
+  .explore h2{
+    font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--gold);margin-bottom:12px;text-align:center;
+  }
+  .explore ul{list-style:none;display:grid;gap:10px;}
+  .explore-link{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    min-height:48px;padding:12px 14px;border:1px solid var(--panel-line);border-radius:10px;
+    background:var(--ink);color:var(--bone);text-decoration:none;
+    font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;letter-spacing:.5px;
+  }
+  .explore-link span{color:var(--gold);}
+  .explore-link:hover{border-color:var(--gold);}
+  .bl-section{
+    font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--gold);margin:8px 0 14px;text-align:center;
+  }
+  .bl-grid{display:grid;gap:16px;margin-bottom:28px;}
+  @media (min-width:768px){
+    .bl-grid{grid-template-columns:repeat(3, minmax(0,1fr));}
+  }
+  .bl-card{
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .bl-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .bl-link{display:block;color:inherit;text-decoration:none;}
+  .bl-link picture{display:block;}
+  .bl-thumb{
+    width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;
+    background:var(--ink);border-bottom:1px solid var(--panel-line);
+  }
+  .bl-body{padding:12px 14px 16px;}
+  .bl-cat{
+    display:inline-block;margin-bottom:6px;font-family:'Oswald',sans-serif;font-size:11px;
+    font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);
+  }
+  .bl-title{font-family:'Oswald',sans-serif;font-size:19px;font-weight:600;line-height:1.25;color:var(--bone);}
+  .bl-date{margin-top:6px;font-size:12px;color:var(--bone-dim);}
+  .bl-desc{margin-top:8px;font-size:14px;line-height:1.55;color:var(--bone-dim);}
+  .bl-empty{
+    text-align:center;font-size:15px;color:var(--bone-dim);padding:28px 16px;
+    background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .bp-card,.bp-card:hover,.bl-card,.bl-card:hover{transition:none;transform:none;}
+  }
+</style>
+<!-- fonts:start -->
+<link rel="preload" href="../../assets/fonts/web/anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/web/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url(../../assets/fonts/web/anton-400-latin.woff2) format('woff2');}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:500 600;font-display:swap;src:url(../../assets/fonts/web/oswald-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(../../assets/fonts/web/poppins-400-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(../../assets/fonts/web/poppins-500-latin.woff2) format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(../../assets/fonts/web/poppins-600-latin.woff2) format('woff2');}
+</style>
+<!-- fonts:end -->
+<!-- favicons:start -->
+<link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/icons/apple-touch-icon.png">
+<!-- favicons:end -->
+</head>
+<body>
+<!-- generated by build_blog.py from blog-src/hockey-fan-gifts-2026/post.md: edit the source, not this file -->
+<div class="wrap post-wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><span aria-current="page">The Hockey Fan Gift Guide: Gifts for Him That Actually Get Used</span></li></ol></nav>
+<article class="post">
+<header>
+  <div class="badge">Gift guides</div>
+  <h1>The Hockey Fan Gift Guide: Gifts for Him That Actually Get Used</h1>
+  <p class="byline">By Jesse, ThatFootball12 · <time datetime="2026-11-26">November 26, 2026</time></p>
+</header>
+<p class="bp-disclosure">As an Amazon Associate, SHEIN affiliate, and Moosehill and House of Blanks (Awin) affiliate, ThatFootball12 earns from qualifying purchases made through links on this site.</p>
+<figure class="bp-hero"><picture><source type="image/webp" srcset="img/puck-pint-glass-500.webp"><img class="bp-photo" src="img/puck-pint-glass-500.jpg" alt="BenShot hockey puck pint glass of beer with a puck set into the middle of its side, on a table by a fireplace, with a &quot;Raise One to Puck Drop&quot; gift guide banner (AI-generated illustration)" width="500" height="745" fetchpriority="high" decoding="async"></picture></figure>
+<div class="intro">
+<p>Buying for a hockey fan is easy until you realize he already owns six jerseys and a drawer full of toques. This guide sorts gift ideas by budget so you can grab something he&#x27;ll actually wear, use or put on the shelf before Christmas.</p>
+<p>It&#x27;s hard to shop for guys, especially this time of year. Yet, we&#x27;ve got a great line up of items for the hockey man in your life, that he&#x27;ll love at home, the bar, or the arena. Check them out!</p>
+<p>Every pick below is sorted into four price tiers, from stocking stuffers to splurge gifts. Prices change fast this time of year, so check the listing before you buy.</p>
+</div>
+<nav class="toc" aria-labelledby="toc-title">
+  <p class="toc-title" id="toc-title">In this post</p>
+  <ol>
+    <li><a href="#under-25-stocking-stuffers-that-don-t-feel-cheap">Under $25: stocking stuffers that don&#x27;t feel cheap</a></li>
+    <li><a href="#25-to-60-the-gifts-he-ll-wear-all-winter">$25 to $60: the gifts he&#x27;ll wear all winter</a></li>
+    <li><a href="#60-to-100-and-splurge-100-the-gifts-that-get-remembered">$60 to $100 and splurge $100+: the gifts that get remembered</a></li>
+    <li><a href="#how-to-wear-it-a-hockey-night-outfit">How to wear it: a hockey night outfit</a></li>
+    <li><a href="#wrap-up">Wrap-up</a></li>
+  </ol>
+</nav>
+<div class="post-body">
+<h2 id="under-25-stocking-stuffers-that-don-t-feel-cheap">Under $25: stocking stuffers that don&#x27;t feel cheap</h2>
+<p>Small gifts work best when they match what he does on game night. Think things he&#x27;ll use before the puck drops.</p>
+<p><a class="bp-aff" href="https://www.amazon.com/dp/B08FKXNNPB?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener">BenShot Hockey Puck Pint Glass (16oz)</a>. For the guy who hosts game night. The puck is set right into the middle of the glass, like a slapshot that hit it. (It&#x27;s the glass in the photo at the top of this post.)</p>
+<p>A 16oz pint glass with a real hockey puck set into its side. It&#x27;s made in the USA and comes in its own gift box.</p>
+<p><strong>Best for:</strong> the hockey fan who likes a cold one.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/puck-phone-stand-500.webp"><img class="bp-photo" src="img/puck-phone-stand-500.jpg" alt="Phone standing upright in a PUCKUPS hockey puck phone stand on a wooden table (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.com/dp/B00E37SQ84?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener">PUCKUPS Genuine Hockey Puck Phone Stand</a>. A real puck turned into a desk or nightstand stand.</p>
+<p>A very sturdy phone stand made from a real regulation hockey puck. It holds most phones upright on a desk.</p>
+<p><strong>Best for:</strong> the hockey player at his desk.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/hockey-tumbler-500.webp"><img class="bp-photo" src="img/hockey-tumbler-500.jpg" alt="Two black Fufandi hockey tumblers, one printed &quot;Eat Sleep Hockey Repeat&quot; (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.com/dp/B0FK1VYVQP?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener">Fufandi Hockey 20oz Insulated Tumbler</a>. Coffee before the game, stays hot through the second period.</p>
+<p>A 20oz stainless steel, double-wall vacuum-insulated tumbler that keeps drinks hot or cold. A hockey-themed gift for coaches and fans.</p>
+<p><strong>Best for:</strong> the hockey coach or rink regular.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/penalty-box-tee-500.webp"><img class="bp-photo" src="img/penalty-box-tee-500.jpg" alt="Folded black &quot;Straight Outta The Penalty Box&quot; hockey T-shirt (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.com/dp/B079T32H5X?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener">Straight Outta The Penalty Box Hockey T-Shirt</a>. The funny one for the guy who spends more time in the box than on the ice.</p>
+<p>A funny penalty-box graphic tee for hockey players and fans. An easy, low-cost gift.</p>
+<p><strong>Best for:</strong> the hockey player who spends time in the box.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/thermal-beanie-500.webp"><img class="bp-photo" src="img/thermal-beanie-500.jpg" alt="Black thermal-lined knit beanie with its grey lining showing, plus four more colours" width="500" height="666" loading="lazy" decoding="async"></picture></figure>
+<p><a class="bp-aff" href="https://onelink.shein.com/57/659ral2t08lk?ismg_ol=2IRVS0bymtU_01_KOC-C" target="_blank" rel="nofollow sponsored noopener">Thermal-Lined Knit Beanie</a>. A toque that&#x27;s actually lined, for cold arenas and colder driveways.</p>
+<p>A thick, thermal-lined knit beanie that&#x27;s warm enough for cold stadium seats and plain enough to go with any team&#x27;s colours. Grab a couple in different shades.</p>
+<p><strong>Best for:</strong> the gameday guy.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/hand-warmers-500.webp"><img class="bp-photo" src="img/hand-warmers-500.jpg" alt="Two ropelux rechargeable electric hand warmers (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B0FSKK9G5F?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">ropelux Rechargeable Hand Warmers (2-pack)</a>. A small add-on that fits in a stocking and gets used all winter.</p>
+<p>A two-pack of rechargeable hand warmers with big 6400mAh batteries. Toss them in his pockets for cold games, walks and commutes.</p>
+<p><strong>Best for:</strong> the cold-hands guy.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/merino-socks-500.webp"><img class="bp-photo" src="img/merino-socks-500.jpg" alt="EBMORE merino wool thermal socks multi-pack in brown, grey and black (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B0CW2TQFPS?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">EBMORE Merino Wool Thermal Socks</a>. Unglamorous, but he&#x27;ll thank you in January.</p>
+<p>A multi-pack of merino wool thermal socks in brown, grey and black. Merino is warm, breathable and naturally fights odour, so they&#x27;re as good for a cold stadium as they are for a winter commute. A practical gift every guy will actually use.</p>
+<p><strong>Best for:</strong> the cold-stadium guy.</p>
+<h2 id="25-to-60-the-gifts-he-ll-wear-all-winter">$25 to $60: the gifts he&#x27;ll wear all winter</h2>
+<p>This is the sweet spot for most gift lists. These are pieces that work on game night and in everyday life.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/hockey-mug-500.webp"><img class="bp-photo" src="img/hockey-mug-500.jpg" alt="MAX&#x27;IS Creations hockey mug with a small hockey net on its rim (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.com/dp/B016P4UZ5Y?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener">MAX&#x27;IS Creations Hockey Mug with a Net (14oz)</a>. The one hockey-specific gift in this tier, and it looks good on a shelf.</p>
+<p>A hand-painted stoneware mug with a net he can shoot snacks into. It doubles as a cereal bowl and makes a fun desk or kitchen gift for hockey fans.</p>
+<p><strong>Best for:</strong> the hockey fan with a sense of humour.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/champion-hoodie-500.webp"><img class="bp-photo" src="img/champion-hoodie-500.jpg" alt="Black Champion Powerblend pullover hoodie on a hanger (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.com/dp/B01HIUTCA8?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener">Champion Men&#x27;s Powerblend Pullover Hoodie</a>. Plain enough to wear anywhere, warm enough for the rink.</p>
+<p>Champion&#x27;s midweight brushed Powerblend fleece, which resists pilling and shrinking. It has a roomy kangaroo pocket and a double-lined drawcord hood.</p>
+<p><strong>Best for:</strong> the guy who lives in hoodies.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/seat-cushions-500.webp"><img class="bp-photo" src="img/seat-cushions-500.jpg" alt="Two blue FASTMOMENT stadium seat cushions stacked on a table (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/stadium-blanket-500.webp"><img class="bp-photo" src="img/stadium-blanket-500.jpg" alt="Folded black DUKUSEEK hooded stadium blanket (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B0D9XWMVN7?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">FASTMOMENT Stadium Seat Cushions (2-pack)</a> or the <a class="bp-aff" href="https://www.amazon.ca/dp/B091GMCBBG?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">DUKUSEEK Hooded Stadium Blanket</a>. For anyone who sits through cold arena games.</p>
+<p><em>FASTMOMENT Stadium Seat Cushions (2-pack):</em> A two-pack of padded stadium seat cushions with carry handles, made for long games on hard bleachers. A gift for him and whoever&#x27;s sitting next to him. <strong>Best for:</strong> the stadium regular.</p>
+<p><em>DUKUSEEK Hooded Stadium Blanket:</em> A hooded, waterproof stadium blanket with a fleece lining, made to wrap around him at cold games, tailgates and campsites. It&#x27;s warmer than a regular throw and packs up easily. <strong>Best for:</strong> the cold-stadium guy.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/touchscreen-gloves-500.webp"><img class="bp-photo" src="img/touchscreen-gloves-500.jpg" alt="Black The North Face Etip touchscreen gloves on a table (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B08BDPDNH7?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">The North Face Etip Recycled Touchscreen Gloves</a>. He can still use his phone to check the score.</p>
+<p>The North Face Etip gloves, made with recycled materials and touchscreen-friendly fingertips so he can use his phone without taking them off. A warm, everyday glove from a brand he&#x27;ll recognise.</p>
+<p><strong>Best for:</strong> the winter commuter.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/stanley-bottle-500.webp"><img class="bp-photo" src="img/stanley-bottle-500.jpg" alt="Stanley Classic vacuum bottle in Hammertone Green (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B000FZX93K?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">Stanley Heritage Classic Vacuum Bottle 1.1 qt</a>. The classic thermos for the early-morning rink run.</p>
+<p>The Stanley Classic vacuum bottle in Hammertone Green, the original keeps-coffee-hot thermos. Built for tailgates, job sites and early mornings, and tough enough to last for years.</p>
+<p><strong>Best for:</strong> the tailgater.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/quarter-zip-500.webp"><img class="bp-photo" src="img/quarter-zip-500.jpg" alt="Coffee brown Manfinity Homme quarter zip pullover with a close-up of its thermal lining" width="500" height="666" loading="lazy" decoding="async"></picture></figure>
+<p><a class="bp-aff" href="https://onelink.shein.com/58/65zgbh3itf7h?ismg_ol=4LifJIaP0tf_01_KOC-C" target="_blank" rel="nofollow sponsored noopener">Manfinity Homme Thermal Lined Quarter Zip Pullover</a>. A warm layer that dresses up or down.</p>
+<p>A thermal-lined quarter-zip pullover in coffee brown, warm enough for cold games and sharp enough for the office.</p>
+<p><strong>Best for:</strong> the gameday layering guy.</p>
+<h2 id="60-to-100-and-splurge-100-the-gifts-that-get-remembered">$60 to $100 and splurge $100+: the gifts that get remembered</h2>
+<p>If the budget stretches, go for one real piece over three small ones.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/carhartt-hoodie-500.webp"><img class="bp-photo" src="img/carhartt-hoodie-500.jpg" alt="Man in a navy Carhartt loose fit midweight hoodie and jeans (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B00778BNEA?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">Carhartt Loose Fit Midweight Logo Sleeve Hoodie</a> ($60 to $100). Heavyweight and built to last.</p>
+<p>Carhartt&#x27;s loose fit midweight hoodie with the logo on the sleeve. It&#x27;s heavy enough for fall, built to last and the hoodie every guy ends up wearing to death.</p>
+<p><strong>Best for:</strong> literally any guy.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/levis-trucker-500.webp"><img class="bp-photo" src="img/levis-trucker-500.jpg" alt="Man in a blue Levi&#x27;s denim trucker jacket over a white T-shirt (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B077TDS2G6?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">Levi&#x27;s Trucker Jacket</a> ($60 to $100). A jacket that works every season.</p>
+<p>The Levi&#x27;s Trucker jacket, the original denim jacket in a stretch wash. It layers over a hoodie in fall and a tee in spring, and it&#x27;s one of those pieces a guy keeps for a decade.</p>
+<p><strong>Best for:</strong> the layering guy.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/maple-leaf-hoodie-500.webp"><img class="bp-photo" src="img/maple-leaf-hoodie-500.jpg" alt="Red House of Blanks Vintage Maple Leaf hooded pullover with a white maple leaf and &quot;Canada&quot; on the chest" width="500" height="500" loading="lazy" decoding="async"></picture></figure>
+<p><a class="bp-aff" href="https://www.awin1.com/cread.php?awinmid=117971&amp;awinaffid=2968527&amp;ued=https%3A%2F%2Fwww.houseofblanks.com%2Fproducts%2Fvintage-maple-leaf-hooded-pullover-red" target="_blank" rel="nofollow sponsored noopener">House of Blanks Vintage Maple Leaf Hooded Pullover</a> ($100+). Made in Canada, and a good pick for the hockey fan who wants his gear to look good.</p>
+<p>House of Blanks&#x27; vintage maple leaf hoodie in red, with a felt maple leaf on the chest. Made in Canada, and perfect for hockey nights.</p>
+<p><strong>Best for:</strong> the guy who&#x27;s proud to be Canadian.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/columbia-jacket-500.webp"><img class="bp-photo" src="img/columbia-jacket-500.jpg" alt="Man in a black quilted Columbia Delta Ridge II down jacket (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B0CLR8R792?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">Columbia Delta Ridge II Down Jacket</a> ($100+). Warm enough for the walk from the parking lot to the arena.</p>
+<p>The Columbia Delta Ridge II, a down hooded jacket with a clean, stitch-free design. Serious warmth for late-season games without the puffy look.</p>
+<p><strong>Best for:</strong> the cold-stadium guy.</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/timberland-boot-500.webp"><img class="bp-photo" src="img/timberland-boot-500.jpg" alt="Wheat-coloured Timberland Premium 6-inch waterproof boot (AI-generated illustration)" width="500" height="750" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B0CPSKXWT1?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">Timberland Premium 6&quot; Waterproof Boot</a> ($100+). The boot he&#x27;ll wear until it falls apart.</p>
+<p>The Timberland Premium 6-inch waterproof boot in wheat nubuck, the original tailgate boot. Waterproof, built for snow and slush, and recognisable everywhere. A gift he&#x27;ll wear for years.</p>
+<p><strong>Best for:</strong> the gameday guy (go big).</p>
+<figure class="bp-figure bp-figure-small"><picture><source type="image/webp" srcset="img/heated-vest-500.webp"><img class="bp-photo" src="img/heated-vest-500.jpg" alt="Man in a black Venustas heated vest over a grey sweater (AI-generated illustration)" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI.</figcaption></figure>
+<p><a class="bp-aff" href="https://www.amazon.ca/dp/B08F4WXBJS?tag=thatfootballg-ca-20" target="_blank" rel="nofollow sponsored noopener">Venustas Heated Vest with Battery</a> ($100+). For the guy who&#x27;s always cold at outdoor games.</p>
+<p>A heated vest with a rechargeable battery and multiple heat settings, in black. It slips under a jacket for cold games, ice fishing or shovelling, and comes in sizes up to 5XL.</p>
+<p><strong>Best for:</strong> the cold-stadium guy (go big).</p>
+<h2 id="how-to-wear-it-a-hockey-night-outfit">How to wear it: a hockey night outfit</h2>
+<p>You don&#x27;t need a jersey to dress for hockey night. Start with the <a class="bp-aff" href="https://tidd.ly/3UIQG9j" target="_blank" rel="nofollow sponsored noopener">House of Blanks 3016 recycled cotton pullover</a> in charcoal, throw the <a class="bp-aff" href="https://www.amazon.com/dp/B0F9ZDLH5H?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener">Levi&#x27;s Sherpa Trucker Jacket</a> over it, and finish with an officially licensed <a class="bp-aff" href="https://www.amazon.com/dp/B0DCT55QZM?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener">NHL pom beanie</a> in his team&#x27;s colours, and you&#x27;re set.</p>
+<figure class="bp-figure"><picture><source type="image/webp" srcset="img/hockey-night-outfit-500.webp"><img class="bp-photo" src="img/hockey-night-outfit-500.jpg" alt="Man at an outdoor rink in a black Levi&#x27;s sherpa-lined trucker jacket over a charcoal hoodie, beige tapered joggers, black boots and a red NHL pom beanie" width="500" height="745" loading="lazy" decoding="async"></picture><figcaption>Image created with AI. <a href="../../outfits/gameday/gameday-nov-23-5/">Shop this hockey night outfit</a></figcaption></figure>
+<div class="bp-products"><article class="bp-card"><picture><source type="image/webp" srcset="../../outfits/gameday/gameday-nov-23-5/pullover/pullover-424.webp"><img class="bp-thumb" src="../../outfits/gameday/gameday-nov-23-5/pullover/pullover-424.jpg" alt="House of Blanks 3016 Recycled Cotton Pullover (Charcoal)" width="424" height="424" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">House of Blanks</span></div><h3 class="prod-name">House of Blanks 3016 Recycled Cotton Pullover (Charcoal)</h3><a class="bp-shop" href="https://tidd.ly/3UIQG9j" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop House of Blanks 3016 Recycled Cotton Pullover (Charcoal) on House of Blanks (opens in a new tab)">Shop House of Blanks<span class="link-text" hidden>House of Blanks 3016 Recycled Cotton Pullover (Charcoal)</span></a><a class="bp-details" href="../../outfits/gameday/gameday-nov-23-5/pullover/">Details</a></div></article><article class="bp-card"><picture><source type="image/webp" srcset="../../outfits/streetwear/streetwear-outfit-nov-16/trucker-jacket/trucker-jacket-424.webp"><img class="bp-thumb" src="../../outfits/streetwear/streetwear-outfit-nov-16/trucker-jacket/trucker-jacket-424.jpg" alt="Levi&#x27;s Men&#x27;s Sherpa Trucker Jacket" width="424" height="424" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">Amazon</span></div><h3 class="prod-name">Levi&#x27;s Men&#x27;s Sherpa Trucker Jacket</h3><a class="bp-shop" href="https://www.amazon.com/dp/B0F9ZDLH5H?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop Levi&#x27;s Men&#x27;s Sherpa Trucker Jacket on Amazon (opens in a new tab)">Shop on Amazon<span class="link-text" hidden>Levi&#x27;s Men&#x27;s Sherpa Trucker Jacket</span></a><a class="bp-details" href="../../outfits/streetwear/streetwear-outfit-nov-16/trucker-jacket/">Details</a></div></article><article class="bp-card"><picture><source type="image/webp" srcset="../../outfits/gameday/gameday-nov-23-5/nhl-pom-beanie/nhl-pom-beanie-424.webp"><img class="bp-thumb" src="../../outfits/gameday/gameday-nov-23-5/nhl-pom-beanie/nhl-pom-beanie-424.jpg" alt="ZHATS NHL Officially Licensed Pom Freestyle Beanie" width="424" height="514" loading="lazy" decoding="async"></picture><div class="bp-card-body"><div class="card-meta"><span class="retailer">Amazon</span></div><h3 class="prod-name">ZHATS NHL Officially Licensed Pom Freestyle Beanie</h3><a class="bp-shop" href="https://www.amazon.com/dp/B0DCT55QZM?tag=thatfootbal01-20" target="_blank" rel="nofollow sponsored noopener" aria-label="Shop ZHATS NHL Officially Licensed Pom Freestyle Beanie on Amazon (opens in a new tab)">Shop on Amazon<span class="link-text" hidden>ZHATS NHL Officially Licensed Pom Freestyle Beanie</span></a><a class="bp-details" href="../../outfits/gameday/gameday-nov-23-5/nhl-pom-beanie/">Details</a></div></article></div>
+<p>It&#x27;s warm enough for the arena, comfortable enough for the couch, and sharp enough to wear to the bar after the game. Not bad for one outfit.</p>
+<h2 id="wrap-up">Wrap-up</h2>
+<p>Pick one gift from the tier that fits your budget, add a small stocking stuffer, and you&#x27;re covered. Last day to order for Christmas delivery varies by seller, so check shipping dates before you buy.</p>
+</div>
+<aside class="explore" aria-labelledby="explore-title">
+  <h2 id="explore-title">Explore more</h2>
+  <ul>
+    <li><a class="explore-link" href="../../gift-guide/">180 Christmas Gifts for Men 2026 (Canada)<span aria-hidden="true">→</span></a></li>
+    <li><a class="explore-link" href="../../outfits/gameday/gameday-nov-23-5/">Gameday Outfit<span aria-hidden="true">→</span></a></li>
+    <li><a class="explore-link" href="../../blog/christmas-gifts-under-50-2026/">Christmas Gifts for Men Under $50 (2026)<span aria-hidden="true">→</span></a></li>
+  </ul>
+</aside>
+</article>
+<a class="back" href="../../blog/">← All blog posts</a>
+</div>
+<!-- site-footer:start -->
+<div class="tf12-foot">
+  <p class="tf12-foot-links"><a href="../../gift-guide/">Holiday Gift Guide</a> · <a href="../../work-with-me/" data-work-location="footer">Work with me</a> · <a href="../../privacy/">Privacy</a> · <button type="button" data-tf12-consent-open>Cookie settings</button></p>
+</div>
+<!-- site-footer:end -->
+</body>
+</html>
