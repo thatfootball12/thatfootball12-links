@@ -25,12 +25,21 @@ Inputs (all in pinterest/):
       the pin but leaves its row out of the CSV, listed in the report.
       Optional per batch: "hashtags_first": true puts the hashtags right
       after the copy, before the disclosure and AI line.
+      Section routing: for batches from pin_settings.json
+      routing.applies_from on, pin_routing.py may move a pin's board/
+      section into a thin section (price tiers, basics, running, 1 in 3
+      Game Day outfits to Men's Stadium Streetwear); the report lists every
+      move and the thin-section counts. "section_locked": true on a pin
+      keeps its hand-set board/section; "outfit_check": true marks the
+      weekly Stadium Streetwear Outfit Check (always Men's Stadium
+      Streetwear).
     pin_settings.json   the disclosure appended to every description
       (disclosure_shein_only when every item in the pin is SHEIN; with
       any Awin item, the line naming only the partners present:
       disclosure_awin_only, _awin_amazon, _awin_shein or disclosure_awin
-      for all three (the wording names House of Blanks, the only Awin
-      merchant pinned so far); else disclosure; a pin with a retailer
+      for all three; the wording names House of Blanks, and a pin whose
+      Awin items are another merchant gets that merchant's name instead,
+      which must be listed in awin_merchants); else disclosure; a pin with a retailer
       outside disclosure_retailers is an error), the AI line added for AI-image pins (every outfit pin, and product
       pins whose retailer is in ai_image_retailers, unless the record
       says "ai_image": false), and the account's
@@ -56,7 +65,9 @@ Per pin:
                 images, never the Amazon product photo.
                 Its Link is the product page of the products.json id in
                 its optional "page" field, else the card's own anchor on
-                the gift guide (gift-guide/#<id>).
+                the gift guide (gift-guide/#<id>). A product pin of a
+                gift guide listing record links to its card the same way
+                (gift-guide/#<holiday_pin>) when the page has that id.
                 A batch where no SHEIN product pin has a product-pin.jpg
                 is an error: make_product_pin.py wasn't run.
     Description copy + disclosure [+ AI line] + hashtags.
@@ -111,6 +122,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 
 import gift_guide
+import pin_routing
 import sellers
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -160,6 +172,15 @@ def page_url(rel_dir):
     return SITE + rel_dir.strip("/").replace("\\", "/") + "/"
 
 
+def card_anchor(card_id):
+    """The gift guide element id for a card ("N106"), or None when the
+    page has no element with that id."""
+    if not card_id:
+        return None
+    with open(os.path.join(REPO, gift_guide.PAGE), encoding="utf-8") as f:
+        return card_id if f'id="{card_id}"' in f.read() else None
+
+
 def gift_card(card_id):
     """(section id, retailer class) of a gift guide card, or None."""
     with open(os.path.join(REPO, gift_guide.PAGE), encoding="utf-8") as f:
@@ -202,6 +223,7 @@ def resolve(pin, products, by_id, settings, problems, warnings):
             return False
         pin["retailers"] = {p.get("retailer") for p in items}
         pin["has_amazon"] = "Amazon" in pin["retailers"]
+        pin["items"] = items
         return True
 
     if pin.get("type") == "product":
@@ -234,12 +256,16 @@ def resolve(pin, products, by_id, settings, problems, warnings):
             pin["media"] = SITE + rec["image"]
         pin["shein_page"] = rec.get("retailer") == "SHEIN" and not gift_guide.listing_only(rec)
         pin["link"] = page_url(rel)
+        if gift_guide.listing_only(rec) and card_anchor(rec.get("holiday_pin")):
+            # Land on the listing's own card, as gift pins do.
+            pin["link"] += "#" + card_anchor(rec["holiday_pin"])
         # "ai_image": false on a record marks a real retailer photo used in
         # place of the AI image (e.g. when Gemini got the product wrong).
         pin["ai"] = rec.get("ai_image",
                             rec.get("retailer") in settings.get("ai_image_retailers", []))
         pin["retailers"] = {rec.get("retailer")}
         pin["has_amazon"] = rec.get("retailer") == "Amazon"
+        pin["rec"], pin["items"] = rec, [rec]
         return True
 
     if pin.get("type") == "gift":
@@ -365,8 +391,25 @@ def disclosure(pin, settings):
         key = {frozenset({"Awin"}): "disclosure_awin_only",
                frozenset({"Awin", "Amazon"}): "disclosure_awin_amazon",
                frozenset({"Awin", "SHEIN"}): "disclosure_awin_shein"}.get(frozenset(retailers), "disclosure_awin")
-        return settings[key].strip()
+        # The awin lines name House of Blanks; swap in the Awin merchants
+        # actually in the pin (e.g. "As a Moosehill affiliate, ...").
+        names = awin_merchants(pin)
+        line = settings[key].strip()
+        if names and names != [AWIN_DEFAULT_MERCHANT]:
+            line = line.replace(AWIN_DEFAULT_MERCHANT, " and ".join(names))
+        return line
     return settings["disclosure"].strip()
+
+
+# The merchant the disclosure_awin* lines in pin_settings.json name.
+AWIN_DEFAULT_MERCHANT = "House of Blanks"
+
+
+def awin_merchants(pin):
+    """Sorted merchant names of the pin's Awin items ("?" when a record
+    has none, so it fails the awin_merchants check)."""
+    return sorted({i.get("merchant") or "?" for i in pin.get("items", [])
+                   if i.get("retailer") == "Awin"})
 
 
 def full_description(pin, settings):
@@ -528,6 +571,10 @@ def validate(pins, settings, problems, warnings, week_start):
         if uncovered:
             problems.append(f"{label}: no disclosure covers {', '.join(sorted(map(str, uncovered)))} "
                             f"(disclosure_retailers in pin_settings.json)")
+        unknown = [m for m in awin_merchants(p) if m not in settings.get("awin_merchants", [AWIN_DEFAULT_MERCHANT])]
+        if unknown:
+            problems.append(f"{label}: Awin merchant {', '.join(unknown)} isn't in awin_merchants "
+                            f"in pin_settings.json (the disclosure would name the wrong partner)")
         if p["has_amazon"] and "$" in title + p["description"]:
             problems.append(f"{label}: '$' in the copy of a pin with an Amazon item")
         if "SHEIN" in p["retailers"]:
@@ -576,7 +623,7 @@ def write_csvs(rows, batch):
     return paths
 
 
-def report(batch, days, pins, warnings, csv_paths):
+def report(batch, days, pins, warnings, csv_paths, routing_lines=()):
     L = [f"# Pinterest bulk upload: {batch}", ""]
     if csv_paths:
         L += ["Files: " + ", ".join(os.path.relpath(p, REPO).replace("\\", "/") for p in csv_paths), ""]
@@ -601,6 +648,7 @@ def report(batch, days, pins, warnings, csv_paths):
         counts[key] = counts.get(key, 0) + 1
     L += ["## Boards and sections", "", "| Board | Section | Pins |", "|---|---|---|"]
     L += [f"| {b} | {s or '(none)'} | {n} |" for (b, s), n in sorted(counts.items())] + [""]
+    L += list(routing_lines)
 
     L += ["## Manual follow-ups", ""]
     held = [p for p in sorted(pins, key=lambda p: p["utc"]) if p.get("hold")]
@@ -684,6 +732,20 @@ def main():
     if tagged:
         for p in pins:
             p["link"] = utm_link(p, campaign)
+    routing_lines = []
+    if pins and "routing" in settings:
+        # Thin-section routing (pin_routing.py): moves pins for batches from
+        # routing.applies_from on, only suggests for earlier ones.
+        applied = week_start >= date.fromisoformat(settings["routing"]["applies_from"])
+        before = pin_routing.current_counts(settings["routing"], exclude_batch=args.batch)
+        after = dict(before)
+        decisions = pin_routing.route(pins, settings, after, apply=applied)
+        warnings += pin_routing.warnings_from(decisions)
+        routing_lines = pin_routing.report_lines(pins, settings, before, after, decisions, applied)
+        print("Thin sections this batch (before + this batch = after, target "
+              f"{settings['routing']['thin']['target']}):")
+        for key in pin_routing.thin_keys(settings["routing"]):
+            print(f"  {pin_routing.fmt(key)}: {before[key]} + {after[key] - before[key]} = {after[key]}")
     if not pins:
         problems.append("no usable pins")
     else:
@@ -707,7 +769,7 @@ def main():
         sys.exit(1)
 
     csv_paths = [] if args.dry_run else write_csvs(csv_rows(pins), args.batch)
-    text = report(args.batch, days, pins, warnings, csv_paths)
+    text = report(args.batch, days, pins, warnings, csv_paths, routing_lines)
     if not args.dry_run:
         with open(os.path.join(PIN_DIR, f"pinterest_bulk_{args.batch}_report.md"), "w",
                   encoding="utf-8", newline="\n") as f:

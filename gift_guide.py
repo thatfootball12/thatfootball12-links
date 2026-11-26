@@ -13,7 +13,8 @@ checks and CI cover them. A listing record has:
                      thumbnail either way)
     price            null (the gift guide shows a price tier, not a price)
     holiday_pin      optional: its pin id, e.g. "S02", once it has a pin
-                     (holiday-2026/pins/<pin>_holiday.png). Leave it off
+                     (holiday-2026/pins/<pin>_gift.jpg, or the older
+                     <pin>_holiday.png). Leave it off
                      until then: pins come later (make_gift_pin.py).
     asin             Amazon listings: the product's ASIN
     merchant         Awin listings: the store, e.g. "Moosehill"
@@ -44,9 +45,16 @@ def listing_only(p):
 
 
 def pin_image(p):
-    """Repo-relative path of the record's holiday pin image, or None."""
+    """Repo-relative path of the record's holiday pin image, or None:
+    <pin>_gift.jpg (make_gift_pin.py) when it exists, else
+    <pin>_holiday.png (the older hand-made pins)."""
     pin = p.get("holiday_pin")
-    return f"{PIN_DIR}/{pin}_holiday.png" if pin else None
+    if not pin:
+        return None
+    gift = f"{PIN_DIR}/{pin}_gift.jpg"
+    if os.path.isfile(os.path.join(REPO, gift.replace("/", os.sep))):
+        return gift
+    return f"{PIN_DIR}/{pin}_holiday.png"
 
 
 def page_links():
