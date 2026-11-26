@@ -1,0 +1,280 @@
+{
+  "batch": "nov-30-addon",
+  "week_start": "2026-11-30",
+  "hashtags_first": true,
+  "note": "17 add-on SHEIN product pins for the Nov 30 week (11 from the Nov 25 sourcing + 6 new), records in gift-guide-nov-30 / trending-products-nov-30. Each has a fixed publish time in a gap between the Nov 30 CSV slots.",
+  "pins": [
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/puffer-vest",
+      "title": "🎁 CA$38.46 Puffer Vest Gift (Usually CA$53) He'll Wear All Winter",
+      "description": "Manfinity Homme hooded puffer vest for CA$38.46, down from CA$53 — rated 4.9 by 1,000+ buyers. Easy to throw over a hoodie for cool weather mens fashion that actually works. Everyday-ready. Order soon; holiday delivery windows are already pushing into December.",
+      "hashtags": [
+        "#mensoutfits",
+        "#layeredfalloutfitsmen",
+        "#DealAlert",
+        "#mensstyle"
+      ],
+      "alt_text": "Men's hooded zip-up puffer vest with pockets, a winter layering gift for him",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "$25–$60",
+      "publish": "2026-11-30T12:35"
+    },
+    {
+      "type": "product",
+      "id": "trending-products/trending-products-nov-30/boots",
+      "title": "👢 CA$53.76 Lace-Up Boots That Go With Every Pair of Jeans",
+      "description": "Minimalist lace-up front boots for CA$53.76 (usually CA$67), rated 4.9 by 1,000+ buyers. A clean shape that works for mens fall boots season and carries straight into winter. Office-appropriate or weekend casual. Sale prices like this tend to move once Black Friday wraps.",
+      "hashtags": [
+        "#mensfallfashion",
+        "#mensoutfits",
+        "#ShopThisLook",
+        "#menswear"
+      ],
+      "alt_text": "Men's minimalist lace-up front boots that pair with jeans for fall and winter",
+      "board": "Business Casual Outfits for Men",
+      "section": "Shoes & Accessories",
+      "publish": "2026-11-30T16:30"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/thermal-set",
+      "title": "🔥 CA$20.24 Thermal Set He Didn't Know He Needed",
+      "description": "Fleece-lined crew neck thermal top and pants for CA$20.24 (usually CA$27), rated 4.9 by 1,000+ buyers. Works as a base layer under cool weather outfits or as cozy winter PJs. Everyday-ready. Practical gifts at this price rarely stay this cheap through the holiday rush.",
+      "hashtags": [
+        "#DealAlert",
+        "#menswear",
+        "#mensoutfits",
+        "#autumnstyle"
+      ],
+      "alt_text": "White fleece-lined men's thermal top and pants set for cold-weather layering",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "Under $25",
+      "publish": "2026-11-30T20:20"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/slippers",
+      "title": "🎁 CA$16.64 Plush Slippers: The Easiest Gift on Your List",
+      "description": "Thick-sole plush slip-on slippers for CA$16.64 (usually CA$21), rated 4.9 by 1,000+ buyers. Warm, cushy and sturdy enough for a quick trip to the mailbox. Zero guesswork on style, just comfort he'll use every day. Grab his size now before holiday shipping gets tight.",
+      "hashtags": [
+        "#Under20Finds",
+        "#DealAlert",
+        "#mensstyle",
+        "#menswear"
+      ],
+      "alt_text": "Plush thick-sole slip-on house slippers, a cozy winter gift for men",
+      "board": "Men's Grooming & Gift Sets",
+      "section": "Slippers & Loungewear",
+      "publish": "2026-12-01T13:50"
+    },
+    {
+      "type": "product",
+      "id": "trending-products/trending-products-nov-30/hoodie",
+      "title": "🧥 CA$28.62 Thermal-Lined Zip Hoodie Built for Real Winter",
+      "description": "Manfinity Homme thermal-lined zip-up hoodie for CA$28.62 (usually CA$36), rated 4.9 by 1,000+ buyers. Warm lining, clean plain look, and easy to work into layered fall outfits men wear right into winter. Everyday-ready. Grab your size while this price is still live.",
+      "hashtags": [
+        "#mensoutfits",
+        "#streetstylemen",
+        "#DealAlert",
+        "#autumnstyle"
+      ],
+      "alt_text": "Brown men's thermal-lined zip-up hoodie with drawstring hood for winter",
+      "board": "Men's Basics & Essentials",
+      "section": "Hoodies",
+      "publish": "2026-12-01T19:05"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/robe",
+      "title": "🛁 The CA$33.58 Hooded Robe That Feels Like a Spa Gift",
+      "description": "Thick flannel fleece hooded robe with a belt and two pockets for CA$33.58 (usually CA$42), rated 4.9 by 1,000+ buyers. Soft, warm and roomy for slow cool weather mornings. A cozy gift that actually gets worn, not regifted. Order early so it lands before Christmas.",
+      "hashtags": [
+        "#DealAlert",
+        "#menswear",
+        "#mensstyle",
+        "#ShopThisLook"
+      ],
+      "alt_text": "Men's thick flannel fleece hooded bathrobe with belt and pockets for winter",
+      "board": "Men's Grooming & Gift Sets",
+      "section": "Slippers & Loungewear",
+      "publish": "2026-12-02T13:50"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/chest-bag",
+      "title": "🎒 CA$13.04 Sling Bag Gift That Looks Way Pricier",
+      "description": "Compact square chest bag for CA$13.04 (usually CA$16), rated 4.9 by 1,000+ buyers. Fits phone, wallet and keys, and pairs with street style men's fits or easy messenger bag outfits. Everyday-ready. A cheap gift that doesn't look cheap, while this sale price holds.",
+      "hashtags": [
+        "#Under20Finds",
+        "#streetstylemen",
+        "#mensstyle",
+        "#ShopThisLook"
+      ],
+      "alt_text": "Small square men's crossbody chest bag for keys, phone and wallet",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "Under $25",
+      "publish": "2026-12-02T19:05"
+    },
+    {
+      "type": "product",
+      "id": "trending-products/trending-products-nov-30/sweatpants",
+      "title": "🔥 CA$30.86 Lined Sweatpants That Beat Flimsy Joggers",
+      "description": "Manfinity Homme thermal-lined drawstring sweatpants for CA$30.86 (usually CA$39), rated 4.9 by 500+ buyers. Warm without the bulk, and they pair with any hoodie for easy mens casual outfits. Everyday-ready. This sale price won't hang around forever.",
+      "hashtags": [
+        "#mensoutfits",
+        "#mensstyle",
+        "#DealAlert",
+        "#ShopThisLook"
+      ],
+      "alt_text": "Men's thermal-lined drawstring sweatpants for warm everyday winter wear",
+      "board": "Men's Basics & Essentials",
+      "section": "Pants",
+      "publish": "2026-12-03T13:50"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/wallet",
+      "title": "💳 CA$7.50 Slim Wallet: The Gift Dad Will Actually Carry",
+      "description": "Slim bi-fold card wallet with a metal accent for CA$7.50, rated 4.9 by 1,000+ buyers. Holds cards and cash without the bulky back-pocket bulge, a small upgrade for dapper mens outfits. Office-appropriate. Easy stocking stuffer, so grab it before holiday orders pile up.",
+      "hashtags": [
+        "#Under20Finds",
+        "#DealAlert",
+        "#dappermensoutfits",
+        "#menswear"
+      ],
+      "alt_text": "Slim bi-fold men's card wallet with metal detail, a budget gift for dad",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "Under $25",
+      "publish": "2026-12-03T19:05"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/gym-bag",
+      "title": "💪 CA$14.32 Gym Duffel With a Wet/Dry Pocket — Gift Sorted",
+      "description": "Lightweight gym duffel with wet/dry separation for CA$14.32 (usually CA$18), rated 4.9 by 1,000+ buyers. Big enough for a full gym kit or a weekend trip. One of the easiest sports gifts for men who actually train. Under CA$14.32 won't last long with holiday orders rolling in.",
+      "hashtags": [
+        "#Under20Finds",
+        "#sportsgiftsformen",
+        "#DealAlert",
+        "#mensstyle"
+      ],
+      "alt_text": "Large lightweight gym duffel bag with wet/dry compartment for men who train",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "Under $25",
+      "publish": "2026-12-04T13:50"
+    },
+    {
+      "type": "product",
+      "id": "trending-products/trending-products-nov-30/teddy-lined-fleece-jacket",
+      "title": "Teddy-Lined Fleece Jacket for CA$48.07 🧸",
+      "description": "An oversized teddy-lined fleece jacket in brown for CA$48.07, rated 4.92 stars from 15K ratings. Patched details, a full zip and real warmth for cold days. Throw it over a hoodie for easy winter streetwear. Popular sizes go first once the cold settles in.",
+      "hashtags": [
+        "#StreetStyleMen",
+        "#ChocolateBrownOutfitsMen",
+        "#MensFallJackets",
+        "#ShopThisLook"
+      ],
+      "alt_text": "Men's oversized brown teddy-lined fleece zip-up jacket for winter",
+      "board": "Men's Casual Streetwear 2026",
+      "section": "Winter Streetwear",
+      "publish": "2026-12-04T19:05"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/watch",
+      "title": "⌚ CA$9.04 Date Watch: Clean, Classic, Gift-Ready",
+      "description": "Minimal round quartz watch with a date window for CA$9.04 (usually CA$11), rated 4.9 by 1,000+ buyers. Simple enough for office-appropriate fits or dapper mens outfits on the weekend. A sharp little gift for the price. Order now so it arrives before the holidays.",
+      "hashtags": [
+        "#Under20Finds",
+        "#DealAlert",
+        "#dappermensoutfits",
+        "#menswear"
+      ],
+      "alt_text": "Minimalist men's round quartz watch with date display, an affordable gift",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "Under $25",
+      "publish": "2026-12-05T11:30"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/shein-7pc-men-s-boxer-briefs-set",
+      "title": "7 Pairs of Boxer Briefs for CA$18.46 🎁",
+      "description": "A seven-pack of simple, comfortable SHEIN boxer briefs for CA$18.46, rated 4.77 stars from 14K ratings. A full-week restock in one box. The practical stocking stuffer every guy actually uses, so grab it before December shipping slows.",
+      "hashtags": [
+        "#StockingStuffersForMen",
+        "#Under20Finds",
+        "#MensBasics",
+        "#GiftsForHim"
+      ],
+      "alt_text": "Seven-pack of men's comfortable boxer briefs, a practical stocking stuffer",
+      "board": "Men's Grooming & Gift Sets",
+      "section": "Stocking Stuffers Under $25",
+      "publish": "2026-12-05T15:45"
+    },
+    {
+      "type": "product",
+      "id": "trending-products/trending-products-nov-30/flap-pocket-cargo-pants",
+      "title": "CA$19.98 Cargo Pants With 3.4K Ratings 👖",
+      "description": "Flap-pocket drawstring cargo pants for CA$19.98 (usually CA$24.98), rated 4.89 stars by 3,400+ buyers. Relaxed fit, useful pockets and easy to pair with a hoodie or a fleece. Everyday street style for under CA$20, while the sale price lasts.",
+      "hashtags": [
+        "#StreetStyleMen",
+        "#Under20Finds",
+        "#MensCasualOutfits",
+        "#DealAlert"
+      ],
+      "alt_text": "Men's flap pocket drawstring cargo pants for everyday streetwear",
+      "board": "Men's Basics & Essentials",
+      "section": "Pants",
+      "publish": "2026-12-05T20:05"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/alanking-tie-handkerchief-cufflinks-gift",
+      "title": "Boxed Tie + Cufflinks Gift Set for CA$10.50 🎁",
+      "description": "A striped blue tie, pocket square and cufflinks set in a gift box for CA$10.50, rated 4.95 stars. Already boxed, so there's zero wrapping stress. A dapper Christmas gift for dad or the guy with a holiday party. Order now while holiday shipping is quick.",
+      "hashtags": [
+        "#DapperMensOutfits",
+        "#Under20Finds",
+        "#GiftsForDad",
+        "#ChristmasShopping"
+      ],
+      "alt_text": "Men's striped tie, handkerchief and cufflinks set in a gift box",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "Under $25",
+      "publish": "2026-12-06T11:30"
+    },
+    {
+      "type": "product",
+      "id": "gift-guides/gift-guide-nov-30/personalized-engraved-stainless-steel-cu",
+      "title": "Engraved Initial Cufflinks: A CA$9.02 Personal Gift ✨",
+      "description": "Minimalist stainless steel cufflinks you can personalize with an initial or name, for CA$9.02 and rated 4.91 stars. A personal touch for a groomsman, boyfriend or dad. Personalized orders take extra time, so get this one in early.",
+      "hashtags": [
+        "#DapperMensOutfits",
+        "#Under20Finds",
+        "#GiftsForBoyfriend",
+        "#ChristmasShopping"
+      ],
+      "alt_text": "Personalized engraved stainless steel cufflinks, a gift for him",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "Under $25",
+      "publish": "2026-12-06T15:45"
+    },
+    {
+      "type": "product",
+      "id": "trending-products/trending-products-nov-30/slim-fit-suit-pants",
+      "title": "Slim Suit Pants for CA$29.42: Holiday Party Ready 👔",
+      "description": "Solid slim fit suit pants with pockets for CA$29.42 (usually CA$36.78), rated 4.81 stars from 15K ratings. Office-appropriate and sharp enough for holiday parties with a knit or blazer. Party season is close, so order early for time to spare.",
+      "hashtags": [
+        "#BusinessCasualMen",
+        "#HolidayPartyOutfitMen",
+        "#DapperMensOutfits",
+        "#DealAlert"
+      ],
+      "alt_text": "Men's solid slim fit suit pants for office and holiday parties",
+      "board": "Business Casual Outfits for Men",
+      "section": "Pants & Chinos",
+      "publish": "2026-12-06T20:05"
+    }
+  ]
+}
