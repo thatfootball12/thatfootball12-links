@@ -6,7 +6,7 @@ updated: 2026-11-27
 category: Gift guides
 search_phrase: gifts for hockey fans
 hero: puck-pint-glass.jpg
-hero_alt: BenShot hockey puck pint glass of beer with a puck set into its side, on a table by a fireplace, with a "Raise One to Puck Drop" gift guide banner (AI-generated illustration)
+hero_alt: BenShot hockey puck pint glass of beer with a puck set into the middle of its side, on a table by a fireplace, with a "Raise One to Puck Drop" gift guide banner (AI-generated illustration)
 draft: true
 related:
   - /gift-guide/
@@ -24,9 +24,9 @@ Every pick below is sorted into four price tiers, from stocking stuffers to splu
 
 Small gifts work best when they match what he does on game night. Think things he'll use before the puck drops.
 
-[BenShot Hockey Puck Pint Glass (16oz)](https://www.amazon.com/dp/B08FKXNNPB?tag=thatfootbal01-20). For the guy who hosts game night. The puck sits right in the base. (It's the glass in the photo at the top of this post.)
+[BenShot Hockey Puck Pint Glass (16oz)](https://www.amazon.com/dp/B08FKXNNPB?tag=thatfootbal01-20). For the guy who hosts game night. The puck is set right into the middle of the glass, like a slapshot that hit it. (It's the glass in the photo at the top of this post.)
 
-A 16oz pint glass with a real puck-shaped base. It's made in the USA and comes in its own gift box.
+A 16oz pint glass with a real hockey puck set into its side. It's made in the USA and comes in its own gift box.
 
 **Best for:** the hockey fan who likes a cold one.
 
