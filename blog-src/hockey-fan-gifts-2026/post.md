@@ -1,13 +1,13 @@
 ---
 title: The Hockey Fan Gift Guide: Gifts for Him That Actually Get Used
 description: Gifts for hockey fans sorted by budget, from puck pint glasses and stocking stuffers to warm hoodies, boots and a down jacket he'll actually use.
-date: 2026-11-27
-updated: 2026-11-27
+date: 2026-11-26
+updated: 2026-11-26
 category: Gift guides
 search_phrase: gifts for hockey fans
 hero: puck-pint-glass.jpg
 hero_alt: BenShot hockey puck pint glass of beer with a puck set into the middle of its side, on a table by a fireplace, with a "Raise One to Puck Drop" gift guide banner (AI-generated illustration)
-draft: true
+draft: false
 related:
   - /gift-guide/
   - /outfits/gameday/gameday-nov-23-5/
