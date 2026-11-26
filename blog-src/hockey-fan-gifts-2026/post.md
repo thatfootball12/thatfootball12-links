@@ -56,7 +56,7 @@ If the budget stretches, go for one real piece over three small ones.
 
 ## How to wear it: a hockey night outfit
 
-You don't need a jersey to dress for hockey night. Start with the [Vintage Maple Leaf hooded pullover](https://www.awin1.com/cread.php?awinmid=117971&awinaffid=2968527&ued=https%3A%2F%2Fwww.houseofblanks.com%2Fproducts%2Fvintage-maple-leaf-hooded-pullover-red), add [Levi's 505 jeans](https://www.amazon.ca/dp/B0018OKNWM?tag=thatfootballg-ca-20), the [thermal-lined beanie](https://onelink.shein.com/57/659ral2t08lk?ismg_ol=2IRVS0bymtU_01_KOC-C) and a pair of [Timberland boots](https://www.amazon.ca/dp/B0CPSKXWT1?tag=thatfootballg-ca-20), and you're set.
+You don't need a jersey to dress for hockey night. Start with the [House of Blanks 3016 recycled cotton pullover](https://tidd.ly/3UIQG9j) in charcoal, throw the [Levi's Sherpa Trucker Jacket](https://www.amazon.com/dp/B0F9ZDLH5H?tag=thatfootbal01-20) over it, and finish with an officially licensed [NHL pom beanie](https://www.amazon.com/dp/B0DCT55QZM?tag=thatfootbal01-20) in his team's colours, and you're set.
 
 ![Man at an outdoor rink in a black Levi's sherpa-lined trucker jacket over a charcoal hoodie, beige tapered joggers, black boots and a red NHL pom beanie](hockey-night-outfit.jpg "Image created with AI. [Shop this hockey night outfit](/outfits/gameday/gameday-nov-23-5/)")
 
