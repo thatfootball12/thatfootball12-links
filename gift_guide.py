@@ -33,6 +33,7 @@ keeps that record and just gets holiday_pin added.
 import html as htmllib
 import json
 import os
+import posixpath
 import re
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -70,6 +71,26 @@ def card_key(card_id):
     """"S1", "S01" and "s01" all name the same card; returns "S1"."""
     m = re.fullmatch(r"([A-Za-z]+)0*(\d+)", (card_id or "").strip())
     return f"{m.group(1).upper()}{m.group(2)}" if m else (card_id or "")
+
+
+def card_records(base_rel, hrefs, products):
+    """The records an outfit page's card links point at, as (records,
+    unresolved hrefs). base_rel is the outfit folder, repo-relative. A card
+    normally links to a detail page (possibly in another outfit's folder);
+    a gift guide listing has none, so its card links to its tile's anchor,
+    e.g. ../../../gift-guide/#N130, matched by the record's holiday_pin."""
+    by_page = {p.get("detail_page_url"): p for p in products if not listing_only(p)}
+    by_card = {card_key(p["holiday_pin"]): p for p in products if listing_only(p) and p.get("holiday_pin")}
+    found, missing = [], []
+    for href in hrefs:
+        path, _, frag = href.partition("#")
+        page = posixpath.normpath(posixpath.join(base_rel, path)) + "/index.html"
+        rec = by_card.get(card_key(frag)) if page == PAGE and frag else by_page.get(page)
+        if rec is None:
+            missing.append(href)
+        elif rec not in found:
+            found.append(rec)
+    return found, missing
 
 
 def shein_cards():
