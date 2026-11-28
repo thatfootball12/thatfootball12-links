@@ -255,6 +255,15 @@ so CI fails) on any page whose canonical or `og:url` isn't its own URL,
 and on any sitemap `<loc>` that doesn't equal its page's canonical.
 `--check` reports without changing anything.
 
+Then run `py -3 write_latest_outfits.py`. It writes the "Latest outfits"
+row on `products/` (between `<!-- latest-outfits:start/end -->` markers):
+the newest campaign page in each outfit category, newest first, 5 of
+them (`LATEST_COUNT`), by the date in the folder name (base page when a
+category has `-2`, `-3`, ... pages for the same date; same-date ties in
+`CATEGORY_ORDER`). Never type that row by hand. `sync_catalog.py`'s
+report item 18 fails (exit 1, so CI fails) when the row is missing or
+stale. `--check` reports without changing anything.
+
 Then run `python write_sitemap.py` and commit the regenerated
 `sitemap.xml` and `sitemap-*.xml` files with the batch. `sitemap.xml` is
 a sitemap index (the URL submitted in Search Console) pointing to
@@ -276,8 +285,9 @@ So the order is: `sync_catalog.py` (plus `--append` if needed, then set
 cards read `products.json`, so a changed record changes posts), then
 `add_analytics.py`, then
 `add_favicons.py`, then `add_fonts.py`, then `add_canonical.py`, then
+`write_latest_outfits.py`, then
 `write_sitemap.py` last among the writers (the scripts before it,
-`add_fonts.py` and `add_canonical.py` included, edit
+`add_fonts.py`, `add_canonical.py` and `write_latest_outfits.py` included, edit
 pages, and each edit moves that page's `<lastmod>`), then
 `sync_catalog.py` once more to confirm it's clean.
 
