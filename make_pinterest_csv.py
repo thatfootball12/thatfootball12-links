@@ -62,7 +62,11 @@ Per pin:
                 for products make_product_pin.py --pick didn't choose).
                 A gift pin uses holiday-2026/pins/<id>_gift.jpg (see
                 make_gift_pin.py), <id>_holiday.png, or <id>_ai.jpg: AI
-                images, never the Amazon product photo.
+                images, never the Amazon product photo. The one
+                exception: a card whose record has "ai_image": false
+                (the team-licensed N184/N189, real photo with the logo)
+                uses <id>_photo.jpg (make_gift_pin.py --real) and gets
+                no AI line or AI-modified label.
                 Its Link is the product page of the products.json id in
                 its optional "page" field, else the card's own anchor on
                 the gift guide (gift-guide/#<id>). A product pin of a
@@ -193,6 +197,21 @@ def gift_card(card_id):
     return (section[-1] if section else None), (retailer.group(1) if retailer else None)
 
 
+def gift_record(products, card_id):
+    """The gift guide listing record for a card: the one whose holiday_pin
+    names it, else the one whose tile image is gift-guide/img/<card>_...
+    None when no record matches."""
+    key = gift_guide.card_key(card_id)
+    for p in products:
+        if gift_guide.listing_only(p) and gift_guide.card_key(p.get("holiday_pin") or "") == key:
+            return p
+    for p in products:
+        m = re.match(r"gift-guide/img/([A-Za-z]+\d+)_", p.get("image") or "")
+        if gift_guide.listing_only(p) and m and gift_guide.card_key(m.group(1)) == key:
+            return p
+    return None
+
+
 def resolve(pin, products, by_id, settings, problems, warnings):
     """Adds link, media, ai, has_amazon to pin. Returns False if it can't."""
     label = f"{pin.get('type')} {pin.get('id')}"
@@ -275,11 +294,20 @@ def resolve(pin, products, by_id, settings, problems, warnings):
         if card[1] != "amazon":
             problems.append(f"{label}: gift pins are for Amazon cards (this one is {card[1]})")
             return False
-        for name in (f"{pin['id']}_gift.jpg", f"{pin['id']}_holiday.png", f"{pin['id']}_ai.jpg"):
+        # A card whose record says "ai_image": false shows the real product
+        # photo (Jesse's call for team-licensed items, logo visible). Its
+        # pin uses <id>_photo.jpg (make_gift_pin.py --real) and carries no
+        # AI line; every other gift pin must use an AI image.
+        rec = gift_record(products, pin["id"])
+        real = rec is not None and rec.get("ai_image") is False
+        names = ((f"{pin['id']}_photo.jpg",) if real else
+                 (f"{pin['id']}_gift.jpg", f"{pin['id']}_holiday.png", f"{pin['id']}_ai.jpg"))
+        for name in names:
             if os.path.isfile(os.path.join(REPO, gift_guide.PIN_DIR, name)):
                 break
         else:
-            problems.append(f"{label}: no AI pin image in {gift_guide.PIN_DIR}")
+            kind = f"real-photo pin image ({names[0]})" if real else "AI pin image"
+            problems.append(f"{label}: no {kind} in {gift_guide.PIN_DIR}")
             return False
         pin["media"] = f"{SITE}{gift_guide.PIN_DIR}/{name}"
         pin["link"] = f"{SITE}gift-guide/#{pin['id']}"
@@ -289,7 +317,7 @@ def resolve(pin, products, by_id, settings, problems, warnings):
                 problems.append(f"{label}: page {pin['page']} isn't in products.json")
                 return False
             pin["link"] = page_url(os.path.dirname(rec["detail_page_url"]))
-        pin["ai"] = True
+        pin["ai"] = not real
         pin["retailers"] = {"Amazon"}
         pin["has_amazon"] = True
         return True

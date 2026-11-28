@@ -302,5 +302,40 @@ class OutfitCardTests(unittest.TestCase):
         self.assertEqual(len(missing), 3)
 
 
+
+class GiftRealPhotoTests(unittest.TestCase):
+    """Gift pins are AI images, except a card whose record says
+    "ai_image": false: that one uses <id>_photo.jpg and gets no AI line."""
+
+    def test_gift_record_by_holiday_pin_then_image(self):
+        products = [
+            {"id": "a", "detail_page_url": "gift-guide/index.html", "image": "gift-guide/img/N5_x-500.jpg"},
+            {"id": "b", "detail_page_url": "gift-guide/index.html", "holiday_pin": "N06", "image": None},
+            {"id": "c", "detail_page_url": "videos/x/index.html", "image": "gift-guide/img/N7_y-500.jpg"},
+        ]
+        self.assertEqual(m.gift_record(products, "N5")["id"], "a")
+        self.assertEqual(m.gift_record(products, "N6")["id"], "b")
+        self.assertIsNone(m.gift_record(products, "N7"))  # not a gift guide listing
+
+    def _resolve(self, card):
+        with open(os.path.join(m.REPO, "products.json"), encoding="utf-8") as f:
+            products = json.load(f)
+        with open(os.path.join(m.REPO, "pinterest", "pin_settings.json"), encoding="utf-8") as f:
+            settings = json.load(f)
+        p, problems = {"type": "gift", "id": card}, []
+        ok = m.resolve(p, products, {x["id"]: x for x in products}, settings, problems, [])
+        self.assertTrue(ok, problems)
+        return p
+
+    def test_real_photo_card_uses_photo_pin_without_ai(self):
+        p = self._resolve("N184")
+        self.assertFalse(p["ai"])
+        self.assertTrue(p["media"].endswith("holiday-2026/pins/N184_photo.jpg"))
+
+    def test_other_gift_cards_stay_ai(self):
+        p = self._resolve("N185")
+        self.assertTrue(p["ai"])
+        self.assertTrue(p["media"].endswith("holiday-2026/pins/N185_gift.jpg"))
+
 if __name__ == "__main__":
     unittest.main()
