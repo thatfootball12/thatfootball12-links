@@ -135,8 +135,15 @@ Report (always runs):
      amazon.ca: a WARNING line counts the amazon.com, amazon.ca, amzn.to and
      link.amazon links (unique URLs across tracked files) to track the move
      to US tags. link.amazon links are only counted, not tag-checked.
+ 17. Canonical and og:url (add_canonical.py): an error for a content
+     page whose <!-- canonical:start/end --> block is missing or stale
+     (its canonical or og:url isn't the page's own URL, trailing slash,
+     no query string), a canonical or og:url left outside the block, a
+     blog or Work with me page whose canonical is missing or wrong, and
+     any sitemap <loc> that doesn't equal its page's canonical. Redirect
+     pages (the root stubs) are never checked. Run add_canonical.py.
 
-Exit status: 1 when item 1, 2, 10, 11, 12, 13, 14, 15 or 16 has an error, or item 8
+Exit status: 1 when item 1, 2, 10, 11, 12, 13, 14, 15, 16 or 17 has an error, or item 8
 finds a missing <picture> file (report-only runs;
 --append fixes item 1 and exits 0), else 0. The catalog-check GitHub
 workflow runs the report on every push and pull request to main, so a
@@ -199,6 +206,7 @@ from PIL import Image, ImageChops, ImageStat
 import add_product_schema
 import write_sitemap
 import add_analytics
+import add_canonical
 import add_favicons
 import add_fonts
 import build_blog
@@ -840,6 +848,7 @@ def main():
     blog_issues = build_blog.audit()
     amazon_tag_errors, amazon_link_counts = amazon_tag_issues()
     amazon_tag_errors += amazon_store_issues(products)
+    canonical_issues = add_canonical.audit()
 
     schema_issues = []
     for p in products:
@@ -1036,12 +1045,21 @@ def main():
               f"{c['link.amazon']} link.amazon short links")
     print()
 
+    print(f"17. Pages whose canonical or og:url isn't their own URL, or sitemap entries that "
+          f"don't match a canonical: {len(canonical_issues)}")
+    for rel, why in canonical_issues:
+        print(f"   ERROR {rel} ({why})")
+    if canonical_issues:
+        print("   Run: python add_canonical.py  (blog pages: py -3 build_blog.py)")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not listing_issues
             and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
             and not webp_issues and not favicon_issues and not category_errors
             and not generator_errors and not seller_errors and not remote_image_errors
-            and not font_issues and not blog_issues and not amazon_tag_errors):
+            and not font_issues and not blog_issues and not amazon_tag_errors
+            and not canonical_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
@@ -1050,7 +1068,8 @@ def main():
               "products/ page tab, "
               "generator.json covers every campaign, every SHEIN product has a seller, "
               "every blog page is current with its source, "
-              "and every Amazon link carries a valid tag.")
+              "every Amazon link carries a valid tag, "
+              "and every page's canonical and og:url are its own URL.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
@@ -1074,10 +1093,12 @@ def main():
         # when a page loads fonts from Google or a font file is missing.
         # Item 15 fails it on any blog error or stale blog page, item 16 on
         # any Amazon link whose tag isn't in VALID_AMAZON_TAGS or any record
-        # that breaks the US-tag rule (the link-count warning never fails it).
+        # that breaks the US-tag rule (the link-count warning never fails it),
+        # item 17 on a page whose canonical or og:url isn't its own URL.
         if (missing_from_catalog or orphaned_records or listing_issues or category_errors
                 or generator_errors or seller_errors or missing_picture_files
-                or remote_image_errors or font_issues or blog_issues or amazon_tag_errors):
+                or remote_image_errors or font_issues or blog_issues or amazon_tag_errors
+                or canonical_issues):
             sys.exit(1)
         return
 
