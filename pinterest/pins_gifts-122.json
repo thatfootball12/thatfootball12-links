@@ -2,7 +2,7 @@
   "batch": "gifts-122",
   "start_date": "2026-11-29",
   "hashtags_first": true,
-  "note": "Action item #122: 23 gift pins for N181-N205. N184 (Red Wings mug) and N189 (Penguins coasters) held: real Amazon photos only, and gift pins must be AI images. No prices in copy (Amazon rule).",
+  "note": "Action item #122: 25 gift pins for N181-N205. N184 (Red Wings mug) and N189 (Penguins coasters) use the real product photo (records ai_image false, <id>_photo.jpg, no AI line). No prices in copy (Amazon rule).",
   "pins": [
     {
       "type": "gift",
@@ -40,8 +40,8 @@
     {
       "type": "gift",
       "id": "N185",
-      "title": "Timex Weekender: A Watch With a Strap He Can Swap in Seconds ⌚",
-      "description": "The Timex Weekender pairs a gray dial with a gray and orange slip-through strap that changes in seconds. INDIGLO lights the face in the dark, and the dial shows 24-hour time too. Office-appropriate and backed by 24,000+ reviews, so it's a safe pick to order now for Christmas.",
+      "title": "Gray Dial, Orange-Striped Strap: The Weekender With Some Colour ⌚🧡",
+      "description": "This take on the Timex Weekender pairs a gray dial with a gray strap cut by an orange stripe, a bit of colour for his casual fits. The dial adds 24-hour military time, and the backlight glows at night. Backed by 24,000+ reviews, so it's a safe pick to wrap up this week.",
       "hashtags": ["#ShopThisLook", "#WatchGift", "#GiftsForHim", "#ChristmasShopping"],
       "alt_text": "Timex Weekender watch with gray dial and gray orange nylon strap, a classic gift for him",
       "board": "Christmas Gifts for Men 2026",
@@ -84,8 +84,8 @@
     {
       "type": "gift",
       "id": "N190",
-      "title": "Timex Easy Reader in Blue: A Classic Dial That Goes With Everything 💙⌚",
-      "description": "The Timex Easy Reader sets a blue dial in a 38mm silver-tone case on a black genuine leather strap that adjusts to fit. A brass case and mineral glass keep it simple and sturdy. Office-appropriate with a sweater or a suit, and he'll wear it daily, so order before the holiday rush.",
+      "title": "Blue Dial, Black Leather: The Easy Reader Dressed Up for the Office 💙",
+      "description": "This Timex Easy Reader trades the classic look for a deep blue dial on a black genuine leather strap, in a 38mm silver-tone case with mineral glass. It looks sharp at a desk or a holiday dinner. Office-appropriate and rated by 12,000+ buyers, so get it ordered before the rush.",
       "hashtags": ["#ShopThisLook", "#WatchGift", "#MensStyle", "#GiftsForHim"],
       "alt_text": "Timex Easy Reader watch with blue dial and black leather strap, an office gift for men",
       "board": "Christmas Gifts for Men 2026",
@@ -128,8 +128,8 @@
     {
       "type": "gift",
       "id": "N194",
-      "title": "OneBlade 360: Trim, Edge and Shave With One Tool ✂️",
-      "description": "The Philips Norelco OneBlade 360 trims, edges and shaves any length on face and body. Its flexible 360 blade follows the curves of his jaw, and it comes with face and body blades for wet or dry use. A grooming gift he'll reach for every day, so order it early for Christmas.",
+      "title": "Face + Body OneBlade 360 Kit With Two Blades in the Box ✂️🎁",
+      "description": "This OneBlade 360 kit comes with two blades, one for face and one for body, so a single kit covers both. The flexible 360 blade follows his jawline, handles any hair length and works wet or dry. A practical grooming gift for boyfriend, so order soon for Christmas delivery.",
       "hashtags": ["#ShopThisLook", "#MensGrooming", "#GiftsForBoyfriend", "#ChristmasShopping"],
       "alt_text": "Philips Norelco OneBlade 360 trimmer with blade attachments, a grooming gift for men",
       "board": "Men's Grooming & Gift Sets",
@@ -256,6 +256,46 @@
       "board": "Men's Grooming & Gift Sets",
       "section": "Beard & Shaving Kits",
       "keywords": ["mens grooming gifts", "stocking stuffers for men", "christmas gifts for men"]
+    },
+    {
+      "type": "gift",
+      "id": "N184",
+      "title": "Red Wings Campfire Mug With a Laser-Engraved Logo for Game Mornings 🏒☕",
+      "description": "This 12 oz ceramic campfire mug has a speckled glaze and the Detroit Red Wings logo laser-engraved deep into the side. It's built for coffee or cocoa before puck drop, or for pens on his desk. A gameday-ready gift for the Wings fan, rated 4.8 stars, so grab it before holiday shipping slows.",
+      "hashtags": [
+        "#Under20Finds",
+        "#HockeyGifts",
+        "#SportsGiftsForMen",
+        "#GiftsForHim"
+      ],
+      "alt_text": "Red speckled campfire mug with an engraved Detroit Red Wings logo, a gift for hockey fans",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "Under $25",
+      "keywords": [
+        "sports gifts for men",
+        "christmas gifts for men",
+        "gifts for boyfriend"
+      ]
+    },
+    {
+      "type": "gift",
+      "id": "N189",
+      "title": "Penguins 3D Arena Coasters That Put the Rink on His Coffee Table 🐧🏒",
+      "description": "This set of two 4 x 4 inch coasters shows the Pittsburgh Penguins arena as a 3D replica built from layered acrylic, with the team logo up front and non-slip backing underneath. Gameday-ready for the man cave or bar cart, and rated 4.8 stars, so add a set before the holiday rush.",
+      "hashtags": [
+        "#Under20Finds",
+        "#HockeyGifts",
+        "#ShopThisLook",
+        "#StockingStuffers"
+      ],
+      "alt_text": "Two Pittsburgh Penguins 3D arena coasters in gold and black, a gift for hockey fans",
+      "board": "Christmas Gifts for Men 2026",
+      "section": "Under $25",
+      "keywords": [
+        "sports gifts ideas",
+        "stocking stuffers for men",
+        "christmas gifts for men"
+      ]
     }
   ]
 }
