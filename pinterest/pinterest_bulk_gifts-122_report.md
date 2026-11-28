@@ -104,8 +104,3 @@ The CSV has no column for it. Paste after upload:
 - Sherpa-Lined Clog Slippers He Can Slide Into in a Second 🧦: Gray felt clog slippers with sherpa lining, a cozy at-home gift for men
 - Full-Length Hooded Robe: The Coziest Upgrade to His Weekend 🛁: Charcoal plush full-length hooded robe on a hanger, a cozy winter gift for men
 
-## Warnings
-
-- gift N184: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N184_photo.jpg
-- gift N189: Media URL not live yet: https://thatfootball12.github.io/thatfootball12-links/holiday-2026/pins/N189_photo.jpg
-
