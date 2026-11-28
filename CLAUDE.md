@@ -238,6 +238,23 @@ reference on a non-stub page, any page missing the block or with a
 stale one, and any missing font file. `--check` reports without
 changing anything.
 
+Then run `python add_canonical.py`. It writes a self-referencing
+`<link rel="canonical">` and a matching `og:url` (the page's own
+absolute URL, trailing slash, no query string, the same URL the sitemap
+lists) between `<!-- canonical:start/end -->` markers on the homepage,
+`products/`, `generator/`, `gift-guide/`, `privacy/` and every page
+under `outfits/` and `videos/`. Pins carry UTM tags, so without it
+Google can index each `?utm_...` URL as its own page. A new page copied
+from an existing one carries the old page's block (and maybe its old
+`og:url`): the script points it at the new page and removes any
+canonical or `og:url` outside the block. Never type either tag by hand.
+It leaves redirect pages (the root stubs keep their canonical to the
+real page), `blog/` (`build_blog.py` writes its own), `work-with-me/`
+and `archive/` alone. `sync_catalog.py`'s report item 17 fails (exit 1,
+so CI fails) on any page whose canonical or `og:url` isn't its own URL,
+and on any sitemap `<loc>` that doesn't equal its page's canonical.
+`--check` reports without changing anything.
+
 Then run `python write_sitemap.py` and commit the regenerated
 `sitemap.xml` and `sitemap-*.xml` files with the batch. `sitemap.xml` is
 a sitemap index (the URL submitted in Search Console) pointing to
@@ -258,8 +275,9 @@ So the order is: `sync_catalog.py` (plus `--append` if needed, then set
 `add_product_schema.py`, then `build_blog.py` (see Blog below: product
 cards read `products.json`, so a changed record changes posts), then
 `add_analytics.py`, then
-`add_favicons.py`, then `add_fonts.py`, then `write_sitemap.py` last
-among the writers (the scripts before it, `add_fonts.py` included, edit
+`add_favicons.py`, then `add_fonts.py`, then `add_canonical.py`, then
+`write_sitemap.py` last among the writers (the scripts before it,
+`add_fonts.py` and `add_canonical.py` included, edit
 pages, and each edit moves that page's `<lastmod>`), then
 `sync_catalog.py` once more to confirm it's clean.
 
