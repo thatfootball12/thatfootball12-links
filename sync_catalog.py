@@ -142,8 +142,12 @@ Report (always runs):
      blog or Work with me page whose canonical is missing or wrong, and
      any sitemap <loc> that doesn't equal its page's canonical. Redirect
      pages (the root stubs) are never checked. Run add_canonical.py.
+ 18. Latest outfits row (write_latest_outfits.py): an error when the
+     <!-- latest-outfits:start/end --> block on products/ is missing or
+     doesn't list the newest campaign page in each category. Run
+     write_latest_outfits.py.
 
-Exit status: 1 when item 1, 2, 10, 11, 12, 13, 14, 15, 16 or 17 has an error, or item 8
+Exit status: 1 when item 1, 2, 10, 11, 12, 13, 14, 15, 16, 17 or 18 has an error, or item 8
 finds a missing <picture> file (report-only runs;
 --append fixes item 1 and exits 0), else 0. The catalog-check GitHub
 workflow runs the report on every push and pull request to main, so a
@@ -207,6 +211,7 @@ import add_product_schema
 import write_sitemap
 import add_analytics
 import add_canonical
+import write_latest_outfits
 import add_favicons
 import add_fonts
 import build_blog
@@ -849,6 +854,7 @@ def main():
     amazon_tag_errors, amazon_link_counts = amazon_tag_issues()
     amazon_tag_errors += amazon_store_issues(products)
     canonical_issues = add_canonical.audit()
+    latest_issues = write_latest_outfits.audit()
 
     schema_issues = []
     for p in products:
@@ -1053,13 +1059,18 @@ def main():
         print("   Run: python add_canonical.py  (blog pages: py -3 build_blog.py)")
     print()
 
+    print(f"18. products/ Latest outfits row missing or out of date: {len(latest_issues)}")
+    for why in latest_issues:
+        print(f"   ERROR {why}")
+    print()
+
     if (not missing_from_catalog and not orphaned_records and not listing_issues
             and not missing_thumbnails
             and not schema_issues and not sitemap_issues and not analytics_issues
             and not webp_issues and not favicon_issues and not category_errors
             and not generator_errors and not seller_errors and not remote_image_errors
             and not font_issues and not blog_issues and not amazon_tag_errors
-            and not canonical_issues):
+            and not canonical_issues and not latest_issues):
         print("Clean — every detail page on disk has a catalog record, every catalog record's "
               "detail page, thumbnail and WebP thumbnail exist, every schema block is current, "
               "sitemap.xml matches the pages on disk, every page has current consent-gated "
@@ -1069,7 +1080,8 @@ def main():
               "generator.json covers every campaign, every SHEIN product has a seller, "
               "every blog page is current with its source, "
               "every Amazon link carries a valid tag, "
-              "and every page's canonical and og:url are its own URL.")
+              "every page's canonical and og:url are its own URL, "
+              "and the products/ Latest outfits row lists the newest outfits.")
         if photo_needed:
             files = len({rel for rel, _ in photo_needed})
             print(f"Still open: {len(photo_needed)} PHOTO NEEDED comment(s) in {files} file(s) "
@@ -1094,11 +1106,12 @@ def main():
         # Item 15 fails it on any blog error or stale blog page, item 16 on
         # any Amazon link whose tag isn't in VALID_AMAZON_TAGS or any record
         # that breaks the US-tag rule (the link-count warning never fails it),
-        # item 17 on a page whose canonical or og:url isn't its own URL.
+        # item 17 on a page whose canonical or og:url isn't its own URL,
+        # item 18 when the products/ Latest outfits row is stale.
         if (missing_from_catalog or orphaned_records or listing_issues or category_errors
                 or generator_errors or seller_errors or missing_picture_files
                 or remote_image_errors or font_issues or blog_issues or amazon_tag_errors
-                or canonical_issues):
+                or canonical_issues or latest_issues):
             sys.exit(1)
         return
 
