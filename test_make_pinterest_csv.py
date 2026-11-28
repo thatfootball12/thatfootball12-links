@@ -275,5 +275,32 @@ class AwinDisclosureTests(unittest.TestCase):
         self.assertEqual(m.awin_merchants({"items": [{"retailer": "Awin"}]}), ["?"])
 
 
+class OutfitCardTests(unittest.TestCase):
+    """Outfit cards resolve to records: detail pages anywhere on the site,
+    and gift guide listings (no detail page) by their tile's anchor."""
+    PRODUCTS = [
+        {"id": "a", "detail_page_url": "videos/x/camp/hoodie/index.html"},
+        {"id": "g1", "detail_page_url": "gift-guide/index.html", "holiday_pin": "N130"},
+        {"id": "g2", "detail_page_url": "gift-guide/index.html", "holiday_pin": "N129"},
+    ]
+
+    def test_detail_page_and_gift_anchor(self):
+        import gift_guide
+        found, missing = gift_guide.card_records(
+            "outfits/gameday/gameday-nov-30",
+            ["../../../videos/x/camp/hoodie/", "../../../gift-guide/#N130", "../../../gift-guide/#n0130"],
+            self.PRODUCTS)
+        self.assertEqual([p["id"] for p in found], ["a", "g1"])
+        self.assertEqual(missing, [])
+
+    def test_unknown_cards_reported(self):
+        import gift_guide
+        found, missing = gift_guide.card_records(
+            "outfits/gameday/gameday-nov-30", ["../../../gift-guide/", "../../../gift-guide/#N999", "../nope/"],
+            self.PRODUCTS)
+        self.assertEqual(found, [])
+        self.assertEqual(len(missing), 3)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -216,10 +216,9 @@ def resolve(pin, products, by_id, settings, problems, warnings):
             cards = re.findall(r'<a class="card" href="([^"]+)"', f.read())
         # A card can link to a page in another outfit's folder: go by the
         # cards, not the folder, or that item's retailer goes undisclosed.
-        pages = {posixpath.normpath(posixpath.join(rel, h)) + "/index.html" for h in cards}
-        items = [p for p in products if p["detail_page_url"] in pages]
-        if len(items) != len(pages):
-            problems.append(f"{label}: {len(pages) - len(items)} card(s) with no products.json record")
+        items, missing = gift_guide.card_records(rel, cards, products)
+        if missing:
+            problems.append(f"{label}: {len(missing)} card(s) with no products.json record")
             return False
         pin["retailers"] = {p.get("retailer") for p in items}
         pin["has_amazon"] = "Amazon" in pin["retailers"]

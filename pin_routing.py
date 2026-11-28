@@ -70,6 +70,7 @@ import urllib.parse
 from datetime import date, datetime, timezone
 
 import categories
+import gift_guide
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 PIN_DIR = os.path.join(REPO, "pinterest")
@@ -116,8 +117,7 @@ def outfit_items(rel, products):
         return []
     with open(page, encoding="utf-8") as f:
         hrefs = CARD_HREF_RE.findall(f.read())
-    pages = {posixpath.normpath(posixpath.join(rel, h)) + "/index.html" for h in hrefs}
-    return [p for p in products if p["detail_page_url"] in pages]
+    return gift_guide.card_records(rel, hrefs, products)[0]
 
 
 # --- counts ----------------------------------------------------------------

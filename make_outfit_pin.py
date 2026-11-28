@@ -57,6 +57,8 @@ import sys
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
+import gift_guide
+
 REPO = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS_JSON = os.path.join(REPO, "products.json")
 FONT_PATH = os.path.join(REPO, "assets", "fonts", "Anton-Regular.ttf")
@@ -93,21 +95,16 @@ def campaign_products(campaign_dir, products):
     page in another campaign (an item reused from an earlier outfit), so
     the folder alone would miss it and understate the total. Falls back to
     every record under the folder when the page has no cards."""
-    by_page = {p.get("detail_page_url"): p for p in products}
     page = os.path.join(campaign_dir, "index.html")
     hrefs = []
     if os.path.exists(page):
         with open(page, encoding="utf-8") as f:
             hrefs = CARD_HREF_RE.findall(f.read())
-    items = []
-    for href in hrefs:
-        target = os.path.normpath(os.path.join(campaign_dir, href, "index.html"))
-        rec = by_page.get(os.path.relpath(target, REPO).replace(os.sep, "/"))
-        if rec and rec not in items:
-            items.append(rec)
+    rel = os.path.relpath(campaign_dir, REPO).replace(os.sep, "/").rstrip("/")
+    items, _ = gift_guide.card_records(rel, hrefs, products)
     if items:
         return items
-    rel = os.path.relpath(campaign_dir, REPO).replace(os.sep, "/").rstrip("/") + "/"
+    rel += "/"
     return [p for p in products if (p.get("detail_page_url") or "").startswith(rel)]
 
 
