@@ -15,6 +15,9 @@ name: Catalog Check
 # And when a page's canonical or og:url isn't its own URL, or a sitemap
 # <loc> doesn't equal its page's canonical (report item 17). Fix with:
 # py -3 add_canonical.py
+# And when the "Latest outfits" row on products/ doesn't list the newest
+# campaign page in each category (report item 18). Fix with:
+# py -3 write_latest_outfits.py
 
 on:
   push:
